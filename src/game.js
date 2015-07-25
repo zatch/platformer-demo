@@ -1,6 +1,10 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'states/menu',
+    'states/play',
+    'states/win',
+    'states/die'
+], function (Phaser, Menu, Play, Win, Die) { 
     'use strict';
 
     function Game() {    
@@ -22,8 +26,14 @@ define([
         },
         
         create: function() {
-            var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-            logo.anchor.setTo(0.5, 0.5);
+            // Add states to our game.
+            this.game.state.add('Menu', Menu);
+            this.game.state.add('Play', Play);
+            this.game.state.add('Win', Win);
+            this.game.state.add('Die', Die);
+
+            // Now that everything is loaded, show the menu.
+            this.game.state.start('Menu');
         }
     };
     
