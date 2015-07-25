@@ -56,6 +56,7 @@ define([
 
         update: function () {
 
+            // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
 
             // Player movement controls
