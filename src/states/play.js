@@ -1,10 +1,11 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'player'
+], function (Phaser, Player) { 
     'use strict';
 
     // Shortcuts
-    var game;
+    var game, moveKeys, player, map, collisionLayer;
 
     return {
         // Intro
@@ -12,15 +13,14 @@ define([
             // Shortcut variables.
             game = this.game;
         },
-
-        preload: function () {},
-        loadUpdate: function () {},
-        loadRender: function () {},
         
         // Main
         create: function () {
+            // Player set-up
+            player = new Player(game, 100, 100);
+
             // Create map.
-            var map = this.game.add.tilemap('Map1');
+            map = this.game.add.tilemap('Map1');
             
             // Add images to map.
             map.addTilesetImage('Sci-Fi-Tiles_A2', 'Sci-Fi-Tiles_A2');
@@ -35,26 +35,40 @@ define([
             map.createLayer('backdrop')
                .resizeWorld(); // Base world size on the backdrop.
             map.createLayer('background-decoration');
-            map.createLayer('foreground-structure');
+            collisionLayer = map.createLayer('foreground-structure');
             // Insert player here?
+            game.add.existing(player);
             map.createLayer('foreground-decoration');
             
-            // Physics?
+            // Physics engine set-up
+            game.physics.startSystem(Phaser.Physics.ARCADE);
+            game.physics.arcade.gravity.y = 500;
             
             // Assign impasasble tiles for collision.
             map.setCollision([48,49,50,51,64,65,66,67], true, 'foreground-structure');
-        },
-        update: function () {},
-        preRender: function () {},
-        render: function () {},
-        resize: function () {},
 
-        // Pause
-        paused: function () {},
-        pauseUpdate: function () {},
-        resumed: function () {},
-        
-        // Outro
-        shutdown: function () {}
+            // Keyboard input set-up
+            moveKeys = game.input.keyboard.createCursorKeys();
+
+            // Camera
+            game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON); 
+        },
+
+        update: function () {
+
+            game.physics.arcade.collide(player, collisionLayer);
+
+            // Player movement controls
+            if(moveKeys.up.isDown) {
+                player.jump();
+            }
+            if(moveKeys.left.isDown) {
+                player.moveLeft();
+            } else if (moveKeys.right.isDown) {
+                player.moveRight();
+            } else {
+                player.stopMoving();
+            }
+        }
     };
 });
