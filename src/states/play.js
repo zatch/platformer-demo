@@ -17,7 +17,7 @@ define([
         // Main
         create: function () {
             // Player set-up
-            player = new Player(game, 100, 100);
+            player = new Player(game, 144, 736);
 
             // Create map.
             map = this.game.add.tilemap('Map1');
