@@ -3,9 +3,16 @@ define([
 ], function (Phaser) { 
     'use strict';
 
+    // Shortcuts
+    var game;
+
     return {
         // Intro
-        init: function () {},
+        init: function () {
+            // Shortcut variables.
+            game = this.game;
+        },
+
         preload: function () {},
         loadUpdate: function () {},
         loadRender: function () {},
