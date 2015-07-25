@@ -45,7 +45,7 @@ define([
             game.physics.arcade.gravity.y = 500;
             
             // Assign impasasble tiles for collision.
-            map.setCollision([48,49,50,51,64,65,66,67], true, 'foreground-structure');
+            map.setCollisionByExclusion([], true, 'foreground-structure');
 
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
