@@ -2,18 +2,15 @@
   "name": "Phaser-RequireJS",
   "version": "0.1.0",
   "description": "Phaser Hello World with RequireJS",
-
   "authors": [
     "ashatch <andrew@andrewhatch.net>"
   ],
-
   "license": "MIT",
-
   "dependencies": {
     "requirejs": "latest",
-    "phaser": "latest"
+    "phaser": "latest",
+    "javascript-state-machine": "~2.3.5"
   },
-
   "ignore": [
     "src/lib"
   ]
