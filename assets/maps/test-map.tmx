@@ -30,7 +30,7 @@
  </layer>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmG8KgCAMxb2S1QX6c7G6QZ24fdkXUUxzm8w9eDxICNzPwZh3zk1gP0iu4G2glK638TW+xrc+T/DVQd2pE+95g5+BEu+tXSFf7TK+umV8dcv46hY3X5xzZvASSTynEjdfnF938BFJPKcSFd9wbk19T2XuP7WS4ptLKln/lqvkzbXo3z9vXIrv1/5trdH7V3r/wL3fkN4rUafx7YMDNV/punOndN258wUQMA1c
+   eJztltsNgDAIRbtS1QV8LKYb6MTyw0/Tpk/EADchN20TSTnF4J1zE4RX4ivEpsi56218ja/xbfcT4vpB3akd73lDPIoc7y1dIV/pMr6yZXxly/jK1td8cc6ZIZaI4zmVvuaL8+sOcUQcz6lExTecW1P7Kc99p1VcfHNOJevfetW8uRH92/PGufiW9u9oae/f1v9nbt3ro/KFfGvrX7ru9VH5jK8Ovlz15srHVW+ufC/Abf0h
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
