@@ -17,6 +17,7 @@ define([
             menuText.anchor.set(0.5);
 
             game.input.keyboard.onPressCallback = function () {
+                game.input.keyboard.onPressCallback = null;
                 game.state.start('Play');
             };
         }
