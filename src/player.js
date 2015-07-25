@@ -15,6 +15,7 @@ define([
         // Enable physics.
         game.physics.enable(this);
         this.body.collideWorldBounds = true;
+        this.checkWorldBounds = true;
 
         // Initialize public properites.
         this.speed = 100;
