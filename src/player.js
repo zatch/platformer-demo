@@ -23,14 +23,6 @@ define([
 
     Player.prototype = Object.create(Phaser.Sprite.prototype);
     Player.prototype.constructor = Player;
-
-    var touchLeft, touchRight;
-    Player.prototype.update = function () {
-        touchLeft = this.body.wasTouching.left;
-        touchRight = this.body.wasTouching.right;
-
-        Phaser.Sprite.prototype.update.call();
-    };
     
     Player.prototype.jump = function () {
 
