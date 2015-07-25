@@ -18,7 +18,8 @@ define([
         create: function () {
             // Player set-up
             player = new Player(game, 144, 736);
-
+            player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
+            
             // Create map.
             map = this.game.add.tilemap('Map1');
             
@@ -44,6 +45,8 @@ define([
             game.physics.startSystem(Phaser.Physics.ARCADE);
             game.physics.arcade.gravity.y = 500;
             
+            //  We check bounds collisions against all walls other than the bottom one
+            game.physics.arcade.checkCollision.down = false;
             // Assign impasasble tiles for collision.
             map.setCollisionByExclusion([], true, 'foreground-structure');
 
@@ -70,6 +73,10 @@ define([
             } else {
                 player.stopMoving();
             }
+        },
+        
+        playerOutOfBounds: function() {
+            game.state.start('Die');
         }
     };
 });

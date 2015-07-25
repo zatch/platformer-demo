@@ -15,8 +15,8 @@ define([
         
         // Main
         create: function () {
-            menuText = game.add.text(game.width / 2, game.height / 2, 'You died :(', {align: 'center', fill: '#ff0000'});
-            menuText.anchor.set(0.5);
+            dieText = game.add.text(game.width / 2, game.height / 2, 'You died :(', {align: 'center', fill: '#ff0000'});
+            dieText.anchor.set(0.5);
         }
     };
 });
