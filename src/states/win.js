@@ -3,26 +3,20 @@ define([
 ], function (Phaser) { 
     'use strict';
 
+    // Shortcuts
+    var game, winText;
+
     return {
         // Intro
-        init: function () {},
-        preload: function () {},
-        loadUpdate: function () {},
-        loadRender: function () {},
+        init: function () {
+            // Shortcut variables.
+            game = this.game;
+        },
         
         // Main
-        create: function () {},
-        update: function () {},
-        preRender: function () {},
-        render: function () {},
-        resize: function () {},
-
-        // Pause
-        paused: function () {},
-        pauseUpdate: function () {},
-        resumed: function () {},
-        
-        // Outro
-        shutdown: function () {}
+        create: function () {
+            winText = game.add.text(game.width / 2, game.height / 2, 'You Win!', {align: 'center', fill: '#00ff00'});
+            winText.anchor.set(0.5);
+        }
     };
 });
