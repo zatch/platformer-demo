@@ -6,7 +6,7 @@ define([
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, player, map, collisionLayer, exitDoor;
+    var game, moveKeys, pad1, player, map, collisionLayer, exitDoor;
 
     return {
         // Intro
@@ -66,7 +66,20 @@ define([
             moveKeys.up.onDown.add(function () {
                 player.jump();
             });
-
+            
+            // Gamepad input setup
+            game.input.gamepad.start();
+            pad1 = game.input.gamepad.pad1;
+            pad1.onDownCallback = function (buttonCode, value) {
+                switch (buttonCode) {
+                    case Phaser.Gamepad.XBOX360_A:
+                        player.jump();
+                        break;
+                    default:
+                        break;
+                }
+            };
+            
             // Camera
             game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER); 
 
@@ -83,9 +96,13 @@ define([
             if(moveKeys.up.isDown) {
                 // player.jump();
             }
-            if(moveKeys.left.isDown) {
+            if(moveKeys.left.isDown ||
+               pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
+               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
                 player.moveLeft();
-            } else if (moveKeys.right.isDown) {
+            } else if (moveKeys.right.isDown ||
+               pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
+               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) {
                 player.moveRight();
             } else {
                 player.stopMoving();

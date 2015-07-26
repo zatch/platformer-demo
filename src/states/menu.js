@@ -20,6 +20,11 @@ define([
                 game.input.keyboard.onPressCallback = null;
                 game.state.start('Play');
             };
+            // Gamepad input setup
+            game.input.gamepad.start();
+            game.input.gamepad.pad1.onDownCallback = function (buttonCode, value) {
+                game.state.start('Play');
+            };
         }
     };
 });
