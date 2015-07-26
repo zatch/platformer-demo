@@ -1,11 +1,12 @@
 define([
     'phaser',
-    'player'
-], function (Phaser, Player) { 
+    'player',
+    'object-layer-helper'
+], function (Phaser, Player, ObjectLayerHelper) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, player, map, collisionLayer;
+    var game, moveKeys, player, map, collisionLayer, exitDoor;
 
     return {
         // Intro
@@ -16,10 +17,11 @@ define([
         
         // Main
         create: function () {
+
             // Player set-up
             player = new Player(game, 144, 736);
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
-            
+
             // Create map.
             map = this.game.add.tilemap('Map1');
             
@@ -37,10 +39,12 @@ define([
                .resizeWorld(); // Base world size on the backdrop.
             map.createLayer('background-decoration');
             collisionLayer = map.createLayer('foreground-structure');
+            
             // Insert player here?
             game.add.existing(player);
+
             map.createLayer('foreground-decoration');
-            
+
             // Physics engine set-up
             game.physics.startSystem(Phaser.Physics.ARCADE);
             game.physics.arcade.gravity.y = 500;
@@ -50,11 +54,22 @@ define([
             // Assign impasasble tiles for collision.
             map.setCollisionByExclusion([], true, 'foreground-structure');
 
+            // Create win trigger
+            exitDoor = ObjectLayerHelper.createObjectByName(game, 'door_exit', map, 'triggers');
+            game.physics.enable(exitDoor);
+            exitDoor.body.allowGravity = false;
+            exitDoor.body.immovable = true;
+            game.add.existing(exitDoor);
+
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
+            moveKeys.up.onDown.add(function () {
+                player.jump();
+            });
 
             // Camera
             game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON); 
+
         },
 
         update: function () {
@@ -62,9 +77,11 @@ define([
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
 
+            game.physics.arcade.overlap(player, exitDoor, this.playerExits);
+
             // Player movement controls
             if(moveKeys.up.isDown) {
-                player.jump();
+                // player.jump();
             }
             if(moveKeys.left.isDown) {
                 player.moveLeft();
@@ -77,6 +94,10 @@ define([
         
         playerOutOfBounds: function() {
             game.state.start('Die');
+        },
+
+        playerExits: function () {
+            game.state.start('Win');
         }
     };
 });

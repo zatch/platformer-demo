@@ -43,7 +43,35 @@
          "width":60,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"triggers",
+         "objects":[
+                {
+                 "height":32,
+                 "id":1,
+                 "name":"door_exit",
+                 "properties":
+                    {
+                     "key":""
+                    },
+                 "rotation":0,
+                 "type":"door",
+                 "visible":true,
+                 "width":32,
+                 "x":1696,
+                 "y":736
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
+         "x":0,
+         "y":0
         }],
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "properties":
     {
