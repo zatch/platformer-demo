@@ -68,7 +68,7 @@ define([
             });
 
             // Camera
-            game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON); 
+            game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER); 
 
         },
 
