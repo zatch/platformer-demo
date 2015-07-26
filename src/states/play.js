@@ -43,7 +43,7 @@ define([
             
             // Physics engine set-up
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            game.physics.arcade.gravity.y = 500;
+            game.physics.arcade.gravity.y = 1000;
             
             //  We check bounds collisions against all walls other than the bottom one
             game.physics.arcade.checkCollision.down = false;
