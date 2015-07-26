@@ -29,27 +29,57 @@ define([
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 300;
         
+        // Gives the player a grace period to jump immediately after falling.
+        this.edgeTimer = 0;
+        this.ableToJump = false;
+        this.wasAbleToJump = false;
     }
 
     Player.prototype = Object.create(Phaser.Sprite.prototype);
     Player.prototype.constructor = Player;
     
+    Player.prototype.preUpdate = function () {
+        // Store and reset jump flag.
+        this.wasAbleToJump = this.ableToJump;
+        this.ableToJump = false;
+        
+        // Call to super.
+        return Phaser.Sprite.prototype.preUpdate.call(this);
+    };
+    
+    Player.prototype.update = function () {
+        // Set flag if we can jump.
+        this.ableToJump =   this.body.onFloor() ||
+                            this.body.blocked.down ||
+                            (this.body.onWall() && this.body.blocked.left) ||
+                            (this.body.onWall() && this.body.blocked.right);
+        if (!this.ableToJump && this.wasAbleToJump) {
+            console.log("refresh edgeTimer");
+            this.edgeTimer = this.game.time.time + 250;
+        }
+    };
+    
     Player.prototype.jump = function () {
-
-        // Normal jumping
-        if(this.body.onFloor()) {
+        if (this.ableToJump || this.game.time.time < this.edgeTimer) {
+            console.log("jumping");
+            // Clear jump flag and edge timer.
+            this.wasAbleToJump = false;
+            this.edgeTimer = this.game.time.time;
+            
+            // Lift off! Apply vertical acceleration.
             this.body.velocity.y = -this.jumpSpeed;
-        }
-
-        // Wall jumping.
-        if(this.body.onWall() && this.body.blocked.left) {
-            this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
-        }
-
-        if(this.body.onWall() && this.body.blocked.right) {
-            this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            
+            // Horizontal acceleration for wall jump.
+            if(this.body.onWall()) {
+                // Jump off of left wall.
+                if (this.body.blocked.left) {
+                    this.body.velocity.x = this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+                }
+                // Jump off of right wall.
+                else {
+                    this.body.velocity.x = -this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+                }
+            }
         }
     };
 
