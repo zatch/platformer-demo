@@ -1,12 +1,13 @@
 define([
     'phaser',
     'player',
+    'platform',
     'object-layer-helper'
-], function (Phaser, Player, ObjectLayerHelper) { 
+], function (Phaser, Player, Platform, ObjectLayerHelper) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, player, map, collisionLayer, exitDoor;
+    var game, moveKeys, player, map, collisionLayer, platforms, exitDoor;
 
     return {
         // Intro
@@ -61,6 +62,10 @@ define([
             exitDoor.body.immovable = true;
             game.add.existing(exitDoor);
 
+            // Platforms
+            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
+            game.add.existing(platforms);
+
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
             moveKeys.up.onDown.add(function () {
@@ -77,6 +82,9 @@ define([
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
 
+            // Collide with platforms.
+            game.physics.arcade.collide(player, platforms, this.playerCollidesPlatform);
+
             game.physics.arcade.overlap(player, exitDoor, this.playerExits);
 
             // Player movement controls
@@ -89,6 +97,12 @@ define([
                 player.moveRight();
             } else {
                 player.stopMoving();
+            }
+        },
+
+        playerCollidesPlatform: function (player, platform) {
+            if(player.body.touching.down) {
+                player.body.velocity.x += (platform.previousPosition.x - platform.position.x);
             }
         },
         

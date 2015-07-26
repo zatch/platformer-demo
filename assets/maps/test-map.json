@@ -70,8 +70,68 @@
          "width":60,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"platforms",
+         "objects":[
+                {
+                 "gid":120,
+                 "height":0,
+                 "id":5,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1568,
+                 "y":544
+                }, 
+                {
+                 "gid":120,
+                 "height":0,
+                 "id":6,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":576
+                }, 
+                {
+                 "height":32,
+                 "id":7,
+                 "name":"platform-1",
+                 "properties":
+                    {
+                     "key":"platform",
+                     "moveX":"5"
+                    },
+                 "rotation":0,
+                 "type":"platform",
+                 "visible":true,
+                 "width":96,
+                 "x":160,
+                 "y":672
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":3,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "properties":
     {
