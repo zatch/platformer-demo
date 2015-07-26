@@ -18,13 +18,17 @@ define([
         this.checkWorldBounds = true;
 
         // Initialize public properites.
-        // Fastest possible horizontal movement speed.
-        this.moveSpeed = 300;
+        // Fastest possible movement speeds.
+        this.body.maxVelocity.x = 350;
+        this.body.maxVelocity.y = 10000;
+        this.body.drag.x = 800;
+        this.body.drag.y = 0;
+        
         // Initial jump speed
-        this.jumpSpeed = 400;
-        // The horizontal acceleration that is applied if the player attemps to
-        // move while they're airborne. 
-        this.jumpMoveAccel = 350;
+        this.jumpSpeed = 500;
+        // The horizontal acceleration that is applied when moving.
+        this.moveAccel = 300;
+        
     }
 
     Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -40,49 +44,61 @@ define([
         // Wall jumping.
         if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.moveSpeed;
+            this.body.velocity.x = this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
 
         if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.moveSpeed;
+            this.body.velocity.x = -this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
     };
 
     Player.prototype.moveLeft = function () {
-        this.frame = 1;
-        this.body.drag.set(0);
-
-        if(this.body.onFloor()) {
+        // Face away from wall and slide down wall slowly.
+        if(this.body.onWall() && this.body.blocked.left) {
+            this.frame = 0;
+            if (this.body.velocity.y > 0) {
+                this.body.velocity.y = 50;
+            }
+        }
+        // Face normally and fall normally.
+        else {
+            this.frame = 1;
+        }
+        
+        // Wait for drag to stop us if switching directions.
+        if (this.body.acceleration.x > 0) {
             this.body.acceleration.x = 0;
-            this.body.velocity.x = -this.moveSpeed; 
-        } else {
-            this.body.acceleration.x = -this.jumpMoveAccel;
-            this.body.velocity.clamp(-this.moveSpeed, this.moveSpeed);
+        }
+        if (this.body.velocity.x <= 0) {
+            this.body.acceleration.x = -this.moveAccel;
         }
     };
 
     Player.prototype.moveRight = function () {
-        this.frame = 0;
-        this.body.drag.set(0);
-
-        if(this.body.onFloor()) {
+        // Face away from wall and slide down wall slowly.
+        if(this.body.onWall() && this.body.blocked.right) {
+            this.frame = 1;
+            if (this.body.velocity.y > 0) {
+                this.body.velocity.y = 50;
+            }
+        }
+        // Face normally and fall normally.
+        else {
+            this.frame = 0;
+        }
+        
+        // Wait for drag to stop us if switching directions.
+        if (this.body.acceleration.x < 0) {
             this.body.acceleration.x = 0;
-            this.body.velocity.x = this.moveSpeed;
-        } else {
-            this.body.acceleration.x = this.jumpMoveAccel;
-            this.body.velocity.clamp(-this.moveSpeed, this.moveSpeed);
+        }
+        if (this.body.velocity.x >= 0) {
+            this.body.acceleration.x = this.moveAccel;
         }
     };
 
     Player.prototype.stopMoving = function () {
-        if(this.body.onFloor()) {
-            this.body.drag.set(this.moveSpeed * 10.5);
-            this.body.acceleration.x = 0;
-        } else {
-            this.body.drag.set(0);
-            this.body.acceleration.x = 0;
-        }
+        this.body.acceleration.x = 0;
     };
 
     return Player;
