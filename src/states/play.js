@@ -65,6 +65,7 @@ define([
             // Platforms
             platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
             game.add.existing(platforms);
+            platforms.callAll('start');
 
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
@@ -78,13 +79,13 @@ define([
         },
 
         update: function () {
-
+            // Collide with platforms.
+            game.physics.arcade.collide(player, platforms);
+            
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
 
-            // Collide with platforms.
-            game.physics.arcade.collide(player, platforms, this.playerCollidesPlatform);
-
+            // Check to see if player has reached the exit door.
             game.physics.arcade.overlap(player, exitDoor, this.playerExits);
 
             // Player movement controls
@@ -97,12 +98,6 @@ define([
                 player.moveRight();
             } else {
                 player.stopMoving();
-            }
-        },
-
-        playerCollidesPlatform: function (player, platform) {
-            if(player.body.touching.down) {
-                player.body.velocity.x += (platform.previousPosition.x - platform.position.x);
             }
         },
         

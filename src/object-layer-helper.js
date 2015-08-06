@@ -23,9 +23,9 @@ define([
     //create a sprite from an object
     function createFromTiledObject (game, element, customClass) {
         var CustomClass = customClass || Phaser.Sprite,
-            sprite = new CustomClass(game, element.x, element.y, element.properties.key || null);
-        
-        //copy all properties to the sprite
+            sprite = new CustomClass(game, element.x, element.y, element.properties.key || null, element.properties.frame || null, element.properties);
+
+        // Copy all properties to the sprite
         Object.keys(element).forEach(function(key) {
             sprite[key] = element[key];
         });

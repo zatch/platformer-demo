@@ -35,9 +35,9 @@ define([
     Player.prototype.constructor = Player;
     
     Player.prototype.jump = function () {
-
+        
         // Normal jumping
-        if(this.body.onFloor()) {
+        if(this.body.onFloor() || this.body.touching.down) {
             this.body.velocity.y = -this.jumpSpeed;
         }
 
