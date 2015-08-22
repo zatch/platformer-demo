@@ -51,6 +51,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":1,
                  "name":"door_exit",
                  "properties":
                     {
@@ -78,6 +79,7 @@
                 {
                  "gid":120,
                  "height":0,
+                 "id":2,
                  "name":"",
                  "properties":
                     {
@@ -93,6 +95,7 @@
                 {
                  "gid":120,
                  "height":0,
+                 "id":3,
                  "name":"",
                  "properties":
                     {
@@ -107,6 +110,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":4,
                  "name":"platform-1",
                  "properties":
                     {
@@ -127,6 +131,7 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "properties":
     {
