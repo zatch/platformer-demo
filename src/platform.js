@@ -59,8 +59,6 @@ define([
             // If we're within the minimum distance, move on to the next waypoint.
             Phaser.Point.subtract(this.destination, this.position, this.distanceToDestination);
 
-            console.log(Math.abs(this.distanceToDestination.getMagnitude()));
-
             if(Math.abs(this.distanceToDestination.getMagnitude()) < this.arrivalRadius) {
                 this.nextWaypoint();
             }
