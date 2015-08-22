@@ -43,7 +43,6 @@ define([
             
             // Insert player here?
             game.add.existing(player);
-
             map.createLayer('foreground-decoration');
 
             // Physics engine set-up
@@ -119,11 +118,19 @@ define([
         },
         
         playerOutOfBounds: function() {
-            game.state.start('Die');
+            // This prevents occasional momentary "flashes" during state transitions.
+            game.camera.unfollow();
+
+            // Switch to the "death" state.
+            game.stateTransition.to('Die', true);
         },
 
         playerExits: function () {
-            game.state.start('Win');
+            // This prevents occasional momentary "flashes" during state transitions.
+            game.camera.unfollow();
+
+            // Switch to the "win" state.
+            game.stateTransition.to('Win');
         }
     };
 });

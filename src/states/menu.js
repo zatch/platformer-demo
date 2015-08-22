@@ -18,7 +18,7 @@ define([
 
             game.input.keyboard.onPressCallback = function () {
                 game.input.keyboard.onPressCallback = null;
-                game.state.start('Play');
+                game.stateTransition.to('Play');
             };
             // Gamepad input setup
             game.input.gamepad.start();

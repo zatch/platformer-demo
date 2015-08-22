@@ -1,10 +1,11 @@
 define([
     'phaser',
+    'phaser-transition',
     'states/menu',
     'states/play',
     'states/win',
     'states/die'
-], function (Phaser, Menu, Play, Win, Die) { 
+], function (Phaser, PhaserState, Menu, Play, Win, Die) { 
     'use strict';
 
     function Game() {    
@@ -17,7 +18,25 @@ define([
         start: function() {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, '', { 
                 preload: this.preload, 
-                create: this.create 
+                create: this.create,
+                init: this.init
+            });
+
+        },
+
+        init: function () {
+            this.game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
+
+            this.game.stateTransition.configure({
+                duration: Phaser.Timer.SECOND * 0.8,
+                ease: Phaser.Easing.Exponential.InOut,
+                properties: {
+                    alpha: 0,
+                    scale: {
+                        x: 1.4,
+                        y: 1.4
+                    }
+                }
             });
         },
 
