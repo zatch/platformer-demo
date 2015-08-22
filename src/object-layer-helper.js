@@ -21,25 +21,27 @@ define([
     }
 
     //create a sprite from an object
-    function createFromTiledObject (game, element) {
-        var sprite = new Phaser.Sprite(game, element.x, element.y, element.properties.key || null);
-        //copy all properties to the sprite
+    function createFromTiledObject (game, element, customClass) {
+        var CustomClass = customClass || Phaser.Sprite,
+            sprite = new CustomClass(game, element.x, element.y, element.properties.key || null, element.properties.frame || null, element.properties);
+
+        // Copy all properties to the sprite
         Object.keys(element).forEach(function(key) {
             sprite[key] = element[key];
         });
         return sprite;
     }
 
-    function createObjectsByType(game, type, map, layer) {
+    function createObjectsByType(game, type, map, layer, customClass) {
         var results = findObjectsByType(type, map, layer);
         var group = game.add.group();
         results.forEach(function (element) {
-            group.add(createFromTiledObject(game, element));
+            group.add(createFromTiledObject(game, element, customClass));
         });
         return group;
     }
 
-    function createObjectByName(game, name, map, layer) {
+    function createObjectByName(game, name, map, layer, customClass) {
         var obj;
         map.objects[layer].forEach(function(element) {
             if (element.name === name) {
@@ -48,7 +50,7 @@ define([
                 //so they might not be placed in the exact pixel position as in Tiled
                 console.log("Found " + element.name);
                 // element.y -= element.height;
-                obj = createFromTiledObject(game, element);
+                obj = createFromTiledObject(game, element, customClass);
                 return false;
             }
         });

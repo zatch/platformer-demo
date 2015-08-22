@@ -1,12 +1,13 @@
 define([
     'phaser',
     'player',
+    'platform',
     'object-layer-helper'
-], function (Phaser, Player, ObjectLayerHelper) { 
+], function (Phaser, Player, Platform, ObjectLayerHelper) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, map, collisionLayer, exitDoor;
+    var game, moveKeys, pad1, player, map, collisionLayer, platforms, exitDoor;
 
     return {
         // Intro
@@ -61,6 +62,11 @@ define([
             exitDoor.body.immovable = true;
             game.add.existing(exitDoor);
 
+            // Platforms
+            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
+            game.add.existing(platforms);
+            platforms.callAll('start');
+
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
             moveKeys.up.onDown.add(function () {
@@ -86,10 +92,13 @@ define([
         },
 
         update: function () {
-
+            // Collide with platforms.
+            game.physics.arcade.collide(player, platforms);
+            
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
 
+            // Check to see if player has reached the exit door.
             game.physics.arcade.overlap(player, exitDoor, this.playerExits);
 
             // Player movement controls

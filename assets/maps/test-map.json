@@ -46,12 +46,11 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"triggers",
          "objects":[
                 {
                  "height":32,
-                 "id":1,
                  "name":"door_exit",
                  "properties":
                     {
@@ -67,11 +66,67 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":60,
+         "width":0,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":0,
+         "name":"platforms",
+         "objects":[
+                {
+                 "gid":120,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1568,
+                 "y":544
+                }, 
+                {
+                 "gid":120,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":576
+                }, 
+                {
+                 "height":32,
+                 "name":"platform-1",
+                 "properties":
+                    {
+                     "key":"platform",
+                     "wayPoints":"[[160, 672],[160, 372],[960, 288],[1662, 372],[960, 288],[160, 372]]"
+                    },
+                 "rotation":0,
+                 "type":"platform",
+                 "visible":true,
+                 "width":96,
+                 "x":160,
+                 "y":672
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":0,
          "x":0,
          "y":0
         }],
- "nextobjectid":3,
  "orientation":"orthogonal",
  "properties":
     {
