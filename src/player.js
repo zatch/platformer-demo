@@ -53,15 +53,14 @@ define([
                             this.body.touching.down ||
                             (this.body.onWall() && this.body.blocked.left) ||
                             (this.body.onWall() && this.body.blocked.right);
+        // Update edgeTimer if qualified to.
         if (!this.ableToJump && this.wasAbleToJump) {
-            console.log("refresh edgeTimer");
             this.edgeTimer = this.game.time.time + 150;
         }
     };
     
     Player.prototype.jump = function () {
         if (this.ableToJump || this.game.time.time < this.edgeTimer) {
-            console.log("jumping");
             // Clear jump flag and edge timer.
             this.wasAbleToJump = false;
             this.edgeTimer = this.game.time.time;
