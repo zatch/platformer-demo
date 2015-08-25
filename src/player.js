@@ -50,7 +50,7 @@ define([
     Player.prototype.update = function () {
         // Set flag if we can jump.
         this.ableToJump =   this.body.onFloor() ||
-                            this.body.blocked.down ||
+                            this.body.touching.down ||
                             (this.body.onWall() && this.body.blocked.left) ||
                             (this.body.onWall() && this.body.blocked.right);
         if (!this.ableToJump && this.wasAbleToJump) {
