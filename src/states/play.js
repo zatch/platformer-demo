@@ -11,9 +11,12 @@ define([
 
     return {
         // Intro
-        init: function () {
+        init: function (mapName) {
             // Shortcut variables.
             game = this.game;
+
+            // Set map name.
+            map = mapName || 'Map1';
         },
         
         // Main
@@ -24,7 +27,7 @@ define([
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
 
             // Create map.
-            map = this.game.add.tilemap('Map1');
+            map = this.game.add.tilemap(map);
             
             // Add images to map.
             map.addTilesetImage('Sci-Fi-Tiles_A2', 'Sci-Fi-Tiles_A2');
@@ -41,8 +44,14 @@ define([
             map.createLayer('background-decoration');
             collisionLayer = map.createLayer('foreground-structure');
             
+            // Spawn point
+            var spawnPoint = ObjectLayerHelper.createObjectByName(game, 'player_spawn', map, 'spawns');
+
             // Insert player here?
             game.add.existing(player);
+            player.x = spawnPoint.x;
+            player.y = spawnPoint.y;
+
             map.createLayer('foreground-decoration');
 
             // Physics engine set-up
@@ -53,6 +62,7 @@ define([
             game.physics.arcade.checkCollision.down = false;
             // Assign impasasble tiles for collision.
             map.setCollisionByExclusion([], true, 'foreground-structure');
+
 
             // Create win trigger
             exitDoor = ObjectLayerHelper.createObjectByName(game, 'door_exit', map, 'triggers');
@@ -86,7 +96,7 @@ define([
             };
             
             // Camera
-            game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER); 
+            game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
 
         },
 
@@ -98,7 +108,9 @@ define([
             game.physics.arcade.collide(player, collisionLayer);
 
             // Check to see if player has reached the exit door.
-            game.physics.arcade.overlap(player, exitDoor, this.playerExits);
+            if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
+                this.playerExits();
+            }
 
             // Player movement controls
             if(moveKeys.up.isDown) {
@@ -130,7 +142,7 @@ define([
             game.camera.unfollow();
 
             // Switch to the "win" state.
-            game.stateTransition.to('Win');
+            game.stateTransition.to('Play', true, false, exitDoor.properties.mapLink);
         }
     };
 });

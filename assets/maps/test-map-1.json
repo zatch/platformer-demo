@@ -51,11 +51,11 @@
          "objects":[
                 {
                  "height":32,
-                 "id":1,
                  "name":"door_exit",
                  "properties":
                     {
-                     "key":""
+                     "key":"",
+                     "mapLink":"Map2"
                     },
                  "rotation":0,
                  "type":"door",
@@ -79,7 +79,6 @@
                 {
                  "gid":120,
                  "height":0,
-                 "id":2,
                  "name":"",
                  "properties":
                     {
@@ -95,7 +94,6 @@
                 {
                  "gid":120,
                  "height":0,
-                 "id":3,
                  "name":"",
                  "properties":
                     {
@@ -110,7 +108,6 @@
                 }, 
                 {
                  "height":32,
-                 "id":4,
                  "name":"platform-1",
                  "properties":
                     {
@@ -130,8 +127,33 @@
          "width":0,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"spawns",
+         "objects":[
+                {
+                 "height":32,
+                 "name":"player_spawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":32,
+                 "x":192,
+                 "y":256
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":6,
  "orientation":"orthogonal",
  "properties":
     {
