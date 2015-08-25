@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" nextobjectid="3">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -30,7 +30,7 @@
  </layer>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztltsNgDAIRbtS1QV8LKYb6MTyw0/Tpk/EADchN20TSTnF4J1zE4RX4ivEpsi56218ja/xbfcT4vpB3akd73lDPIoc7y1dIV/pMr6yZXxly/jK1td8cc6ZIZaI4zmVvuaL8+sOcUQcz6lExTecW1P7Kc99p1VcfHNOJevfetW8uRH92/PGufiW9u9oae/f1v9nbt3ro/KFfGvrX7ru9VH5jK8Ovlz15srHVW+ufC/Abf0h
+   eJztmMENgDAIRbtS3UA3UyfQieXCpdEUKdQKvIT89GKlr4mGnFKaoLKTnKEWR/n1eYff8Bt++blCbQOcu3ZinwfU6Sixb+uUfq0Tfm0Tfm0Tfm3Ty+/OLGl6+eW8u0a/Wn7L/1Zuv+VzWtHyq+FGAi2/o/Yr4ffu7mr223LH4/trm9IvdU6A1NbSUPenzjeo8x+ktpaGuv9Thl8fft/O+ZC/+eXOn5G/+cW8AOdl3fk=
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
@@ -39,10 +39,24 @@
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object id="1" name="door_exit" type="door" x="1696" y="736" width="32" height="32">
+  <object name="door_exit" type="door" x="1696" y="736" width="32" height="32">
    <properties>
     <property name="key" value=""/>
+    <property name="mapLink" value="Map1"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object gid="120" x="1568" y="544"/>
+  <object gid="120" x="1600" y="576"/>
+  <object name="platform-1" type="platform" x="160" y="672" width="96" height="32">
+   <properties>
+    <property name="key" value="platform"/>
+    <property name="wayPoints" value="[[160, 672],[160, 372],[960, 288],[1662, 372],[960, 288],[160, 372]]"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawns">
+  <object name="player_spawn" type="spawn" x="928" y="352" width="32" height="32"/>
  </objectgroup>
 </map>

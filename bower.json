@@ -9,7 +9,8 @@
   "dependencies": {
     "requirejs": "latest",
     "phaser": "latest",
-    "javascript-state-machine": "~2.3.5"
+    "javascript-state-machine": "~2.3.5",
+    "phaser-state-transition-plugin": "https://github.com/suicidepills/phaser-state-transition-plugin.git#master"
   },
   "ignore": [
     "src/lib"

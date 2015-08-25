@@ -18,6 +18,11 @@ define([
 
             game.input.keyboard.onPressCallback = function () {
                 game.input.keyboard.onPressCallback = null;
+                game.stateTransition.to('Play');
+            };
+            // Gamepad input setup
+            game.input.gamepad.start();
+            game.input.gamepad.pad1.onDownCallback = function (buttonCode, value) {
                 game.state.start('Play');
             };
         }
