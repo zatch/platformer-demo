@@ -55,7 +55,7 @@ define([
                             (this.body.onWall() && this.body.blocked.right);
         if (!this.ableToJump && this.wasAbleToJump) {
             console.log("refresh edgeTimer");
-            this.edgeTimer = this.game.time.time + 250;
+            this.edgeTimer = this.game.time.time + 150;
         }
     };
     
