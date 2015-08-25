@@ -39,6 +39,8 @@ define([
         this.body.allowGravity = false;
         this.body.immovable = true;
         this.body.checkCollision.down = false;
+        this.body.checkCollision.left = false;
+        this.body.checkCollision.right = false;
         
     }
 
