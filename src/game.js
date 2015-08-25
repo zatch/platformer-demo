@@ -53,6 +53,7 @@ define([
             this.game.load.image('Sci-Fi-Tiles_E',  'assets/tilesets/Sci-Fi-Tiles_E.png');
 
             this.game.load.spritesheet('player', 'assets/sprites/player.png', 32, 32, 2);
+            this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 128, 8, 1);
         },
         
         create: function() {

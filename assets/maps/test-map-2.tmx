@@ -49,7 +49,7 @@
  <objectgroup name="platforms">
   <object gid="120" x="1568" y="544"/>
   <object gid="120" x="1600" y="576"/>
-  <object name="platform-1" type="platform" x="160" y="672" width="96" height="32">
+  <object name="platform-1" type="platform" x="160" y="672" width="128" height="8">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[160, 672],[160, 372],[960, 288],[1662, 372],[960, 288],[160, 372]]"/>
