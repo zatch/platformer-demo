@@ -7,6 +7,10 @@ define([
     //find objects in a Tiled layer that containt a property called "type" equal to a certain value
     function findObjectsByType (type, map, layer) {
         var result = new Array();
+
+        // If layer doesn't exist, return an empty array.
+        if(!map.objects[layer]) return result;
+
         map.objects[layer].forEach(function(element) {
             if (element.type === type) {
                 //Phaser uses top left, Tiled bottom left so we have to adjust the y position
@@ -35,6 +39,11 @@ define([
     function createObjectsByType(game, type, map, layer, customClass) {
         var results = findObjectsByType(type, map, layer);
         var group = game.add.group();
+
+        // If no objects matching the specified criteria could be found, return
+        // an empty group.
+        if(!results.length) return group;
+
         results.forEach(function (element) {
             group.add(createFromTiledObject(game, element, customClass));
         });
