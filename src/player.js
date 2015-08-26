@@ -62,7 +62,7 @@ define([
     Player.prototype.jump = function () {
         if (this.ableToJump || this.game.time.time < this.edgeTimer) {
             // Clear jump flag and edge timer.
-            this.wasAbleToJump = false;
+            this.ableToJump = this.wasAbleToJump = false;
             this.edgeTimer = this.game.time.time;
             
             // Lift off! Apply vertical acceleration.
