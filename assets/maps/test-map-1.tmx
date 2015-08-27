@@ -28,6 +28,9 @@
    eJztldkNAjEMRI2iBX64KwAqAIqGDqAD+KMEquD44RgK2JBkkzhi50kjOSvL8jHSihBCCCGElM8VukF36FFAfmqe0At6fx8d/XxffPdZoYcu1IP6Dv2kyg/1ge8+B8gZQiNorJgf6gPf/buyNSI7Y4+bENq37/5d2WOmg7HHTUjV9y/q7nXEt5Oxxy51SiPWvWLVSU3dvbTqxCS357Q9nttz2h7P7bkSPa7JpBKZQrNKu5P0nPHPnWPOBbRswbwXzLvCnGto04J5CSHkn/gAqmxFng==
   </data>
  </layer>
+ <objectgroup name="enemies">
+  <object name="enemy1" type="enemy" gid="97" x="320" y="768" width="32" height="32"/>
+ </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJztltsNgDAIRbtS1QV8LKYb6MTyw0/Tpk/EADchN20TSTnF4J1zE4RX4ivEpsi56218ja/xbfcT4vpB3akd73lDPIoc7y1dIV/pMr6yZXxly/jK1td8cc6ZIZaI4zmVvuaL8+sOcUQcz6lExTecW1P7Kc99p1VcfHNOJevfetW8uRH92/PGufiW9u9oae/f1v9nbt3ro/KFfGvrX7ru9VH5jK8Ovlz15srHVW+ufC/Abf0h
@@ -42,7 +45,7 @@
   <object name="door_exit" type="door" x="1696" y="736" width="32" height="32">
    <properties>
     <property name="key" value=""/>
-    <property name="mapLink" value="Map1"/>
+    <property name="mapLink" value="Map2"/>
    </properties>
   </object>
  </objectgroup>
@@ -57,6 +60,6 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object name="player_spawn" type="spawn" x="928" y="288" width="32" height="32"/>
+  <object name="player_spawn" type="spawn" x="192" y="288" width="32" height="32"/>
  </objectgroup>
 </map>

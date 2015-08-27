@@ -6,11 +6,11 @@ define([
     // Shortcuts
     var game;
 
-    function Player (_game, x, y) {
+    function Enemy (_game, x, y) {
         game = _game;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'player');
+        Phaser.Sprite.call(this, game, x, y, 'enemy');
         this.anchor.set(0.5);
 
         // Enable physics.
@@ -29,59 +29,13 @@ define([
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 300;
-
-        // Number of times the player can be hit by an enemy.
-        this.health = 10;
-
-        // Invulnerability
-        this.invulnerable = false;
-        this.invulnerableTimer = 0;
-
-        // Signals
-        this.events.onHeal = new Phaser.Signal();
-        this.events.onDamage = new Phaser.Signal();
         
     }
 
-    function onBlinkLoop (){
-        if(game.time.now - this.invulnerableTimer > 1500) {
-            this.blinkTween.start(0);
-            this.blinkTween.pause();
-            this.invulnerable = false;
-            this.alpha = 1;
-        }
-    }
-
-    Player.prototype = Object.create(Phaser.Sprite.prototype);
-    Player.prototype.constructor = Player;
-
-    Player.prototype.heal = function (amount, source) {
-        amount = Math.abs(amount || 1);
-        this.health += amount;
-        this.events.onHeal.dispatch(this.health, amount);
-    };
-
-    Player.prototype.damage = function (amount, source) {
-
-        // Can currently take damage?
-        if(this.invulnerable) return;
-
-        amount = Math.abs(amount || 1);
-        this.health -= amount;
-        this.events.onDamage.dispatch(this.health, amount);
-
-        // Temporary invulnerability.
-        this.invulnerable = true;
-        this.invulnerableTimer = game.time.now;
-        
-        // Visual feedback to show player was hit and is currently invulnerable.
-        this.blinkTween = game.add.tween(this);
-        this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
-        this.blinkTween.onLoop.add(onBlinkLoop, this);
-
-    };
+    Enemy.prototype = Object.create(Phaser.Sprite.prototype);
+    Enemy.prototype.constructor = Enemy;
     
-    Player.prototype.jump = function () {
+    Enemy.prototype.jump = function () {
         
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
@@ -100,7 +54,7 @@ define([
         }
     };
 
-    Player.prototype.moveLeft = function () {
+    Enemy.prototype.moveLeft = function () {
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
             this.frame = 0;
@@ -122,7 +76,7 @@ define([
         }
     };
 
-    Player.prototype.moveRight = function () {
+    Enemy.prototype.moveRight = function () {
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
             this.frame = 1;
@@ -144,10 +98,10 @@ define([
         }
     };
 
-    Player.prototype.stopMoving = function () {
+    Enemy.prototype.stopMoving = function () {
         this.body.acceleration.x = 0;
     };
 
-    return Player;
+    return Enemy;
 
 });
