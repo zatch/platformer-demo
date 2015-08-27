@@ -37,6 +37,8 @@ define([
         this.invulnerable = false;
         this.invulnerableTimer = 0;
 
+        this.knockback = new Phaser.Point();
+
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
@@ -78,6 +80,14 @@ define([
         this.blinkTween = game.add.tween(this);
         this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
         this.blinkTween.onLoop.add(onBlinkLoop, this);
+
+        // Knockback force
+        Phaser.Point.subtract(this.position, source.position, this.knockback);
+        Phaser.Point.normalize(this.knockback, this.knockback);
+        this.knockback.setMagnitude(400);
+
+        Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
+        this.knockback.set(0);
 
     };
     
