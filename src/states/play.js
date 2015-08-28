@@ -1,13 +1,15 @@
 define([
     'phaser',
     'player',
+    'enemy',
     'platform',
-    'object-layer-helper'
-], function (Phaser, Player, Platform, ObjectLayerHelper) { 
+    'object-layer-helper',
+    'health-display'
+], function (Phaser, Player, Enemy, Platform, ObjectLayerHelper, HealthDisplay) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, map, collisionLayer, platforms, exitDoor;
+    var game, moveKeys, pad1, player, enemies, map, collisionLayer, platforms, exitDoor, healthDisplay;
 
     return {
         // Intro
@@ -23,8 +25,9 @@ define([
         create: function () {
 
             // Player set-up
-            player = new Player(game, 144, 736);
+            player = new Player(game, 0, 0);
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
+            player.events.onDamage.add(this.onPlayerDamage);
 
             // Create map.
             map = this.game.add.tilemap(map);
@@ -52,6 +55,10 @@ define([
             player.x = spawnPoint.x;
             player.y = spawnPoint.y;
 
+            // Insert enemies
+            enemies = ObjectLayerHelper.createObjectsByType(game, 'enemy', map, 'enemies', Enemy);
+            game.add.existing(enemies);
+
             map.createLayer('foreground-decoration');
 
             // Physics engine set-up
@@ -75,6 +82,11 @@ define([
             platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
             game.add.existing(platforms);
             platforms.callAll('start');
+
+            // HUD
+            healthDisplay = new HealthDisplay(game, 0, 0, 'player');
+            game.add.existing(healthDisplay);
+            healthDisplay.updateDisplay(player.health);
 
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
@@ -106,6 +118,9 @@ define([
             
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
+            game.physics.arcade.collide(enemies, collisionLayer);
+
+            game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
 
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
@@ -126,6 +141,23 @@ define([
                 player.moveRight();
             } else {
                 player.stopMoving();
+            }
+        },
+
+        onPlayerCollidesEnemy: function (player, enemy) {
+            player.damage(1, enemy);
+        },
+
+        onPlayerDamage: function (totalHealth, amount) {
+            console.log('health: ', totalHealth);
+
+            // Update HUD
+            healthDisplay.updateDisplay(player.health);
+
+            // Is the player dead?
+            if(totalHealth <= 0) {
+                game.camera.unfollow();
+                game.stateTransition.to('Die', true);
             }
         },
         

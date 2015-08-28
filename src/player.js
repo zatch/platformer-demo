@@ -11,6 +11,7 @@ define([
 
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, 'player');
+        this.anchor.set(0.5);
 
         // Enable physics.
         game.physics.enable(this);
@@ -28,6 +29,19 @@ define([
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 300;
+
+        // Number of times the player can be hit by an enemy.
+        this.health = 10;
+
+        // Invulnerability
+        this.invulnerable = false;
+        this.invulnerableTimer = 0;
+
+        this.knockback = new Phaser.Point();
+
+        // Signals
+        this.events.onHeal = new Phaser.Signal();
+        this.events.onDamage = new Phaser.Signal();
         
         // Gives the player a grace period to jump immediately after falling.
         this.edgeTimer = 0;
@@ -35,8 +49,51 @@ define([
         this.wasAbleToJump = false;
     }
 
+    function onBlinkLoop (){
+        if(game.time.now - this.invulnerableTimer > 1500) {
+            this.blinkTween.start(0);
+            this.blinkTween.pause();
+            this.invulnerable = false;
+            this.alpha = 1;
+        }
+    }
+
     Player.prototype = Object.create(Phaser.Sprite.prototype);
     Player.prototype.constructor = Player;
+
+    Player.prototype.heal = function (amount, source) {
+        amount = Math.abs(amount || 1);
+        this.health += amount;
+        this.events.onHeal.dispatch(this.health, amount);
+    };
+
+    Player.prototype.damage = function (amount, source) {
+
+        // Can currently take damage?
+        if(this.invulnerable) return;
+
+        amount = Math.abs(amount || 1);
+        this.health -= amount;
+        this.events.onDamage.dispatch(this.health, amount);
+
+        // Temporary invulnerability.
+        this.invulnerable = true;
+        this.invulnerableTimer = game.time.now;
+        
+        // Visual feedback to show player was hit and is currently invulnerable.
+        this.blinkTween = game.add.tween(this);
+        this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
+        this.blinkTween.onLoop.add(onBlinkLoop, this);
+
+        // Knockback force
+        Phaser.Point.subtract(this.position, source.position, this.knockback);
+        Phaser.Point.normalize(this.knockback, this.knockback);
+        this.knockback.setMagnitude(400);
+
+        Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
+        this.knockback.set(0);
+
+    };
     
     Player.prototype.preUpdate = function () {
         // Store and reset jump flag.
