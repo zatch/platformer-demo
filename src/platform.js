@@ -10,7 +10,7 @@ define([
         game = _game;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'Platform');
+        Phaser.Sprite.call(this, game, x, y, 'platform');
 
         // Enable physics.
         game.physics.enable(this);
