@@ -29,6 +29,9 @@ define([
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
 
+            // Make player accessible via game object.
+            game.player = player;
+
             // Create map.
             map = this.game.add.tilemap(map);
             

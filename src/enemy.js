@@ -17,10 +17,11 @@ define([
         game.physics.enable(this);
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
+        this.outOfBoundsKill = true;
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 350;
+        this.body.maxVelocity.x = 150;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 800;
         this.body.drag.y = 0;
@@ -28,12 +29,38 @@ define([
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
-        this.moveAccel = 300;
+        this.moveAccel = 100;
+
+        this.bearing = new Phaser.Point();
+        this.distanceToPlayer = new Phaser.Point();
         
     }
 
     Enemy.prototype = Object.create(Phaser.Sprite.prototype);
     Enemy.prototype.constructor = Enemy;
+
+    Enemy.prototype.update = function () {
+        Phaser.Point.subtract(game.player.position, this.position, this.distanceToPlayer);
+        if(this.distanceToPlayer.getMagnitude() > 400) {
+            this.stopMoving();
+            return;
+        } else {
+            this.stopMoving();
+        }
+
+        if(this.distanceToPlayer.x < 0) {
+            this.moveLeft();
+        }
+        else{
+            this.moveRight();
+        }
+        if(this.distanceToPlayer.y < this.position.x + this.height) {
+            this.jump();
+        }
+
+        // Call up!
+        Phaser.Sprite.prototype.update.call(this);
+    };
     
     Enemy.prototype.jump = function () {
         
