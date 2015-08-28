@@ -134,7 +134,7 @@
                  "y":576
                 }, 
                 {
-                 "height":8,
+                 "height":32,
                  "name":"platform-1",
                  "properties":
                     {
@@ -144,7 +144,7 @@
                  "rotation":0,
                  "type":"platform",
                  "visible":true,
-                 "width":128,
+                 "width":96,
                  "x":160,
                  "y":672
                 }],
