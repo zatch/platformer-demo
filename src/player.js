@@ -37,7 +37,9 @@ define([
         this.invulnerable = false;
         this.invulnerableTimer = 0;
 
+        // Knockback
         this.knockback = new Phaser.Point();
+        this.knockbackTimeout = game.time.now;
 
         // Signals
         this.events.onHeal = new Phaser.Signal();
@@ -92,9 +94,14 @@ define([
         Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
         this.knockback.set(0);
 
+        // Temporarily disable input after knockback.
+        this.knockbackTimeout = game.time.now + 500;
+
     };
     
     Player.prototype.jump = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
         
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
@@ -114,6 +121,9 @@ define([
     };
 
     Player.prototype.moveLeft = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
+        
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
             this.frame = 0;
@@ -136,6 +146,9 @@ define([
     };
 
     Player.prototype.moveRight = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
+
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
             this.frame = 1;
