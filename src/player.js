@@ -86,6 +86,9 @@ define([
         Phaser.Point.normalize(this.knockback, this.knockback);
         this.knockback.setMagnitude(400);
 
+        // Zero out current velocity
+        this.body.velocity.set(0);
+
         Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
         this.knockback.set(0);
 
