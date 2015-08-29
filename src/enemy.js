@@ -54,7 +54,7 @@ define([
         else{
             this.moveRight();
         }
-        if(this.distanceToPlayer.y < this.position.x + this.height) {
+        if(game.player.position.y < this.position.y) {
             this.jump();
         }
 
