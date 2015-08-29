@@ -55,6 +55,7 @@ define([
             this.game.load.spritesheet('player', 'assets/sprites/player.png', 32, 32, 2);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 32, 32, 2);
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
+            this.game.load.spritesheet('sword', 'assets/sprites/sword.png', 32, 7, 2);
         },
         
         create: function() {

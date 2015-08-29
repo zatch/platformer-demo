@@ -123,11 +123,18 @@ define([
             game.physics.arcade.collide(player, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
 
+            // Check to see if weapons are colliding with enemies.
+            game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
+
             game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
 
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
                 this.playerExits();
+            }
+
+            if(moveKeys.down.isDown) {
+                player.attack();
             }
 
             // Player movement controls
@@ -149,6 +156,11 @@ define([
 
         onPlayerCollidesEnemy: function (player, enemy) {
             player.damage(1, enemy);
+        },
+
+        onPlayerAttacksEnemy: function (weapon, enemy) {
+            enemy.damage(1);
+            if(enemy.health <= 0) enemy.kill();
         },
 
         onPlayerDamage: function (totalHealth, amount) {

@@ -1,6 +1,7 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'sword'
+], function (Phaser, Sword) { 
     'use strict';
 
     // Shortcuts
@@ -12,6 +13,9 @@ define([
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, 'player');
         this.anchor.set(0.5);
+
+        // Which way is the player facing?
+        this.facing = 'right';
 
         // Enable physics.
         game.physics.enable(this);
@@ -32,6 +36,10 @@ define([
 
         // Number of times the player can be hit by an enemy.
         this.health = 10;
+
+        // Equip weapons
+        this.weapon = new Sword(game, x, y);
+        this.addChild(this.weapon);
 
         // Invulnerability
         this.invulnerable = false;
@@ -58,6 +66,16 @@ define([
 
     Player.prototype = Object.create(Phaser.Sprite.prototype);
     Player.prototype.constructor = Player;
+    
+    // Update children.
+    Player.prototype.update = function () {
+        if(this.weapon) this.weapon.update();
+        Phaser.Sprite.prototype.update.call(this);
+    };
+
+    Player.prototype.attack = function () {
+        if(this.weapon) this.weapon.use();
+    };
 
     Player.prototype.heal = function (amount, source) {
         amount = Math.abs(amount || 1);
@@ -126,6 +144,7 @@ define([
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
+            this.facing = 'right';
             this.frame = 0;
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
@@ -133,6 +152,7 @@ define([
         }
         // Face normally and fall normally.
         else {
+            this.facing = 'left';
             this.frame = 1;
         }
         
@@ -151,6 +171,7 @@ define([
 
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
+            this.facing = 'left';
             this.frame = 1;
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
@@ -158,6 +179,7 @@ define([
         }
         // Face normally and fall normally.
         else {
+            this.facing = 'right';
             this.frame = 0;
         }
         
