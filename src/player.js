@@ -1,7 +1,8 @@
 define([
     'phaser',
-    'sword'
-], function (Phaser, Sword) { 
+    'sword',
+    'bow'
+], function (Phaser, Sword, Bow) { 
     'use strict';
 
     // Shortcuts
@@ -38,7 +39,7 @@ define([
         this.health = 10;
 
         // Equip weapons
-        this.weapon = new Sword(game, x, y);
+        this.weapon = new Bow(game, 0, 0);
         this.addChild(this.weapon);
 
         // Invulnerability
