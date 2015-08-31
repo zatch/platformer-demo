@@ -62,7 +62,7 @@ define([
         var missile;
         if(!this.inUse) {
             this.inUse = true;
-            //missile = this.missiles.getFirstDead();
+            missile = this.missiles.getFirstDead();
             if(missile){
                 missile.revive();
             } else {
