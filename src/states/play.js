@@ -24,6 +24,8 @@ define([
         // Main
         create: function () {
 
+            var self = this;
+
             // Player set-up
             player = new Player(game, 0, 0);
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
@@ -104,6 +106,15 @@ define([
                 switch (buttonCode) {
                     case Phaser.Gamepad.XBOX360_A:
                         player.jump();
+                        break;
+                    case Phaser.Gamepad.XBOX360_B:
+                        player.attack();
+                        break;
+                    case Phaser.Gamepad.XBOX360_Y:
+                        // Check to see if player has reached the exit door.
+                        if(game.physics.arcade.overlap(player, exitDoor)) {
+                            self.playerExits();
+                        }
                         break;
                     default:
                         break;
