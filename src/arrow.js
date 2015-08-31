@@ -9,7 +9,7 @@ define([
     function Arrow (_game, x, y) {
         game = _game;
 
-        Phaser.Sprite.call(this, game, x, y, 'sword', 1);
+        Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
         this.anchor.set(0.5);
 
         this.debug = true;
