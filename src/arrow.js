@@ -15,7 +15,7 @@ define([
         this.debug = true;
 
         this.speed = 800;
-        this.lifespan_default = 500;
+        this.lifespan_default = 1000;
         this.revive();
 
         game.physics.enable(this);
