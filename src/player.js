@@ -39,8 +39,19 @@ define([
         this.health = 10;
 
         // Equip weapons
-        this.weapon = new Bow(game, 0, 0);
-        this.addChild(this.weapon);
+        this.weaponIndex = 0;
+        this.allWeapons = [
+            new Sword(game, 0, 0),
+            new Bow(game, 0, 0)
+        ];
+
+        // this.allWeapons.forEach(this.addChild);
+        for(var i=0; i<this.allWeapons.length; i++) {
+            this.addChild(this.allWeapons[i]);
+            this.allWeapons[i].kill();
+        }
+
+        this.setWeapon(this.allWeapons[this.weaponIndex]);
 
         // Invulnerability
         this.invulnerable = false;
@@ -72,6 +83,24 @@ define([
     Player.prototype.update = function () {
         if(this.weapon) this.weapon.update();
         Phaser.Sprite.prototype.update.call(this);
+    };
+
+    Player.prototype.setWeapon = function (weapon) {
+        if(this.weapon) this.weapon.kill();
+        this.weapon = weapon;
+        this.weapon.revive();
+    };
+
+    Player.prototype.nextWeapon = function () {
+        this.weaponIndex += 1;
+        if(this.weaponIndex > this.allWeapons.length - 1) this.weaponIndex = 0;
+        this.setWeapon(this.allWeapons[this.weaponIndex]);
+    };
+
+    Player.prototype.previousWeapon = function () {
+        this.weaponIndex -= 1;
+        if(this.weaponIndex < 0) this.weaponIndex = this.allWeapons.length - 1;
+        this.setWeapon(this.allWeapons[this.weaponIndex]);
     };
 
     Player.prototype.attack = function () {

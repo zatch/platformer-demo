@@ -98,6 +98,10 @@ define([
             moveKeys.up.onDown.add(function () {
                 player.jump();
             });
+
+            game.input.keyboard.addKey(Phaser.Keyboard.ALT).onDown.add(function () {
+                player.nextWeapon();
+            });
             
             // Gamepad input setup
             game.input.gamepad.start();
@@ -115,6 +119,9 @@ define([
                         if(game.physics.arcade.overlap(player, exitDoor)) {
                             self.playerExits();
                         }
+                        break;
+                    case Phaser.Gamepad.XBOX360_X:
+                        player.nextWeapon();
                         break;
                     default:
                         break;
