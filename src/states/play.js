@@ -45,6 +45,7 @@ define([
             map.addTilesetImage('Sci-Fi-Tiles_C', 'Sci-Fi-Tiles_C');
             map.addTilesetImage('Sci-Fi-Tiles_D', 'Sci-Fi-Tiles_D');
             map.addTilesetImage('Sci-Fi-Tiles_E', 'Sci-Fi-Tiles_E');
+            map.addTilesetImage('cave', 'cave');
             
             // Add layers to map.
             map.createLayer('backdrop')
@@ -133,6 +134,11 @@ define([
 
         },
 
+        render: function () {
+            var body = player.weapon.getCollidables();
+            if(body) game.debug.body(body);
+        },
+
         update: function () {
             // Collide with platforms.
             game.physics.arcade.collide(player, platforms);
@@ -151,7 +157,7 @@ define([
                 this.playerExits();
             }
 
-            if(moveKeys.down.isDown) {
+            if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
                 player.attack();
             }
 

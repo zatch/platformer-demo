@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="30" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -18,28 +18,28 @@
  <tileset firstgid="1137" name="Sci-Fi-Tiles_E" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_E.png" width="512" height="512"/>
  </tileset>
- <layer name="backdrop" width="60" height="30">
+ <layer name="backdrop" width="500" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0cENACAIBEF6xQ60/2gVksA8Lvu/yYhYbzmk++0MavXffPny5cuXL9/+rf6bL1++fPny5du/1X/z5cuXL1++fPu3+u/fvVJN8/s=
+   eJzt1sEJhFAAxcDfq3aw2z/awzsEYQ5hWsh1zrnfLpIk+Vl/b3+SJPlp658gSZK79U+QJMnd+idIkuRu/RMkSXK3/gmSJLlb/wRJktytf4IkSe7WP0GSJHfrnyBJkrv1T5Akyd36J0iS5G79EyRJcrf+CZIkuVv/BEmS3K1/giRJ7tY/QZIkd+ufIEmSu/VPkCTJ3fonSJLkbv0TJElyt/4JkiS5W/8ESZLcrX+CJEnu1j9BkiR3658gSZK79U+QJMnd+idIkuRu/RMkSXL3AVdNnD0=
   </data>
  </layer>
- <layer name="background-decoration" width="60" height="30">
+ <layer name="background-decoration" width="500" height="30">
   <data encoding="base64" compression="zlib">
-   eJztldkNAjEMRI2iBX64KwAqAIqGDqAD+KMEquD44RgK2JBkkzhi50kjOSvL8jHSihBCCCGElM8VukF36FFAfmqe0At6fx8d/XxffPdZoYcu1IP6Dv2kyg/1ge8+B8gZQiNorJgf6gPf/buyNSI7Y4+bENq37/5d2WOmg7HHTUjV9y/q7nXEt5Oxxy51SiPWvWLVSU3dvbTqxCS357Q9nttz2h7P7bkSPa7JpBKZQrNKu5P0nPHPnWPOBbRswbwXzLvCnGto04J5CSHkn/gAqmxFng==
+   eJzt2MlNxEAQBdAeWQYu7BEAEQBBQwaQAdwIgShYLiwfcfBpRm55bDPDe9KX2lap1bdSVSkAAAAAAAAAAAAAAAAAAAAAAPDrJXlN3pL3P1APANT7SD6Tr5+Pxfz1AED9PNymx+4ku8lej347Vr05HgA6tfPwfmoOksPkaMZ6czwAdGrn575umlJum9XnIcZ6NwBsotr5ua+79Oz7ZvV5iLHeDQD/0bJ5+yH/HpvV5z73AADjW9e8va57AIB6y+btue7ZZsdtKSfJaTv3SwDYZFPvxO3gO0+LUs7Sx8+TC/0cgAGm3onbwXee088v08evkmv9HIABpt6J28EDAAAAAAAAAAAAAAAAAAAAAAAA2+obsg5Fng==
   </data>
  </layer>
- <layer name="foreground-structure" width="60" height="30">
+ <layer name="foreground-structure" width="500" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmMENgDAIRbtS3UA3UyfQieXCpdEUKdQKvIT89GKlr4mGnFKaoLKTnKEWR/n1eYff8Bt++blCbQOcu3ZinwfU6Sixb+uUfq0Tfm0Tfm0Tfm3Ty+/OLGl6+eW8u0a/Wn7L/1Zuv+VzWtHyq+FGAi2/o/Yr4ffu7mr223LH4/trm9IvdU6A1NbSUPenzjeo8x+ktpaGuv9Thl8fft/O+ZC/+eXOn5G/+cW8AOdl3fk=
+   eJzt3HFqwjAUwOHgTbadwN1Ab+Z2gu7EK4zAJoZmNjUv9vug/BAe8/lXG8EdU0rv83VUVVXVYXuar7OqqqoO3d7PE6qqqrq+vZ8nVFVVdX17P0+oqqrq+vZ+nlBVVdX1vczXR+r/XLF1az/ns89F28feMeei7WPvmHPR9mm9d9T9S3PTfH2pqqrq0M33dQBgXPm+DgCMy/kcAMbnfA4A43M+B4DxOZ8DwPiczwFgfM7nADC+rc/nn3deAEC9rc/n99yb3c8B4H9an8+P6e//lb33fn79dwCAstbnc2drAHi81udz9/PHeTmk9Prrejv03giAXtacz299t77l/dx38ABwm9+fA8D4/P4cAMaXz+fX32WXmi29bq32/Uut/ZzPPhdtH3vHnIu2j71jzkXbp/XeUfcvzU3p53x+mq9zRbOl163Vvn+ptZ/z2eei7WPvmHPR9rF3zLlo+7TeO+r+pblLcj7f01y0fewdcy7aPvaOORdtn9Z7R92/NDcl5/M9zUXbx94x56LtY++Yc9H2ab131P1Lc7XPJ7nZ0uvWat9fVVV1j619PsnNll63Vvv+qqqqe+w3/xtR3g==
   </data>
  </layer>
- <layer name="foreground-decoration" width="60" height="30">
+ <layer name="foreground-decoration" width="500" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0rdNREEUQNFZ6ZPhCsAVgGsPT4pZIMUjIQI8KZ4UTwG4AnAF4E4FRGi1A+9KR380o/eTmZSiv1xfkVI/AwwyxDC33HHPA4/00FvkPTPGOGUmmGSKJ5554ZU3RhjNfGaWOeZZYJEl3vngky9STUrTvjOZz6yzwSZbbLNDrX/UUU8DjazaX8t8Zt/6gEOOOOaEJmfNtNBKG7v294q8Z86tL7jkimtuaHfWQSdddHNq/6zIeyaKoiiK/lvLpZRWSj+vo+rvt+4r7j2qdJV+c/HGoyiKoiiq9r4BOgvimQ==
+   eJzt3DePFDEYxvE5MQcUXAAqcmpJXwEKeij4LmRaMi0ZCVGQacm0ZD4A6QOQGkLB3fFcgUCrZcf22B7b+/9Jj4CTZnbnHduvZ7VHVQEAAAAAgK7tqatqr7JP2a8cUA4qb5S3yjvlvfJB2aXsrvM+BgCAEh1RjzuqHFOOKyeUk8pH5ZPyWfmifFUOKYfrvI8BAKBEZ9TjzirnlPPKBeWi8kuZUqaVmdk+OFpVp/Tn6TrvYwAAKNE19bjryg3lpnJLua0sUI8cU8aVCWVSuaKfX63zPgYAgBLdU6+7rzxQHiqPlMfKcvW+FcpKZZWyWrmjn9+t8z4GAIASPVOve668UF4qr5TXynr1vg3KRmWTsll5op8/rfM+BgAAAAAAAH5sm9P1OwAAAG3tTKSfs68AgDJ8U74rP5Sfmb5eqT1pi65rq8O12dQjlX3F/5R6bxGOzZhxnWOpKeU60GzQ+J5SppWZ2X+MNJ+r7bhpej2X8/f2pNh7lFC267p2ONQ6ZI+O3V9NrmWhxtEiZbHB+C2Fz2t2vaepzjOb8e86x/rpsh4+rwPx2YydQeN7VOvBXGWeMt9gbRg0bkzWmKbX8zEubfco/djOzWHpKbZ7hRh1WaJzL1WWeXyN1J93fF6z6/7Pxzwzlere4V9N9RiWNeKPYbveNnzNpTEdO65MKJMt626yxrR5PdPxYbtH6ce2viF6ignTmtishz7nYYy6rNG51yrrPNbA1/NOqDXN9Jpd+dibtzl3r5h7B1dN9ehqjXDhY9ymfr2X9L4ujwz+eyw+epZvodcY0/HhY49iW99B1970rGczd3rPZVoTm/XQ5zw0GROxnr266AmmtQxZA5dzh9ybu4wvl/Uu9vNhUz1Cr48++VgDcrrervl8rs6Fr/FhMs991rfpWc9m7vSey7QmNuth7HkYq892sQc2rWXIGricO+QYcDm3y3z00ZNy/MzYx3suqRf7et7u4rm9H5f7m+M4NpXa50Ax5k7K+79YfTZ0Ddp8VzBkDWLuY1L63oGPeZXaWmEix/c8bNqsFS731/SYlOavqZL2nl3zcf9T3mvY7Gvb/F6BTQ1sax6zvqV9zzrHtSL2e86xB3StzVrhcn9Nj+l6/sYaS037qWH9Pemu739oKT7rlF5z/JVDr0xpPMb+TDyVz+BLEWssNe2nUv9/WeAmx+czlCOlXgkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKnfXslvLw==
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object name="door_exit" type="door" x="1696" y="736" width="32" height="32">
+  <object name="door_exit" type="door" x="3616" y="608" width="32" height="32">
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map1"/>

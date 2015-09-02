@@ -25,18 +25,18 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 350;
+        this.body.maxVelocity.x = 300;
         this.body.maxVelocity.y = 10000;
-        this.body.drag.x = 800;
+        this.body.drag.x = 1500;
         this.body.drag.y = 0;
         
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
-        this.moveAccel = 300;
+        this.moveAccel = 800;
 
         // Number of times the player can be hit by an enemy.
-        this.health = 10;
+        this.health = 5;
 
         // Equip weapons
         this.weaponIndex = 0;
@@ -64,7 +64,7 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
-        
+
     }
 
     function onBlinkLoop (){
@@ -159,12 +159,12 @@ define([
         // Wall jumping.
         if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
 
         if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = -this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
     };
 
@@ -187,10 +187,12 @@ define([
         }
         
         // Wait for drag to stop us if switching directions.
-        if (this.body.acceleration.x > 0) {
-            this.body.acceleration.x = 0;
+        if (this.body.acceleration.x > 0 && this.body.touching.bottom) {
+            this.body.acceleration.x *= -1;
         }
-        if (this.body.velocity.x <= 0) {
+        if (this.body.velocity.x <= 0 && this.body.touching.bottom) {
+            this.body.acceleration.x = -this.moveAccel;
+        } else {
             this.body.acceleration.x = -this.moveAccel;
         }
     };
@@ -214,10 +216,12 @@ define([
         }
         
         // Wait for drag to stop us if switching directions.
-        if (this.body.acceleration.x < 0) {
-            this.body.acceleration.x = 0;
+        if (this.body.acceleration.x < 0 && this.body.touching.bottom) {
+            this.body.acceleration.x *= -1;
         }
-        if (this.body.velocity.x >= 0) {
+        if (this.body.velocity.x >= 0 && this.body.touching.bottom) {
+            this.body.acceleration.x = this.moveAccel;
+        } else {
             this.body.acceleration.x = this.moveAccel;
         }
     };

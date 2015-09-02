@@ -21,11 +21,14 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 150;
+        this.body.maxVelocity.x = 50;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 800;
         this.body.drag.y = 0;
         
+        // Initial health.
+        this.health = 2;
+
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
@@ -49,6 +52,9 @@ define([
         // AI
         this.bearing = new Phaser.Point();
         this.distanceToPlayer = new Phaser.Point();
+
+        this.knockback = new Phaser.Point();
+        this.knockbackTimeout = 0;
         
     }
 
@@ -175,7 +181,7 @@ define([
             this.body.acceleration.x = 0;
         }
         if (this.body.velocity.x <= 0) {
-            this.body.acceleration.x = -this.moveAccel;
+            this.body.acceleration.x = -this.moveAccel * 2;
         }
     };
 
@@ -200,7 +206,7 @@ define([
             this.body.acceleration.x = 0;
         }
         if (this.body.velocity.x >= 0) {
-            this.body.acceleration.x = this.moveAccel;
+            this.body.acceleration.x = this.moveAccel * 2;
         }
     };
 

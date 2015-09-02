@@ -18,6 +18,9 @@
  <tileset firstgid="1137" name="Sci-Fi-Tiles_E" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_E.png" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="1393" name="cave" tilewidth="32" tileheight="32">
+  <image source="../sprites/cave_32.png" trans="000000" width="640" height="512"/>
+ </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJzt0cENACAIBEF6xQ60/2gVksA8Lvu/yYhYbzmk++0MavXffPny5cuXL9/+rf6bL1++fPny5du/1X/z5cuXL1++fPu3+u/fvVJN8/s=
@@ -29,16 +32,20 @@
   </data>
  </layer>
  <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="320" y="768" width="32" height="32"/>
+  <object name="enemy1" type="enemy" gid="97" x="768" y="736" width="32" height="32"/>
+  <object name="enemy2" type="enemy" gid="97" x="896" y="448" width="32" height="32"/>
+  <object name="enemy4" type="enemy" gid="97" x="1248" y="544" width="32" height="32"/>
+  <object name="enemy5" type="enemy" gid="97" x="1792" y="736" width="32" height="32"/>
+  <object name="enemy3" type="enemy" gid="97" x="1216" y="736" width="32" height="32"/>
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztltsNgDAIRbtS1QV8LKYb6MTyw0/Tpk/EADchN20TSTnF4J1zE4RX4ivEpsi56218ja/xbfcT4vpB3akd73lDPIoc7y1dIV/pMr6yZXxly/jK1td8cc6ZIZaI4zmVvuaL8+sOcUQcz6lExTecW1P7Kc99p1VcfHNOJevfetW8uRH92/PGufiW9u9oae/f1v9nbt3ro/KFfGvrX7ru9VH5jK8Ovlz15srHVW+ufC/Abf0h
+   eJztlkkOgDAIRXslhws4XExvoCeWDZumphOIAX5CfrCJpLySMIQQRojBiC8QqyGX7rfzdb7Ot90PiPMHfed2vOcFcRtyvLd2xXy1y/nqlvPVLeerW1/zxT1ngpgTjudc+pov7q8bxJ5wPOcSF994b337/ua5/7RKim/OueTzW6+aN0cxvz1vXIpv6fxSy/r8lvY/nrdc3utU9WK+tf0vzXudql4rX1Rp3utU9azyleq3VD2pfkvVewAu4P+L
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0rdNREEUQNFZ6ZPhCsAVgGsPT4pZIMUjIQI8KZ4UTwG4AnAF4E4FRGi1A+9KR380o/eTmZSiv1xfkVI/AwwyxDC33HHPA4/00FvkPTPGOGUmmGSKJ5554ZU3RhjNfGaWOeZZYJEl3vngky9STUrTvjOZz6yzwSZbbLNDrX/UUU8DjazaX8t8Zt/6gEOOOOaEJmfNtNBKG7v294q8Z86tL7jkimtuaHfWQSdddHNq/6zIeyaKoiiK/lvLpZRWSj+vo+rvt+4r7j2qdJV+c/HGoyiKoiiq9r4BOgvimQ==
+   eJzt1jlOw0AUxvEXye7CcgC2A7BdjgLC1kIW0hJDgoQo2GnZaZMA4QBsB2A7ANs/CoWLUZRYDvEk75N+8mis9+zxTGERTScn4YjMYg7zWMAi7vGARzzhGdOYceyuSSKFNDJYQRYveMUb3vGBJSxbXuNhDevIo4ANfOIL3/iBuCKrXHOW1+xiD/s4wCGOEKdHD3rRh35sM79jec0p4zOc4wKXuMIA9wYxhGGM4Jj5E8fumjLja9zgFhXcYZR7YxjHBCZRZL7k2F2j0Wg0Gk23ZTMmshWrP9ZEP2HtV9T33fv7X0u4NdXkAvzDeYaaIH3+K1m3xp8ptzH++L9bVGI6c6b1BompT7vOeL2z24r1RuWMm9bWyv0N64ynAvZoZL3pJnr73yOsb9nM8zUajUbTnvwCRf4Apg==
   </data>
  </layer>
  <objectgroup name="triggers">
