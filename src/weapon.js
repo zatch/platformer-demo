@@ -3,11 +3,12 @@ define([
 ], function (Phaser) { 
     'use strict';
 
-    var game;
+    var game, self;
 
     function Weapon (_game, x, y, key) {
         game = _game;
-
+        self = this;
+        
         Phaser.Sprite.call(this, game, x, y, key);
 
         // Whether or not this weapon is currently in use.
@@ -53,7 +54,7 @@ define([
     };
 
     Weapon.prototype.onHit = function (weapon, victim) {
-        victim.damage(1, this.parent);
+        victim.damage(1, self.parent);
     };
 
     return Weapon;

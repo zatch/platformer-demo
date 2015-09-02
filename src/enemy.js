@@ -31,9 +31,37 @@ define([
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 100;
 
+        // Number of times the player can be hit by an enemy.
+        this.health = 3;
+
+        // Invulnerability
+        this.invulnerable = false;
+        this.invulnerableTimer = 0;
+
+        // Knockback
+        this.knockback = new Phaser.Point();
+        this.knockbackTimeout = game.time.now;
+
+        // Signals
+        this.events.onHeal = new Phaser.Signal();
+        this.events.onDamage = new Phaser.Signal();
+
+        // AI
         this.bearing = new Phaser.Point();
         this.distanceToPlayer = new Phaser.Point();
         
+    }
+
+    function onBlinkLoop (){
+        if(game.time.now - this.invulnerableTimer > 500) {
+            this.blinkTween.start(0);
+            this.blinkTween.pause();
+            this.invulnerable = false;
+            this.alpha = 1;
+            if (!this.alive) {
+                this.kill();
+            }
+        }
     }
 
     Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -47,22 +75,67 @@ define([
         } else {
             this.stopMoving();
         }
-
-        if(this.distanceToPlayer.x < 0) {
-            this.moveLeft();
-        }
-        else{
-            this.moveRight();
-        }
-        if(game.player.position.y < this.position.y) {
-            this.jump();
+        
+        if (this.alive) {
+            if(this.distanceToPlayer.x < 0) {
+                this.moveLeft();
+            }
+            else{
+                this.moveRight();
+            }
+            if(game.player.position.y < this.position.y) {
+                this.jump();
+            }
         }
 
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
     };
+
+    Enemy.prototype.damage = function (amount, source) {
+
+        // Can currently take damage?
+        if(this.invulnerable) return;
+
+        amount = Math.abs(amount || 1);
+        this.health -= amount;
+        this.events.onDamage.dispatch(this.health, amount);
+
+        // Temporary invulnerability.
+        this.invulnerable = true;
+        this.invulnerableTimer = game.time.now;
+        
+        // Visual feedback to show player was hit and is currently invulnerable.
+        this.blinkTween = game.add.tween(this);
+        this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
+        this.blinkTween.onLoop.add(onBlinkLoop, this);
+
+        // Knockback force
+        Phaser.Point.subtract({x: this.position.x, y: this.position.y-20}, source.position, this.knockback);
+        Phaser.Point.normalize(this.knockback, this.knockback);
+        this.knockback.setMagnitude(400);
+
+        // Zero out current velocity
+        this.body.velocity.set(0);
+
+        Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
+        this.knockback.set(0);
+
+        // Temporarily disable input after knockback.
+        this.knockbackTimeout = game.time.now + 500;
+        
+        if (this.health === 0) {
+            this.alive = false;
+            this.body.checkCollision.up = false;
+            this.body.checkCollision.down = false;
+            this.body.checkCollision.left = false;
+            this.body.checkCollision.right = false;
+        }
+    };
     
     Enemy.prototype.jump = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
         
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
@@ -82,6 +155,9 @@ define([
     };
 
     Enemy.prototype.moveLeft = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
+        
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
             this.frame = 0;
@@ -104,6 +180,9 @@ define([
     };
 
     Enemy.prototype.moveRight = function () {
+        // Temporarily disable input after knockback.
+        if(this.knockbackTimeout > game.time.now) return;
+        
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
             this.frame = 1;
