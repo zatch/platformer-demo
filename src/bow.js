@@ -87,7 +87,7 @@ define([
     Bow.prototype.onHit = function (missile, victim) {
         console.log('hit');
         missile.kill();
-        victim.damage(1);
+        victim.damage(1, victim);
     };
 
     return Bow;

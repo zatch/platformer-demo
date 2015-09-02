@@ -163,7 +163,7 @@ define([
     };
 
     Weapon.prototype.onHit = function (weapon, victim) {
-        victim.damage(1, this.parent);
+        victim.damage(1, victim);
     };
 
     return Sword;

@@ -136,7 +136,7 @@ define([
 
         render: function () {
             var body = player.weapon.getCollidables();
-            if(body) game.debug.body(body);
+            // if(body) game.debug.body(body);
         },
 
         update: function () {
@@ -180,11 +180,6 @@ define([
 
         onPlayerCollidesEnemy: function (player, enemy) {
             player.damage(1, enemy);
-        },
-
-        onPlayerAttacksEnemy: function (weapon, enemy) {
-            enemy.damage(1);
-            if(enemy.health <= 0) enemy.kill();
         },
 
         onPlayerDamage: function (totalHealth, amount) {
