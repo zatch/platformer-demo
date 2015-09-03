@@ -1,6 +1,7 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'health-powerup'
+], function (Phaser, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
@@ -132,6 +133,10 @@ define([
         
         if (this.health === 0) {
             this.alive = false;
+            
+            // Drop loot.
+            this.game.add.existing(new HealthPowerup(game, this.x, this.y));
+
             this.body.checkCollision.up = false;
             this.body.checkCollision.down = false;
             this.body.checkCollision.left = false;
