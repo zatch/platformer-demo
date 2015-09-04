@@ -2,15 +2,16 @@ define([
     'phaser',
     'player',
     'enemy',
+    'villager',
     'platform',
     'object-layer-helper',
     'health-display',
     'health-powerup'
-], function (Phaser, Player, Enemy, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup) { 
+], function (Phaser, Player, Enemy, Villager, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, map, collisionLayer, platforms, exitDoor, healthDisplay, collectables;
+    var game, moveKeys, pad1, player, enemies, villagers, map, collisionLayer, platforms, exitDoor, healthDisplay, collectables;
 
     return {
         // Intro
@@ -67,6 +68,11 @@ define([
             enemies = ObjectLayerHelper.createObjectsByType(game, 'enemy', map, 'enemies', Enemy);
             enemies.forEach(this.registerEnemyEvents, this);
             game.add.existing(enemies);
+
+            // Insert villagers
+            villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
+            //villagers.forEach(this.registerVillagerEvents, this);
+            game.add.existing(villagers);
 
             map.createLayer('foreground-decoration');
 
@@ -153,10 +159,12 @@ define([
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
+            game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
 
             // Check to see if weapons are colliding with enemies.
             game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
+            game.physics.arcade.overlap(player.weapon.getCollidables(), villagers, player.weapon.onHit);
 
             game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
             
