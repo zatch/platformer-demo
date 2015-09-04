@@ -240,6 +240,32 @@
          "width":0,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"collectables",
+         "objects":[
+                {
+                 "height":16,
+                 "name":"health-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"health-powerup",
+                 "visible":true,
+                 "width":16,
+                 "x":112,
+                 "y":720
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":

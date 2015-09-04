@@ -93,7 +93,7 @@ define([
             platforms.callAll('start');
 
             // Collectables
-            collectables = ObjectLayerHelper.createObjectsByType(game, 'collectable', map, 'collectables', Platform);
+            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
             game.add.existing(collectables);
             
             // HUD

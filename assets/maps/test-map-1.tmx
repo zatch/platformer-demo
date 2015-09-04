@@ -69,4 +69,7 @@
  <objectgroup name="spawns">
   <object name="player_spawn" type="spawn" x="192" y="288" width="32" height="32"/>
  </objectgroup>
+ <objectgroup name="collectables">
+  <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
+ </objectgroup>
 </map>
