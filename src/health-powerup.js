@@ -3,7 +3,7 @@ define([
 ], function (Phaser) { 
     'use strict';
 
-    var game, self;
+    var game, self, animation;
 
     function HealthPowerup (_game, x, y) {
         game = _game;
@@ -16,6 +16,9 @@ define([
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
+        
+        animation = this.animations.add('fascinate');
+        animation.play(10, true);
     }
 
     HealthPowerup.prototype = Object.create(Phaser.Sprite.prototype);
