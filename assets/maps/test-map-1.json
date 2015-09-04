@@ -243,7 +243,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"collectables",
          "objects":[
                 {
@@ -263,7 +263,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":60,
+         "width":0,
          "x":0,
          "y":0
         }],
@@ -367,7 +367,7 @@
         }, 
         {
          "firstgid":1393,
-         "image":"..\/sprites\/cave_32.png",
+         "image":"..\/tilesets\/cave_32.png",
          "imageheight":512,
          "imagewidth":640,
          "margin":0,
