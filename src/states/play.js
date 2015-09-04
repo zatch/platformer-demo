@@ -4,12 +4,13 @@ define([
     'enemy',
     'platform',
     'object-layer-helper',
-    'health-display'
-], function (Phaser, Player, Enemy, Platform, ObjectLayerHelper, HealthDisplay) { 
+    'health-display',
+    'health-powerup'
+], function (Phaser, Player, Enemy, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, map, collisionLayer, platforms, exitDoor, healthDisplay;
+    var game, moveKeys, pad1, player, enemies, map, collisionLayer, platforms, exitDoor, healthDisplay, collectables;
 
     return {
         // Intro
@@ -30,6 +31,7 @@ define([
             player = new Player(game, 0, 0);
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
+            player.events.onHeal.add(this.onPlayerHeal);
 
             // Make player accessible via game object.
             game.player = player;
@@ -63,6 +65,7 @@ define([
 
             // Insert enemies
             enemies = ObjectLayerHelper.createObjectsByType(game, 'enemy', map, 'enemies', Enemy);
+            enemies.forEach(this.registerEnemyEvents, this);
             game.add.existing(enemies);
 
             map.createLayer('foreground-decoration');
@@ -89,6 +92,10 @@ define([
             game.add.existing(platforms);
             platforms.callAll('start');
 
+            // Collectables
+            collectables = ObjectLayerHelper.createObjectsByType(game, 'collectable', map, 'collectables', Platform);
+            game.add.existing(collectables);
+            
             // HUD
             healthDisplay = new HealthDisplay(game, 0, 0, 'player');
             game.add.existing(healthDisplay);
@@ -146,11 +153,14 @@ define([
             // Collide player with map.
             game.physics.arcade.collide(player, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
+            game.physics.arcade.collide(collectables, collisionLayer);
 
             // Check to see if weapons are colliding with enemies.
             game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
 
             game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
+            
+            game.physics.arcade.collide(player, collectables, this.onPlayerCollidesCollectable);
 
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
@@ -177,9 +187,19 @@ define([
                 player.stopMoving();
             }
         },
-
+        
+        registerEnemyEvents: function (enemy) {
+            enemy.events.onDeath.add(this.onEnemyDeath, this);
+        },
+        
         onPlayerCollidesEnemy: function (player, enemy) {
             player.damage(1, enemy);
+        },
+        
+        onEnemyDeath: function (enemy) {
+            // Drop loot.
+            var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
+            collectables.add(healthPowerup);
         },
 
         onPlayerDamage: function (totalHealth, amount) {
@@ -193,6 +213,18 @@ define([
                 game.camera.unfollow();
                 game.stateTransition.to('Die', true);
             }
+        },
+
+        onPlayerHeal: function (totalHealth, amount) {
+            console.log('health: ', totalHealth);
+
+            // Update HUD
+            healthDisplay.updateDisplay(player.health);
+        },
+        
+        onPlayerCollidesCollectable: function (player, collectable) {
+            collectable.useOn(player);
+            collectable.destroy();
         },
         
         playerOutOfBounds: function() {

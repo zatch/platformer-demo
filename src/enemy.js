@@ -1,14 +1,14 @@
 define([
     'phaser',
-    'health-powerup'
-], function (Phaser, HealthPowerup) { 
+], function (Phaser) { 
     'use strict';
 
     // Shortcuts
-    var game;
+    var game, self;
 
     function Enemy (_game, x, y) {
         game = _game;
+        self = this;
 
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, 'enemy');
@@ -49,6 +49,7 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
+        this.events.onDeath = new Phaser.Signal();
 
         // AI
         this.bearing = new Phaser.Point();
@@ -132,15 +133,7 @@ define([
         this.knockbackTimeout = game.time.now + 500;
         
         if (this.health === 0) {
-            this.alive = false;
-            
-            // Drop loot.
-            this.game.add.existing(new HealthPowerup(game, this.x, this.y));
-
-            this.body.checkCollision.up = false;
-            this.body.checkCollision.down = false;
-            this.body.checkCollision.left = false;
-            this.body.checkCollision.right = false;
+            this.handleDeath();
         }
     };
     
@@ -217,6 +210,15 @@ define([
 
     Enemy.prototype.stopMoving = function () {
         this.body.acceleration.x = 0;
+    };
+    
+    Enemy.prototype.handleDeath = function () {
+        this.events.onDeath.dispatch(this);
+
+        this.body.checkCollision.up = false;
+        this.body.checkCollision.down = false;
+        this.body.checkCollision.left = false;
+        this.body.checkCollision.right = false;
     };
 
     return Enemy;
