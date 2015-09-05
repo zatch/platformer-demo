@@ -111,21 +111,14 @@ define([
 
         if(this.parent && this.parent.facing) {
             if(this.parent.facing === 'right') {
-                 // this.frame = 0;
                  this.scale.x = 1;
             }
             if(this.parent.facing === 'left') {
-                // this.frame = 1;
                 this.scale.x = -1;
             }
         }
         Phaser.Sprite.prototype.update.call(this);
     };
-
-    /*Sword.prototype.postUpdate = function () {
-        this.body.x = this.parent.x;
-        this.body.y = this.parent.y - this.body.height / 2;
-    };*/
 
     function onAttackFinish () {
         this.inUse = false;
@@ -136,9 +129,9 @@ define([
             this.inUse = true;
             var attackTween = game.add.tween(this);
             if(this.parent.facing === 'right') {
-                anim.play(); // attackTween.to({x: this.x + this.width}, 50, null, true, 0, 0, true);
+                anim.play();
             } else {
-                anim.play(); // attackTween.to({x: this.x - this.width}, 50, null, true, 0, 0, true);
+                anim.play();
             }
             attackTween.onComplete.addOnce(onAttackFinish, this);
         }
@@ -150,10 +143,6 @@ define([
         } else {
             return false;
         }
-    };
-
-    Weapon.prototype.onHit = function (weapon, victim) {
-        victim.damage(1, victim);
     };
 
     return Sword;
