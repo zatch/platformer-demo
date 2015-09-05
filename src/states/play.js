@@ -33,6 +33,8 @@ define([
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
             player.events.onHeal.add(this.onPlayerHeal);
+            player.events.onExalt.add(this.onPlayerExalt);
+            player.events.onCensure.add(this.onPlayerCensure);
 
             // Make player accessible via game object.
             game.player = player;
@@ -72,7 +74,7 @@ define([
 
             // Insert villagers
             villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
-            //villagers.forEach(this.registerVillagerEvents, this);
+            villagers.forEach(this.registerVillagerEvents, this);
             game.add.existing(villagers);
 
             map.createLayer('foreground-decoration');
@@ -202,6 +204,10 @@ define([
             enemy.events.onDeath.add(this.onEnemyDeath, this);
         },
         
+        registerVillagerEvents: function (villager) {
+            villager.events.onDeath.add(this.onVillagerDeath, this);
+        },
+        
         onPlayerCollidesEnemy: function (player, enemy) {
             player.damage(4, enemy);
         },
@@ -212,6 +218,11 @@ define([
                 var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
                 collectables.add(healthPowerup);
             }
+            player.exalt(1, enemy);
+        },
+        
+        onVillagerDeath: function (villager) {
+            player.censure(1, villager);
         },
 
         onPlayerDamage: function (totalHealth, amount) {
@@ -232,6 +243,20 @@ define([
 
             // Update HUD
             healthDisplay.updateDisplay(player.health);
+        },
+
+        onPlayerExalt: function (totalKarma, amount) {
+            console.log('karma: ', totalKarma);
+
+            // Update HUD
+            //healthDisplay.updateDisplay(player.health);
+        },
+
+        onPlayerCensure: function (totalKarma, amount) {
+            console.log('karma: ', totalKarma);
+
+            // Update HUD
+            //healthDisplay.updateDisplay(player.health);
         },
         
         onPlayerCollidesCollectable: function (player, collectable) {

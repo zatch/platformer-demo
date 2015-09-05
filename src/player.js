@@ -39,6 +39,11 @@ define([
         this.maxHealth = 20;
         this.health = 20;
 
+        // Number of times the player can be hit by an enemy.
+        this.maxKarma = 10;
+        this.minKarma = -10;
+        this.karma = 0;
+
         // Equip weapons
         this.weaponIndex = 0;
         this.allWeapons = [
@@ -65,6 +70,8 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
+        this.events.onExalt = new Phaser.Signal();
+        this.events.onCensure = new Phaser.Signal();
 
     }
 
@@ -153,6 +160,18 @@ define([
         // Temporarily disable input after knockback.
         this.knockbackTimeout = game.time.now + 500;
 
+    };
+    
+    Player.prototype.exalt = function (amount, source) {
+        this.karma += amount;
+        if (this.karma > this.maxKarma) this.karma = this.maxKarma;
+        this.events.onExalt.dispatch(this.karma, amount);
+    };
+    
+    Player.prototype.censure = function (amount, source) {
+        this.karma -= amount;
+        if (this.karma < this.minKarma) this.karma = this.minKarma;
+        this.events.onCensure.dispatch(this.karma, amount);
     };
     
     Player.prototype.jump = function () {
