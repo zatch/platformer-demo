@@ -94,7 +94,7 @@ define([
             else{
                 this.moveRight();
             }
-            if(game.player.position.y < this.position.y) {
+            if(game.player.position.y+game.player.height < this.position.y+this.height) {
                 this.jump();
             }
         }
