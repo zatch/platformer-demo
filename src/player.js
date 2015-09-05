@@ -36,7 +36,8 @@ define([
         this.moveAccel = 800;
 
         // Number of times the player can be hit by an enemy.
-        this.health = 5;
+        this.maxHealth = 10;
+        this.health = 10;
 
         // Equip weapons
         this.weaponIndex = 0;
@@ -110,6 +111,7 @@ define([
     Player.prototype.heal = function (amount, source) {
         amount = Math.abs(amount || 1);
         this.health += amount;
+        if (this.health > this.maxHealth) this.health = this.maxHealth;
         this.events.onHeal.dispatch(this.health, amount);
     };
 

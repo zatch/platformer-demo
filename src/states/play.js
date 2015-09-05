@@ -103,8 +103,9 @@ define([
             game.add.existing(collectables);
             
             // HUD
-            healthDisplay = new HealthDisplay(game, 0, 0, 'player');
+            healthDisplay = new HealthDisplay(game, 10, 10, 'health-bar-cap-left', 'health-bar-middle', 'health-bar-cap-right', 'health-bar-fill');
             game.add.existing(healthDisplay);
+            healthDisplay.setMaxHealth(player.maxHealth);
             healthDisplay.updateDisplay(player.health);
 
             // Keyboard input set-up
