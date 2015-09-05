@@ -39,7 +39,7 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":800,
+                 "x":912,
                  "y":864
                 }, 
                 {
@@ -54,8 +54,8 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":896,
-                 "y":448
+                 "x":1048,
+                 "y":720
                 }, 
                 {
                  "gid":97,
@@ -84,8 +84,8 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":1792,
-                 "y":736
+                 "x":1360,
+                 "y":472
                 }, 
                 {
                  "gid":97,
@@ -101,6 +101,81 @@
                  "width":32,
                  "x":1216,
                  "y":736
+                }, 
+                {
+                 "gid":97,
+                 "height":32,
+                 "name":"enemy6",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":1392,
+                 "y":400
+                }, 
+                {
+                 "gid":97,
+                 "height":32,
+                 "name":"enemy7",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":1288,
+                 "y":368
+                }, 
+                {
+                 "gid":97,
+                 "height":32,
+                 "name":"enemy8",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":1568,
+                 "y":368
+                }, 
+                {
+                 "gid":97,
+                 "height":32,
+                 "name":"enemy9",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":1640,
+                 "y":376
+                }, 
+                {
+                 "gid":97,
+                 "height":32,
+                 "name":"enemy10",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":1672,
+                 "y":376
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -163,36 +238,6 @@
          "height":0,
          "name":"platforms",
          "objects":[
-                {
-                 "gid":120,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1568,
-                 "y":544
-                }, 
-                {
-                 "gid":120,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1600,
-                 "y":576
-                }, 
                 {
                  "height":24,
                  "name":"platform-1",
@@ -283,8 +328,162 @@
                  "type":"villager",
                  "visible":true,
                  "width":24,
-                 "x":336,
-                 "y":744
+                 "x":1152,
+                 "y":120
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-9",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1184,
+                 "y":184
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-6",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1200,
+                 "y":152
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-5",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1168,
+                 "y":152
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-4",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1248,
+                 "y":120
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-2",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1184,
+                 "y":120
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-3",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1216,
+                 "y":120
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-7",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1232,
+                 "y":152
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-8",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1264,
+                 "y":152
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-10",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1216,
+                 "y":184
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-11",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1248,
+                 "y":184
+                }, 
+                {
+                 "height":24,
+                 "name":"villager-12",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"villager",
+                 "visible":true,
+                 "width":24,
+                 "x":1280,
+                 "y":184
                 }],
          "opacity":1,
          "type":"objectgroup",
