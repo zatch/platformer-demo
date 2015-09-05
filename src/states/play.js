@@ -203,7 +203,7 @@ define([
         },
         
         onPlayerCollidesEnemy: function (player, enemy) {
-            player.damage(1, enemy);
+            player.damage(4, enemy);
         },
         
         onEnemyDeath: function (enemy) {

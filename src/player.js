@@ -36,8 +36,8 @@ define([
         this.moveAccel = 800;
 
         // Number of times the player can be hit by an enemy.
-        this.maxHealth = 10;
-        this.health = 10;
+        this.maxHealth = 20;
+        this.health = 20;
 
         // Equip weapons
         this.weaponIndex = 0;

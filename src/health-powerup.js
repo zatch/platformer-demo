@@ -25,7 +25,7 @@ define([
     HealthPowerup.prototype.constructor = HealthPowerup;
     
     HealthPowerup.prototype.useOn = function (target) {
-        target.heal(1, self);
+        target.heal(4, self);
     };
 
     return HealthPowerup;
