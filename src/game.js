@@ -58,7 +58,7 @@ define([
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
             this.game.load.spritesheet('sword', 'assets/sprites/sword.png', 32, 7, 2);
             this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 2);
-            this.game.load.spritesheet('sword-swipe', 'assets/sprites/sword-swipe.png', 60, 76, 10);
+            this.game.load.spritesheet('sword-swipe', 'assets/sprites/sword-swipe.png', 64, 128, 10);
             
             // Power-ups
             this.game.load.spritesheet('health-powerup', 'assets/sprites/health-powerup.png', 16, 16, 5);
