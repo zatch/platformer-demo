@@ -29,40 +29,29 @@ define([
         this.hitboxes.enableBody = true;
         this.addChild(this.hitboxes);
 
-        // DEBUG - ADD SOME RANDOM HITBOXES
-        for(var i=0; i<10; i++) {
-            this.hitboxes.create(0, 0, null);
-        }
+        this.rightHitboxFrames = makeRightHitboxFrames(this.hitboxes);
+        this.leftHitboxFrames = makeLeftHitboxFrames(this.hitboxes);
 
+        // Make sure hitboxes stay attached to the player.
         this.hitboxes.forEach(function (hitbox) {
             hitbox.body.allowGravity = false;
             hitbox.body.moves = false;
             hitbox.body.immovable = true;
         });
 
-        this.rightHitboxFrames = makeRightHitboxFrames(this.hitboxes);
-        this.makeLeftHitboxFrames = makeLeftHitboxFrames(this.hitboxes);
-
-        game.physics.enable(this);
-
-        // this.body.setSize(42, 64, 16, 0);
-        this.body.moves = false;
-        this.body.immovable = true;
-        this.body.allowGravity = false;
-
     }
 
     function makeRightHitboxFrames (hitboxes) {
-        var frame4 = hitboxes.getChildAt(0);
+        var frame4 = hitboxes.create(0,0,null);
         frame4.body.setSize(24, 16, 8, -32);
 
-        var frame6 = hitboxes.getChildAt(1);
+        var frame6 = hitboxes.create(0,0,null);
         frame6.body.setSize(24, 27, 8, -43);
 
-        var frame7 = hitboxes.getChildAt(2);
+        var frame7 = hitboxes.create(0,0,null);
         frame7.body.setSize(30, 32, 16, -16);
 
-        var frame8 = hitboxes.getChildAt(3);
+        var frame8 = hitboxes.create(0,0,null);
         frame8.body.setSize(30, 22, 16, 16);
 
         // Remember: frame keys here are 0 indexed.
@@ -78,16 +67,16 @@ define([
     }
 
     function makeLeftHitboxFrames (hitboxes) {
-        var frame4 = hitboxes.getChildAt(4);
+        var frame4 = hitboxes.create(0,0,null);
         frame4.body.setSize(24, 16, -25, -32);
 
-        var frame6 = hitboxes.getChildAt(5);
+        var frame6 = hitboxes.create(0,0,null);
         frame6.body.setSize(24, 27, -25, -43);
 
-        var frame7 = hitboxes.getChildAt(6);
+        var frame7 = hitboxes.create(0,0,null);
         frame7.body.setSize(32, 32, -50, -16);
 
-        var frame8 = hitboxes.getChildAt(7);
+        var frame8 = hitboxes.create(0,0,null);
         frame8.body.setSize(32, 22, -45, 16);
 
         // Remember: frame keys here are 0 indexed.
@@ -111,8 +100,9 @@ define([
         if(this.parent.facing == 'right') {
             hitbox = this.rightHitboxFrames[anim.currentFrame.index];
         } else {
-            hitbox = this.makeLeftHitboxFrames[anim.currentFrame.index];
+            hitbox = this.leftHitboxFrames[anim.currentFrame.index];
         }
+
         if(hitbox) return hitbox;
         return null;  
     };
