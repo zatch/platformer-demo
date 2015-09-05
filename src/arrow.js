@@ -10,7 +10,7 @@ define([
         game = _game;
 
         Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
-        this.anchor.set(0.5);
+        this.anchor.set(0.1);
 
         this.debug = true;
 
@@ -35,11 +35,11 @@ define([
     Arrow.prototype.fire = function (direction) {
         switch(direction) {
             case 'left':
-                this.frame = 1;
+                this.scale.x = -1; //flipped
                 this.body.velocity.x = -this.speed;
                 break;
             case 'right':
-                this.frame = 0;
+                this.scale.x = 1; //facing default direction
                 this.body.velocity.x = this.speed;
                 break;
             case 'up':

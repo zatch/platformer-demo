@@ -60,12 +60,12 @@ define([
             this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
 
-            this.game.load.spritesheet('player', 'assets/sprites/player.png', 32, 32, 2);
-            this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 32, 32, 2);
-            this.game.load.spritesheet('villager', 'assets/sprites/villager.png', 24, 24, 1);
+            this.game.load.spritesheet('player', 'assets/sprites/player.png', 26, 30, 1);
+            this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
+            this.game.load.spritesheet('villager', 'assets/sprites/villager.png', 15, 24, 1);
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
-            this.game.load.spritesheet('sword', 'assets/sprites/sword.png', 32, 7, 2);
-            this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 2);
+            this.game.load.spritesheet('bow', 'assets/sprites/bow.png', 30, 19, 1);
+            this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 1);
             this.game.load.spritesheet('sword-swipe', 'assets/sprites/sword-swipe.png', 64, 128, 10);
             
             // Power-ups

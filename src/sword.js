@@ -116,15 +116,6 @@ define([
     };
 
     Sword.prototype.update = function () {
-
-        if(this.parent && this.parent.facing) {
-            if(this.parent.facing === 'right') {
-                 this.scale.x = 1;
-            }
-            if(this.parent.facing === 'left') {
-                this.scale.x = -1;
-            }
-        }
         Phaser.Sprite.prototype.update.call(this);
     };
 

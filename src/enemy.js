@@ -14,6 +14,9 @@ define([
         Phaser.Sprite.call(this, game, x, y, 'enemy');
         this.anchor.set(0.5);
 
+        // Which way is the dude or dudette facing?
+        this.facing = 'right';
+
         // Enable physics.
         game.physics.enable(this);
         this.body.collideWorldBounds = true;
@@ -95,6 +98,14 @@ define([
                 this.jump();
             }
         }
+        
+        // Update direction
+        if (this.facing === 'right') {
+            this.scale.x = 1; //facing default direction
+        }
+        else {
+            this.scale.x = -1; //flipped
+        }
 
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
@@ -164,14 +175,14 @@ define([
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
-            this.frame = 0;
+            this.facing = 'right';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
         }
         // Face normally and fall normally.
         else {
-            this.frame = 1;
+            this.facing = 'left';
         }
         
         // Wait for drag to stop us if switching directions.
@@ -189,14 +200,14 @@ define([
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
-            this.frame = 1;
+            this.facing = 'left';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
         }
         // Face normally and fall normally.
         else {
-            this.frame = 0;
+            this.facing = 'right';
         }
         
         // Wait for drag to stop us if switching directions.

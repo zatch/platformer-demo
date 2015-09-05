@@ -43,7 +43,7 @@ define([
         this.weaponIndex = 0;
         this.allWeapons = [
             new Sword(game, 0, 0),
-            new Bow(game, 0, 0)
+            new Bow(game, 4, 4)
         ];
 
         // this.allWeapons.forEach(this.addChild);
@@ -83,6 +83,12 @@ define([
     // Update children.
     Player.prototype.update = function () {
         if(this.weapon) this.weapon.update();
+        if (this.facing === 'right') {
+            this.scale.x = 1; //facing default direction
+        }
+        else {
+            this.scale.x = -1; //flipped
+        }
         Phaser.Sprite.prototype.update.call(this);
     };
 
@@ -177,7 +183,6 @@ define([
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
             this.facing = 'right';
-            this.frame = 0;
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
@@ -185,7 +190,6 @@ define([
         // Face normally and fall normally.
         else {
             this.facing = 'left';
-            this.frame = 1;
         }
         
         // Wait for drag to stop us if switching directions.
@@ -206,7 +210,6 @@ define([
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
             this.facing = 'left';
-            this.frame = 1;
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
@@ -214,7 +217,6 @@ define([
         // Face normally and fall normally.
         else {
             this.facing = 'right';
-            this.frame = 0;
         }
         
         // Wait for drag to stop us if switching directions.

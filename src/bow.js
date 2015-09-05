@@ -10,7 +10,7 @@ define([
     function Bow (_game, x, y) {
         game = _game;
 
-        Weapon.call(this, game, x, y, 'sword', 1);
+        Weapon.call(this, game, x, y, 'bow', 1);
         this.anchor.set(0.5);
 
         this.missiles = game.add.group();
@@ -39,14 +39,6 @@ define([
     Bow.prototype.constructor = Bow;
 
     Bow.prototype.update = function () {
-        if(this.parent && this.parent.facing) {
-            if(this.parent.facing === 'right') {
-                this.frame = 0;
-            }
-            if(this.parent.facing === 'left') {
-                this.frame = 1;
-            }
-        }
         Phaser.Sprite.prototype.update.call(this);
     };
 

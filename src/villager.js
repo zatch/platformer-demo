@@ -50,7 +50,7 @@ define([
 
         // AI
         this.spawnX = this.x;
-        this.bearing = 'left';
+        this.facing = 'right';
         this.maxDistanceFromSpawn = 50;
 
         this.knockback = new Phaser.Point();
@@ -76,18 +76,31 @@ define([
     Villager.prototype.update = function () {
         // Pace back and forth.
         if (this.alive) {
-            if(this.bearing === 'left') {
+            if(this.facing === 'left') {
                 this.moveLeft();
                 if (this.x <= this.spawnX - this.maxDistanceFromSpawn) {
-                    this.bearing = 'right';
+                    this.moveRight();
+                }
+                else {
+                    this.moveLeft();
                 }
             }
-            else if(this.bearing === 'right'){
-                this.moveRight();
+            else if(this.facing === 'right'){
                 if (this.x >= this.spawnX + this.maxDistanceFromSpawn) {
-                    this.bearing = 'left';
+                    this.moveLeft();
+                }
+                else {   
+                    this.moveRight();
                 }
             }
+        }
+        
+        // Update direction
+        if (this.facing === 'right') {
+            this.scale.x = 1; //facing default direction
+        }
+        else {
+            this.scale.x = -1; //flipped
         }
 
         // Call up!
@@ -158,14 +171,14 @@ define([
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
-            this.frame = 0;
+            this.facing = 'right';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
         }
         // Face normally and fall normally.
         else {
-            this.frame = 1;
+            this.facing = 'left';
         }
         
         // Wait for drag to stop us if switching directions.
@@ -183,14 +196,14 @@ define([
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
-            this.frame = 1;
+            this.facing = 'left';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
             }
         }
         // Face normally and fall normally.
         else {
-            this.frame = 0;
+            this.facing = 'right';
         }
         
         // Wait for drag to stop us if switching directions.
