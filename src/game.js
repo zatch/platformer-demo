@@ -55,10 +55,18 @@ define([
             this.game.load.image('cave',  'assets/tilesets/cave_32.png');
             
             // HUD
-            this.game.load.image('health-bar-cap-left', 'assets/hud/health-bar-cap-left.png');
-            this.game.load.image('health-bar-middle', 'assets/hud/health-bar-middle.png');
-            this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
-            this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
+            
+            // Health Bar
+            this.game.load.image('health-bar-cap-left', 'assets/hud/health-bar/health-bar-cap-left.png');
+            this.game.load.image('health-bar-middle', 'assets/hud/health-bar/health-bar-middle.png');
+            this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar/health-bar-cap-right.png');
+            this.game.load.image('health-bar-fill', 'assets/hud/health-bar/health-bar-fill.png');
+            
+            // Karma Bar
+            this.game.load.image('karma-bar-cap-left', 'assets/hud/karma-bar/karma-bar-cap-left.png');
+            this.game.load.image('karma-bar-middle', 'assets/hud/karma-bar/karma-bar-middle.png');
+            this.game.load.image('karma-bar-cap-right', 'assets/hud/karma-bar/karma-bar-cap-right.png');
+            this.game.load.image('karma-bar-fill', 'assets/hud/karma-bar/karma-bar-fill.png');
 
             this.game.load.spritesheet('player', 'assets/sprites/player.png', 26, 30, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);

@@ -6,12 +6,13 @@ define([
     'platform',
     'object-layer-helper',
     'health-display',
+    'karma-display',
     'health-powerup'
-], function (Phaser, Player, Enemy, Villager, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup) { 
+], function (Phaser, Player, Enemy, Villager, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, villagers, map, collisionLayer, platforms, exitDoor, healthDisplay, collectables;
+    var game, moveKeys, pad1, player, enemies, villagers, map, collisionLayer, platforms, exitDoor, healthDisplay, karmaDisplay, collectables;
 
     return {
         // Intro
@@ -106,11 +107,23 @@ define([
             game.add.existing(collectables);
             
             // HUD
+            
+            // Health Display
             healthDisplay = new HealthDisplay(game, 10, 10, 'health-bar-cap-left', 'health-bar-middle', 'health-bar-cap-right', 'health-bar-fill');
             game.add.existing(healthDisplay);
             healthDisplay.setMaxHealth(player.maxHealth);
             healthDisplay.updateDisplay(player.health);
+            
+            // Karma Display
+            karmaDisplay = new KarmaDisplay(game, 10, 10, 'karma-bar-cap-left', 'karma-bar-middle', 'karma-bar-cap-right', 'karma-bar-fill');
+            game.add.existing(karmaDisplay);
+            karmaDisplay.setMinKarma(player.minKarma);
+            karmaDisplay.setMaxKarma(player.maxKarma);
+            karmaDisplay.updateDisplay(player.karma);
 
+            
+            
+            
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
             moveKeys.up.onDown.add(function () {
@@ -226,8 +239,6 @@ define([
         },
 
         onPlayerDamage: function (totalHealth, amount) {
-            console.log('health: ', totalHealth);
-
             // Update HUD
             healthDisplay.updateDisplay(player.health);
 
@@ -239,24 +250,18 @@ define([
         },
 
         onPlayerHeal: function (totalHealth, amount) {
-            console.log('health: ', totalHealth);
-
             // Update HUD
             healthDisplay.updateDisplay(player.health);
         },
 
         onPlayerExalt: function (totalKarma, amount) {
-            console.log('karma: ', totalKarma);
-
             // Update HUD
-            //healthDisplay.updateDisplay(player.health);
+            karmaDisplay.updateDisplay(player.karma);
         },
 
         onPlayerCensure: function (totalKarma, amount) {
-            console.log('karma: ', totalKarma);
-
             // Update HUD
-            //healthDisplay.updateDisplay(player.health);
+            karmaDisplay.updateDisplay(player.karma);
         },
         
         onPlayerCollidesCollectable: function (player, collectable) {
