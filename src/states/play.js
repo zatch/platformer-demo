@@ -48,6 +48,7 @@ define([
             map.addTilesetImage('Sci-Fi-Tiles_C', 'Sci-Fi-Tiles_C');
             map.addTilesetImage('Sci-Fi-Tiles_D', 'Sci-Fi-Tiles_D');
             map.addTilesetImage('Sci-Fi-Tiles_E', 'Sci-Fi-Tiles_E');
+            map.addTilesetImage('platformertiles', 'platformertiles');
             map.addTilesetImage('cave', 'cave');
             
             // Add layers to map.

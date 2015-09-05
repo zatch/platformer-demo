@@ -51,6 +51,7 @@ define([
             this.game.load.image('Sci-Fi-Tiles_C',  'assets/tilesets/Sci-Fi-Tiles_C.png');
             this.game.load.image('Sci-Fi-Tiles_D',  'assets/tilesets/Sci-Fi-Tiles_D.png');
             this.game.load.image('Sci-Fi-Tiles_E',  'assets/tilesets/Sci-Fi-Tiles_E.png');
+            this.game.load.image('platformertiles',  'assets/tilesets/platformertiles.png');
             this.game.load.image('cave',  'assets/tilesets/cave_32.png');
             
             // HUD

@@ -21,18 +21,21 @@
  <tileset firstgid="1393" name="cave" tilewidth="32" tileheight="32">
   <image source="../tilesets/cave_32.png" trans="000000" width="640" height="512"/>
  </tileset>
+ <tileset firstgid="1713" name="platformertiles" tilewidth="32" tileheight="32">
+  <image source="../tilesets/platformertiles.png" width="256" height="96"/>
+ </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0cENACAIBEF6xQ60/2gVksA8Lvu/yYhYbzmk++0MavXffPny5cuXL9/+rf6bL1++fPny5du/1X/z5cuXL1++fPu3+u/fvVJN8/s=
+   eJzt07EOgCAMBFAm//+DGPkwFwdDQiix12tth4vRQe5R6FdrvRI648n8jd0LaV2F3c/SWt7YKe+/vbt9YPcoL9br3Sy5j6dhmyyMnqzj9USHbbVyevJmNWc605Zmtq/mG8sqWctijmyvh2SyaniZnctrf56R+yH5967HF8PuHT1XDYumFzVfT965n8bdOlkvkxdl9uqV9r8BOXtoNA==
   </data>
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztldkNAjEMRI2iBX64KwAqAIqGDqAD+KMEquD44RgK2JBkkzhi50kjOSvL8jHSihBCCCGElM8VukF36FFAfmqe0At6fx8d/XxffPdZoYcu1IP6Dv2kyg/1ge8+B8gZQiNorJgf6gPf/buyNSI7Y4+bENq37/5d2WOmg7HHTUjV9y/q7nXEt5Oxxy51SiPWvWLVSU3dvbTqxCS357Q9nttz2h7P7bkSPa7JpBKZQrNKu5P0nPHPnWPOBbRswbwXzLvCnGto04J5CSHkn/gAqmxFng==
+   eJztllEOgjAMhusDvKsnUE+g3h+8gUfwKpaYJUuzdnVs2M19yUIUGP3bvwUA+0yjjf3nhOse42fliiEXS4xaPTnQ5KAGXJ2WI1ezSVlznxrzk+rZWE/sB4ADruOg229rL8eg2qTYnjuAE+o847oo9cYIPU/Kd27v0f383y/Ue0WdN1x3Qe/s9RmH1IOpcLXaej6veTa9/tv7Q34oMZ+kvqDnNH7Q7p1CqfnM6dRSy3vD6Uqpyy97zxoWcyG9f93/vk9j88Wyp0vFZlVzyG8z+X6jtaf3WPo244jFyOWhBSTvWZw3JbDaf7n4lzpqaaHeIQ2tzKQ1tJoDTlcLXu50Op2OLd4t6UCl
   </data>
  </layer>
  <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="768" y="736" width="32" height="32"/>
+  <object name="enemy1" type="enemy" gid="97" x="800" y="864" width="32" height="32"/>
   <object name="enemy2" type="enemy" gid="97" x="896" y="448" width="32" height="32"/>
   <object name="enemy4" type="enemy" gid="97" x="1248" y="544" width="32" height="32"/>
   <object name="enemy5" type="enemy" gid="97" x="1792" y="736" width="32" height="32"/>
@@ -40,16 +43,16 @@
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkkOgDAIRXslhws4XExvoCeWDZumphOIAX5CfrCJpLySMIQQRojBiC8QqyGX7rfzdb7Ot90PiPMHfed2vOcFcRtyvLd2xXy1y/nqlvPVLeerW1/zxT1ngpgTjudc+pov7q8bxJ5wPOcSF994b337/ua5/7RKim/OueTzW6+aN0cxvz1vXIpv6fxSy/r8lvY/nrdc3utU9WK+tf0vzXudql4rX1Rp3utU9azyleq3VD2pfkvVewAu4P+L
+   eJztmFEOgyAMhn3iXDvaruSWLeqyZM6LDR9IGiylFYTqbPLHB7H2w0KLg2mal9WerbfxDwIdhbczzedrryHZ+5cj8cY4uOO028mbNk67nbxp47Qb2J+vN3uFupvluFq8rRfbWnXMWlubl+oTYrWUK828kHHKFNNbIa/jzMUITRvvzBridOv7jtyn1j4cr42XevcYyO1WsEftiZd6jtrTJsW8rmZiOUs9x427NC+1zmBOztxcZg28IS5qnUnO4S3isyav22upc3asj6DqEdab+HFjc56z3/DnPOSnJ2LkGtab+PMTm5NUXt9/SV7Mj6tfoZxJ5fX9h/KxFC/Xx9b16N94R0YOxCwn7xPZ11Il6R9ChtUgWK+lcUj/U0uUq8alxgHnRdILlOKlvqlmQd6HWbKs+TejWdiZbMv1U1taeX9rlQZo
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1jlOw0AUxvEXye7CcgC2A7BdjgLC1kIW0hJDgoQo2GnZaZMA4QBsB2A7ANs/CoWLUZRYDvEk75N+8mis9+zxTGERTScn4YjMYg7zWMAi7vGARzzhGdOYceyuSSKFNDJYQRYveMUb3vGBJSxbXuNhDevIo4ANfOIL3/iBuCKrXHOW1+xiD/s4wCGOEKdHD3rRh35sM79jec0p4zOc4wKXuMIA9wYxhGGM4Jj5E8fumjLja9zgFhXcYZR7YxjHBCZRZL7k2F2j0Wg0Gk23ZTMmshWrP9ZEP2HtV9T33fv7X0u4NdXkAvzDeYaaIH3+K1m3xp8ptzH++L9bVGI6c6b1BompT7vOeL2z24r1RuWMm9bWyv0N64ynAvZoZL3pJnr73yOsb9nM8zUajUbTnvwCRf4Apg==
+   eJzt11EKgCAMgGGfvP9hOsPqWBU0WKZECsbY/73UGMI0ZZkS4MuW7+82BkYs7CUAgbT6p/bWMu+p33qqdVSUuUaZJ/qVdwQAfd7u2JrjzH0TfY1m/FfavelpveWodb3qPZ8aS37ma7GOs/mZavVInl+H5en7A8DfdrkdIaA=
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object name="door_exit" type="door" x="1696" y="736" width="32" height="32">
+  <object name="door_exit" type="door" x="1728" y="192" width="32" height="32">
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map2"/>
@@ -59,10 +62,10 @@
  <objectgroup name="platforms">
   <object gid="120" x="1568" y="544"/>
   <object gid="120" x="1600" y="576"/>
-  <object name="platform-1" type="platform" x="160" y="672" width="96" height="32">
+  <object name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
    <properties>
     <property name="key" value="platform"/>
-    <property name="wayPoints" value="[[160, 672],[160, 372],[960, 288],[1662, 372],[960, 288],[160, 372]]"/>
+    <property name="wayPoints" value="[[1824, 224],[1824, 776]]"/>
    </properties>
   </object>
  </objectgroup>
@@ -73,6 +76,6 @@
   <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="villagers">
-  <object name="villager-1" type="villager" x="544" y="648" width="24" height="24"/>
+  <object name="villager-1" type="villager" x="336" y="744" width="24" height="24"/>
  </objectgroup>
 </map>
