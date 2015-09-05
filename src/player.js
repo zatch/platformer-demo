@@ -165,12 +165,12 @@ define([
         }
 
         // Wall jumping.
-        if(this.body.onWall() && this.body.blocked.left) {
+        else if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
 
-        if(this.body.onWall() && this.body.blocked.right) {
+        else if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = -this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
@@ -181,7 +181,7 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
         
         // Face away from wall and slide down wall slowly.
-        if(this.body.onWall() && this.body.blocked.left) {
+        if(this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
             this.facing = 'right';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
@@ -208,7 +208,7 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
 
         // Face away from wall and slide down wall slowly.
-        if(this.body.onWall() && this.body.blocked.right) {
+        if(this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {
             this.facing = 'left';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
