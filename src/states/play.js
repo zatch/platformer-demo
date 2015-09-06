@@ -188,6 +188,7 @@ define([
             // so objects aren't pushed through walls.
             game.physics.arcade.collide(player, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
+            game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
 
             // Check to see if player has reached the exit door.
