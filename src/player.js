@@ -25,7 +25,7 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 300;
+        this.body.maxVelocity.x = 500;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 1500;
         this.body.drag.y = 0;
@@ -66,6 +66,7 @@ define([
         // Knockback
         this.knockback = new Phaser.Point();
         this.knockbackTimeout = game.time.now;
+        this.maxMoveSpeed = new Phaser.Point(300, 10000);
 
         // Signals
         this.events.onHeal = new Phaser.Signal();
@@ -186,18 +187,20 @@ define([
         // Wall jumping.
         else if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = this.maxMoveSpeed.x;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
 
         else if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.body.maxVelocity.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = -this.maxMoveSpeed.x;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
     };
 
     Player.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
+
+        if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
@@ -207,7 +210,7 @@ define([
             }
         }
         // Face normally and fall normally.
-        else {
+        else if(!this.weapon.inUse) {
             this.facing = 'left';
         }
         
@@ -225,6 +228,8 @@ define([
     Player.prototype.moveRight = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
+
+        if(this.body.velocity.x >=  this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
 
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {

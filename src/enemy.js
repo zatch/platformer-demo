@@ -25,7 +25,7 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 50;
+        this.body.maxVelocity.x = 400;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 800;
         this.body.drag.y = 0;
@@ -55,6 +55,7 @@ define([
         this.events.onDeath = new Phaser.Signal();
 
         // AI
+        this.maxMoveSpeed = new Phaser.Point(75, 1000);
         this.bearing = new Phaser.Point();
         this.distanceToPlayer = new Phaser.Point();
 
@@ -132,7 +133,7 @@ define([
         // Knockback force
         Phaser.Point.subtract({x: this.position.x, y: this.position.y-20}, source.position, this.knockback);
         Phaser.Point.normalize(this.knockback, this.knockback);
-        this.knockback.setMagnitude(400);
+        this.knockback.setMagnitude(500);
 
         // Zero out current velocity
         this.body.velocity.set(0);
@@ -160,19 +161,21 @@ define([
         // Wall jumping.
         if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = this.maxMoveSpeed.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
 
         if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.body.maxVelocity.x/3; // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.body.velocity.x = -this.maxMoveSpeed.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
         }
     };
 
     Enemy.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
-        
+
+        if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
+
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.left) {
             this.facing = 'right';
@@ -190,13 +193,15 @@ define([
             this.body.acceleration.x = 0;
         }
         if (this.body.velocity.x <= 0) {
-            this.body.acceleration.x = -this.moveAccel * 2;
+            this.body.acceleration.x = -this.moveAccel;
         }
     };
 
     Enemy.prototype.moveRight = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
+
+        if(this.body.velocity.x >= this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
@@ -215,7 +220,7 @@ define([
             this.body.acceleration.x = 0;
         }
         if (this.body.velocity.x >= 0) {
-            this.body.acceleration.x = this.moveAccel * 2;
+            this.body.acceleration.x = this.moveAccel;
         }
     };
 
