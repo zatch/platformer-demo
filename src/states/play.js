@@ -216,6 +216,12 @@ define([
                 player.stopMoving();
             }
         },
+
+        shutdown: function () {
+            // This prevents occasional momentary "flashes" during state transitions.
+            game.camera.unfollow();
+            pad1.onDownCallback = undefined;
+        },
         
         registerEnemyEvents: function (enemy) {
             enemy.events.onDeath.add(this.onEnemyDeath, this);
@@ -274,17 +280,11 @@ define([
         },
         
         playerOutOfBounds: function() {
-            // This prevents occasional momentary "flashes" during state transitions.
-            game.camera.unfollow();
-
             // Switch to the "death" state.
             game.stateTransition.to('Die', true);
         },
 
         playerExits: function () {
-            // This prevents occasional momentary "flashes" during state transitions.
-            game.camera.unfollow();
-
             // Switch to the "win" state.
             game.stateTransition.to('Play', true, false, exitDoor.properties.mapLink);
         }
