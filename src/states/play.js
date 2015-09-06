@@ -173,20 +173,22 @@ define([
         update: function () {
             // Collide with platforms.
             game.physics.arcade.collide(player, platforms);
-            
-            // Collide player with map.
-            game.physics.arcade.collide(player, collisionLayer);
-            game.physics.arcade.collide(enemies, collisionLayer);
-            game.physics.arcade.collide(villagers, collisionLayer);
-            game.physics.arcade.collide(collectables, collisionLayer);
 
             // Check to see if weapons are colliding with enemies.
             game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
             game.physics.arcade.overlap(player.weapon.getCollidables(), villagers, player.weapon.onHit);
 
+            // Collide player + enemies.
             game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
             
+            // Collide player + collectables.
             game.physics.arcade.collide(player, collectables, this.onPlayerCollidesCollectable);
+
+            // Collide objects with map.  Do this after other collision checks
+            // so objects aren't pushed through walls.
+            game.physics.arcade.collide(player, collisionLayer);
+            game.physics.arcade.collide(enemies, collisionLayer);
+            game.physics.arcade.collide(collectables, collisionLayer);
 
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
