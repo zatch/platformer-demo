@@ -121,11 +121,13 @@ define([
 
     function onAttackFinish () {
         this.inUse = false;
+
     }
 
     Sword.prototype.use = function (direction) {
-        if(!this.inUse) {
+        if(this.canUse()) {
             this.inUse = true;
+            this.useTimeout = game.time.now;
             var attackTween = game.add.tween(this);
             if(this.parent.facing === 'right') {
                 anim.play();
@@ -137,7 +139,9 @@ define([
     };
 
     Sword.prototype.canUse = function () {
-        if (game.time.now > this.useTimeout + this.useRate) {
+        if (!this.inUse && 
+            this.parent && 
+            game.time.now > this.useTimeout + this.useRate) {
             return true;
         } else {
             return false;
