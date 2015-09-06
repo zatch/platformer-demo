@@ -24,6 +24,9 @@
  <tileset firstgid="1713" name="platformertiles" tilewidth="32" tileheight="32">
   <image source="../tilesets/platformertiles.png" width="256" height="96"/>
  </tileset>
+ <tileset firstgid="1737" name="moon" tilewidth="64" tileheight="64">
+  <image source="../tilesets/moon.png" width="64" height="64"/>
+ </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJzt07EOgCAMBFAm//+DGPkwFwdDQiix12tth4vRQe5R6FdrvRI648n8jd0LaV2F3c/SWt7YKe+/vbt9YPcoL9br3Sy5j6dhmyyMnqzj9USHbbVyevJmNWc605Zmtq/mG8sqWctijmyvh2SyaniZnctrf56R+yH5967HF8PuHT1XDYumFzVfT965n8bdOlkvkxdl9uqV9r8BOXtoNA==
@@ -31,7 +34,7 @@
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztllEOgjAMhusDvKsnUE+g3h+8gUfwKpaYJUuzdnVs2M19yUIUGP3bvwUA+0yjjf3nhOse42fliiEXS4xaPTnQ5KAGXJ2WI1ezSVlznxrzk+rZWE/sB4ADruOg229rL8eg2qTYnjuAE+o847oo9cYIPU/Kd27v0f383y/Ue0WdN1x3Qe/s9RmH1IOpcLXaej6veTa9/tv7Q34oMZ+kvqDnNH7Q7p1CqfnM6dRSy3vD6Uqpyy97zxoWcyG9f93/vk9j88Wyp0vFZlVzyG8z+X6jtaf3WPo244jFyOWhBSTvWZw3JbDaf7n4lzpqaaHeIQ2tzKQ1tJoDTlcLXu50Op2OLd4t6UCl
+   eJztllEOwiAMhuvD9q6eQD2Bev/hq08ewavIYkhIQ6HrYBbkS8hitkH/9m8dgH6mUcf+RvDcY/yuXDHkYo6RqycHnBzUgKvTfKVqNjFr7lNjfqSeTfXEfgA42HUcePtt7eUUWFssttcO4GR1nu26MPWmCJ0XyvezUM7wWf7vt9V7tTpvdt0jeo3XZxSxHpRC1Wrr+bzmbPz80vdDXikxn2J9ge9x/MDdW0Kp+Uzp5FLL/4bTJanLL3tPG7XlwtXb92lqvmj2dKnYtGoO+c2g7zfc0/gdTd9mFKkYqTy0QMx7tc0bKVr7Lxf/UkcuLdQ7pKGVmbSGVnNA6WrBy51Op9PRxQeUfT8k
   </data>
  </layer>
  <objectgroup name="enemies">
@@ -53,7 +56,7 @@
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt11EKgCAMgGGfvP9hOsPqWBU0WKZECsbY/73UGMI0ZZkS4MuW7+82BkYs7CUAgbT6p/bWMu+p33qqdVSUuUaZJ/qVdwQAfd7u2JrjzH0TfY1m/FfavelpveWodb3qPZ8aS37ma7GOs/mZavVInl+H5en7A8DfdrkdIaA=
+   eJzt190KgDAIgNFd+f5PtXqsChJsLaoFhvidmyUSuJ+wlQLEMsvx2cYAAOCZq/6pvbXNR+q3kWr9Kstcs8wT49o7AoAxd3dszfHNvZN9jTz+K+3ZjLTeda112uvdRo2rnPO9WN+zeU+9eqr412FF2n8A+NsC9oQg5g==
   </data>
  </layer>
  <objectgroup name="triggers">

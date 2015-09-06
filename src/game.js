@@ -44,6 +44,7 @@ define([
             this.game.load.tilemap('Map1', 'assets/maps/test-map-1.json', null, Phaser.Tilemap.TILED_JSON);
             this.game.load.tilemap('Map2', 'assets/maps/test-map-2.json', null, Phaser.Tilemap.TILED_JSON);
             
+            this.game.load.image('moon', 'assets/tilesets/moon.png');
             this.game.load.image('Sci-Fi-Tiles_A2', 'assets/tilesets/Sci-Fi-Tiles_A2.png');
             this.game.load.image('Sci-Fi-Tiles_A4', 'assets/tilesets/Sci-Fi-Tiles_A4.png');
             this.game.load.image('Sci-Fi-Tiles_A5', 'assets/tilesets/Sci-Fi-Tiles_A5.png');
