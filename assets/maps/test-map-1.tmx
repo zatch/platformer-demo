@@ -24,7 +24,7 @@
  <tileset firstgid="1713" name="platformertiles" tilewidth="32" tileheight="32">
   <image source="../tilesets/platformertiles.png" width="256" height="96"/>
  </tileset>
- <tileset firstgid="1737" name="moon" tilewidth="64" tileheight="64">
+ <tileset firstgid="1737" name="moon" tilewidth="32" tileheight="32">
   <image source="../tilesets/moon.png" width="64" height="64"/>
  </tileset>
  <layer name="backdrop" width="60" height="30">
@@ -34,7 +34,7 @@
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztllEOwiAMhuvD9q6eQD2Bev/hq08ewavIYkhIQ6HrYBbkS8hitkH/9m8dgH6mUcf+RvDcY/yuXDHkYo6RqycHnBzUgKvTfKVqNjFr7lNjfqSeTfXEfgA42HUcePtt7eUUWFssttcO4GR1nu26MPWmCJ0XyvezUM7wWf7vt9V7tTpvdt0jeo3XZxSxHpRC1Wrr+bzmbPz80vdDXikxn2J9ge9x/MDdW0Kp+Uzp5FLL/4bTJanLL3tPG7XlwtXb92lqvmj2dKnYtGoO+c2g7zfc0/gdTd9mFKkYqTy0QMx7tc0bKVr7Lxf/UkcuLdQ7pKGVmbSGVnNA6WrBy51Op9PRxQeUfT8k
+   eJztlkkOwjAMRc2i3QMnAE4A3L9lyyBxBK6CKxQpsuLEpElxQp4UVW0z+HtqAfQz9Dr2HyPmXfrPSGVDKiYbpXpSIPFBCZg4TVcuZoMw5jYl+ic2Z0M1se4ANji2nWy/pXM5BNXms+25Atihzj2Og1BvCNd5Ln9f8dktg9/oWfb9C/UeUecJx9mjd7TqjMNXgy7uOPcRmM/Faun+POdsOv/b9a5cydGffHVB30nyQbp3DLn6M6dTSinfDaMrJi6/rD1tlOYLE287T0P9RXNO57JNq2ZXvo3k/43WNF2j6d+MI2Qj54ca8OVeaf0mFq31l4p/iaOUGuLt0lBLT5pDrT7gdNWQy41Go9HQxRtCWkGX
   </data>
  </layer>
  <objectgroup name="enemies">
