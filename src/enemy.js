@@ -95,7 +95,7 @@ define([
             else{
                 this.moveRight();
             }
-            if(game.player.position.y+game.player.height < this.position.y+this.height) {
+            if(this.shouldJump()) {
                 this.jump();
             }
         }
@@ -147,6 +147,17 @@ define([
         if (this.health === 0) {
             this.handleDeath();
         }
+    };
+
+    Enemy.prototype.shouldJump = function () {
+        // If the player is higher than enemy and enemy...
+        if(game.player.position.y+game.player.height < this.position.y+this.height) return true;
+
+        // If player is within attack range, there is a 5% change enemy will jump;
+        if(this.distanceToPlayer.getMagnitude() < 64 && Math.random() < 0.05) return true;
+
+        // ...else don't jump.
+        return false;
     };
     
     Enemy.prototype.jump = function () {
