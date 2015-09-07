@@ -54,7 +54,7 @@ define([
     };
 
     Weapon.prototype.onHit = function (weapon, victim) {
-        victim.damage(1, self.parent);
+        if(victim.health > 0) victim.damage(1, self.parent);
     };
 
     return Weapon;
