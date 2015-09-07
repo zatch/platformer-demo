@@ -1,6 +1,7 @@
 define([
     'phaser',
-], function (Phaser) { 
+    'health-powerup'
+], function (Phaser, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
@@ -53,6 +54,7 @@ define([
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
         this.events.onDeath = new Phaser.Signal();
+        this.events.onDrop = new Phaser.Signal();
 
         // AI
         this.maxMoveSpeed = new Phaser.Point(75, 1000);
@@ -241,6 +243,12 @@ define([
     
     Enemy.prototype.handleDeath = function () {
         this.events.onDeath.dispatch(this);
+
+        // Drop loot.
+        if (Math.random() < 0.5) {
+            var healthPowerup = new HealthPowerup(game, this.x, this.y);
+            this.events.onDrop.dispatch(this, healthPowerup);
+        }
 
         this.body.checkCollision.up = false;
         this.body.checkCollision.down = false;

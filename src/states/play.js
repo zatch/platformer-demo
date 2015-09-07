@@ -225,6 +225,7 @@ define([
         
         registerEnemyEvents: function (enemy) {
             enemy.events.onDeath.add(this.onEnemyDeath, this);
+            enemy.events.onDrop.add(this.onEnemyDrop, this);
         },
         
         registerVillagerEvents: function (villager) {
@@ -236,12 +237,11 @@ define([
         },
         
         onEnemyDeath: function (enemy) {
-            // Drop loot.
-            if (Math.random() >= 0.5) {
-                var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
-                collectables.add(healthPowerup);
-            }
             player.exalt(1, enemy);
+        },
+
+        onEnemyDrop: function (enemy, item) {
+            collectables.add(item);
         },
         
         onVillagerDeath: function (villager) {
