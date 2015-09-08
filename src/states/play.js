@@ -131,6 +131,10 @@ define([
                 player.jump();
             });
 
+            game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(function () {
+                player.attack();
+            });
+
             game.input.keyboard.addKey(Phaser.Keyboard.ALT).onDown.add(function () {
                 player.nextWeapon();
             });
@@ -194,10 +198,6 @@ define([
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
                 this.playerExits();
-            }
-
-            if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                player.attack();
             }
 
             // Player movement controls
