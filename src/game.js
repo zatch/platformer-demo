@@ -72,6 +72,7 @@ define([
             this.game.load.spritesheet('player', 'assets/sprites/player.png', 26, 30, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
             this.game.load.spritesheet('villager', 'assets/sprites/villager.png', 15, 24, 1);
+            this.game.load.spritesheet('commander-kavosic', 'assets/sprites/commander-kavosic.png', 26, 30, 1);
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
             this.game.load.spritesheet('bow', 'assets/sprites/bow.png', 30, 19, 1);
             this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 1);

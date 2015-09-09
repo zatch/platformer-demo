@@ -225,6 +225,57 @@
                  "width":32,
                  "x":1728,
                  "y":192
+                }, 
+                {
+                 "height":968,
+                 "name":"commander-kavosic1",
+                 "properties":
+                    {
+                     "characterTriggerTarget":"commander-kavosic",
+                     "renderable":"false"
+                    },
+                 "rotation":0,
+                 "type":"character-trigger",
+                 "visible":true,
+                 "width":16,
+                 "x":416,
+                 "y":0
+                }, 
+                {
+                 "height":552,
+                 "name":"commander-kavosic2",
+                 "properties":
+                    {
+                     "characterTriggerTarget":"commander-kavosic",
+                     "currentPhrase":"We need you down in the caves. Your job is fighting monsters, not old men!",
+                     "renderable":"true",
+                     "x":"688",
+                     "y":"504"
+                    },
+                 "rotation":0,
+                 "type":"character-trigger",
+                 "visible":true,
+                 "width":16,
+                 "x":616,
+                 "y":0
+                }, 
+                {
+                 "height":184,
+                 "name":"commander-kavosic2",
+                 "properties":
+                    {
+                     "characterTriggerTarget":"commander-kavosic",
+                     "currentPhrase":"Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too.",
+                     "renderable":"true",
+                     "x":"688",
+                     "y":"728"
+                    },
+                 "rotation":0,
+                 "type":"character-trigger",
+                 "visible":true,
+                 "width":16,
+                 "x":544,
+                 "y":648
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -489,6 +540,32 @@
          "type":"objectgroup",
          "visible":true,
          "width":0,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"characters",
+         "objects":[
+                {
+                 "height":32,
+                 "name":"commander-kavosic",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"commander-kavosic",
+                 "visible":true,
+                 "width":32,
+                 "x":88,
+                 "y":728
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
          "x":0,
          "y":0
         }],

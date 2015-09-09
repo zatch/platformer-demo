@@ -66,6 +66,30 @@
     <property name="mapLink" value="Map2"/>
    </properties>
   </object>
+  <object name="commander-kavosic1" type="character-trigger" x="416" y="0" width="16" height="968">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="renderable" value="false"/>
+   </properties>
+  </object>
+  <object name="commander-kavosic2" type="character-trigger" x="616" y="0" width="16" height="552">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="currentPhrase" value="We need you down in the caves. Your job is fighting monsters, not old men!"/>
+    <property name="renderable" value="true"/>
+    <property name="x" value="688"/>
+    <property name="y" value="504"/>
+   </properties>
+  </object>
+  <object name="commander-kavosic2" type="character-trigger" x="544" y="648" width="16" height="184">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="currentPhrase" value="Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too."/>
+    <property name="renderable" value="true"/>
+    <property name="x" value="688"/>
+    <property name="y" value="728"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="platforms">
   <object name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
@@ -94,5 +118,8 @@
   <object name="villager-10" type="villager" x="1216" y="184" width="24" height="24"/>
   <object name="villager-11" type="villager" x="1248" y="184" width="24" height="24"/>
   <object name="villager-12" type="villager" x="1280" y="184" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup name="characters">
+  <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
 </map>
