@@ -57,5 +57,9 @@ define([
         if(victim.health > 0) victim.damage(1, self.parent);
     };
 
+    Weapon.prototype.onHitTerrain = function (weapon, tile) {
+        
+    };
+
     return Weapon;
 });
