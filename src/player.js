@@ -48,9 +48,9 @@ define([
         // Equip weapons
         this.weaponIndex = 0;
         this.allWeapons = [
+            new ClawArm(game, 0, 0),
             new Sword(game, 0, 0),
-            new Bow(game, 4, 4),
-            new ClawArm(game, 0, 0)
+            new Bow(game, 4, 4)
         ];
 
         // this.allWeapons.forEach(this.addChild);
