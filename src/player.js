@@ -1,8 +1,9 @@
 define([
     'phaser',
     'sword',
-    'bow'
-], function (Phaser, Sword, Bow) { 
+    'bow',
+    'claw-arm'
+], function (Phaser, Sword, Bow, ClawArm) { 
     'use strict';
 
     // Shortcuts
@@ -48,7 +49,8 @@ define([
         this.weaponIndex = 0;
         this.allWeapons = [
             new Sword(game, 0, 0),
-            new Bow(game, 4, 4)
+            new Bow(game, 4, 4),
+            new ClawArm(game, 0, 0)
         ];
 
         // this.allWeapons.forEach(this.addChild);
