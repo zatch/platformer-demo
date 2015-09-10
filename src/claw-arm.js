@@ -88,7 +88,6 @@ define([
     };
 
     function onAttackFinish () {
-        console.log("onAttackFinish called");
         self.useTimer.stop();
         self.useTimer.removeAll();
         self.claw.kill();
@@ -109,6 +108,8 @@ define([
             game.world.bringToTop(self.claw);
             self.claw.x = self.x = self.parent.x;
             self.claw.y = self.y = self.parent.y;
+            self.armBalls.setAll('x', self.x);
+            self.armBalls.setAll('y', self.y);
             self.claw.fire(self.parent.facing);
             self.useTimer.add(self.useRate, onAttackFinish, self);
             self.useTimer.start();
