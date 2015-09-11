@@ -38,6 +38,7 @@ define([
         
         // Whether this is anchored into a target
         this.clawAnchor = null;
+        this.clawObjectHeld = null;
     }
 
     ClawArm.prototype = Object.create(Weapon.prototype);
@@ -112,6 +113,11 @@ define([
                 else {
                     this.claw.body.velocity.x = Math.cos(angle) * 700;
                     this.claw.body.velocity.y = Math.sin(angle) * 700;
+                    
+                    if (this.clawObjectHeld) {
+                        this.clawObjectHeld.x = this.claw.x;
+                        this.clawObjectHeld.y = this.claw.y;
+                    }
                 }
             }
             // Not anchored yet, so pull 
@@ -130,6 +136,7 @@ define([
         self.claw.kill();
         self.armBalls.callAll('kill');
         self.clawAnchor = null;
+        self.clawObjectHeld = null;
         self.inUse = false;
         self.retracting = false;
     }
@@ -154,8 +161,10 @@ define([
     };
 
     ClawArm.prototype.onHit = function (collidable, victim) {
-        onAttackFinish();
         victim.damage(1, victim);
+        self.clawObjectHeld = victim;
+        self.retracting = true;
+        
     };
 
     ClawArm.prototype.onHitTerrain = function (weapon, tile) {
