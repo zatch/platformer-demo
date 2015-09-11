@@ -152,8 +152,8 @@ define([
             game.world.bringToTop(self.armBalls);
             self.claw.revive();
             game.world.bringToTop(self.claw);
-            self.claw.x = self.x = self.parent.x;
-            self.claw.y = self.y = self.parent.y;
+            self.claw.x = self.parent.x;
+            self.claw.y = self.parent.y;
             self.armBalls.setAll('x', self.x);
             self.armBalls.setAll('y', self.y);
             self.claw.fire(self.parent.facing);
