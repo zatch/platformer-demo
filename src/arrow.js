@@ -10,7 +10,7 @@ define([
         game = _game;
 
         Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
-        this.anchor.set(0.1);
+        this.anchor.set(0.5);
 
         this.debug = true;
 
