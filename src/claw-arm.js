@@ -5,7 +5,7 @@ define([
 ], function (Phaser, Weapon, Claw) { 
     'use strict';
 
-    var game, self, distancePoints, coordinatesMediumPoint;
+    var game, self, distanceBetweenPoints, angleBetweenPoints, coordinatesMediumPoint;
 
     function ClawArm (_game, x, y) {
         game = _game;
@@ -28,6 +28,7 @@ define([
         this.inUse = false;
 
         // How often this weapon can be used (in ms)
+        this.maxDistance = 200;
         this.useRate = 500;
         this.useTimer = game.time.create(false);
 
@@ -42,11 +43,15 @@ define([
     ClawArm.prototype = Object.create(Weapon.prototype);
     ClawArm.prototype.constructor = ClawArm;
 
-    distancePoints = function ( xA, yA, xB, yB ){
-        var xDistance = Math.abs( xA - xB );
-        var yDistance = Math.abs( yA - yB );
+    distanceBetweenPoints = function ( point1, point2 ){
+        var xDistance = Math.abs( point1.x - point2.x );
+        var yDistance = Math.abs( point1.y - point2.y );
        
         return Math.sqrt( Math.pow( xDistance, 2 ) + Math.pow( yDistance, 2 ) );
+    };
+    
+    angleBetweenPoints = function ( point1, point2 ){
+        return Math.atan2( ( point2.y - point1.y ), ( point2.x - point1.x ) );
     };
     
     coordinatesMediumPoint = function( xA, yA, xB, yB, distanceAC ){
@@ -62,18 +67,15 @@ define([
     
     ClawArm.prototype.update = function () {
         if(self.inUse) {
+            // Precalculate new position of target
+            var angle = angleBetweenPoints(this.claw, this.parent),
+                distanceBetween = distanceBetweenPoints(this.claw, this.parent);
+            
             // Update arm ball positions
             var aBall;
             for (var lcv = 0; lcv < this.armBalls.length; lcv++) {
                 aBall = this.armBalls.getChildAt(lcv);
                 
-                // Precalculate new position of target
-                var distanceBetween = distancePoints(
-                    this.claw.x,
-                    this.claw.y,
-                    this.parent.x,
-                    this.parent.y
-                );
                 var clawDelta = distanceBetween / (this.armBalls.length / lcv);
                 var armBallCoords = coordinatesMediumPoint(
                     this.claw.x,
@@ -87,30 +89,34 @@ define([
                 aBall.y = armBallCoords.y;
             }
             
+            
+            // Handle current state of action.
+            
+            // Pull the user to the claw.
             if (this.clawAnchor) {
-                var xA = this.claw.x,
-                    yA = this.claw.y,
-                    xB = this.parent.x,
-                    yB = this.parent.y,
-                    angle = Math.atan2( ( yB - yA ), ( xB - xA ) );
-                
-                
-                // Precalculate new position of target
-                var distanceBetween = distancePoints(
-                    this.claw.x,
-                    this.claw.y,
-                    this.parent.x,
-                    this.parent.y
-                );
+                console.log(this.clawAnchor);
                 if (distanceBetween > 20) {
                     this.parent.body.velocity.x = Math.cos(angle) * -700;
                     this.parent.body.velocity.y = Math.sin(angle) * -700;
                 }
                 else {
-                    self.clawAnchor = null;
                     onAttackFinish();
                 }
                 
+            }
+            // Pull the claw to the user.
+            else if (this.retracting) {
+                if (distanceBetween < 20) {
+                    onAttackFinish();
+                }
+                else {
+                    this.claw.body.velocity.x = Math.cos(angle) * 700;
+                    this.claw.body.velocity.y = Math.sin(angle) * 700;
+                }
+            }
+            // Not anchored yet, so pull 
+            else if (distanceBetween >= this.maxDistance) {
+                this.retracting = true;
             }
             
         }
@@ -123,12 +129,9 @@ define([
         self.useTimer.removeAll();
         self.claw.kill();
         self.armBalls.callAll('kill');
+        self.clawAnchor = null;
         self.inUse = false;
-    }
-    
-    function onRetractStart () {
-        self.useTimer.stop();
-        self.useTimer.removeAll();
+        self.retracting = false;
     }
 
     ClawArm.prototype.getCollidables = function () {
@@ -147,8 +150,6 @@ define([
             self.armBalls.setAll('x', self.x);
             self.armBalls.setAll('y', self.y);
             self.claw.fire(self.parent.facing);
-            self.useTimer.add(self.useRate, onAttackFinish, self);
-            self.useTimer.start();
         }
     };
 
@@ -158,8 +159,7 @@ define([
     };
 
     ClawArm.prototype.onHitTerrain = function (weapon, tile) {
-        self.clawAnchor = {x: tile.worldX, y: tile.worldY};
-        onRetractStart();
+        self.clawAnchor = tile;
     };
 
     return ClawArm;

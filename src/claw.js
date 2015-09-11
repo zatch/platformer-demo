@@ -15,7 +15,6 @@ define([
         this.debug = true;
 
         this.speed = 500;
-        this.lifespan_default = 500;
         this.revive();
 
         game.physics.enable(this);
@@ -28,11 +27,11 @@ define([
     Claw.prototype.constructor = Claw;
 
     Claw.prototype.revive = function (health) {
-        //this.lifespan = this.lifespan_default;
         Phaser.Sprite.prototype.revive.call(this, health);
     };
 
     Claw.prototype.fire = function (direction) {
+        this.body.velocity.y = 0;
         switch(direction) {
             case 'left':
                 this.scale.x = -1; //flipped
