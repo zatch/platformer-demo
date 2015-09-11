@@ -13,7 +13,7 @@ define([
         game = _game;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'player');
+        Phaser.Sprite.call(this, game, x, y, 'player-human');
         this.anchor.set(0.5);
 
         // Which way is the player facing?
@@ -41,25 +41,23 @@ define([
         this.health = 20;
 
         // Number of times the player can be hit by an enemy.
-        this.maxKarma = 10;
-        this.minKarma = -10;
+        this.maxKarma = 5;
+        this.minKarma = -5;
         this.karma = 0;
 
         // Equip weapons
-        this.weaponIndex = 0;
-        this.allWeapons = [
-            new ClawArm(game, 0, 0),
-            new Sword(game, 0, 0),
-            new Bow(game, 4, 4)
-        ];
-
-        // this.allWeapons.forEach(this.addChild);
-        for(var i=0; i<this.allWeapons.length; i++) {
-            this.addChild(this.allWeapons[i]);
-            this.allWeapons[i].kill();
+        this.allWeapons = {
+            clawArm: new ClawArm(game, 0, 0),
+            sword: new Sword(game, 0, 0),
+            bow: new Bow(game, 4, 4)
+        };
+        for (var weaponKey in this.allWeapons) {
+            this.addChild(this.allWeapons[weaponKey]);
+            this.allWeapons[weaponKey].kill();
         }
-
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
+        
+        this.currentForm = null;
+        this.morph('human');
 
         // Invulnerability
         this.invulnerable = false;
@@ -101,6 +99,33 @@ define([
         }
         Phaser.Sprite.prototype.update.call(this);
     };
+    
+    Player.prototype.morph = function(form) {
+        if (form !== this.currentForm) {
+            if (form === 'human') {
+                console.log("becoming human");
+                this.loadTexture('player-human');
+                
+                this.weaponIndex = 0;
+                this.equippedWeapons = [
+                    this.allWeapons.sword,
+                    this.allWeapons.bow
+                ];
+                this.setWeapon(this.equippedWeapons[this.weaponIndex]);
+            }
+            else if (form === 'player-claw-arm') {
+                console.log("becoming creature");
+                this.loadTexture('player-claw-arm');
+                
+                this.weaponIndex = 0;
+                this.equippedWeapons = [
+                    this.allWeapons.clawArm,
+                    this.allWeapons.sword
+                ];
+                this.setWeapon(this.equippedWeapons[this.weaponIndex]);
+            }
+        }
+    };
 
     Player.prototype.setWeapon = function (weapon) {
         if(this.weapon) this.weapon.kill();
@@ -110,14 +135,14 @@ define([
 
     Player.prototype.nextWeapon = function () {
         this.weaponIndex += 1;
-        if(this.weaponIndex > this.allWeapons.length - 1) this.weaponIndex = 0;
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
+        if(this.weaponIndex > this.equippedWeapons.length - 1) this.weaponIndex = 0;
+        this.setWeapon(this.equippedWeapons[this.weaponIndex]);
     };
 
     Player.prototype.previousWeapon = function () {
         this.weaponIndex -= 1;
-        if(this.weaponIndex < 0) this.weaponIndex = this.allWeapons.length - 1;
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
+        if(this.weaponIndex < 0) this.weaponIndex = this.equippedWeapons.length - 1;
+        this.setWeapon(this.equippedWeapons[this.weaponIndex]);
     };
 
     Player.prototype.attack = function () {
@@ -166,14 +191,24 @@ define([
     };
     
     Player.prototype.exalt = function (amount, source) {
-        this.karma += amount;
-        if (this.karma > this.maxKarma) this.karma = this.maxKarma;
+        if (this.karma < this.maxKarma) {
+            this.karma += amount;
+            if (this.karma >= this.maxKarma) {
+                this.karma = this.maxKarma;
+                this.morph('human');
+            }
+        }
         this.events.onExalt.dispatch(this.karma, amount);
     };
     
     Player.prototype.censure = function (amount, source) {
-        this.karma -= amount;
-        if (this.karma < this.minKarma) this.karma = this.minKarma;
+        if (this.karma > this.minKarma) {
+            this.karma -= amount;
+            if (this.karma <= this.minKarma) {
+                this.karma = this.minKarma;
+                this.morph('player-claw-arm');
+            }
+        }
         this.events.onCensure.dispatch(this.karma, amount);
     };
     

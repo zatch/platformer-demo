@@ -107,5 +107,14 @@
   <object name="villager-10" type="villager" x="992" y="832" width="24" height="24"/>
   <object name="villager-11" type="villager" x="1024" y="832" width="24" height="24"/>
   <object name="villager-12" type="villager" x="1056" y="832" width="24" height="24"/>
+  <object name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
+  <object name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
+  <object name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
+  <object name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
+  <object name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
+  <object name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
+  <object name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
+  <object name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
+  <object name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
  </objectgroup>
 </map>

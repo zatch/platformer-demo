@@ -69,7 +69,8 @@ define([
             this.game.load.image('karma-bar-cap-right', 'assets/hud/karma-bar/karma-bar-cap-right.png');
             this.game.load.image('karma-bar-fill', 'assets/hud/karma-bar/karma-bar-fill.png');
 
-            this.game.load.spritesheet('player', 'assets/sprites/player-claw-arm.png', 26, 30, 1);
+            this.game.load.spritesheet('player-human', 'assets/sprites/player.png', 26, 30, 1);
+            this.game.load.spritesheet('player-claw-arm', 'assets/sprites/player-claw-arm.png', 26, 30, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
             this.game.load.spritesheet('villager', 'assets/sprites/villager.png', 15, 24, 1);
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
