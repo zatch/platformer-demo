@@ -88,6 +88,13 @@ define([
             }
             
             if (this.clawAnchor) {
+                var xA = this.claw.x,
+                    yA = this.claw.y,
+                    xB = this.parent.x,
+                    yB = this.parent.y,
+                    angle = Math.atan2( ( yB - yA ), ( xB - xA ) );
+                
+                
                 // Precalculate new position of target
                 var distanceBetween = distancePoints(
                     this.claw.x,
@@ -95,18 +102,9 @@ define([
                     this.parent.x,
                     this.parent.y
                 );
-                if (distanceBetween > 32) {
-                    var clawDelta = distanceBetween / (this.useTimer.duration);
-                    var newParentCoords = coordinatesMediumPoint(
-                        this.claw.x,
-                        this.claw.y,
-                        this.parent.x,
-                        this.parent.y,
-                        clawDelta
-                    );
-                    
-                    this.parent.x = this.x = newParentCoords.x;
-                    this.parent.y = this.y = newParentCoords.y;
+                if (distanceBetween > 20) {
+                    this.parent.body.velocity.x = Math.cos(angle) * -700;
+                    this.parent.body.velocity.y = Math.sin(angle) * -700;
                 }
                 else {
                     self.clawAnchor = null;
