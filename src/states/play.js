@@ -185,10 +185,10 @@ define([
             game.physics.arcade.collide(player.weapon.getCollidables(), collisionLayer, player.weapon.onHitTerrain);
 
             // Collide player + enemies.
-            game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
+            game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
             
             // Collide player + collectables.
-            game.physics.arcade.collide(player, collectables, this.onPlayerCollidesCollectable);
+            game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
 
             // Collide objects with map.  Do this after other collision checks
             // so objects aren't pushed through walls.
