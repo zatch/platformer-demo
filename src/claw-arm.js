@@ -127,7 +127,8 @@ define([
     }
     
     function onRetractStart () {
-        self.useTimer.pause();
+        self.useTimer.stop();
+        self.useTimer.removeAll();
     }
 
     ClawArm.prototype.getCollidables = function () {
@@ -152,14 +153,11 @@ define([
     };
 
     ClawArm.prototype.onHit = function (collidable, victim) {
-        console.log('hit');
         onAttackFinish();
         victim.damage(1, victim);
     };
 
     ClawArm.prototype.onHitTerrain = function (weapon, tile) {
-        console.log('hit tile');
-        console.log(tile);
         self.clawAnchor = {x: tile.worldX, y: tile.worldY};
         onRetractStart();
     };
