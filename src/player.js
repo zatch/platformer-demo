@@ -57,7 +57,7 @@ define([
         }
         
         this.currentForm = null;
-        this.morph('human');
+        this.morph('player-claw-arm');
 
         // Invulnerability
         this.invulnerable = false;
