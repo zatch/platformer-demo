@@ -29,12 +29,12 @@
  </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt07EOgCAMBFAm//+DGPkwFwdDQlpir9dKh4uRQe5R6VdrvZI648m8xu6FtK7C7udpLW/ulPffXukc2D3Ki/VGN2vu427YJg9jJOt4PdFhW72ckbynmk/6pz3NbF/NN5dVs5fHHNneCLGwZbFaeVmdy4v3ep6H5ttSjy8G6R09VwuLpRc130jeuZ/F3drZ7yQvyhzVq+1/A3sbaDw=
+   eJzt07EOgCAMBFAm//+DGP0wFycSQhu5u2I73KAheo9Cv1rrlaNzvxnfqXshrbOo+zGt5T075dV7FT2iWdF9snrZZu/9sqz3JpoXGfZ5VpvL+2+vwpzNqzYrvMp9UBuZZmbfCOf5tPmovVHmxvSqOpcX72Xuh+Xbqx5fDKtn9Fx3WHZ6UfON5B377bhbnv9l8qLMUb3W/g/LF2pc
   </data>
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkkOwjAMRc2i3QMnAE4A3L9lyyBxBK6CKxQpsuLEpElxQp4UVW0z+HtqAfQz9Dr2HyPmXfrPSGVDKiYbpXpSIPFBCZg4TVcuZoMw5jYl+ic2Z0M1se4ANji2nWy/pXM5BNXms+25Atihzj2Og1BvCNd5Ln9f8dktg9/oWfb9C/UeUecJx9mjd7TqjMNXgy7uOPcRmM/Faun+POdsOv/b9a5cydGffHVB30nyQbp3DLn6M6dTSinfDaMrJi6/rD1tlOYLE287T0P9RXNO57JNq2ZXvo3k/43WNF2j6d+MI2Qj54ca8OVeaf0mFq31l4p/iaOUGuLt0lBLT5pDrT7gdNWQy41Go9HQxRtCWkGX
+   eJztlksOwiAQhsdF3asnUE+g3t926yPxCF7FYUFCJjwGCmWKfAmptFOYn3lUAPnct3XWn8j9kemHaafWoOvE+FAK5SNXj7Y3f3M0mcTa18YVD31fXX02ks4nJV6KUE6m5myoJnYDwB7HYeCtF8plutcD50+LfUw9+IjpG58NwBF1nnCcmXpD0P1eOH8vWH9Uvzn/ot4L6rziuHn0jkad+cjdN12xWro/z9mb2se+b6vNEv3JVxf0GTcfOGunUKo/u3RyWct3VetKiUvN2pPG2s5Cx9vM01B/kZzTpXyTqtmWb/T/JK1p+k7uXlyCkI+uc2gBX+6trd+kIrX+cvEvceTSQrxtGlrpSXNo9QxculrI5U6n0+nI4geePUfB
   </data>
  </layer>
  <objectgroup name="enemies">
@@ -56,12 +56,12 @@
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmF0OgzAIgH3yXDvaruRMFnVZMufFVh+akA4orD+ik4T4IFY+hIKd2qZ5ON2zjM7/SaFH4R3a5vV2V0rd/cuReGMcUjvrcvKm2VmXkzfNzrqA/fl6c1eofftttxVvF/j2qw7CXrs1LzcnxHqpVC3zQsYlk09Pg7yeMxcjFGu8KyvF6eu7R+5ztQ/trfFy756J3O4Ue9SeeLnnuD1tMczreyaWs9xzUr9r83J1BnNy5ZYyW+CluLg60/yHd8iaW/L6vZb7z47NEVw/wmaT0G8s5jnnjTDm1Doj46NUsNkkjE8sJqm8c/DtavJi6/j+ReVMjnyeibUpX0vyStco3Y/+jVeSAzHJyXtH9rVU1cwPlGA9CPZrrR/ac+raZ9o5/INx0cwCtXi5b2pZIa/m3GZPjBRvybqxolZ5P65KCBU=
+   eJztmF0KgzAMgH3yXB5tV9LBmI7BtBdbyxBKSZPU/ph2BsIeHDFfTJo0S991L625Zc74HmN7CdBWeJ9999n0r0/186ElXso+93+pfLp409mWyPvQOiF6P+iHYN4BO09UY7wFzucbljM18I5EDUw/TlavrYF3RfKfo7Xxxsr74q2SF6tr+4xqgXcMOKNa4KXuB0oI794fj85Rti2u36V59zqz889wxzBL4PWdH746g2ZpLAYjYPNM3hmpp/2eTd3JsfkZ2mG4fkMxTzlvuDH32ZkRH7ni8pq4ufGhYhLLuzrfriQvZAeaPVVCXvcdvnwsxcu1kbsf/RsvJwcoSclL7VmOaOxMYQTqQXYPD/UjdE9deqedwj87LtjMfRYv9k0lq83L2cnUyOjjzVk3UlQq7xdjcwMh
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt190KgDAIgNFd+f5PtXqsChJsLaoFhvidmyUSuJ+wlQLEMsvx2cYAAOCZq/6pvbXNR+q3kWr9Kstcs8wT49o7AoAxd3dszfHNvZN9jTz+K+3ZjLTeda112uvdRo2rnPO9WN+zeU+9eqr412FF2n8A+NsC9oQg5g==
+   eJztmNEKgCAMRX3y/79K+6weQlrDmkhqo3MgaFgQy+3eGQKAL7Z4vZcxjCfF48oq7zoG+Dq6f7T2kiSey/GMEzUAzrjb86U29Dp6CwA9zPKIPZr+BjVf3Prek3fAW68BP2fP2GVtVc155e85muEr5d70lG+pI2W+1HOm1ATrPGZ2H6t9j6Vxo/H0/wEAVrMDoOks4A==
   </data>
  </layer>
  <objectgroup name="triggers">
