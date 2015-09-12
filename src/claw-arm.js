@@ -5,7 +5,7 @@ define([
 ], function (Phaser, Weapon, Claw) { 
     'use strict';
 
-    var game, self, distanceBetweenPoints, angleBetweenPoints, coordinatesMediumPoint;
+    var game, self, coordinatesMediumPoint;
 
     function ClawArm (_game, x, y) {
         game = _game;
@@ -42,17 +42,6 @@ define([
 
     ClawArm.prototype = Object.create(Weapon.prototype);
     ClawArm.prototype.constructor = ClawArm;
-
-    distanceBetweenPoints = function ( point1, point2 ){
-        var xDistance = Math.abs( point1.x - point2.x );
-        var yDistance = Math.abs( point1.y - point2.y );
-       
-        return Math.sqrt( Math.pow( xDistance, 2 ) + Math.pow( yDistance, 2 ) );
-    };
-    
-    angleBetweenPoints = function ( point1, point2 ){
-        return Math.atan2( ( point2.y - point1.y ), ( point2.x - point1.x ) );
-    };
     
     coordinatesMediumPoint = function( xA, yA, xB, yB, distanceAC ){
         var angleAB     = Math.atan2( ( yB - yA ), ( xB - xA ) );
@@ -68,8 +57,8 @@ define([
     ClawArm.prototype.update = function () {
         if(this.inUse) {
             // Precalculate new position of target
-            var angle = angleBetweenPoints(this.claw, this.parent),
-                distanceBetween = distanceBetweenPoints(this.claw, this.parent);
+            var angle = this.claw.position.angle(this.parent),
+                distanceBetween = this.claw.position.distance(this.parent);
             
             // Update arm ball positions
             var aBall;
