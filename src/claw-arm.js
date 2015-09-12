@@ -117,7 +117,7 @@ define([
             // Not anchored yet, so start pulling the claw in to the player.
             else if (distanceBetween >= this.maxDistance) {
                 // Set flag.
-                this.retracting = true;
+                this.retract();
             }
             
         }
@@ -153,11 +153,23 @@ define([
             self.armBalls.setAll('y', self.parent.y);
             
             // Reset claw and fire it!
+            self.claw.body.checkCollision.up = true;
+            self.claw.body.checkCollision.down = true;
+            self.claw.body.checkCollision.left = true;
+            self.claw.body.checkCollision.right = true;
             self.claw.reset(self.parent.x, self.parent.y);
             game.world.bringToTop(self.claw);
             self.claw.fire(self.parent.facing);
         }
     };
+    
+    ClawArm.prototype.retract = function() {
+            self.retracting = true;
+            self.claw.body.checkCollision.up = false;
+            self.claw.body.checkCollision.down = false;
+            self.claw.body.checkCollision.left = false;
+            self.claw.body.checkCollision.right = false;
+    },
 
     ClawArm.prototype.onHit = function (collidable, victim) {
         if (self.inUse && !self.clawObjectHeld && !self.clawAnchor && !self.retracting) {
@@ -166,9 +178,8 @@ define([
             
             // Set flags.
             self.clawObjectHeld = victim;
-            self.retracting = true;
+            self.retract();
         }
-        
     };
 
     ClawArm.prototype.onHitTerrain = function (weapon, tile) {
