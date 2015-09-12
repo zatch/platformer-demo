@@ -20,26 +20,21 @@ define([
         this.armBalls.createMultiple(30, 'claw-arm-ball');
         
         this.claw = new Claw(game, x, y);
-        //game.add.existing(this.claw);
-        this.claw.x = 0;
-        this.claw.y = 0;
-        //this.claw.kill(); // start the claw off dead
+        game.add.existing(this.claw);
+        this.claw.kill(); // start the claw off dead
 
-        // Whether or not this weapon is currently in use.
+        // Flags
         this.inUse = false;
+        this.retracting = false;
+        this.clawAnchor = null;
+        this.clawObjectHeld = null;
 
         // How often this weapon can be used (in ms)
         this.maxDistance = 200;
-        this.useRate = 500;
-        this.useTimer = game.time.create(false);
 
         game.physics.enable(this);
         this.body.immovable = true;
         this.body.allowGravity = false;
-        
-        // Whether this is anchored into a target
-        this.clawAnchor = null;
-        this.clawObjectHeld = null;
     }
 
     ClawArm.prototype = Object.create(Weapon.prototype);
@@ -119,37 +114,27 @@ define([
                     }
                 }
             }
-            // Not anchored yet, so pull 
+            // Not anchored yet, so start pulling the claw in to the player.
             else if (distanceBetween >= this.maxDistance) {
+                // Set flag.
                 this.retracting = true;
             }
             
-        }
-        else {
-            /*this.claw.x = this.parent.x;
-            this.claw.y = this.parent.y;*/
         }
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
     };
 
     function onAttackFinish () {
-        console.log("onAttackFinish");
-        self.useTimer.stop();
-        self.useTimer.removeAll();
-        
-        self.claw.body.velocity.x = 0;
-        self.claw.body.velocity.y = 0;
-        self.armBalls.callAll('kill');
+        // Clear flags.
         self.clawAnchor = null;
         self.clawObjectHeld = null;
         self.inUse = false;
         self.retracting = false;
-        self.addChild(self.claw);
-        self.claw.x = 0;
-        self.claw.y = 0;
-        //self.claw.kill();
-        //self.claw.revive();
+        
+        // Kill the claw and arm balls.
+        self.claw.kill();
+        self.armBalls.callAll('kill');
     }
 
     ClawArm.prototype.getCollidables = function () {
@@ -158,19 +143,17 @@ define([
 
     ClawArm.prototype.use = function () {
         if(!self.inUse) {
-            console.log(self.parent);
-            
+            // Set flag.
             self.inUse = true;
             
+            // Reset arm balls.
             self.armBalls.callAll('revive');
             game.world.bringToTop(self.armBalls);
             self.armBalls.setAll('x', self.parent.x);
             self.armBalls.setAll('y', self.parent.y);
             
-            //self.claw.revive();
-            game.add.existing(self.claw);
-            self.claw.x = self.parent.x;
-            self.claw.y = self.parent.y;
+            // Reset claw and fire it!
+            self.claw.reset(self.parent.x, self.parent.y);
             game.world.bringToTop(self.claw);
             self.claw.fire(self.parent.facing);
         }
@@ -178,8 +161,10 @@ define([
 
     ClawArm.prototype.onHit = function (collidable, victim) {
         if (self.inUse && !self.clawObjectHeld && !self.clawAnchor && !self.retracting) {
-            console.log("onHit", victim);
+            // Do some damage to the victim.
             victim.damage(1, victim);
+            
+            // Set flags.
             self.clawObjectHeld = victim;
             self.retracting = true;
         }
@@ -188,7 +173,7 @@ define([
 
     ClawArm.prototype.onHitTerrain = function (weapon, tile) {
         if (self.inUse && !self.clawObjectHeld && !self.clawAnchor && !self.retracting) {
-            console.log("onHitTerrain", tile);
+            // Set flag.
             self.clawAnchor = {x: tile.worldX, y: tile.worldY};
         }
     };
