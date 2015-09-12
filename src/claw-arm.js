@@ -31,6 +31,9 @@ define([
 
         // How often this weapon can be used (in ms)
         this.maxDistance = 200;
+        
+        // Auto-release timer.
+        this.timeToRelease = Phaser.Timer.SECOND * 0.25; // 1 second
 
         game.physics.enable(this);
         this.body.immovable = true;
@@ -92,8 +95,17 @@ define([
             // Pull the user to the claw.
             if (this.clawAnchor) {
                 if (distanceBetween > 20) {
-                    this.parent.body.velocity.x = Math.cos(angle) * -700;
-                    this.parent.body.velocity.y = Math.sin(angle) * -700;
+                    if ((this.parent.body.blocked.up && this.parent.body.blocked.right) ||
+                        (this.parent.body.blocked.up && this.parent.body.blocked.left) ||
+                        (this.parent.body.blocked.down && this.parent.body.blocked.right) ||
+                        (this.parent.body.blocked.down && this.parent.body.blocked.left)) {
+                        
+                        game.time.events.add(this.timeToRelease, onAttackFinish, this);
+                    }
+                    else {
+                        this.parent.body.velocity.x = Math.cos(angle) * -700;
+                        this.parent.body.velocity.y = Math.sin(angle) * -700;
+                    }
                 }
                 else {
                     onAttackFinish();
