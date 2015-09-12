@@ -103,6 +103,10 @@ define([
             // Pull the claw to the user.
             else if (this.retracting) {
                 if (distanceBetween < 20) {
+                    if (this.clawObjectHeld && this.clawObjectHeld.body) {
+                        this.clawObjectHeld.body.velocity.x = Math.cos(angle) * 700;
+                        this.clawObjectHeld.body.velocity.y = Math.sin(angle) * 700;
+                    }
                     onAttackFinish();
                 }
                 else {
@@ -175,7 +179,7 @@ define([
     ClawArm.prototype.onHit = function (collidable, victim) {
         if (self.inUse && !self.clawObjectHeld && !self.clawAnchor && !self.retracting) {
             // Do some damage to the victim.
-            victim.damage(1, victim);
+            //victim.damage(1, victim);
             
             // Set flags.
             self.clawObjectHeld = victim;
