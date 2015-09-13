@@ -141,6 +141,10 @@ define([
                 player.jump();
             });
 
+            game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(function () {
+                player.attack();
+            });
+
             game.input.keyboard.addKey(Phaser.Keyboard.ALT).onDown.add(function () {
                 player.nextWeapon();
             });
@@ -187,15 +191,19 @@ define([
             // Check to see if weapons are colliding with enemies.
             game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
             game.physics.arcade.overlap(player.weapon.getCollidables(), villagers, player.weapon.onHit);
+            // Check to see if weapons are colliding with collectables.
+            game.physics.arcade.overlap(player.weapon.getCollidables(), collectables, player.weapon.onHit);
+            // Check to see if weapons are colliding collision layer.
+            game.physics.arcade.collide(player.weapon.getCollidables(), collisionLayer, player.weapon.onHitTerrain);
 
             // Collide player + enemies.
-            game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
+            game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
             
             // Check overlap of player + character triggers.
             game.physics.arcade.overlap(player, characterTriggers, this.onPlayerOverlapCharacterTrigger);
             
             // Collide player + collectables.
-            game.physics.arcade.collide(player, collectables, this.onPlayerCollidesCollectable);
+            game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
 
             // Collide objects with map.  Do this after other collision checks
             // so objects aren't pushed through walls.
@@ -208,10 +216,6 @@ define([
             // Check to see if player has reached the exit door.
             if(game.physics.arcade.overlap(player, exitDoor) && moveKeys.down.isDown) {
                 this.playerExits();
-            }
-
-            if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                player.attack();
             }
 
             // Player movement controls

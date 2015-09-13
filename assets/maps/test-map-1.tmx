@@ -29,34 +29,39 @@
  </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt07EOgCAMBFAm//+DGPkwFwdDQiix12tth4vRQe5R6FdrvRI648n8jd0LaV2F3c/SWt7YKe+/vbt9YPcoL9br3Sy5j6dhmyyMnqzj9USHbbVyevJmNWc605Zmtq/mG8sqWctijmyvh2SyaniZnctrf56R+yH5967HF8PuHT1XDYumFzVfT965n8bdOlkvkxdl9uqV9r8BOXtoNA==
+   eJzt07EOgCAMBFAm//+DGP0wFycSQhu5u2I73KAheo9Cv1rrlaNzvxnfqXshrbOo+zGt5T075dV7FT2iWdF9snrZZu/9sqz3JpoXGfZ5VpvL+2+vwpzNqzYrvMp9UBuZZmbfCOf5tPmovVHmxvSqOpcX72Xuh+Xbqx5fDKtn9Fx3WHZ6UfON5B377bhbnv9l8qLMUb3W/g/LF2pc
   </data>
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkkOwjAMRc2i3QMnAE4A3L9lyyBxBK6CKxQpsuLEpElxQp4UVW0z+HtqAfQz9Dr2HyPmXfrPSGVDKiYbpXpSIPFBCZg4TVcuZoMw5jYl+ic2Z0M1se4ANji2nWy/pXM5BNXms+25Atihzj2Og1BvCNd5Ln9f8dktg9/oWfb9C/UeUecJx9mjd7TqjMNXgy7uOPcRmM/Faun+POdsOv/b9a5cydGffHVB30nyQbp3DLn6M6dTSinfDaMrJi6/rD1tlOYLE287T0P9RXNO57JNq2ZXvo3k/43WNF2j6d+MI2Qj54ca8OVeaf0mFq31l4p/iaOUGuLt0lBLT5pDrT7gdNWQy41Go9HQxRtCWkGX
+   eJztlksOwiAQhsdF3asnUE+g3t926yPxCF7FYUFCJjwGCmWKfAmptFOYn3lUAPnct3XWn8j9kemHaafWoOvE+FAK5SNXj7Y3f3M0mcTa18YVD31fXX02ks4nJV6KUE6m5myoJnYDwB7HYeCtF8plutcD50+LfUw9+IjpG58NwBF1nnCcmXpD0P1eOH8vWH9Uvzn/ot4L6rziuHn0jkad+cjdN12xWro/z9mb2se+b6vNEv3JVxf0GTcfOGunUKo/u3RyWct3VetKiUvN2pPG2s5Cx9vM01B/kZzTpXyTqtmWb/T/JK1p+k7uXlyCkI+uc2gBX+6trd+kIrX+cvEvceTSQrxtGlrpSXNo9QxculrI5U6n0+nI4geePUfB
   </data>
  </layer>
  <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="912" y="864" width="32" height="32"/>
-  <object name="enemy2" type="enemy" gid="97" x="1048" y="720" width="32" height="32"/>
-  <object name="enemy4" type="enemy" gid="97" x="1248" y="544" width="32" height="32"/>
+  <object name="enemy1" type="enemy" gid="97" x="1088" y="864" width="32" height="32"/>
+  <object name="enemy2" type="enemy" gid="97" x="1184" y="800" width="32" height="32"/>
+  <object name="enemy4" type="enemy" gid="97" x="1088" y="448" width="32" height="32"/>
   <object name="enemy5" type="enemy" gid="97" x="1360" y="472" width="32" height="32"/>
-  <object name="enemy3" type="enemy" gid="97" x="1216" y="736" width="32" height="32"/>
+  <object name="enemy3" type="enemy" gid="97" x="1280" y="736" width="32" height="32"/>
   <object name="enemy6" type="enemy" gid="97" x="1392" y="400" width="32" height="32"/>
   <object name="enemy7" type="enemy" gid="97" x="1288" y="368" width="32" height="32"/>
   <object name="enemy8" type="enemy" gid="97" x="1568" y="368" width="32" height="32"/>
   <object name="enemy9" type="enemy" gid="97" x="1640" y="376" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1672" y="376" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1760" y="544" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1696" y="544" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1632" y="544" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1760" y="224" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1600" y="736" width="32" height="32"/>
+  <object name="enemy10" type="enemy" gid="97" x="1664" y="736" width="32" height="32"/>
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmFEOgyAMhn3iXDvaruSWLeqyZM6LDR9IGiylFYTqbPLHB7H2w0KLg2mal9WerbfxDwIdhbczzedrryHZ+5cj8cY4uOO028mbNk67nbxp47Qb2J+vN3uFupvluFq8rRfbWnXMWlubl+oTYrWUK828kHHKFNNbIa/jzMUITRvvzBridOv7jtyn1j4cr42XevcYyO1WsEftiZd6jtrTJsW8rmZiOUs9x427NC+1zmBOztxcZg28IS5qnUnO4S3isyav22upc3asj6DqEdab+HFjc56z3/DnPOSnJ2LkGtab+PMTm5NUXt9/SV7Mj6tfoZxJ5fX9h/KxFC/Xx9b16N94R0YOxCwn7xPZ11Il6R9ChtUgWK+lcUj/U0uUq8alxgHnRdILlOKlvqlmQd6HWbKs+TejWdiZbMv1U1taeX9rlQZo
+   eJztmF0KgzAMgH3yXB5tV9LBmI7BtBdbyxBKSZPU/ph2BsIeHDFfTJo0S991L625Zc74HmN7CdBWeJ9999n0r0/186ElXso+93+pfLp409mWyPvQOiF6P+iHYN4BO09UY7wFzucbljM18I5EDUw/TlavrYF3RfKfo7Xxxsr74q2SF6tr+4xqgXcMOKNa4KXuB0oI794fj85Rti2u36V59zqz889wxzBL4PWdH746g2ZpLAYjYPNM3hmpp/2eTd3JsfkZ2mG4fkMxTzlvuDH32ZkRH7ni8pq4ufGhYhLLuzrfriQvZAeaPVVCXvcdvnwsxcu1kbsf/RsvJwcoSclL7VmOaOxMYQTqQXYPD/UjdE9deqedwj87LtjMfRYv9k0lq83L2cnUyOjjzVk3UlQq7xdjcwMh
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt190KgDAIgNFd+f5PtXqsChJsLaoFhvidmyUSuJ+wlQLEMsvx2cYAAOCZq/6pvbXNR+q3kWr9Kstcs8wT49o7AoAxd3dszfHNvZN9jTz+K+3ZjLTeda112uvdRo2rnPO9WN+zeU+9eqr412FF2n8A+NsC9oQg5g==
+   eJztmNEKgCAMRX3y/79K+6weQlrDmkhqo3MgaFgQy+3eGQKAL7Z4vZcxjCfF48oq7zoG+Dq6f7T2kiSey/GMEzUAzrjb86U29Dp6CwA9zPKIPZr+BjVf3Prek3fAW68BP2fP2GVtVc155e85muEr5d70lG+pI2W+1HOm1ATrPGZ2H6t9j6Vxo/H0/wEAVrMDoOks4A==
   </data>
  </layer>
  <objectgroup name="triggers">
@@ -104,20 +109,37 @@
  </objectgroup>
  <objectgroup name="collectables">
   <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1088" y="448" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1856" y="768" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1376" y="224" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1408" y="224" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1440" y="224" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1472" y="224" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="villagers">
-  <object name="villager-1" type="villager" x="1152" y="120" width="24" height="24"/>
-  <object name="villager-9" type="villager" x="1184" y="184" width="24" height="24"/>
-  <object name="villager-6" type="villager" x="1200" y="152" width="24" height="24"/>
-  <object name="villager-5" type="villager" x="1168" y="152" width="24" height="24"/>
-  <object name="villager-4" type="villager" x="1248" y="120" width="24" height="24"/>
-  <object name="villager-2" type="villager" x="1184" y="120" width="24" height="24"/>
-  <object name="villager-3" type="villager" x="1216" y="120" width="24" height="24"/>
-  <object name="villager-7" type="villager" x="1232" y="152" width="24" height="24"/>
-  <object name="villager-8" type="villager" x="1264" y="152" width="24" height="24"/>
-  <object name="villager-10" type="villager" x="1216" y="184" width="24" height="24"/>
-  <object name="villager-11" type="villager" x="1248" y="184" width="24" height="24"/>
-  <object name="villager-12" type="villager" x="1280" y="184" width="24" height="24"/>
+  <object name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
+  <object name="villager-9" type="villager" x="960" y="832" width="24" height="24"/>
+  <object name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
+  <object name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
+  <object name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
+  <object name="villager-2" type="villager" x="1600" y="736" width="24" height="24"/>
+  <object name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
+  <object name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
+  <object name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
+  <object name="villager-10" type="villager" x="992" y="832" width="24" height="24"/>
+  <object name="villager-11" type="villager" x="1024" y="832" width="24" height="24"/>
+  <object name="villager-12" type="villager" x="1056" y="832" width="24" height="24"/>
+  <object name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
+  <object name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
+  <object name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
+  <object name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
+  <object name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
+  <object name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
+  <object name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
+  <object name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
+  <object name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
  </objectgroup>
  <objectgroup name="characters">
   <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>

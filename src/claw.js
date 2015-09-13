@@ -6,16 +6,15 @@ define([
 
     var game;
 
-    function Arrow (_game, x, y) {
+    function Claw (_game, x, y) {
         game = _game;
 
-        Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
+        Phaser.Sprite.call(this, game, x, y, 'claw', 1);
         this.anchor.set(0.5);
 
         this.debug = true;
 
-        this.speed = 800;
-        this.lifespan_default = 1000;
+        this.speed = 500;
         this.revive();
 
         game.physics.enable(this);
@@ -24,15 +23,15 @@ define([
 
     }
 
-    Arrow.prototype = Object.create(Phaser.Sprite.prototype);
-    Arrow.prototype.constructor = Arrow;
+    Claw.prototype = Object.create(Phaser.Sprite.prototype);
+    Claw.prototype.constructor = Claw;
 
-    Arrow.prototype.revive = function (health) {
-        this.lifespan = this.lifespan_default;
+    Claw.prototype.revive = function (health) {
         Phaser.Sprite.prototype.revive.call(this, health);
     };
 
-    Arrow.prototype.fire = function (direction) {
+    Claw.prototype.fire = function (direction) {
+        this.body.velocity.y = 0;
         switch(direction) {
             case 'left':
                 this.scale.x = -1; //flipped
@@ -50,5 +49,5 @@ define([
 
     };
 
-    return Arrow;
+    return Claw;
 });
