@@ -84,12 +84,10 @@ define([
             // Pull the user to the claw.
             if (this.clawAnchor) {
                 if (distanceBetween > 20) {
-                    if ((this.parent.body.blocked.up && this.parent.body.blocked.right) ||
-                        (this.parent.body.blocked.up && this.parent.body.blocked.left) ||
-                        (this.parent.body.blocked.down && this.parent.body.blocked.right) ||
-                        (this.parent.body.blocked.down && this.parent.body.blocked.left)) {
+                    if (Math.abs(Phaser.Point.distance(this.parent.position, this.parent.previousPosition)) < 1 &&
+                        Math.abs(Phaser.Point.distance(this.claw.position, this.claw.previousPosition)) < 1) {
                         
-                        game.time.events.add(this.timeToRelease, onAttackFinish, this);
+                        game.time.events.add(this.timeToRelease, onStuck, this);
                     }
                     else {
                         this.parent.body.velocity.x = Math.cos(angle) * -700;
@@ -110,6 +108,12 @@ define([
                     onAttackFinish();
                 }
                 else {
+                    if (Math.abs(Phaser.Point.distance(this.parent.position, this.parent.previousPosition)) < 1 &&
+                        Math.abs(Phaser.Point.distance(this.claw.position, this.claw.previousPosition)) < 1) {
+                        
+                        game.time.events.add(this.timeToRelease, onStuck, this);
+                    }
+                    
                     this.claw.body.velocity.x = Math.cos(angle) * 700;
                     this.claw.body.velocity.y = Math.sin(angle) * 700;
                     
@@ -129,6 +133,23 @@ define([
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
     };
+
+    function onStuck () {
+        if(self.inUse) {
+            // Release any anchor or object held.
+            self.clawAnchor = null;
+            self.clawObjectHeld = null;
+            
+            // Ensure Claw is retracting.
+            self.retracting = true;
+            
+            // Allow Claw to pass through terrain to finish retracting.
+            self.claw.body.checkCollision.up = false;
+            self.claw.body.checkCollision.down = false;
+            self.claw.body.checkCollision.left = false;
+            self.claw.body.checkCollision.right = false;
+        }
+    }
 
     function onAttackFinish () {
         // Clear flags.
@@ -170,11 +191,11 @@ define([
     
     ClawArm.prototype.retract = function() {
             self.retracting = true;
-            self.claw.body.checkCollision.up = false;
-            self.claw.body.checkCollision.down = false;
-            self.claw.body.checkCollision.left = false;
-            self.claw.body.checkCollision.right = false;
     },
+    
+    ClawArm.prototype.checkRetractErrors = function() {
+        
+    };
 
     ClawArm.prototype.onHit = function (collidable, victim) {
         if (self.inUse && !self.clawObjectHeld && !self.clawAnchor && !self.retracting) {
