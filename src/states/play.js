@@ -9,19 +9,20 @@ define([
     'health-display',
     'karma-display',
     'health-powerup',
-    'character-trigger'
-], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger) { 
+    'character-trigger',
+    'levels/test-map-1'
+], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables;
+    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables, level;
 
     return {
         // Intro
         init: function (mapName) {
             // Shortcut variables.
             game = this.game;
-
+            
             // Set map name.
             map = mapName || 'Map1';
         },
@@ -98,6 +99,8 @@ define([
             map.setCollisionByExclusion([], true, 'foreground-structure');
 
             // Create character plot triggers
+            level = new TestMap1();
+            //game.add.existing(level);
             characterTriggers = ObjectLayerHelper.createObjectsByType(game, 'character-trigger', map, 'triggers', CharacterTrigger);
             game.add.existing(characterTriggers);
 
@@ -253,7 +256,7 @@ define([
         onPlayerOverlapCharacterTrigger: function (player, characterTrigger) {
             characters.forEach( function(character) {
                 if (character.name === characterTrigger.properties.characterTriggerTarget) {
-                    character.handleTrigger(characterTrigger.properties.key, characterTrigger.properties);
+                    level.handleTrigger(character, characterTrigger.properties.key, characterTrigger.properties);
                 }
             });
         },

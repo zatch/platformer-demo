@@ -37,9 +37,6 @@ define([
         // AI
         this.addChild(this.dialog);
         this.facing = 'right';
-        
-        // Triggers
-        this.previousTrigger = "";
     }
     
     CommanderKavosic.prototype = Object.create(Phaser.Sprite.prototype);
@@ -61,26 +58,6 @@ define([
 
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
-    };
-    
-    CommanderKavosic.prototype.handleTrigger = function (key, properties) {
-        switch (key) {
-            case "hide":
-                this.kill();
-                break;
-            case "warn about jumping monsters":
-            case "complain about old men":
-                this.revive();
-                if (key !== this.previousTrigger) {
-                    this.x = Number(properties["x"]);
-                    this.y = Number(properties["y"]);
-                    this.currentPhrase = properties.currentPhrase;
-                }
-                break;
-            default:
-                break;
-        }
-        this.previousTrigger = key;
     };
     
     return CommanderKavosic;
