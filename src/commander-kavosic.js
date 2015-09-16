@@ -70,6 +70,7 @@ define([
                 break;
             case "warn about jumping monsters":
             case "complain about old men":
+                this.revive();
                 if (key !== this.previousTrigger) {
                     this.x = Number(properties["x"]);
                     this.y = Number(properties["y"]);
