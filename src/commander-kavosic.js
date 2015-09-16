@@ -60,21 +60,23 @@ define([
         Phaser.Sprite.prototype.update.call(this);
     };
     
-    CommanderKavosic.prototype.handleTrigger = function (properties) {
-        for (var key in properties) {
-            if (!isNaN(properties[key])) {
-                self[key] = Number(properties[key]);
-            }
-            else if (properties[key] === "true") {
-                self[key] = true;
-            }
-            else if (properties[key] === "false") {
-                self[key] = false;
-            }
-            else {
-                self[key] = properties[key];
-            }
-            
+    CommanderKavosic.prototype.handleTrigger = function (key, properties) {
+        console.log(key);
+        console.log(Number(properties["x"]));
+        console.log(this);
+        switch (key) {
+            case "hide":
+                this.renderable = false;
+                return;
+            case "warn about jumping monsters":
+            case "complain about old men":
+                this.renderable = true;
+                this.x = Number(properties["x"]);
+                this.y = Number(properties["y"]);
+                this.currentPhrase = properties.currentPhrase;
+                return;
+            default:
+                return;
         }
     };
     

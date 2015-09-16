@@ -307,7 +307,7 @@
                  "properties":
                     {
                      "characterTriggerTarget":"commander-kavosic",
-                     "renderable":"false"
+                     "key":"hide"
                     },
                  "rotation":0,
                  "type":"character-trigger",
@@ -323,7 +323,7 @@
                     {
                      "characterTriggerTarget":"commander-kavosic",
                      "currentPhrase":"We need you down in the caves. Your job is fighting monsters, not old men!",
-                     "renderable":"true",
+                     "key":"complain about old men",
                      "x":"688",
                      "y":"504"
                     },
@@ -341,7 +341,7 @@
                     {
                      "characterTriggerTarget":"commander-kavosic",
                      "currentPhrase":"Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too.",
-                     "renderable":"true",
+                     "key":"warn about jumping monsters",
                      "x":"688",
                      "y":"728"
                     },
@@ -858,7 +858,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"characters",
          "objects":[
                 {
@@ -878,7 +878,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":60,
+         "width":0,
          "x":0,
          "y":0
         }],

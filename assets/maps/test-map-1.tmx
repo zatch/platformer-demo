@@ -74,14 +74,14 @@
   <object name="commander-kavosic1" type="character-trigger" x="416" y="0" width="16" height="968">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
-    <property name="renderable" value="false"/>
+    <property name="key" value="hide"/>
    </properties>
   </object>
   <object name="commander-kavosic2" type="character-trigger" x="616" y="0" width="16" height="552">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="We need you down in the caves. Your job is fighting monsters, not old men!"/>
-    <property name="renderable" value="true"/>
+    <property name="key" value="complain about old men"/>
     <property name="x" value="688"/>
     <property name="y" value="504"/>
    </properties>
@@ -90,7 +90,7 @@
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too."/>
-    <property name="renderable" value="true"/>
+    <property name="key" value="warn about jumping monsters"/>
     <property name="x" value="688"/>
     <property name="y" value="728"/>
    </properties>
