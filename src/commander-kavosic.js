@@ -66,12 +66,11 @@ define([
     CommanderKavosic.prototype.handleTrigger = function (key, properties) {
         switch (key) {
             case "hide":
-                this.renderable = false;
+                this.kill();
                 break;
             case "warn about jumping monsters":
             case "complain about old men":
                 if (key !== this.previousTrigger) {
-                    this.renderable = true;
                     this.x = Number(properties["x"]);
                     this.y = Number(properties["y"]);
                     this.currentPhrase = properties.currentPhrase;

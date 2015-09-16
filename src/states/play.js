@@ -253,6 +253,7 @@ define([
         onPlayerOverlapCharacterTrigger: function (player, characterTrigger) {
             characters.forEach( function(character) {
                 if (character.name === characterTrigger.properties.characterTriggerTarget) {
+                    character.revive();
                     character.handleTrigger(characterTrigger.properties.key, characterTrigger.properties);
                 }
             });
