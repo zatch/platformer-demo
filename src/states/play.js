@@ -3,23 +3,26 @@ define([
     'player',
     'enemy',
     'villager',
+    'commander-kavosic',
     'platform',
     'object-layer-helper',
     'health-display',
     'karma-display',
-    'health-powerup'
-], function (Phaser, Player, Enemy, Villager, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup) { 
+    'health-powerup',
+    'character-trigger',
+    'levels/test-map-1'
+], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, villagers, map, collisionLayer, platforms, exitDoor, healthDisplay, karmaDisplay, collectables;
+    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables, level;
 
     return {
         // Intro
         init: function (mapName) {
             // Shortcut variables.
             game = this.game;
-
+            
             // Set map name.
             map = mapName || 'Map1';
         },
@@ -62,7 +65,13 @@ define([
             map.createLayer('background-decoration');
             collisionLayer = map.createLayer('foreground-structure');
 
+            // Make the collision layer globally accessiable via 'game'.
             game.collisionLayer = collisionLayer;
+
+            // Insert Commander Kavosic
+            characters = ObjectLayerHelper.createObjectsByType(game, 'commander-kavosic', map, 'characters', CommanderKavosic);
+            //characters.forEach(this.registerEnemyEvents, this);
+            game.add.existing(characters);
             
             // Spawn point
             var spawnPoint = ObjectLayerHelper.createObjectByName(game, 'player_spawn', map, 'spawns');
@@ -93,6 +102,11 @@ define([
             // Assign impasasble tiles for collision.
             map.setCollisionByExclusion([], true, 'foreground-structure');
 
+            // Create character plot triggers
+            level = new TestMap1();
+            //game.add.existing(level);
+            characterTriggers = ObjectLayerHelper.createObjectsByType(game, 'character-trigger', map, 'triggers', CharacterTrigger);
+            game.add.existing(characterTriggers);
 
             // Create win trigger
             exitDoor = ObjectLayerHelper.createObjectByName(game, 'door_exit', map, 'triggers');
@@ -187,16 +201,24 @@ define([
             // Check to see if weapons are colliding with enemies.
             game.physics.arcade.overlap(player.weapon.getCollidables(), enemies, player.weapon.onHit);
             game.physics.arcade.overlap(player.weapon.getCollidables(), villagers, player.weapon.onHit);
+            // Check to see if weapons are colliding with collectables.
+            game.physics.arcade.overlap(player.weapon.getCollidables(), collectables, player.weapon.onHit);
+            // Check to see if weapons are colliding collision layer.
+            game.physics.arcade.collide(player.weapon.getCollidables(), collisionLayer, player.weapon.onHitTerrain);
 
             // Collide player + enemies.
-            game.physics.arcade.collide(player, enemies, this.onPlayerCollidesEnemy);
+            game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
+            
+            // Check overlap of player + character triggers.
+            game.physics.arcade.overlap(player, characterTriggers, this.onPlayerOverlapCharacterTrigger);
             
             // Collide player + collectables.
-            game.physics.arcade.collide(player, collectables, this.onPlayerCollidesCollectable);
+            game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
 
             // Collide objects with map.  Do this after other collision checks
             // so objects aren't pushed through walls.
             game.physics.arcade.collide(player, collisionLayer);
+            game.physics.arcade.collide(characters, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
             game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
@@ -236,6 +258,14 @@ define([
         
         registerVillagerEvents: function (villager) {
             villager.events.onDeath.add(this.onVillagerDeath, this);
+        },
+        
+        onPlayerOverlapCharacterTrigger: function (player, characterTrigger) {
+            characters.forEach( function(character) {
+                if (character.name === characterTrigger.properties.characterTriggerTarget) {
+                    level.handleTrigger(character, characterTrigger.properties.key, characterTrigger.properties);
+                }
+            });
         },
         
         onPlayerCollidesEnemy: function (player, enemy) {

@@ -29,16 +29,16 @@
  </tileset>
  <layer name="backdrop" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt07EOgCAMBFAm//+DGPkwFwdDQiix12tth4vRQe5R6FdrvRI648n8jd0LaV2F3c/SWt7YKe+/vbt9YPcoL9br3Sy5j6dhmyyMnqzj9USHbbVyevJmNWc605Zmtq/mG8sqWctijmyvh2SyaniZnctrf56R+yH5967HF8PuHT1XDYumFzVfT965n8bdOlkvkxdl9uqV9r8BOXtoNA==
+   eJzt07EOgCAMBFAm//+DGP0wFycSQhu5u2I73KAheo9Cv1rrlaNzvxnfqXshrbOo+zGt5T075dV7FT2iWdF9snrZZu/9sqz3JpoXGfZ5VpvL+2+vwpzNqzYrvMp9UBuZZmbfCOf5tPmovVHmxvSqOpcX72Xuh+Xbqx5fDKtn9Fx3WHZ6UfON5B377bhbnv9l8qLMUb3W/g/LF2pc
   </data>
  </layer>
  <layer name="background-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkkOwjAMRc2i3QMnAE4A3L9lyyBxBK6CKxQpsuLEpElxQp4UVW0z+HtqAfQz9Dr2HyPmXfrPSGVDKiYbpXpSIPFBCZg4TVcuZoMw5jYl+ic2Z0M1se4ANji2nWy/pXM5BNXms+25Atihzj2Og1BvCNd5Ln9f8dktg9/oWfb9C/UeUecJx9mjd7TqjMNXgy7uOPcRmM/Faun+POdsOv/b9a5cydGffHVB30nyQbp3DLn6M6dTSinfDaMrJi6/rD1tlOYLE287T0P9RXNO57JNq2ZXvo3k/43WNF2j6d+MI2Qj54ca8OVeaf0mFq31l4p/iaOUGuLt0lBLT5pDrT7gdNWQy41Go9HQxRtCWkGX
+   eJztlksOwiAQhsdF3asnUE+g3t926yPxCF7FYUFCJjwGCmWKfAmptFOYn3lUAPnct3XWn8j9kemHaafWoOvE+FAK5SNXj7Y3f3M0mcTa18YVD31fXX02ks4nJV6KUE6m5myoJnYDwB7HYeCtF8plutcD50+LfUw9+IjpG58NwBF1nnCcmXpD0P1eOH8vWH9Uvzn/ot4L6rziuHn0jkad+cjdN12xWro/z9mb2se+b6vNEv3JVxf0GTcfOGunUKo/u3RyWct3VetKiUvN2pPG2s5Cx9vM01B/kZzTpXyTqtmWb/T/JK1p+k7uXlyCkI+uc2gBX+6trd+kIrX+cvEvceTSQrxtGlrpSXNo9QxculrI5U6n0+nI4geePUfB
   </data>
  </layer>
  <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="1088" y="864" width="32" height="32"/>
+  <object name="enemy1" type="enemy" gid="97" x="1096" y="848" width="32" height="32"/>
   <object name="enemy2" type="enemy" gid="97" x="1184" y="800" width="32" height="32"/>
   <object name="enemy4" type="enemy" gid="97" x="1088" y="448" width="32" height="32"/>
   <object name="enemy5" type="enemy" gid="97" x="1360" y="472" width="32" height="32"/>
@@ -56,12 +56,12 @@
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmFEOgzAIQP3yXDvaruRMFnVZMufFVj+akA4orLVSJwnxQ2Q8BgWd2qZ5OK1ZRhf/pNCj8A5t83q7K6Xu/uVIvDEOqZ11OXnT7KzLyZtmZ13A+Xy9uSvUvv2224u3C2L7VQfhrN2bl9sTYrNUqpZ5IeOSKaanQV7PmYsRijXelZXi9P3dI/e53of21ni5356J2u4UZ1RNvNxz3Jm2GOb1MxOrWe45adylebk+gzW5ckuZLfBSXFyfad7DO8Tnnrz+rOXes2N7BDePsN0kjBvLec59I8w55WdkYpQKtpuE+YnlJJU39F+SF/Pj5xdVM6m8oX+qHkvxSn1sPY/+jXcW1EBMcvLekXMtVTX7AyXYDILzWhuH9ju1RnPNuNQ4YF40u0ApXu4/tayQV/PdpiZGinfLvrGiVnk/mPwIlw==
+   eJztmF0OgyAMgH3yXB5tV8Ily3RZMvVigyxkhJS2SHHAJGl80NR+hf7Que+6h5bca8r4H6N7jpBWeO9991r1MyT6/dASL6Wf+52UTSevnO4SeW9aRkSuO+0omHfA8snWGO8B+fmCnZkaeBURA+OHk1Vra+BdkPPPkdp4U9fz5K2SF4trN0e1wKsiclQLvNT9YCuE19bHvX2Uq4tr99G8Ns7c82e4U5hL4A3lj1CcQb005gMF6Pwl74TEk7lnU3dxqn+GZhi+3ZDPJfsN3+chPRK5yuc1/vP9Q/kklXfpvzMSTE8OXkgf1Htugrz+P0Ln8Shero7c9ejfeBdg7xWRj/0lyUvNWfYIxcLZc6gGuTU81o7YObXUTNv2v9z5S4q4fsF67py8WBxhe1qyuCx+H2A5oDiqiTHEmzNuSpFSed/8ZgMZ
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt190KgDAIgNFd+f5PtXqsChJsLaoFhvidmyUSuJ+wlQLEMsvx2cYAAOCZq/6pvbXNR+q3kWr9Kstcs8wT49o7AoAxd3dszfHNvZN9jTz+K+3ZjLTeda112uvdRo2rnPO9WN+zeU+9eqr412FF2n8A+NsC9oQg5g==
+   eJzt2FEKgCAMgGGfvP+ptGP1EKM1LEVKHf0fBA0LQpybhQD4ssXrvY7xvRSPK5t5tzGwOrt/tO4lST2X4xkncgDO3K15yQ07Tr0F0GNUj9hT099Q6otb33vqHeit56Cfq5+xZWxWznn19zka0VfqtelpvnUdkfOlPWfqmlD7HzN6Hyt9T63GAQDWsQNw2ywS
   </data>
  </layer>
  <objectgroup name="triggers">
@@ -69,6 +69,30 @@
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map2"/>
+   </properties>
+  </object>
+  <object name="commander-kavosic2" type="character-trigger" x="528" y="0" width="16" height="616">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="currentPhrase" value="We need you down in the caves. Your job is fighting monsters, not old men!"/>
+    <property name="key" value="complain about old men"/>
+    <property name="x" value="688"/>
+    <property name="y" value="504"/>
+   </properties>
+  </object>
+  <object name="commander-kavosic2" type="character-trigger" x="504" y="640" width="16" height="184">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="currentPhrase" value="Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too."/>
+    <property name="key" value="warn about jumping monsters"/>
+    <property name="x" value="688"/>
+    <property name="y" value="728"/>
+   </properties>
+  </object>
+  <object name="commander-kavosic1" type="character-trigger" x="1120" y="600" width="16" height="272">
+   <properties>
+    <property name="characterTriggerTarget" value="commander-kavosic"/>
+    <property name="key" value="hide"/>
    </properties>
   </object>
  </objectgroup>
@@ -96,7 +120,7 @@
  </objectgroup>
  <objectgroup name="villagers">
   <object name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
-  <object name="villager-9" type="villager" x="960" y="832" width="24" height="24"/>
+  <object name="villager-9" type="villager" x="1040" y="832" width="24" height="24"/>
   <object name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
   <object name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
   <object name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
@@ -104,8 +128,20 @@
   <object name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
   <object name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
   <object name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
-  <object name="villager-10" type="villager" x="992" y="832" width="24" height="24"/>
-  <object name="villager-11" type="villager" x="1024" y="832" width="24" height="24"/>
-  <object name="villager-12" type="villager" x="1056" y="832" width="24" height="24"/>
+  <object name="villager-10" type="villager" x="1064" y="832" width="24" height="24"/>
+  <object name="villager-11" type="villager" x="1088" y="832" width="24" height="24"/>
+  <object name="villager-12" type="villager" x="1112" y="832" width="24" height="24"/>
+  <object name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
+  <object name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
+  <object name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
+  <object name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
+  <object name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
+  <object name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
+  <object name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
+  <object name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
+  <object name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup name="characters">
+  <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
 </map>
