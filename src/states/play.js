@@ -54,12 +54,15 @@ define([
             map.addTilesetImage('platformertiles', 'platformertiles');
             map.addTilesetImage('moon', 'moon');
             map.addTilesetImage('cave', 'cave');
+
             
             // Add layers to map.
             map.createLayer('backdrop')
                .resizeWorld(); // Base world size on the backdrop.
             map.createLayer('background-decoration');
             collisionLayer = map.createLayer('foreground-structure');
+
+            game.collisionLayer = collisionLayer;
             
             // Spawn point
             var spawnPoint = ObjectLayerHelper.createObjectByName(game, 'player_spawn', map, 'spawns');
@@ -172,6 +175,9 @@ define([
         render: function () {
             var body = player.weapon.getCollidables();
             // if(body) game.debug.body(body);
+            enemies.forEach(function (enemy) {
+                game.debug.geom(enemy.behavior.hunter.lineHunting);
+            });
         },
 
         update: function () {

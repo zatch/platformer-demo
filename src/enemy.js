@@ -1,11 +1,12 @@
 define([
     'phaser',
-    'health-powerup'
-], function (Phaser, HealthPowerup) { 
+    'health-powerup',
+    'hunter'
+], function (Phaser, HealthPowerup, Hunter) { 
     'use strict';
 
     // Shortcuts
-    var game, self;
+    var game, self, sightLine;
 
     function Enemy (_game, x, y) {
         game = _game;
@@ -57,12 +58,18 @@ define([
         this.events.onDrop = new Phaser.Signal();
 
         // AI
+        this.targetPosition = new Phaser.Point();
+        this.sightLine = new Phaser.Line();
         this.maxMoveSpeed = new Phaser.Point(75, 1000);
         this.bearing = new Phaser.Point();
         this.distanceToPlayer = new Phaser.Point();
 
         this.knockback = new Phaser.Point();
         this.knockbackTimeout = 0;
+
+        this.behavior = {
+            hunter: new Hunter(this, game.player)
+        };
         
     }
 
@@ -82,26 +89,15 @@ define([
     Enemy.prototype.constructor = Enemy;
 
     Enemy.prototype.update = function () {
+
         Phaser.Point.subtract(game.player.position, this.position, this.distanceToPlayer);
-        if(this.distanceToPlayer.getMagnitude() > 400) {
-            this.stopMoving();
-            return;
-        } else {
-            this.stopMoving();
-        }
-        
-        if (this.alive) {
-            if(this.distanceToPlayer.x < 0) {
-                this.moveLeft();
-            }
-            else{
-                this.moveRight();
-            }
-            if(this.shouldJump()) {
-                this.jump();
-            }
-        }
-        
+
+        // Don't continue to accelerate unless force is applied.
+        this.stopMoving();
+
+        // Apply behaviors.
+        this.behavior.hunter.update();
+
         // Update direction
         if (this.facing === 'right') {
             this.scale.x = 1; //facing default direction
@@ -109,9 +105,20 @@ define([
         else {
             this.scale.x = -1; //flipped
         }
-
+        
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
+    };
+
+    Enemy.prototype.canSee = function (target, line) {
+        line.start.x = this.x;
+        line.start.y = this.y;
+        line.end.x = target.x;
+        line.end.y = target.y;
+        var tiles = game.collisionLayer.getRayCastTiles(line, null, true);
+
+        if(tiles.length) return false;
+        return true;
     };
 
     Enemy.prototype.damage = function (amount, source) {
