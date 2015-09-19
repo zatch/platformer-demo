@@ -15,7 +15,7 @@ define([
         this.anchor.set(0.5);
         
         // Spawn settings
-        this.maxSpawned = 3;
+        this.maxSpawned = 1;
         this.spawnRate = 500; // Delay to spawn, in ms
         
         // Internal counters

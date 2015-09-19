@@ -129,13 +129,10 @@
   <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawners">
-  <object name="spawner-1" type="spawner" x="536" y="728" width="24" height="24">
-   <properties>
-    <property name="maxSpawned" value="1"/>
-   </properties>
-  </object>
+  <object name="spawner-1" type="spawner" x="536" y="728" width="24" height="24"/>
   <object name="spawner-2" type="spawner" x="1312" y="424" width="24" height="24">
    <properties>
+    <property name="maxSpawned" value="3"/>
     <property name="spawnRate" value="1500"/>
    </properties>
   </object>
