@@ -1,6 +1,7 @@
 define([
     'phaser',
-], function (Phaser) { 
+    'behaviors/pacer'
+], function (Phaser, Pacer) { 
     'use strict';
 
     // Shortcuts
@@ -56,6 +57,10 @@ define([
         this.knockback = new Phaser.Point();
         this.knockbackTimeout = 0;
         
+        this.behavior = {
+            pacer: new Pacer(this)
+        };
+        
     }
 
     function onBlinkLoop (){
@@ -76,23 +81,7 @@ define([
     Villager.prototype.update = function () {
         // Pace back and forth.
         if (this.alive) {
-            if(this.facing === 'left') {
-                this.moveLeft();
-                if (this.x <= this.spawnX - this.maxDistanceFromSpawn) {
-                    this.moveRight();
-                }
-                else {
-                    this.moveLeft();
-                }
-            }
-            else if(this.facing === 'right'){
-                if (this.x >= this.spawnX + this.maxDistanceFromSpawn) {
-                    this.moveLeft();
-                }
-                else {   
-                    this.moveRight();
-                }
-            }
+            this.behavior.pacer.update();
         }
         
         // Update direction
