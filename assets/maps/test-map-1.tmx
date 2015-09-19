@@ -136,5 +136,10 @@
     <property name="spawnRate" value="1500"/>
    </properties>
   </object>
+  <object name="spawner-1" type="spawner" x="1160" y="800" width="24" height="24"/>
+  <object name="spawner-1" type="spawner" x="1568" y="344" width="24" height="24"/>
+  <object name="spawner-1" type="spawner" x="1528" y="736" width="24" height="24"/>
+  <object name="spawner-1" type="spawner" x="1752" y="536" width="24" height="24"/>
+  <object name="spawner-1" type="spawner" x="920" y="448" width="24" height="24"/>
  </objectgroup>
 </map>
