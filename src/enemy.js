@@ -1,7 +1,7 @@
 define([
     'phaser',
     'health-powerup',
-    'hunter'
+    'behaviors/hunter'
 ], function (Phaser, HealthPowerup, Hunter) { 
     'use strict';
 
