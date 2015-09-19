@@ -26,232 +26,7 @@
          "draworder":"topdown",
          "height":0,
          "name":"enemies",
-         "objects":[
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1096,
-                 "y":848
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy2",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1184,
-                 "y":800
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy4",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1088,
-                 "y":448
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy5",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1360,
-                 "y":472
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy3",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1280,
-                 "y":736
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy6",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1392,
-                 "y":400
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy7",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1288,
-                 "y":368
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy8",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1568,
-                 "y":368
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy9",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1640,
-                 "y":376
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1760,
-                 "y":544
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1696,
-                 "y":544
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1632,
-                 "y":544
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1760,
-                 "y":224
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1600,
-                 "y":736
-                }, 
-                {
-                 "gid":97,
-                 "height":32,
-                 "name":"enemy10",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":1664,
-                 "y":736
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -879,6 +654,46 @@
          "type":"objectgroup",
          "visible":true,
          "width":0,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"spawners",
+         "objects":[
+                {
+                 "height":24,
+                 "name":"spawner-1",
+                 "properties":
+                    {
+                     "maxSpawned":"1"
+                    },
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":24,
+                 "x":536,
+                 "y":728
+                }, 
+                {
+                 "height":24,
+                 "name":"spawner-2",
+                 "properties":
+                    {
+                     "spawnRate":"1500"
+                    },
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":24,
+                 "x":1312,
+                 "y":424
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":60,
          "x":0,
          "y":0
         }],

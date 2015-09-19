@@ -37,23 +37,7 @@
    eJztlksOwiAQhsdF3asnUE+g3t926yPxCF7FYUFCJjwGCmWKfAmptFOYn3lUAPnct3XWn8j9kemHaafWoOvE+FAK5SNXj7Y3f3M0mcTa18YVD31fXX02ks4nJV6KUE6m5myoJnYDwB7HYeCtF8plutcD50+LfUw9+IjpG58NwBF1nnCcmXpD0P1eOH8vWH9Uvzn/ot4L6rziuHn0jkad+cjdN12xWro/z9mb2se+b6vNEv3JVxf0GTcfOGunUKo/u3RyWct3VetKiUvN2pPG2s5Cx9vM01B/kZzTpXyTqtmWb/T/JK1p+k7uXlyCkI+uc2gBX+6trd+kIrX+cvEvceTSQrxtGlrpSXNo9QxculrI5U6n0+nI4geePUfB
   </data>
  </layer>
- <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="1096" y="848" width="32" height="32"/>
-  <object name="enemy2" type="enemy" gid="97" x="1184" y="800" width="32" height="32"/>
-  <object name="enemy4" type="enemy" gid="97" x="1088" y="448" width="32" height="32"/>
-  <object name="enemy5" type="enemy" gid="97" x="1360" y="472" width="32" height="32"/>
-  <object name="enemy3" type="enemy" gid="97" x="1280" y="736" width="32" height="32"/>
-  <object name="enemy6" type="enemy" gid="97" x="1392" y="400" width="32" height="32"/>
-  <object name="enemy7" type="enemy" gid="97" x="1288" y="368" width="32" height="32"/>
-  <object name="enemy8" type="enemy" gid="97" x="1568" y="368" width="32" height="32"/>
-  <object name="enemy9" type="enemy" gid="97" x="1640" y="376" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1760" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1696" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1632" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1760" y="224" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1600" y="736" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1664" y="736" width="32" height="32"/>
- </objectgroup>
+ <objectgroup name="enemies"/>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJztmF0OgyAMgH3yXB5tV8Ily3RZMvVigyxkhJS2SHHAJGl80NR+hf7Que+6h5bca8r4H6N7jpBWeO9991r1MyT6/dASL6Wf+52UTSevnO4SeW9aRkSuO+0omHfA8snWGO8B+fmCnZkaeBURA+OHk1Vra+BdkPPPkdp4U9fz5K2SF4trN0e1wKsiclQLvNT9YCuE19bHvX2Uq4tr99G8Ns7c82e4U5hL4A3lj1CcQb005gMF6Pwl74TEk7lnU3dxqn+GZhi+3ZDPJfsN3+chPRK5yuc1/vP9Q/kklXfpvzMSTE8OXkgf1Htugrz+P0Ln8Shero7c9ejfeBdg7xWRj/0lyUvNWfYIxcLZc6gGuTU81o7YObXUTNv2v9z5S4q4fsF67py8WBxhe1qyuCx+H2A5oDiqiTHEmzNuSpFSed/8ZgMZ
@@ -143,5 +127,17 @@
  </objectgroup>
  <objectgroup name="characters">
   <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="spawners">
+  <object name="spawner-1" type="spawner" x="536" y="728" width="24" height="24">
+   <properties>
+    <property name="maxSpawned" value="1"/>
+   </properties>
+  </object>
+  <object name="spawner-2" type="spawner" x="1312" y="424" width="24" height="24">
+   <properties>
+    <property name="spawnRate" value="1500"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,6 +1,7 @@
 define([
     'phaser',
     'player',
+    'spawner',
     'enemy',
     'villager',
     'commander-kavosic',
@@ -11,11 +12,11 @@ define([
     'health-powerup',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables, level;
+    var game, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables, level;
 
     return {
         // Intro
@@ -80,6 +81,11 @@ define([
             game.add.existing(player);
             player.x = spawnPoint.x;
             player.y = spawnPoint.y;
+
+            // Insert enemies
+            spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner);
+            spawners.forEach(this.registerSpawnerEvents, this);
+            game.add.existing(spawners);
 
             // Insert enemies
             enemies = ObjectLayerHelper.createObjectsByType(game, 'enemy', map, 'enemies', Enemy);
@@ -251,6 +257,11 @@ define([
             pad1.onDownCallback = undefined;
         },
         
+        registerSpawnerEvents: function (spawner) {
+            spawner.events.onSpawn.add(this.onSpawnerSpawn, this);
+        },
+        
+        
         registerEnemyEvents: function (enemy) {
             enemy.events.onDeath.add(this.onEnemyDeath, this);
             enemy.events.onDrop.add(this.onEnemyDrop, this);
@@ -266,6 +277,18 @@ define([
                     level.handleTrigger(character, characterTrigger.properties.key, characterTrigger.properties);
                 }
             });
+        },
+        
+        onSpawnerSpawn: function(spawner, key) {
+            var sprite;
+            if (key === 'enemy') {
+                sprite = new Enemy(game, spawner.x, spawner.y);
+                spawner.maxSpawned = spawner.properties.maxSpawned || spawner.maxSpawned;
+                spawner.spawnRate = Number(spawner.properties.spawnRate) || spawner.spawnRate;
+                this.registerEnemyEvents(sprite);
+                enemies.add(sprite);
+            }
+            
         },
         
         onPlayerCollidesEnemy: function (player, enemy) {
