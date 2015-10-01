@@ -213,6 +213,9 @@ define([
             game.physics.arcade.collide(player.weapon.getCollidables(), collisionLayer, player.weapon.onHitTerrain);
 
             // Collide player + enemies.
+            game.physics.arcade.overlap(player, spawners, this.onPlayerCollidesSpawner);
+
+            // Collide player + enemies.
             game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
             
             // Check overlap of player + character triggers.
@@ -279,10 +282,14 @@ define([
             });
         },
         
+        onPlayerCollidesSpawner: function (player, spawner) {
+            spawner.spawn();
+        },
+        
         onSpawnerSpawn: function(spawner, key) {
             var sprite;
             if (key === 'enemy') {
-                sprite = new Enemy(game, spawner.x, spawner.y);
+                sprite = new Enemy(game, spawner.x + (spawner.width / 2), spawner.y + (spawner.height / 2));
                 spawner.maxSpawned = spawner.properties.maxSpawned || spawner.maxSpawned;
                 spawner.spawnRate = Number(spawner.properties.spawnRate) || spawner.spawnRate;
                 this.registerEnemyEvents(sprite);

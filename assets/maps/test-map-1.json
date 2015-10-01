@@ -63,6 +63,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":1,
                  "name":"door_exit",
                  "properties":
                     {
@@ -78,6 +79,7 @@
                 }, 
                 {
                  "height":616,
+                 "id":2,
                  "name":"commander-kavosic2",
                  "properties":
                     {
@@ -96,6 +98,7 @@
                 }, 
                 {
                  "height":184,
+                 "id":3,
                  "name":"commander-kavosic2",
                  "properties":
                     {
@@ -114,6 +117,7 @@
                 }, 
                 {
                  "height":272,
+                 "id":4,
                  "name":"commander-kavosic1",
                  "properties":
                     {
@@ -141,6 +145,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":5,
                  "name":"platform-1",
                  "properties":
                     {
@@ -168,6 +173,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":6,
                  "name":"player_spawn",
                  "properties":
                     {
@@ -194,6 +200,7 @@
          "objects":[
                 {
                  "height":16,
+                 "id":7,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -208,6 +215,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":8,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -222,6 +230,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":9,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -236,6 +245,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":10,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -250,6 +260,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":11,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -264,6 +275,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":12,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -278,6 +290,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":13,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -292,6 +305,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":14,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -306,6 +320,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":15,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -332,6 +347,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":16,
                  "name":"villager-1",
                  "properties":
                     {
@@ -346,6 +362,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":17,
                  "name":"villager-9",
                  "properties":
                     {
@@ -360,6 +377,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":18,
                  "name":"villager-6",
                  "properties":
                     {
@@ -374,6 +392,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":19,
                  "name":"villager-5",
                  "properties":
                     {
@@ -388,6 +407,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":20,
                  "name":"villager-4",
                  "properties":
                     {
@@ -402,6 +422,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":21,
                  "name":"villager-2",
                  "properties":
                     {
@@ -416,6 +437,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":22,
                  "name":"villager-3",
                  "properties":
                     {
@@ -430,6 +452,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":23,
                  "name":"villager-7",
                  "properties":
                     {
@@ -444,6 +467,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":24,
                  "name":"villager-8",
                  "properties":
                     {
@@ -458,6 +482,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":25,
                  "name":"villager-10",
                  "properties":
                     {
@@ -472,6 +497,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":26,
                  "name":"villager-11",
                  "properties":
                     {
@@ -486,6 +512,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":27,
                  "name":"villager-12",
                  "properties":
                     {
@@ -500,6 +527,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":28,
                  "name":"villager-20",
                  "properties":
                     {
@@ -514,6 +542,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":29,
                  "name":"villager-19",
                  "properties":
                     {
@@ -528,6 +557,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":30,
                  "name":"villager-21",
                  "properties":
                     {
@@ -542,6 +572,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":31,
                  "name":"villager-16",
                  "properties":
                     {
@@ -556,6 +587,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":32,
                  "name":"villager-14",
                  "properties":
                     {
@@ -570,6 +602,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":33,
                  "name":"villager-13",
                  "properties":
                     {
@@ -584,6 +617,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":34,
                  "name":"villager-15",
                  "properties":
                     {
@@ -598,6 +632,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":35,
                  "name":"villager-17",
                  "properties":
                     {
@@ -612,6 +647,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":36,
                  "name":"villager-18",
                  "properties":
                     {
@@ -638,6 +674,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":37,
                  "name":"commander-kavosic",
                  "properties":
                     {
@@ -659,11 +696,12 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"spawners",
          "objects":[
                 {
-                 "height":24,
+                 "height":216,
+                 "id":38,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -672,12 +710,13 @@
                  "rotation":0,
                  "type":"spawner",
                  "visible":true,
-                 "width":24,
-                 "x":536,
-                 "y":728
+                 "width":392,
+                 "x":256,
+                 "y":584
                 }, 
                 {
                  "height":24,
+                 "id":39,
                  "name":"spawner-2",
                  "properties":
                     {
@@ -693,6 +732,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":40,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -707,6 +747,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":41,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -721,6 +762,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":42,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -735,6 +777,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":43,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -749,6 +792,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":44,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -764,10 +808,11 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":60,
+         "width":0,
          "x":0,
          "y":0
         }],
+ "nextobjectid":45,
  "orientation":"orthogonal",
  "properties":
     {

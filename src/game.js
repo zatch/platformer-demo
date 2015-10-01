@@ -71,6 +71,7 @@ define([
 
             this.game.load.spritesheet('player-human', 'assets/sprites/player.png', 26, 30, 1);
             this.game.load.spritesheet('player-claw-arm', 'assets/sprites/player-claw-arm.png', 26, 30, 1);
+            this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
             this.game.load.spritesheet('villager', 'assets/sprites/villager.png', 15, 24, 1);
             this.game.load.spritesheet('commander-kavosic', 'assets/sprites/commander-kavosic.png', 26, 30, 1);
