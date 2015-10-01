@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" nextobjectid="53">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -38,25 +38,25 @@
   </data>
  </layer>
  <objectgroup name="enemies">
-  <object name="enemy1" type="enemy" gid="97" x="1096" y="848" width="32" height="32"/>
-  <object name="enemy2" type="enemy" gid="97" x="1184" y="800" width="32" height="32"/>
-  <object name="enemy4" type="enemy" gid="97" x="1088" y="448" width="32" height="32"/>
-  <object name="enemy5" type="enemy" gid="97" x="1360" y="472" width="32" height="32"/>
-  <object name="enemy3" type="enemy" gid="97" x="1280" y="736" width="32" height="32"/>
-  <object name="enemy6" type="enemy" gid="97" x="1392" y="400" width="32" height="32"/>
-  <object name="enemy7" type="enemy" gid="97" x="1288" y="368" width="32" height="32"/>
-  <object name="enemy8" type="enemy" gid="97" x="1568" y="368" width="32" height="32"/>
-  <object name="enemy9" type="enemy" gid="97" x="1640" y="376" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1760" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1696" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1632" y="544" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1760" y="224" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1600" y="736" width="32" height="32"/>
-  <object name="enemy10" type="enemy" gid="97" x="1664" y="736" width="32" height="32"/>
+  <object id="1" name="enemy1" type="enemy" gid="97" x="1520" y="616" width="32" height="32"/>
+  <object id="2" name="enemy2" type="enemy" gid="97" x="1480" y="648" width="32" height="32"/>
+  <object id="3" name="enemy4" type="enemy" gid="97" x="1088" y="752" width="32" height="32"/>
+  <object id="4" name="enemy5" type="enemy" gid="97" x="1600" y="528" width="32" height="32"/>
+  <object id="5" name="enemy3" type="enemy" gid="97" x="1560" y="656" width="32" height="32"/>
+  <object id="6" name="enemy6" type="enemy" gid="97" x="1520" y="536" width="32" height="32"/>
+  <object id="7" name="enemy7" type="enemy" gid="97" x="1553" y="496" width="32" height="32"/>
+  <object id="8" name="enemy8" type="enemy" gid="97" x="1568" y="368" width="32" height="32"/>
+  <object id="9" name="enemy9" type="enemy" gid="97" x="1640" y="376" width="32" height="32"/>
+  <object id="10" name="enemy10" type="enemy" gid="97" x="1760" y="544" width="32" height="32"/>
+  <object id="11" name="enemy10" type="enemy" gid="97" x="1696" y="544" width="32" height="32"/>
+  <object id="12" name="enemy10" type="enemy" gid="97" x="1632" y="544" width="32" height="32"/>
+  <object id="13" name="enemy10" type="enemy" gid="97" x="1760" y="224" width="32" height="32"/>
+  <object id="14" name="enemy10" type="enemy" gid="97" x="1600" y="736" width="32" height="32"/>
+  <object id="15" name="enemy10" type="enemy" gid="97" x="1664" y="736" width="32" height="32"/>
  </objectgroup>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmF0OgyAMgH3yXB5tV8Ily3RZMvVigyxkhJS2SHHAJGl80NR+hf7Que+6h5bca8r4H6N7jpBWeO9991r1MyT6/dASL6Wf+52UTSevnO4SeW9aRkSuO+0omHfA8snWGO8B+fmCnZkaeBURA+OHk1Vra+BdkPPPkdp4U9fz5K2SF4trN0e1wKsiclQLvNT9YCuE19bHvX2Uq4tr99G8Ns7c82e4U5hL4A3lj1CcQb005gMF6Pwl74TEk7lnU3dxqn+GZhi+3ZDPJfsN3+chPRK5yuc1/vP9Q/kklXfpvzMSTE8OXkgf1Htugrz+P0Ln8Shero7c9ejfeBdg7xWRj/0lyUvNWfYIxcLZc6gGuTU81o7YObXUTNv2v9z5S4q4fsF67py8WBxhe1qyuCx+H2A5oDiqiTHEmzNuSpFSed/8ZgMZ
+   eJztmE0KgCAQhV15ro7WlTIIM4J+LtZsBClLw40+3oMPF87Cb6PjOK3UIrScWc7vfoDia7XaDlnfkP0OyTflkVtXe+hbVld76FtWV3uC+7k3soaM+lnXqq93splvbeu+X2+tB8k3Jyt96QsU+tIXKfTF8R1uvaQB7zdicx1k3z3ST57AvqnQFzved4rcayjE/vvIhDOPr7kAIaR+LpRJheI=
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
@@ -65,13 +65,13 @@
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object name="door_exit" type="door" x="1728" y="192" width="32" height="32">
+  <object id="16" name="door_exit" type="door" x="1728" y="192" width="32" height="32">
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map2"/>
    </properties>
   </object>
-  <object name="commander-kavosic2" type="character-trigger" x="528" y="0" width="16" height="616">
+  <object id="17" name="commander-kavosic2" type="character-trigger" x="528" y="0" width="16" height="616">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="We need you down in the caves. Your job is fighting monsters, not old men!"/>
@@ -80,7 +80,7 @@
     <property name="y" value="504"/>
    </properties>
   </object>
-  <object name="commander-kavosic2" type="character-trigger" x="504" y="640" width="16" height="184">
+  <object id="18" name="commander-kavosic2" type="character-trigger" x="504" y="640" width="16" height="184">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too."/>
@@ -89,7 +89,7 @@
     <property name="y" value="728"/>
    </properties>
   </object>
-  <object name="commander-kavosic1" type="character-trigger" x="1120" y="600" width="16" height="272">
+  <object id="19" name="commander-kavosic1" type="character-trigger" x="1120" y="600" width="16" height="272">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="key" value="hide"/>
@@ -97,7 +97,7 @@
   </object>
  </objectgroup>
  <objectgroup name="platforms">
-  <object name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
+  <object id="20" name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[1824, 224],[1824, 776]]"/>
@@ -105,43 +105,43 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object name="player_spawn" type="spawn" x="192" y="288" width="32" height="32"/>
+  <object id="21" name="player_spawn" type="spawn" x="192" y="288" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables">
-  <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1088" y="448" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1856" y="768" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1376" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1408" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1440" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1472" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
+  <object id="22" name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
+  <object id="23" name="health-powerup-1" type="health-powerup" x="1088" y="448" width="16" height="16"/>
+  <object id="24" name="health-powerup-1" type="health-powerup" x="1856" y="768" width="16" height="16"/>
+  <object id="25" name="health-powerup-1" type="health-powerup" x="1376" y="224" width="16" height="16"/>
+  <object id="26" name="health-powerup-1" type="health-powerup" x="1408" y="224" width="16" height="16"/>
+  <object id="27" name="health-powerup-1" type="health-powerup" x="1440" y="224" width="16" height="16"/>
+  <object id="28" name="health-powerup-1" type="health-powerup" x="1472" y="224" width="16" height="16"/>
+  <object id="29" name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
+  <object id="30" name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="villagers">
-  <object name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
-  <object name="villager-9" type="villager" x="1040" y="832" width="24" height="24"/>
-  <object name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
-  <object name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
-  <object name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
-  <object name="villager-2" type="villager" x="1600" y="736" width="24" height="24"/>
-  <object name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
-  <object name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
-  <object name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
-  <object name="villager-10" type="villager" x="1064" y="832" width="24" height="24"/>
-  <object name="villager-11" type="villager" x="1088" y="832" width="24" height="24"/>
-  <object name="villager-12" type="villager" x="1112" y="832" width="24" height="24"/>
-  <object name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
-  <object name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
-  <object name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
-  <object name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
-  <object name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
-  <object name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
-  <object name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
-  <object name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
-  <object name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
+  <object id="31" name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
+  <object id="32" name="villager-9" type="villager" x="1040" y="832" width="24" height="24"/>
+  <object id="33" name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
+  <object id="34" name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
+  <object id="35" name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
+  <object id="36" name="villager-2" type="villager" x="1600" y="736" width="24" height="24"/>
+  <object id="37" name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
+  <object id="38" name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
+  <object id="39" name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
+  <object id="40" name="villager-10" type="villager" x="1064" y="832" width="24" height="24"/>
+  <object id="41" name="villager-11" type="villager" x="1088" y="832" width="24" height="24"/>
+  <object id="42" name="villager-12" type="villager" x="1112" y="832" width="24" height="24"/>
+  <object id="43" name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
+  <object id="44" name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
+  <object id="45" name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
+  <object id="46" name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
+  <object id="47" name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
+  <object id="48" name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
+  <object id="49" name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
+  <object id="50" name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
+  <object id="51" name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
  </objectgroup>
  <objectgroup name="characters">
-  <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
+  <object id="52" name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
 </map>
