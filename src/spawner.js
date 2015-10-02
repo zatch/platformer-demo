@@ -1,6 +1,7 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'enemy'
+], function (Phaser, Enemy) { 
     'use strict';
 
     // Shortcuts
@@ -12,15 +13,24 @@ define([
 
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, 'spawner');
-            
+        
         // Spawn settings
         this.maxSpawned = 1;
         this.spawnRate = 500; // Delay to spawn, in ms
+        this.isFresh = true;
         
-        // Internal counters
-        this.nextPossibleSpawnTime = 0;
-        this.spawnCount = 0;
-        this.lastSpawnCount = 0;
+        // Sprites spawned
+        this.sprites = game.add.group();
+        this.sprites.x = 0;
+        this.sprites.y = 0;
+        this.sprites.classType = Enemy;
+        this.sprites.createMultiple(this.maxSpawned, 'enemy', 1, true);
+        this.sprites.callAll('kill');
+        
+        // Spawn timer
+        this.onCooldown = false;
+        this.spawnTimer = game.time.create(false);
+        this.spawnTimer.start(); 
 
         // Signals
         this.events.onSpawn = new Phaser.Signal();
@@ -34,29 +44,39 @@ define([
     Spawner.prototype.constructor = Spawner;
 
     Spawner.prototype.update = function () {
-        
-        
-       // if (this.inCamera) {
+        if (this.inCamera) {
             // Attempt to spawn when the spawner is within the camera bounds.
-       //     this.spawn();
-            //console.log(this.width, this.height);
-            //console.log(game.width, game.height);
-           // console.log(this.width, this.height);
-       // }
-       // else {
-            // Reset spawn count when not within the camera.
-            //this.spawnCount = 0;
-       // }
+            this.spawn();
+        }
+        else {
+            this.isFresh = true;
+        }
 
         // Call up!
         Phaser.Sprite.prototype.update.call(this);
     };
 
+    function onCooldownComplete () {
+        // No action necessary?
+    }
+
     Spawner.prototype.spawn = function () {
-        if (game.time.now >= this.nextPossibleSpawnTime && this.spawnCount < this.maxSpawned) {
-            this.events.onSpawn.dispatch(this, 'enemy');
-            this.spawnCount++;
-            this.nextPossibleSpawnTime = game.time.now + this.spawnRate;
+        var sprite;
+        if (!this.spawnTimer.duration && this.isFresh) {
+            sprite = this.sprites.getFirstDead();
+            if (sprite) {
+                sprite.revive();
+                sprite.x = this.x;
+                sprite.y = this.y;
+                this.events.onSpawn.dispatch(this, sprite);
+                if (!this.sprites.getFirstDead()) {
+                    this.isFresh = false; // fresh out!
+                }
+                this.spawnTimer.add(this.spawnRate, onCooldownComplete, this);
+            }
+            else{
+                this.isFresh = false; // fresh out!
+            }
         }
     };
 

@@ -110,6 +110,16 @@ define([
         Phaser.Sprite.prototype.update.call(this);
     };
 
+    Enemy.prototype.revive = function () {
+        // Call up!
+        Phaser.Sprite.prototype.revive.call(this);
+        
+        this.body.checkCollision.up = true;
+        this.body.checkCollision.down = true;
+        this.body.checkCollision.left = true;
+        this.body.checkCollision.right = true;
+    };
+
     Enemy.prototype.canSee = function (target, line) {
         line.start.x = this.x;
         line.start.y = this.y;

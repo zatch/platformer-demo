@@ -83,14 +83,10 @@ define([
             player.y = spawnPoint.y;
 
             // Insert enemies
+            enemies = [];
             spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner);
             spawners.forEach(this.registerSpawnerEvents, this);
             game.add.existing(spawners);
-
-            // Insert enemies
-            enemies = ObjectLayerHelper.createObjectsByType(game, 'enemy', map, 'enemies', Enemy);
-            enemies.forEach(this.registerEnemyEvents, this);
-            game.add.existing(enemies);
 
             // Insert villagers
             villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
@@ -213,9 +209,6 @@ define([
             game.physics.arcade.collide(player.weapon.getCollidables(), collisionLayer, player.weapon.onHitTerrain);
 
             // Collide player + enemies.
-            game.physics.arcade.overlap(player, spawners, this.onPlayerCollidesSpawner);
-
-            // Collide player + enemies.
             game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
             
             // Check overlap of player + character triggers.
@@ -261,11 +254,13 @@ define([
         },
         
         registerSpawnerEvents: function (spawner) {
+            spawner.sprites.forEach(this.registerEnemyEvents, this);
             spawner.events.onSpawn.add(this.onSpawnerSpawn, this);
         },
         
         
         registerEnemyEvents: function (enemy) {
+            enemies.push(enemy);
             enemy.events.onDeath.add(this.onEnemyDeath, this);
             enemy.events.onDrop.add(this.onEnemyDrop, this);
         },
@@ -282,20 +277,8 @@ define([
             });
         },
         
-        onPlayerCollidesSpawner: function (player, spawner) {
-            spawner.spawn();
-        },
-        
-        onSpawnerSpawn: function(spawner, key) {
-            var sprite;
-            if (key === 'enemy') {
-                sprite = new Enemy(game, spawner.x + (spawner.width / 2), spawner.y + (spawner.height / 2));
-                spawner.maxSpawned = spawner.properties.maxSpawned || spawner.maxSpawned;
-                spawner.spawnRate = Number(spawner.properties.spawnRate) || spawner.spawnRate;
-                this.registerEnemyEvents(sprite);
-                enemies.add(sprite);
-            }
-            
+        onSpawnerSpawn: function(spawner, sprite) {
+            this.registerEnemyEvents(sprite);
         },
         
         onPlayerCollidesEnemy: function (player, enemy) {
