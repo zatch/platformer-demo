@@ -700,7 +700,22 @@
                  "visible":true,
                  "width":24,
                  "x":872,
-                 "y":688
+                 "y":696
+                }, 
+                {
+                 "height":24,
+                 "id":54,
+                 "name":"spawner-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":24,
+                 "x":1000,
+                 "y":696
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -709,7 +724,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":54,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "properties":
     {

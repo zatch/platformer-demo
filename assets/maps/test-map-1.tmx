@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" nextobjectid="54">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" nextobjectid="55">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -128,6 +128,7 @@
   <object id="52" name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawners">
-  <object id="53" name="spawner-1" type="spawner" x="872" y="688" width="24" height="24"/>
+  <object id="53" name="spawner-1" type="spawner" x="872" y="696" width="24" height="24"/>
+  <object id="54" name="spawner-1" type="spawner" x="1000" y="696" width="24" height="24"/>
  </objectgroup>
 </map>
