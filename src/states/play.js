@@ -3,6 +3,7 @@ define([
     'player',
     'spawner',
     'enemy',
+    'worm',
     'villager',
     'commander-kavosic',
     'platform',
@@ -12,7 +13,7 @@ define([
     'health-powerup',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Worm, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
@@ -43,6 +44,11 @@ define([
 
             // Make player accessible via game object.
             game.player = player;
+            
+            game.spriteClassTypes = {
+                "enemy": Enemy,
+                "worm": Worm
+            };
 
             // Create map.
             map = this.game.add.tilemap(map);
