@@ -19,7 +19,7 @@ define([
         this.inUse = false;
 
         // How often this weapon can be used (in ms)
-        this.useRate = 100;
+        this.useRate = 10;
 
         // Used to throttle use rate.
         this.useTimeout = 0;
@@ -121,26 +121,22 @@ define([
 
     function onAttackFinish () {
         this.inUse = false;
-
     }
 
     Sword.prototype.use = function (direction) {
         if(this.canUse()) {
             this.inUse = true;
             this.useTimeout = game.time.now;
-            var attackTween = game.add.tween(this);
             if(this.parent.facing === 'right') {
                 anim.play();
             } else {
                 anim.play();
             }
-            attackTween.onComplete.addOnce(onAttackFinish, this);
         }
     };
 
     Sword.prototype.canUse = function () {
-        if (!this.inUse && 
-            this.parent && 
+        if (this.parent && 
             game.time.now > this.useTimeout + this.useRate) {
             return true;
         } else {
