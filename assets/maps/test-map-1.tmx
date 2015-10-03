@@ -103,7 +103,6 @@
  </objectgroup>
  <objectgroup name="villagers">
   <object id="31" name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
-  <object id="32" name="villager-9" type="villager" x="1040" y="832" width="24" height="24"/>
   <object id="33" name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
   <object id="34" name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
   <object id="35" name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
@@ -111,16 +110,8 @@
   <object id="37" name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
   <object id="38" name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
   <object id="39" name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
-  <object id="40" name="villager-10" type="villager" x="1064" y="832" width="24" height="24"/>
-  <object id="41" name="villager-11" type="villager" x="1088" y="832" width="24" height="24"/>
-  <object id="42" name="villager-12" type="villager" x="1112" y="832" width="24" height="24"/>
-  <object id="43" name="villager-20" type="villager" x="832" y="472" width="24" height="24"/>
   <object id="44" name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
-  <object id="45" name="villager-21" type="villager" x="912" y="472" width="24" height="24"/>
   <object id="46" name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
-  <object id="47" name="villager-14" type="villager" x="640" y="504" width="24" height="24"/>
-  <object id="48" name="villager-13" type="villager" x="608" y="504" width="24" height="24"/>
-  <object id="49" name="villager-15" type="villager" x="672" y="504" width="24" height="24"/>
   <object id="50" name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
   <object id="51" name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
  </objectgroup>
@@ -128,7 +119,15 @@
   <object id="52" name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawners">
-  <object id="53" name="spawner-1" type="spawner" x="872" y="696" width="24" height="24"/>
-  <object id="54" name="spawner-1" type="spawner" x="1000" y="696" width="24" height="24"/>
+  <object id="53" name="spawner-1" type="spawner" x="872" y="696" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="54" name="spawner-1" type="spawner" x="1000" y="696" width="24" height="24">
+   <properties>
+    <property name="key" value="enemy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

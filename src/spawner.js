@@ -1,13 +1,18 @@
 define([
     'phaser',
-    'enemy'
-], function (Phaser, Enemy) { 
+    'enemy',
+    'worm'
+], function (Phaser, Enemy, Worm) { 
     'use strict';
 
     // Shortcuts
-    var game, self;
+    var game, self,
+    classTypes = {
+        "enemy": Enemy,
+        "worm": Worm
+    };
 
-    function Spawner (_game, x, y) {
+    function Spawner (_game, x, y, key, frame, properties) {
         game = _game;
         self = this;
 
@@ -23,8 +28,8 @@ define([
         this.sprites = game.add.group();
         this.sprites.x = 0;
         this.sprites.y = 0;
-        this.sprites.classType = Enemy;
-        this.sprites.createMultiple(this.maxSpawned, 'enemy', 1, true);
+        this.sprites.classType = classTypes[properties.key];
+        this.sprites.createMultiple(this.maxSpawned, properties.key, 1, true);
         this.sprites.callAll('kill');
         
         // Spawn timer
