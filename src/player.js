@@ -41,19 +41,15 @@ define([
         this.health = 20;
 
         // Equip weapons
-        this.weaponIndex = 0;
-        this.allWeapons = [
-            new ClawArm(game, 0, 0),
+        this.weapons = [
             new Sword(game, 0, 0),
-            new Bow(game, 4, 4)
+            new Bow(game, 4, 4),
+            new ClawArm(game, 0, 0)
         ];
 
-        for(var i=0; i<this.allWeapons.length; i++) {
-            this.addChild(this.allWeapons[i]);
-            this.allWeapons[i].kill();
+        for(var i=0; i<this.weapons.length; i++) {
+            this.addChild(this.weapons[i]);
         }
-
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
 
         // Invulnerability
         this.invulnerable = false;
@@ -84,36 +80,32 @@ define([
     
     // Update children.
     Player.prototype.update = function () {
-        if(this.weapon) this.weapon.update();
         if (this.facing === 'right') {
             this.scale.x = 1; //facing default direction
         }
         else {
             this.scale.x = -1; //flipped
         }
+
+        // Update weapons.
+        for(var w=0; w<this.weapons.length; w++) {
+            this.weapons[w].facing = this.facing;
+            this.weapons[w].update();
+        }
+
         Phaser.Sprite.prototype.update.call(this);
     };
 
-    Player.prototype.setWeapon = function (weapon) {
-        if(this.weapon) this.weapon.kill();
-        this.weapon = weapon;
-        this.weapon.revive();
+    Player.prototype.attackSword = function () {
+        this.weapons[0].use();
     };
 
-    Player.prototype.nextWeapon = function () {
-        this.weaponIndex += 1;
-        if(this.weaponIndex > this.allWeapons.length - 1) this.weaponIndex = 0;
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
+    Player.prototype.attackBow = function () {
+        this.weapons[1].use();
     };
-
-    Player.prototype.previousWeapon = function () {
-        this.weaponIndex -= 1;
-        if(this.weaponIndex < 0) this.weaponIndex = this.allWeapons.length - 1;
-        this.setWeapon(this.allWeapons[this.weaponIndex]);
-    };
-
-    Player.prototype.attack = function () {
-        if(this.weapon) this.weapon.use();
+    
+    Player.prototype.attackClaw = function () {
+        this.weapons[2].use();
     };
 
     Player.prototype.heal = function (amount, source) {
@@ -192,7 +184,7 @@ define([
             }
         }
         // Face normally and fall normally.
-        else if(!this.weapon.inUse) {
+        else {
             this.facing = 'left';
         }
         
