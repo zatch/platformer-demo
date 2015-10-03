@@ -192,7 +192,7 @@ define([
             var body = player.weapon.getCollidables();
             // if(body) game.debug.body(body);
             enemies.forEach(function (enemy) {
-                game.debug.geom(enemy.behavior.hunter.lineHunting);
+                if (enemy.behavior.hunter) game.debug.geom(enemy.behavior.hunter.lineHunting);
             });
         },
 

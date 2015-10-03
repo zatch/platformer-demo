@@ -1,8 +1,8 @@
 define([
     'phaser',
     'health-powerup',
-    'behaviors/hunter'
-], function (Phaser, HealthPowerup, Hunter) { 
+    'behaviors/pacer'
+], function (Phaser, HealthPowerup, Pacer) { 
     'use strict';
 
     // Shortcuts
@@ -13,8 +13,11 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'villager');
+        Phaser.Sprite.call(this, game, x, y, 'velma-worm');
         this.anchor.set(0.5);
+        
+        this.animations.add('walk', [0,1,2,3,4,5], 5);
+       // this.animations.add('attack', [4,5,6]);
 
         // Which way is the dude or dudette facing?
         this.facing = 'right';
@@ -27,7 +30,7 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 400;
+        this.body.maxVelocity.x = 500;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 800;
         this.body.drag.y = 0;
@@ -38,7 +41,7 @@ define([
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
-        this.moveAccel = 100;
+        this.moveAccel = 1200;
 
         // Number of times the player can be hit by an enemy.
         this.health = 3;
@@ -68,7 +71,7 @@ define([
         this.knockbackTimeout = 0;
 
         this.behavior = {
-            hunter: new Hunter(this, game.player)
+            pacer: new Pacer(this, game.player)
         };
         
         this.offCameraKillTimer = game.time.create(false);
@@ -99,7 +102,7 @@ define([
         this.stopMoving();
 
         // Apply behaviors.
-        this.behavior.hunter.update();
+        this.behavior.pacer.update();
 
         // Update direction
         if (this.facing === 'right') {
@@ -220,15 +223,14 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
 
         if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
-
-        // Face away from wall and slide down wall slowly.
+        
+        this.animations.play('walk');
+        
+        // Face away from wall.
         if(this.body.onWall() && this.body.blocked.left) {
             this.facing = 'right';
-            if (this.body.velocity.y > 0) {
-                this.body.velocity.y = 50;
-            }
         }
-        // Face normally and fall normally.
+        // Face normally.
         else {
             this.facing = 'left';
         }
@@ -237,7 +239,7 @@ define([
         if (this.body.acceleration.x > 0) {
             this.body.acceleration.x = 0;
         }
-        if (this.body.velocity.x <= 0) {
+        if (this.body.velocity.x <= 0 && this.animations.frame === 4) {
             this.body.acceleration.x = -this.moveAccel;
         }
     };
@@ -247,6 +249,8 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
 
         if(this.body.velocity.x >= this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
+        
+        this.animations.play('walk');
         
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
@@ -264,7 +268,7 @@ define([
         if (this.body.acceleration.x < 0) {
             this.body.acceleration.x = 0;
         }
-        if (this.body.velocity.x >= 0) {
+        if (this.body.velocity.x >= 0 && this.animations.frame === 4) {
             this.body.acceleration.x = this.moveAccel;
         }
     };
