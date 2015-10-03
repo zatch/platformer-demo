@@ -120,6 +120,10 @@ define([
         anim.stop(true);
     }
 
+    Sword.prototype.update = function () {
+        Phaser.Sprite.prototype.update.call(this);
+    };
+
     Sword.prototype.revive = function (health) {
         anim.stop(true);
         Weapon.prototype.revive.call(this);
