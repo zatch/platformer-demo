@@ -1,6 +1,6 @@
 { "frames": {
    "velma-worm 0.ase": {
-    "frame": { "x": 0, "y": 0, "w": 48, "h": 24 },
+    "frame": { "x": 1, "y": 1, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -8,7 +8,7 @@
     "duration": 100
    },
    "velma-worm 1.ase": {
-    "frame": { "x": 48, "y": 0, "w": 48, "h": 24 },
+    "frame": { "x": 52, "y": 1, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -16,7 +16,7 @@
     "duration": 100
    },
    "velma-worm 2.ase": {
-    "frame": { "x": 96, "y": 0, "w": 48, "h": 24 },
+    "frame": { "x": 103, "y": 1, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -24,7 +24,7 @@
     "duration": 100
    },
    "velma-worm 3.ase": {
-    "frame": { "x": 144, "y": 0, "w": 48, "h": 24 },
+    "frame": { "x": 154, "y": 1, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -32,7 +32,7 @@
     "duration": 100
    },
    "velma-worm 4.ase": {
-    "frame": { "x": 192, "y": 0, "w": 48, "h": 24 },
+    "frame": { "x": 205, "y": 1, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -40,7 +40,7 @@
     "duration": 100
    },
    "velma-worm 5.ase": {
-    "frame": { "x": 0, "y": 24, "w": 48, "h": 24 },
+    "frame": { "x": 1, "y": 28, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -48,7 +48,7 @@
     "duration": 100
    },
    "velma-worm 6.ase": {
-    "frame": { "x": 48, "y": 24, "w": 48, "h": 24 },
+    "frame": { "x": 52, "y": 28, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -56,7 +56,7 @@
     "duration": 100
    },
    "velma-worm 7.ase": {
-    "frame": { "x": 96, "y": 24, "w": 48, "h": 24 },
+    "frame": { "x": 103, "y": 28, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
@@ -64,7 +64,7 @@
     "duration": 100
    },
    "velma-worm 8.ase": {
-    "frame": { "x": 144, "y": 24, "w": 48, "h": 24 },
+    "frame": { "x": 154, "y": 28, "w": 50, "h": 26 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
