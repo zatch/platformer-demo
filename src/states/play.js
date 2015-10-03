@@ -7,15 +7,14 @@ define([
     'platform',
     'object-layer-helper',
     'health-display',
-    'karma-display',
     'health-powerup',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Enemy, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, karmaDisplay, collectables, level;
+    var game, moveKeys, pad1, player, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, collectables, level;
 
     return {
         // Intro
@@ -37,8 +36,6 @@ define([
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
             player.events.onHeal.add(this.onPlayerHeal);
-            player.events.onExalt.add(this.onPlayerExalt);
-            player.events.onCensure.add(this.onPlayerCensure);
 
             // Make player accessible via game object.
             game.player = player;
@@ -88,7 +85,6 @@ define([
 
             // Insert villagers
             villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
-            villagers.forEach(this.registerVillagerEvents, this);
             game.add.existing(villagers);
 
             map.createLayer('foreground-decoration');
@@ -125,23 +121,11 @@ define([
             game.add.existing(collectables);
             
             // HUD
-            
-            // Health Display
             healthDisplay = new HealthDisplay(game, 10, 10, 'health-bar-cap-left', 'health-bar-middle', 'health-bar-cap-right', 'health-bar-fill');
             game.add.existing(healthDisplay);
             healthDisplay.setMaxHealth(player.maxHealth);
             healthDisplay.updateDisplay(player.health);
-            
-            // Karma Display
-            karmaDisplay = new KarmaDisplay(game, 10, 10, 'karma-bar-cap-left', 'karma-bar-middle', 'karma-bar-cap-right', 'karma-bar-fill');
-            game.add.existing(karmaDisplay);
-            karmaDisplay.setMinKarma(player.minKarma);
-            karmaDisplay.setMaxKarma(player.maxKarma);
-            karmaDisplay.updateDisplay(player.karma);
 
-            
-            
-            
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
             moveKeys.up.onDown.add(function () {
@@ -275,18 +259,22 @@ define([
         },
         
         onEnemyDeath: function (enemy) {
-            player.exalt(1, enemy);
+            // Drop loot.
+            if (Math.random() >= 0.5) {
+                var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
+                collectables.add(healthPowerup);
+            }
         },
 
         onEnemyDrop: function (enemy, item) {
             collectables.add(item);
         },
         
-        onVillagerDeath: function (villager) {
-            player.censure(1, villager);
-        },
+        onVillagerDeath: function (villager) {},
 
         onPlayerDamage: function (totalHealth, amount) {
+            console.log('health: ', totalHealth);
+
             // Update HUD
             healthDisplay.updateDisplay(player.health);
 
@@ -298,20 +286,12 @@ define([
         },
 
         onPlayerHeal: function (totalHealth, amount) {
+            console.log('health: ', totalHealth);
+
             // Update HUD
             healthDisplay.updateDisplay(player.health);
         },
-
-        onPlayerExalt: function (totalKarma, amount) {
-            // Update HUD
-            karmaDisplay.updateDisplay(player.karma);
-        },
-
-        onPlayerCensure: function (totalKarma, amount) {
-            // Update HUD
-            karmaDisplay.updateDisplay(player.karma);
-        },
-        
+            
         onPlayerCollidesCollectable: function (player, collectable) {
             collectable.useOn(player);
             collectable.destroy();
