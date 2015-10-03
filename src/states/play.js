@@ -186,13 +186,15 @@ define([
 
         },
 
+        /*
         render: function () {
             var body = player.weapon.getCollidables();
-            // if(body) game.debug.body(body);
+            if(body) game.debug.body(body);
             enemies.forEach(function (enemy) {
                 game.debug.geom(enemy.behavior.hunter.lineHunting);
             });
         },
+        */
 
         update: function () {
             // Collide with platforms.
