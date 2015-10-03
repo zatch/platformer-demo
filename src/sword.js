@@ -115,23 +115,22 @@ define([
         return null;  
     };
 
-    Sword.prototype.update = function () {
-        Phaser.Sprite.prototype.update.call(this);
-    };
-
     function onAttackFinish () {
         this.inUse = false;
+        anim.stop(true);
     }
+
+    Sword.prototype.revive = function (health) {
+        anim.stop(true);
+        Weapon.prototype.revive.call(this);
+    };
 
     Sword.prototype.use = function (direction) {
         if(this.canUse()) {
             this.inUse = true;
             this.useTimeout = game.time.now;
-            if(this.parent.facing === 'right') {
-                anim.play();
-            } else {
-                anim.play();
-            }
+            anim.stop(true);
+            anim.play();
         }
     };
 
