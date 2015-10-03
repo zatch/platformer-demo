@@ -56,10 +56,11 @@ define([
             this.inUse = true;
             missile = this.missiles.getFirstDead();
             if(missile){
-                missile.revive();
+                missile.reset(this.parent.x, this.parent.y, 1);
             } else {
                 missile = this.missiles.create(this.x, this.y);
             }
+
             game.world.bringToTop(this.missiles);
             missile.x = this.parent.x;
             missile.y = this.parent.y;
@@ -77,9 +78,8 @@ define([
     };
 
     Bow.prototype.onHit = function (missile, victim) {
-        console.log('hit');
         missile.kill();
-        victim.damage(1, victim);
+        Weapon.prototype.onHit.call(this, 1, victim);
     };
 
     return Bow;

@@ -16,7 +16,7 @@ define([
 
         this.speed = 800;
         this.lifespan_default = 1000;
-        this.revive();
+        this.lifespan = this.lifespan_default;
 
         game.physics.enable(this);
         this.body.immovable = true;
@@ -27,9 +27,9 @@ define([
     Arrow.prototype = Object.create(Phaser.Sprite.prototype);
     Arrow.prototype.constructor = Arrow;
 
-    Arrow.prototype.revive = function (health) {
+    Arrow.prototype.reset = function (x, y, health) {
         this.lifespan = this.lifespan_default;
-        Phaser.Sprite.prototype.revive.call(this, health);
+        Phaser.Sprite.prototype.reset.call(this, health);
     };
 
     Arrow.prototype.fire = function (direction) {
