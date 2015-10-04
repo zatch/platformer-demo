@@ -278,13 +278,7 @@ define([
             player.damage(4, enemy);
         },
         
-        onEnemyDeath: function (enemy) {
-            // Drop loot.
-            if (Math.random() >= 0.5) {
-                var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
-                collectables.add(healthPowerup);
-            }
-        },
+        onEnemyDeath: function (enemy) {},
 
         onEnemyDrop: function (enemy, item) {
             collectables.add(item);
