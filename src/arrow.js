@@ -12,8 +12,6 @@ define([
         Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
         this.anchor.set(0.5);
 
-        this.debug = true;
-
         this.speed = 800;
         this.lifespan_default = 1000;
         this.lifespan = this.lifespan_default;
@@ -29,7 +27,7 @@ define([
 
     Arrow.prototype.reset = function (x, y, health) {
         this.lifespan = this.lifespan_default;
-        Phaser.Sprite.prototype.reset.call(this, health);
+        Phaser.Sprite.prototype.reset.call(this, x, y, health);
     };
 
     Arrow.prototype.fire = function (direction) {
