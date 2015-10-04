@@ -48,7 +48,7 @@ define([
 
     function onMissileKilled () {
         if(!this.missiles.getFirstAlive()) {
-            this.inUsed = false;
+            this.inUse = false;
         }
     }
 
