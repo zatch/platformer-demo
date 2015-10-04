@@ -12,8 +12,6 @@ define([
         Phaser.Sprite.call(this, game, x, y, 'arrow', 1);
         this.anchor.set(0.5);
 
-        this.debug = true;
-
         this.speed = 800;
         this.lifespan_default = 1000;
         this.lifespan = this.lifespan_default;
