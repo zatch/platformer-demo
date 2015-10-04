@@ -39,7 +39,7 @@
  </layer>
  <layer name="foreground-structure" width="60" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmFsKgzAQRfOVdXVpbkmFEi0F226s8xMI7aiRaJhc7oVDPhxwjkhes3fuIbScSfqfD4DiG7xb3jKuIc9vSL57Hrl11kPfsjrroW9ZnfUk83M3yJgy+v+6Vn2jU8hca1v33VprI0i+OXnSl75AoS99kUJfHN/+Zy85gO83tHsdZN+Xsp/8GPaN/+N4UT+1fHM9ru6nlm98z12ZT1JCJd+9PkrZOp9qnNmPdt5HJr3zOPrdCSG2+AI+kZZW
+   eJztmN0KgyAYhr8jr2uX1i2tIGwRbOvG8uQDV2Y6msuX94UHDxTy0fBPpP4MRuSRCELU1xp5vl25h6u//buvZ0R9x4P5G8Dml77bdgih7347hHjrc9O60qczn+1qjjrZyH47AvnG9loFyTclE32hQ1/s0Bc79MXJfXWWbMHPG6F3HWTfV+A8OV/YV//H7kf9KuWb6pF6j/02pXzVow+sJz62gG/s+2cRu5+GOBqXHNb3/Zx+1Ij/5pE77oSQa7EAH7NyMg==
   </data>
  </layer>
  <layer name="foreground-decoration" width="60" height="30">
@@ -124,7 +124,12 @@
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="1256" y="744" width="24" height="24">
+  <object name="spawner-1" type="spawner" x="496" y="560" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="664" y="728" width="24" height="24">
    <properties>
     <property name="key" value="enemy"/>
    </properties>

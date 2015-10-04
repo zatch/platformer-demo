@@ -3,6 +3,7 @@ define([
     'player',
     'spawner',
     'enemy',
+    'cthulbat',
     'worm',
     'villager',
     'commander-kavosic',
@@ -13,7 +14,7 @@ define([
     'health-powerup',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Worm, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, KarmaDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
@@ -46,8 +47,9 @@ define([
             game.player = player;
             
             game.spriteClassTypes = {
-                "enemy": Enemy,
-                "worm": Worm
+                'enemy': Enemy,
+                'cthulbat': Cthulbat,
+                'worm': Worm
             };
 
             // Create map.
