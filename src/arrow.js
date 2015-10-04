@@ -29,7 +29,7 @@ define([
 
     Arrow.prototype.reset = function (x, y, health) {
         this.lifespan = this.lifespan_default;
-        Phaser.Sprite.prototype.reset.call(this, health);
+        Phaser.Sprite.prototype.reset.call(this, x, y, health);
     };
 
     Arrow.prototype.fire = function (direction) {
