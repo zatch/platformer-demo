@@ -46,26 +46,33 @@ define([
         this.inUse = false;
     }
 
+    function onMissileKilled () {
+        if(!this.missiles.getFirstAlive()) {
+            this.inUsed = false;
+        }
+    }
+
     Bow.prototype.getCollidables = function () {
         return this.missiles;
     };
 
     Bow.prototype.use = function (direction) {
         var missile;
-        if(!this.inUse) {
+        if(this.canUse()) {
             this.inUse = true;
             missile = this.missiles.getFirstDead();
             if(missile){
                 missile.reset(this.parent.x, this.parent.y, 1);
             } else {
                 missile = this.missiles.create(this.x, this.y);
+                missile.events.onKilled.add(onMissileKilled, this);
             }
 
             game.world.bringToTop(this.missiles);
             missile.x = this.parent.x;
             missile.y = this.parent.y;
             missile.fire(this.parent.facing);
-            this.useTimer.add(this.useRate, onAttackFinish, this);
+            this.useTimeout = game.time.now;
         }
     };
 
