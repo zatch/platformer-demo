@@ -42,60 +42,74 @@ define([
     }
 
     function makeRightHitboxFrames (hitboxes) {
-        var frame0 = hitboxes.create(0,0,null);
-        frame0.body.setSize(64, 32, -16, -48);
 
-        var frame4 = hitboxes.create(0,0,null);
-        frame4.body.setSize(32, 64, 16, -48);
+        var box0 = hitboxes.create(0,0,null);
+        box0.body.setSize(32, 32, -16, -48);
 
-        var frame6 = hitboxes.create(0,0,null);
-        frame6.body.setSize(32, 96, 16, -48);
+        var box1 = hitboxes.create(0,0,null);
+        box1.body.setSize(32, 32, 0, -48);
 
-        var frame7 = hitboxes.create(0,0,null);
-        frame7.body.setSize(32, 64, 16, -32);
+        var box2 = hitboxes.create(0,0,null);
+        box2.body.setSize(32, 48, 16, -48);
 
-        var frame8 = hitboxes.create(0,0,null);
-        frame8.body.setSize(64, 32, -16, 16);
+        var box3 = hitboxes.create(0,0,null);
+        box3.body.setSize(32, 64, 16, -48);
+
+        var box4 = hitboxes.create(0,0,null);
+        box4.body.setSize(32, 64, 16, -32);
+
+        var box5 = hitboxes.create(0,0,null);
+        box5.body.setSize(32, 80, 16, -31);
+
+        var box6 = hitboxes.create(0,0,null);
+        box6.body.setSize(48, 32, 0, 16);
 
         // Remember: frame keys here are 0 indexed.
         return {
-            '0': frame0,
-            '1': frame0,
-            '2': frame4,
-            '3': frame6,
-            '4': frame6,
-            '5': frame6,
-            '6': frame8,
-            '7': frame8
+            '0': box0,
+            '1': box1,
+            '2': box2,
+            '3': box3,
+            '4': box4,
+            '5': box5,
+            '6': box6,
+            '7': null
         };
     }
 
     function makeLeftHitboxFrames (hitboxes) {
-        var frame0 = hitboxes.create(0,0,null);
-        frame0.body.setSize(64, 32, -48, -48);
 
-        var frame4 = hitboxes.create(0,0,null);
-        frame4.body.setSize(32, 64, -48, -48);
+        var box0 = hitboxes.create(0,0,null);
+        box0.body.setSize(32, 32, -16, -48);
 
-        var frame6 = hitboxes.create(0,0,null);
-        frame6.body.setSize(32, 96, -48, -48);
+        var box1 = hitboxes.create(0,0,null);
+        box1.body.setSize(32, 32, -32, -48);
 
-        var frame7 = hitboxes.create(0,0,null);
-        frame7.body.setSize(32, 64, -48, -32);
+        var box2 = hitboxes.create(0,0,null);
+        box2.body.setSize(32, 48, -48, -48);
 
-        var frame8 = hitboxes.create(0,0,null);
-        frame8.body.setSize(64, 32, -48, 16);
+        var box3 = hitboxes.create(0,0,null);
+        box3.body.setSize(32, 64, -48, -48);
+
+        var box4 = hitboxes.create(0,0,null);
+        box4.body.setSize(32, 64, -48, -32);
+
+        var box5 = hitboxes.create(0,0,null);
+        box5.body.setSize(32, 80, -48, -31);
+
+        var box6 = hitboxes.create(0,0,null);
+        box6.body.setSize(48, 32, -48, 16);
 
         // Remember: frame keys here are 0 indexed.
         return {
-            '0': frame0,
-            '1': frame0,
-            '2': frame4,
-            '3': frame6,
-            '4': frame6,
-            '5': frame6,
-            '6': frame8,
-            '7': frame8
+            '0': box0,
+            '1': box1,
+            '2': box2,
+            '3': box3,
+            '4': box4,
+            '5': box5,
+            '6': box6,
+            '7': null
         };
     }
 

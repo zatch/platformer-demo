@@ -245,9 +245,6 @@ define([
             game.physics.arcade.collide(collectables, collisionLayer);
 
             // Player movement controls
-            if(moveKeys.up.isDown) {
-                // player.jump();
-            }
             if(moveKeys.wasd.left.isDown ||
                pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
                pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
@@ -299,13 +296,7 @@ define([
             player.damage(4, enemy);
         },
         
-        onEnemyDeath: function (enemy) {
-            // Drop loot.
-            if (Math.random() >= 0.5) {
-                var healthPowerup = new HealthPowerup(game, enemy.x, enemy.y);
-                collectables.add(healthPowerup);
-            }
-        },
+        onEnemyDeath: function (enemy) {},
 
         onEnemyDrop: function (enemy, item) {
             collectables.add(item);
