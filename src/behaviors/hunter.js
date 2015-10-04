@@ -49,8 +49,6 @@ function (Phaser, StateMachine) {
 	
 	Hunter.prototype.update_hunting = function () {
 	
-		console.log('hunting');
-	
 		// Cache LoS result.
 		var canSee = this.parent.canSee(this.huntTarget, this.lineOfSight);
 	
@@ -91,8 +89,6 @@ function (Phaser, StateMachine) {
 	};
 	
 	Hunter.prototype.update_attacking = function () {
-		
-		console.log('attacking');
 	
 		// Cache LoS result.
 		var canSee = this.parent.canSee(this.huntTarget, this.lineOfSight);

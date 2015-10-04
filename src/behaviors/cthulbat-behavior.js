@@ -59,9 +59,6 @@ function (Phaser, StateMachine) {
 	};
 	
 	CthulbatBehavior.prototype.update_hunting = function () {
-	
-		console.log('hunting');
-		
 		// If I can see player
 		if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
 		// -- update lastSeenTarget x and y to match player's.
@@ -99,9 +96,6 @@ function (Phaser, StateMachine) {
 	};
 	
 	CthulbatBehavior.prototype.update_attacking = function () {
-		
-		console.log('attacking');
-	
 		// -- update lastSeenTarget x and y to match player's.
 		this.lastSeenTarget.x =	this.huntTarget.x;
 		this.lastSeenTarget.y =	this.huntTarget.y;
