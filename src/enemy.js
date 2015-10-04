@@ -33,15 +33,12 @@ define([
         this.body.drag.y = 0;
         
         // Initial health.
-        this.health = 2;
+        this.health = this.maxHealth = 2;
 
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 100;
-
-        // Number of times the player can be hit by an enemy.
-        this.health = 3;
 
         // Invulnerability
         this.invulnerable = false;
@@ -127,7 +124,7 @@ define([
 
     Enemy.prototype.revive = function () {
         // Call up!
-        Phaser.Sprite.prototype.revive.call(this);
+        Phaser.Sprite.prototype.revive.call(this, this.maxHealth);
         
         this.body.checkCollision.up = true;
         this.body.checkCollision.down = true;
