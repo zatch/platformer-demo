@@ -19,7 +19,7 @@ define([
         this.inUse = false;
 
         // How often this weapon can be used (in ms)
-        this.useRate = 100;
+        this.useRate = 10;
 
         // Used to throttle use rate.
         this.useTimeout = 0;
@@ -115,32 +115,31 @@ define([
         return null;  
     };
 
+    function onAttackFinish () {
+        this.inUse = false;
+        anim.stop(true);
+    }
+
     Sword.prototype.update = function () {
         Phaser.Sprite.prototype.update.call(this);
     };
 
-    function onAttackFinish () {
-        this.inUse = false;
-
-    }
+    Sword.prototype.revive = function (health) {
+        anim.stop(true);
+        Weapon.prototype.revive.call(this);
+    };
 
     Sword.prototype.use = function (direction) {
         if(this.canUse()) {
             this.inUse = true;
             this.useTimeout = game.time.now;
-            var attackTween = game.add.tween(this);
-            if(this.parent.facing === 'right') {
-                anim.play();
-            } else {
-                anim.play();
-            }
-            attackTween.onComplete.addOnce(onAttackFinish, this);
+            anim.stop(true);
+            anim.play();
         }
     };
 
     Sword.prototype.canUse = function () {
-        if (!this.inUse && 
-            this.parent && 
+        if (this.parent && 
             game.time.now > this.useTimeout + this.useRate) {
             return true;
         } else {

@@ -23,7 +23,7 @@ define([
             // Gamepad input setup
             game.input.gamepad.start();
             game.input.gamepad.pad1.onDownCallback = function (buttonCode, value) {
-                game.state.start('Play');
+                game.stateTransition.to('Play');
             };
         }
     };

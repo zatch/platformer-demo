@@ -13,7 +13,7 @@ define([
         game = _game;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'player-human');
+        Phaser.Sprite.call(this, game, x, y, 'player');
         this.anchor.set(0.5);
 
         // Which way is the player facing?
@@ -40,24 +40,16 @@ define([
         this.maxHealth = 20;
         this.health = 20;
 
-        // Number of times the player can be hit by an enemy.
-        this.maxKarma = 5;
-        this.minKarma = -5;
-        this.karma = 0;
-
         // Equip weapons
-        this.allWeapons = {
-            clawArm: new ClawArm(game, 0, 0),
-            sword: new Sword(game, 0, 0),
-            bow: new Bow(game, 4, 4)
-        };
-        for (var weaponKey in this.allWeapons) {
-            this.addChild(this.allWeapons[weaponKey]);
-            this.allWeapons[weaponKey].kill();
+        this.weapons = [
+            new Sword(game, 0, 0),
+            new Bow(game, 4, 4),
+            new ClawArm(game, 0, 0)
+        ];
+
+        for(var i=0; i<this.weapons.length; i++) {
+            this.addChild(this.weapons[i]);
         }
-        
-        this.currentForm = null;
-        this.morph('player-claw-arm');
 
         // Invulnerability
         this.invulnerable = false;
@@ -71,8 +63,6 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
-        this.events.onExalt = new Phaser.Signal();
-        this.events.onCensure = new Phaser.Signal();
 
     }
 
@@ -90,63 +80,32 @@ define([
     
     // Update children.
     Player.prototype.update = function () {
-        if(this.weapon) this.weapon.update();
         if (this.facing === 'right') {
             this.scale.x = 1; //facing default direction
         }
         else {
             this.scale.x = -1; //flipped
         }
+
+        // Update weapons.
+        for(var w=0; w<this.weapons.length; w++) {
+            this.weapons[w].facing = this.facing;
+            this.weapons[w].update();
+        }
+
         Phaser.Sprite.prototype.update.call(this);
     };
+
+    Player.prototype.attackSword = function () {
+        this.weapons[0].use();
+    };
+
+    Player.prototype.attackBow = function () {
+        this.weapons[1].use();
+    };
     
-    Player.prototype.morph = function(form) {
-        if (form !== this.currentForm) {
-            if (form === 'human') {
-                console.log("becoming human");
-                this.loadTexture('player-human');
-                
-                this.weaponIndex = 0;
-                this.equippedWeapons = [
-                    this.allWeapons.sword,
-                    this.allWeapons.bow
-                ];
-                this.setWeapon(this.equippedWeapons[this.weaponIndex]);
-            }
-            else if (form === 'player-claw-arm') {
-                console.log("becoming creature");
-                this.loadTexture('player-claw-arm');
-                
-                this.weaponIndex = 0;
-                this.equippedWeapons = [
-                    this.allWeapons.clawArm,
-                    this.allWeapons.sword
-                ];
-                this.setWeapon(this.equippedWeapons[this.weaponIndex]);
-            }
-        }
-    };
-
-    Player.prototype.setWeapon = function (weapon) {
-        if(this.weapon) this.weapon.kill();
-        this.weapon = weapon;
-        this.weapon.revive();
-    };
-
-    Player.prototype.nextWeapon = function () {
-        this.weaponIndex += 1;
-        if(this.weaponIndex > this.equippedWeapons.length - 1) this.weaponIndex = 0;
-        this.setWeapon(this.equippedWeapons[this.weaponIndex]);
-    };
-
-    Player.prototype.previousWeapon = function () {
-        this.weaponIndex -= 1;
-        if(this.weaponIndex < 0) this.weaponIndex = this.equippedWeapons.length - 1;
-        this.setWeapon(this.equippedWeapons[this.weaponIndex]);
-    };
-
-    Player.prototype.attack = function () {
-        if(this.weapon) this.weapon.use();
+    Player.prototype.attackClaw = function () {
+        this.weapons[2].use();
     };
 
     Player.prototype.heal = function (amount, source) {
@@ -190,28 +149,6 @@ define([
 
     };
     
-    Player.prototype.exalt = function (amount, source) {
-        if (this.karma < this.maxKarma) {
-            this.karma += amount;
-            if (this.karma >= this.maxKarma) {
-                this.karma = this.maxKarma;
-                this.morph('human');
-            }
-        }
-        this.events.onExalt.dispatch(this.karma, amount);
-    };
-    
-    Player.prototype.censure = function (amount, source) {
-        if (this.karma > this.minKarma) {
-            this.karma -= amount;
-            if (this.karma <= this.minKarma) {
-                this.karma = this.minKarma;
-                this.morph('player-claw-arm');
-            }
-        }
-        this.events.onCensure.dispatch(this.karma, amount);
-    };
-    
     Player.prototype.jump = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
@@ -247,7 +184,7 @@ define([
             }
         }
         // Face normally and fall normally.
-        else if(!this.weapon.inUse) {
+        else {
             this.facing = 'left';
         }
         
