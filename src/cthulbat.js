@@ -1,14 +1,18 @@
 define([
     'phaser',
     'health-powerup',
-    'behaviors/cthulbat-behavior'
-], function (Phaser, HealthPowerup, CthulbatBehavior) { 
+    'utilities/state-machine'
+], function (Phaser, HealthPowerup, StateMachine) { 
     'use strict';
 
     // Shortcuts
     var game, self, sightLine;
 
     function Cthulbat (_game, x, y) {
+        // DEBUG
+        window.bat = this;
+        window.game = _game;
+
         game = _game;
         self = this;
 
@@ -30,22 +34,22 @@ define([
         
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
-        
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 500;
-        this.body.maxVelocity.y = 500;
-        this.body.drag.x = 10000;
-        this.body.drag.y = 10000;
-        
-        // Initial health.
-        this.health = this.maxHealth = 2;
+        this.body.maxVelocity.x = 150;
+        this.body.maxVelocity.y = 150;
+        this.body.drag.x = 500;
+        this.body.drag.y = 500;
+
+        // The acceleration that is applied when moving.
+        this.moveAccel = 500;
 
         // Initial jump speed
         this.jumpSpeed = 500;
-        // The horizontal acceleration that is applied when moving.
-        this.moveAccel = 100;
+     
+        // Initial health.
+        this.health = this.maxHealth = 2;
 
         // Invulnerability
         this.invulnerable = false;
@@ -62,16 +66,36 @@ define([
         this.events.onDrop = new Phaser.Signal();
 
         // AI
-        this.bearing = new Phaser.Point();
-        this.distanceToPlayer = new Phaser.Point();
+        this.distanceToTarget = new Phaser.Point();
+        this.swoopTween = null;
+        this.huntTarget = game.player;
 
-        this.knockback = new Phaser.Point();
-        this.knockbackTimeout = 0;
-
-        this.behavior = {
-            cthulbat: new CthulbatBehavior(this, game.player)
-        };
+        // AI Config
+        this.distanceToHunting = 300;
+        this.distanceToAttacking = 128;
         
+        // State machine for managing behavior states.
+        StateMachine.extend(this);
+        this.stateMachine.states = {
+            'idle': {
+                'update': this.update_idle
+            },
+            'hunting': {
+                'update': this.update_hunting
+            },
+            'attacking': { 
+                'update': this.update_attacking
+            },
+            'swoop': { 
+                'update': this.update_swooping
+            }
+        };
+
+        // Spawn in idle state.
+        this.stateMachine.setState('idle');
+        
+        // Assets for killing enemy when it goes off screen for a given period
+        // of time.
         this.offCameraKillTimer = game.time.create(false);
         this.offCameraKillTimer.start(); 
         
@@ -93,14 +117,17 @@ define([
     Cthulbat.prototype.constructor = Cthulbat;
 
     Cthulbat.prototype.update = function () {
-
-        Phaser.Point.subtract(game.player.position, this.position, this.distanceToPlayer);
-
-        // Don't continue to accelerate unless force is applied.
+        
+        // Calculate distance between enemy and player.
+        Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
+        
+        // Don't move unless acceleration is actively applied.
         this.stopMoving();
 
         // Apply behaviors.
-        this.behavior.cthulbat.update();
+        if(this.alive && !this.dying) {
+            this.stateMachine.handle('update');
+        }
 
         // Update direction
         if (this.facing === 'right') {
@@ -124,6 +151,97 @@ define([
             }
         }
     };
+    
+    Cthulbat.prototype.update_idle = function () {
+
+        // If distance to player is <400, continue.
+        Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
+        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
+            this.stateMachine.setState('hunting');
+        }
+    };
+
+    
+    Cthulbat.prototype.update_hunting = function () {
+
+        // If enemy is close enough to the player to hunt them...
+        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
+
+        // -- If player is within attack range, switch to "attack" state.
+            if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
+                this.stateMachine.setState('attacking');
+            }
+    
+            // otherwise, move toward the player.
+            else if(this.distanceToTarget.getMagnitude() > this.huntTarget.width / 2) {
+                // Move to the enemy or where the player was last seen.
+                if(this.distanceToTarget.x > 8) {
+                    this.moveRight();
+                } 
+        
+                else if(this.distanceToTarget.x < -8) {
+                    this.moveLeft();
+                } 
+            }
+        }
+    
+        // Give up if the player isn't where we last saw them or they're too far away.
+        else {
+            this.stateMachine.setState('idle');
+        }
+    };
+
+    Cthulbat.prototype.update_attacking = function () {
+        
+        // Swoop!
+        this.body.moves = false;
+        
+        if(!this.swoopTween) {
+            this.swoopTween = this.game.add.tween(this);
+            this.swoopTween.to({
+                //x: this.huntTarget.x,
+                //y: this.huntTarget.y
+                x: [this.x, this.huntTarget.x, this.huntTarget.x, this.x+(this.scale.x*200)],
+                y: [this.y, this.huntTarget.y+20, this.huntTarget.y+20, this.y-20]
+            }, 1000, Phaser.Easing.Quadratic.Out, true)
+            .interpolation(Phaser.Math.bezierInterpolation)
+            .onComplete.add(this.onSwoopComplete, this);
+        }
+        this.stateMachine.setState('swoop');
+    };
+    
+    Cthulbat.prototype.onSwoopComplete = function () {
+        this.stopSwoop();
+    };
+
+    Cthulbat.prototype.update_swooping = function () {
+        // If enemy dies while swooping, abort the swoop.
+        if(this.dying && this.swoopTween && this.swoopTween.isRunning)  {
+             this.stopSwoop();
+        }
+        if(this.invulnerable) this.stopSwoop();
+    };
+
+    Cthulbat.prototype.shouldAttack = function () {
+        // If the player is visible and within attack range.
+        if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) return true;
+    
+        // ...else don't attack.
+        return false;
+    };
+
+    Cthulbat.prototype.stopSwoop = function () {
+        // If swoop is in progress, cancel it.
+        if(this.swoopTween) {        
+            this.swoopTween.stop();
+            this.swoopTween = null;
+            this.body.moves = true;
+            this.stopMoving();
+            this.body.velocity.set(0);
+            this.stateMachine.setState('idle');
+        }
+    };
+    
 
     Cthulbat.prototype.revive = function () {
         // Call up!
@@ -132,20 +250,13 @@ define([
         // Zero out all movement.
         this.body.acceleration.set(0);
         this.body.velocity.set(0);
+
+        // Reset physics settings for this body.
+        this.body.drag.set(500);
+        this.body.maxVelocity.set(150);
         
         // Restore flight.
         this.body.allowGravity = false;
-    };
-
-    Cthulbat.prototype.canSee = function (target, line) {
-        line.start.x = this.x;
-        line.start.y = this.y;
-        line.end.x = target.x;
-        line.end.y = target.y;
-        var tiles = game.collisionLayer.getRayCastTiles(line, null, true);
-
-        if(tiles.length) return false;
-        return true;
     };
 
     Cthulbat.prototype.damage = function (amount, source) {
@@ -180,17 +291,9 @@ define([
         // Temporarily disable input after knockback.
         this.knockbackTimeout = game.time.now + 500;
         
-        if (this.health === 0) {
+        if (this.health <= 0) {
             this.handleDeath();
         }
-    };
-    
-    Cthulbat.prototype.attack = function () {
-        // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
-        
-        this.body.acceleration.set(0);
-        game.physics.arcade.accelerateToObject(this, game.player, 500);
     };
 
     Cthulbat.prototype.moveLeft = function () {
@@ -198,7 +301,7 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
 
         this.body.acceleration.set(0);
-        game.physics.arcade.accelerateToObject(this, game.player, 100);
+        game.physics.arcade.accelerateToObject(this, game.player, this.moveAccel, this.body.maxVelocity.x, this.body.maxVelocity.y);
         this.facing = 'left';
     };
 
@@ -207,7 +310,7 @@ define([
         if(this.knockbackTimeout > game.time.now) return;
         
         this.body.acceleration.set(0);
-        game.physics.arcade.accelerateToObject(this, game.player, 100);
+        game.physics.arcade.accelerateToObject(this, game.player, this.moveAccel, this.body.maxVelocity.x, this.body.maxVelocity.y);
         this.facing = 'right';
     };
 
@@ -223,9 +326,24 @@ define([
             var healthPowerup = new HealthPowerup(game, this.x, this.y);
             this.events.onDrop.dispatch(this, healthPowerup);
         }
+
+        // If in the process of swooping, stop it.
+        this.stopSwoop();
+
+        // Enemy is now in the process of dying.
+        this.dying = true;
+
+        this.body.drag.y = 0;
+        this.body.maxVelocity.y = 500;
         
         // Stop trying to fly.
         this.body.allowGravity = true;
+
+    };
+
+    Cthulbat.prototype.kill = function () {
+        this.dying = false;
+        Phaser.Sprite.prototype.kill.apply(this, arguments);
     };
 
     return Cthulbat;
