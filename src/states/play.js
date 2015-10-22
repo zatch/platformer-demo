@@ -144,9 +144,9 @@ define([
                 left: game.input.keyboard.addKey(Phaser.Keyboard.A),
                 right: game.input.keyboard.addKey(Phaser.Keyboard.D)
             };
-            moveKeys.wasd.up.onDown.add(function () {
+            /*moveKeys.wasd.up.onDown.add(function () {
                 player.jump();
-            });
+            });*/
 
             game.input.keyboard.addKey(Phaser.Keyboard.COMMA).onDown.add(function () {
                 player.attackSword();
@@ -171,7 +171,7 @@ define([
             pad1.onDownCallback = function (buttonCode, value) {
                 switch (buttonCode) {
                     case Phaser.Gamepad.XBOX360_A:
-                        player.jump();
+                        // player.jump();
                         break;
                     case Phaser.Gamepad.XBOX360_B:
                         player.attackSword();
@@ -243,6 +243,8 @@ define([
             game.physics.arcade.collide(enemies, collisionLayer);
             game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
+
+            if(moveKeys.wasd.up.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_A)) player.jump();
 
             // Player movement controls
             if(moveKeys.wasd.left.isDown ||

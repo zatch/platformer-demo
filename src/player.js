@@ -31,8 +31,10 @@ define([
         this.body.drag.x = 1500;
         this.body.drag.y = 0;
         
+        // Is player currently jumping?
+        this.isJumping = false;
         // Initial jump speed
-        this.jumpSpeed = 500;
+        this.jumpSpeed = 350;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 800;
 
@@ -150,25 +152,43 @@ define([
     };
     
     Player.prototype.jump = function () {
+        var jumpDuration = 250;
+
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
         
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
-            this.body.velocity.y = -this.jumpSpeed;
+            this.isJumping = true;
+            this.jumpTimer = game.time.now + jumpDuration;
+            // this.body.velocity.y = -this.jumpSpeed;
         }
 
         // Wall jumping.
         else if(this.body.onWall() && this.body.blocked.left) {
-            this.body.velocity.y = -this.jumpSpeed;
+            // this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = this.maxMoveSpeed.x;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.isJumping = true;
+            this.jumpTimer = game.time.now + jumpDuration;
         }
 
         else if(this.body.onWall() && this.body.blocked.right) {
-            this.body.velocity.y = -this.jumpSpeed;
+            // this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = -this.maxMoveSpeed.x;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
+            this.isJumping = true;
+            this.jumpTimer = game.time.now + jumpDuration;
         }
+
+        if(game.time.now > this.jumpTimer) {
+            this.isJumping = false;
+        }
+        if(this.isJumping) {
+            this.body.velocity.y = -this.jumpSpeed;
+        }
+
     };
+
+    
 
     Player.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.
