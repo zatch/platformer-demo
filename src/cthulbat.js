@@ -88,6 +88,9 @@ define([
             },
             'swoop': { 
                 'update': this.update_swooping
+            },
+            'retreat': {
+                'update': this.update_retreat
             }
         };
 
@@ -125,7 +128,7 @@ define([
         this.stopMoving();
 
         // Apply behaviors.
-        if(this.alive && !this.dying) {
+        if(this.alive && !this.dying && !this.invulnerable) {
             this.stateMachine.handle('update');
         }
 
@@ -156,7 +159,7 @@ define([
 
         // If distance to player is <400, continue.
         Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
-        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
+        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting && !this.invulnerable) {
             this.stateMachine.setState('hunting');
         }
     };
@@ -199,7 +202,7 @@ define([
         if(!this.swoopTween) {
             this.swoopTween = this.game.add.tween(this);
             this.swoopTween.to({
-                //x: this.huntTarget.x,
+                //x: this.huntTarget.x + (this.scale.x*(this.distanceToAttacking/2)),
                 //y: this.huntTarget.y
                 x: [this.x, this.huntTarget.x, this.huntTarget.x, this.x+(this.scale.x*200)],
                 y: [this.y, this.huntTarget.y+20, this.huntTarget.y+20, this.y-20]
@@ -212,6 +215,7 @@ define([
     
     Cthulbat.prototype.onSwoopComplete = function () {
         this.stopSwoop();
+        this.stateMachine.setState('retreat');
     };
 
     Cthulbat.prototype.update_swooping = function () {
@@ -219,7 +223,31 @@ define([
         if(this.dying && this.swoopTween && this.swoopTween.isRunning)  {
              this.stopSwoop();
         }
-        if(this.invulnerable) this.stopSwoop();
+        if(this.invulnerable) {
+            this.stopSwoop();
+            this.stateMachine.setState('idle');
+        }
+    };
+
+    Cthulbat.prototype.update_retreat = function() {
+        if(this.invulnerable) this.stateMachine.setState('idle');
+        Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
+        if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
+            // Move to the enemy or where the player was last seen.
+            if(this.distanceToTarget.x > 8) {
+                this.moveRight();
+                Phaser.Point.negative(this.body.acceleration, this.body.acceleration);
+                if(this.body.acceleration.y > 0) this.body.acceleration.y *= -1;
+            } 
+    
+            else if(this.distanceToTarget.x < -8) {
+                this.moveLeft();
+                Phaser.Point.negative(this.body.acceleration, this.body.acceleration);
+                if(this.body.acceleration.y > 0) this.body.acceleration.y *= -1;
+            }
+        } else {
+            this.stateMachine.setState('idle');
+        }
     };
 
     Cthulbat.prototype.shouldAttack = function () {
@@ -263,6 +291,8 @@ define([
 
         // Can currently take damage?
         if(this.invulnerable) return;
+
+        this.stopSwoop();
 
         amount = Math.abs(amount || 1);
         this.health -= amount;
@@ -333,6 +363,7 @@ define([
         // Enemy is now in the process of dying.
         this.dying = true;
 
+        // Modify drag and max velocity to allow enemy to fall while dying.
         this.body.drag.y = 0;
         this.body.maxVelocity.y = 500;
         
