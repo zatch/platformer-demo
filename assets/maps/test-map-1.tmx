@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="30" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -27,28 +27,28 @@
  <tileset firstgid="1737" name="moon" tilewidth="32" tileheight="32">
   <image source="../tilesets/moon.png" width="64" height="64"/>
  </tileset>
- <layer name="backdrop" width="60" height="30">
+ <layer name="backdrop" width="120" height="30" visible="0">
   <data encoding="base64" compression="zlib">
-   eJzt07EOgCAMBFAm//+DGP0wFycSQhu5u2I73KAheo9Cv1rrlaNzvxnfqXshrbOo+zGt5T075dV7FT2iWdF9snrZZu/9sqz3JpoXGfZ5VpvL+2+vwpzNqzYrvMp9UBuZZmbfCOf5tPmovVHmxvSqOpcX72Xuh+Xbqx5fDKtn9Fx3WHZ6UfON5B377bhbnv9l8qLMUb3W/g/LF2pc
+   eJzt1jEOwCAMQ1Gm3v9AjD1YdxaoRLBJ/uCBSoWQB1X701ovlLdY1P2ONByf4Xt/1P10i9oDW3zxxRdffCvGxeDEmhXPgINtdC341vCtGCffsR51bzLEzTd6r+oaMvuq+6teH1988SX4EpUvxvl9ca/pG21c8Qyd8nG4p/h63z98z/qO76v3gu9+X1W9+OKL7z3/witzz+rAd91sNo6qczZ2/OZk9I26v/jqfMd5d9TxZz188/qu7kXdb3y5vzvzAcJG9vc=
   </data>
  </layer>
- <layer name="background-decoration" width="60" height="30">
+ <layer name="background-decoration" width="120" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlksOwiAQhsdF3asnUE+g3t926yPxCF7FYUFCJjwGCmWKfAmptFOYn3lUAPnct3XWn8j9kemHaafWoOvE+FAK5SNXj7Y3f3M0mcTa18YVD31fXX02ks4nJV6KUE6m5myoJnYDwB7HYeCtF8plutcD50+LfUw9+IjpG58NwBF1nnCcmXpD0P1eOH8vWH9Uvzn/ot4L6rziuHn0jkad+cjdN12xWro/z9mb2se+b6vNEv3JVxf0GTcfOGunUKo/u3RyWct3VetKiUvN2pPG2s5Cx9vM01B/kZzTpXyTqtmWb/T/JK1p+k7uXlyCkI+uc2gBX+6trd+kIrX+cvEvceTSQrxtGlrpSXNo9QxculrI5U6n0+nI4geePUfB
+   eJzt2EsOgjAQxvG6wL16AvUE6v3FrY/EI3gVy4KEjH1M66NQ/7+EaLAQ0s+ZNhgzfsd56Seoi28+T+J8q5z34bjuHvI+Kc+Az+gy0ebXjx9+12Q4lDoev+Wrt/589xkaw/+hnJx67MR6bG4P1vZ4uMV6s3ZuU/p7SO66jzyl51fmTS3HtYN1MuTT+1rff4X98++kzrUcn3q9qx6pUbdFY8zSHqsmPjbUd+Vv2nrX3DsHeRtznxmztrlu7LFV5Oviy1WLHL7nYfPd2Vz39jgk5tvnmFN3rJ3TdbbZXd7Ij+zH7WrzuYn3C7H9ED16PL6VBRmPg6t/yveTck2W15R+/4FXsUx8uWN6Qr2U/VGdWD/rQp3+N+p5elyZsYf6P2ReB1+O9GYAAAAANXoCEt1G/A==
   </data>
  </layer>
- <layer name="foreground-structure" width="60" height="30">
+ <layer name="foreground-structure" width="120" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmN0KgyAYhr8jr2uX1i2tIGwRbOvG8uQDV2Y6msuX94UHDxTy0fBPpP4MRuSRCELU1xp5vl25h6u//buvZ0R9x4P5G8Dml77bdgih7347hHjrc9O60qczn+1qjjrZyH47AvnG9loFyTclE32hQ1/s0Bc79MXJfXWWbMHPG6F3HWTfV+A8OV/YV//H7kf9KuWb6pF6j/02pXzVow+sJz62gG/s+2cRu5+GOBqXHNb3/Zx+1Ij/5pE77oSQa7EAH7NyMg==
+   eJztmlsOgjAQRfvFut2SmhjwkfjYmBJtUpNSbqUj5XJPMv/THmYYSp1bPl3j3BGM+0ri/FkvA95v27hras0PkvUidIR+TyTrKYH8ciO/tmxfuezA2BvkLb+23IL3/tjMZ5G3/P6PsfleftME8/Mm1fuGeqZFf4zlNxQHgzwY/Ho/LVgbQ/tsXfdory6ZB4Nf5Du/Br8hqVqW33wuC/Lr+3SJWVt+v/fV+h3sCXs1Ol/nPgPhO4sdxO/cs3fO+XlusIP6tZhhUeT3d1C/c9bx1J4tv29q9RujVE2zI7/cLNXvzcDv0Ky9FGLnj8j5Ro1+e0rUMBOx/ZBfHmJzaHgnR37nxfdXq29Q+bUB9Wb9H1d+bfMcOzttjfd4jX7RO0JTIvV/NhboGXru3aY1+mWP8E4H8pzV5LdHjsuG/HKH/HKH/HIHm98n7WCBXg==
   </data>
  </layer>
- <layer name="foreground-decoration" width="60" height="30">
+ <layer name="foreground-decoration" width="120" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2FEKgCAMgGGfvP+ptGP1EKM1LEVKHf0fBA0LQpybhQD4ssXrvY7xvRSPK5t5tzGwOrt/tO4lST2X4xkncgDO3K15yQ07Tr0F0GNUj9hT099Q6otb33vqHeit56Cfq5+xZWxWznn19zka0VfqtelpvnUdkfOlPWfqmlD7HzN6Hyt9T63GAQDWsQNw2ywS
+   eJzt2lEKgzAMAFC/ev9T1R1rH6MsC87qJp3M90CwVEFEY5M4TQDncSuv+3EMfKeWxzan9yqPARgnr3e2rn1qOG4uz3EV0wF+5l0Mb7E+z8t3AYB/Nqrm+ElOzX5LdeWt563VKtSm4Xjqg9fT66m3Od9M1ngmrkWd8ngx1rqf5xXzmtZfzX3WmKP0/q8Zve5aup5ezgUAABDdAROVLBI=
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object name="door_exit" type="door" x="1728" y="192" width="32" height="32">
+  <object name="door_exit" type="door" x="3616" y="320" width="32" height="32">
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map2"/>
@@ -86,9 +86,21 @@
     <property name="wayPoints" value="[[1824, 224],[1824, 776]]"/>
    </properties>
   </object>
+  <object name="platform-3" type="platform" x="2144" y="224" width="96" height="32">
+   <properties>
+    <property name="key" value="platform"/>
+    <property name="wayPoints" value="[[2144, 224],[2656, 128],[2656, 192],[2144,288]]"/>
+   </properties>
+  </object>
+  <object name="platform-2" type="platform" x="2656" y="128" width="96" height="32">
+   <properties>
+    <property name="key" value="platform"/>
+    <property name="wayPoints" value="[[2656, 128],[2656, 192],[2144,288], [2144, 224]]"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object name="player_spawn" type="spawn" x="192" y="288" width="32" height="32"/>
+  <object name="player_spawn" type="spawn" x="2016" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables">
   <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
@@ -101,22 +113,9 @@
   <object name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
   <object name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="villagers">
-  <object name="villager-1" type="villager" x="1568" y="736" width="24" height="24"/>
-  <object name="villager-6" type="villager" x="1568" y="352" width="24" height="24"/>
-  <object name="villager-5" type="villager" x="1536" y="352" width="24" height="24"/>
-  <object name="villager-4" type="villager" x="1664" y="736" width="24" height="24"/>
-  <object name="villager-2" type="villager" x="1600" y="736" width="24" height="24"/>
-  <object name="villager-3" type="villager" x="1632" y="736" width="24" height="24"/>
-  <object name="villager-7" type="villager" x="1600" y="352" width="24" height="24"/>
-  <object name="villager-8" type="villager" x="1632" y="352" width="24" height="24"/>
-  <object name="villager-19" type="villager" x="1424" y="176" width="24" height="24"/>
-  <object name="villager-16" type="villager" x="1680" y="544" width="24" height="24"/>
-  <object name="villager-17" type="villager" x="1712" y="544" width="24" height="24"/>
-  <object name="villager-18" type="villager" x="1744" y="544" width="24" height="24"/>
- </objectgroup>
+ <objectgroup name="villagers"/>
  <objectgroup name="characters">
-  <object name="commander-kavosic" type="commander-kavosic" x="88" y="728" width="32" height="32"/>
+  <object name="commander-kavosic" type="commander-kavosic" x="928" y="704" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawners">
   <object name="spawner-1" type="spawner" x="992" y="712" width="24" height="24">
@@ -124,14 +123,64 @@
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="496" y="560" width="24" height="24">
+  <object name="spawner-1" type="spawner" x="2464" y="320" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="664" y="728" width="24" height="24">
+  <object name="spawner-1" type="spawner" x="1312" y="736" width="24" height="24">
    <properties>
     <property name="key" value="enemy"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1664" y="64" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1760" y="512" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1920" y="32" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="2608" y="48" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="3264" y="192" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="3360" y="192" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="3200" y="288" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="3744" y="320" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="160" y="744" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="416" y="744" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
    </properties>
   </object>
  </objectgroup>
