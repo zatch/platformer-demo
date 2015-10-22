@@ -211,7 +211,10 @@ define([
 
         update: function () {
             // Collide with platforms.
-            game.physics.arcade.collide(player, platforms);
+            if(pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.5 || !pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
+                game.physics.arcade.collide(player, platforms);
+
+            }
 
             // Check weapon collisions.
             var currentWeapon;
