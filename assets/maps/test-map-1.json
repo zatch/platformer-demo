@@ -6,7 +6,7 @@
          "name":"backdrop",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":120,
          "x":0,
          "y":0
@@ -195,8 +195,8 @@
                  "type":"spawn",
                  "visible":true,
                  "width":32,
-                 "x":2016,
-                 "y":160
+                 "x":128,
+                 "y":528
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -559,7 +559,7 @@
                  "name":"spawner-1",
                  "properties":
                     {
-                     "key":"worm"
+                     "key":"dipteranura"
                     },
                  "rotation":0,
                  "type":"spawner",

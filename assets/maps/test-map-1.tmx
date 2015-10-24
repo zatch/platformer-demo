@@ -27,7 +27,7 @@
  <tileset firstgid="1737" name="moon" tilewidth="32" tileheight="32">
   <image source="../tilesets/moon.png" width="64" height="64"/>
  </tileset>
- <layer name="backdrop" width="120" height="30" visible="0">
+ <layer name="backdrop" width="120" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1jEOwCAMQ1Gm3v9AjD1YdxaoRLBJ/uCBSoWQB1X701ovlLdY1P2ONByf4Xt/1P10i9oDW3zxxRdffCvGxeDEmhXPgINtdC341vCtGCffsR51bzLEzTd6r+oaMvuq+6teH1988SX4EpUvxvl9ca/pG21c8Qyd8nG4p/h63z98z/qO76v3gu9+X1W9+OKL7z3/witzz+rAd91sNo6qczZ2/OZk9I26v/jqfMd5d9TxZz188/qu7kXdb3y5vzvzAcJG9vc=
   </data>
@@ -100,7 +100,7 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object name="player_spawn" type="spawn" x="2016" y="160" width="32" height="32"/>
+  <object name="player_spawn" type="spawn" x="128" y="528" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables">
   <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
@@ -180,7 +180,7 @@
   </object>
   <object name="spawner-1" type="spawner" x="416" y="744" width="24" height="24">
    <properties>
-    <property name="key" value="worm"/>
+    <property name="key" value="dipteranura"/>
    </properties>
   </object>
  </objectgroup>

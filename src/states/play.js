@@ -5,6 +5,8 @@ define([
     'enemy',
     'cthulbat',
     'worm',
+    'dipteranura',
+    'egg-sac',
     'villager',
     'commander-kavosic',
     'platform',
@@ -13,7 +15,7 @@ define([
     'health-powerup',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
@@ -46,7 +48,9 @@ define([
             game.spriteClassTypes = {
                 'enemy': Enemy,
                 'cthulbat': Cthulbat,
-                'worm': Worm
+                'worm': Worm,
+                'dipteranura': Dipteranura,
+                'egg-sac': EggSac
             };
 
             // Create map.
@@ -279,6 +283,7 @@ define([
             enemies.push(enemy);
             enemy.events.onDeath.add(this.onEnemyDeath, this);
             enemy.events.onDrop.add(this.onEnemyDrop, this);
+            if (enemy.events.onSpawnChild) enemy.events.onSpawnChild.add(this.onSpawnerSpawn, this);
         },
         
         registerVillagerEvents: function (villager) {
