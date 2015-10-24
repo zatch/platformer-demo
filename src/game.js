@@ -38,6 +38,9 @@ define([
                     }
                 }
             });
+
+            // Keep my pixels crisp and crunchy!
+            this.game.stage.smoothed = false;
         },
 
         preload: function() {
