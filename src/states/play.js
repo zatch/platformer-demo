@@ -21,6 +21,20 @@ define([
     // Shortcuts
     var game, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, collectables, level;
 
+    // Helper functions 
+
+    // Used to determine if the user is pressing the key combo  on the keyboard 
+    // to trigger falling through platforms.
+    function keyboardJumpAndDownPressed() {
+        return (moveKeys.wasd.down.isDown && moveKeys.wasd.up.isDown);
+    }
+
+    // Used to determine if the user isp ressing the button combo on the gamepad
+    // to trigger falling through platforms.
+    function gamepadJumpAndDownPressed() {
+        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.5 && pad1.isDown(Phaser.Gamepad.XBOX360_A));
+    }
+
     return {
         // Intro
         init: function (mapName) {
@@ -148,10 +162,14 @@ define([
                 left: game.input.keyboard.addKey(Phaser.Keyboard.A),
                 right: game.input.keyboard.addKey(Phaser.Keyboard.D)
             };
-            /*moveKeys.wasd.up.onDown.add(function () {
-                player.jump();
-            });*/
-
+            moveKeys.wasd.up.onDown.add(function () {
+                // As long as the player isn't intentionally attempting to fall
+                // through a platform, attempt to jump.
+                if(!keyboardJumpAndDownPressed()) player.jump();
+            });
+            moveKeys.wasd.up.onUp.add(function () {
+                player.endJump();
+            });
             game.input.keyboard.addKey(Phaser.Keyboard.COMMA).onDown.add(function () {
                 player.attackSword();
             });
@@ -161,7 +179,13 @@ define([
             game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK).onDown.add(function () {
                 player.attackClaw();
             });
-
+            game.input.keyboard.addKey(Phaser.Keyboard.F).onDown.add(function() {
+                if(game.scale.isFullScreen) {
+                    game.scale.stopFullScreen();
+                } else {
+                    game.scale.startFullScreen();
+                }
+            });
             game.input.keyboard.addKey(Phaser.Keyboard.SPACE).onDown.add(function () {
                 // Check to see if player has reached the exit door.
                 if(game.physics.arcade.overlap(player, exitDoor)) {
@@ -175,7 +199,16 @@ define([
             pad1.onDownCallback = function (buttonCode, value) {
                 switch (buttonCode) {
                     case Phaser.Gamepad.XBOX360_A:
-                        // player.jump();
+                        // HACK: Phaser has a bug where it doesn't update button
+                        // down/up state of a button object until after it has
+                        // fired the onDownCallback.  To get around this, we
+                        // manually update the button state here.  A bug report
+                        // has been filed here: https://github.com/photonstorm/phaser/issues/2159
+                        pad1.getButton(buttonCode).start(null, value);
+
+                        // As long as the player isn't intentionally attempting 
+                        // to fall through a platform, attempt to jump.
+                        if(!gamepadJumpAndDownPressed()) player.jump();
                         break;
                     case Phaser.Gamepad.XBOX360_B:
                         player.attackSword();
@@ -197,6 +230,15 @@ define([
                         break;
                 }
             };
+            pad1.onUpCallback = function (buttonCode, value) {
+                switch(buttonCode) {
+                    case Phaser.Gamepad.XBOX360_A:
+                        player.endJump();
+                        break;
+                    default:
+                        break;
+                }
+            };
             
             // Camera
             game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
@@ -214,10 +256,10 @@ define([
         */
 
         update: function () {
-            // Collide with platforms.
-            if(pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.5 || !pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
+            // Collide with platforms unless the user presses jump+down on the
+            // keyboard *or* the controller (but not both).
+            if(!keyboardJumpAndDownPressed() && !gamepadJumpAndDownPressed()) {
                 game.physics.arcade.collide(player, platforms);
-
             }
 
             // Check weapon collisions.
@@ -250,8 +292,6 @@ define([
             game.physics.arcade.collide(enemies, collisionLayer);
             game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
-
-            if(moveKeys.wasd.up.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_A)) player.jump();
 
             // Player movement controls
             if(moveKeys.wasd.left.isDown ||
