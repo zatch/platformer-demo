@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="30" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="30" tilewidth="32" tileheight="32" nextobjectid="63">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -27,34 +27,34 @@
  <tileset firstgid="1737" name="moon" tilewidth="32" tileheight="32">
   <image source="../tilesets/moon.png" width="64" height="64"/>
  </tileset>
- <layer name="backdrop" width="120" height="30" visible="0">
+ <layer name="backdrop" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1jEOwCAMQ1Gm3v9AjD1YdxaoRLBJ/uCBSoWQB1X701ovlLdY1P2ONByf4Xt/1P10i9oDW3zxxRdffCvGxeDEmhXPgINtdC341vCtGCffsR51bzLEzTd6r+oaMvuq+6teH1988SX4EpUvxvl9ca/pG21c8Qyd8nG4p/h63z98z/qO76v3gu9+X1W9+OKL7z3/witzz+rAd91sNo6qczZ2/OZk9I26v/jqfMd5d9TxZz188/qu7kXdb3y5vzvzAcJG9vc=
+   eJzt1zESgjAURVEr978gSxZm6zij6Dfkyc8pTgFFSDJzA9yul8ttIRs0ku7pyEaf7+mXbtKteb9CXbo37UJdujn9Ql26Of1CXbo5/UJdurmZXWucbtJt6Rfq0m3N7Be6SbelQahLdzmzX+cA3aS71C/Upbuc+e2sX7pJtzmzX+gm3aZ2oS7dp3ahLt2odqEu3enMbp0LdNO11VdrTe83jLRCt49rTe83jLRCt49rTc8BRjpbu7+Mp1+6OVO7249j6pduztbtu7H35qFfuqk2uXd91Dz3rv/9HxxGOqrfo7+b9Qtj+30ed8Q8vnmefllNl34/XUt6v2GkLv16/7KiO4bIC0M=
   </data>
  </layer>
- <layer name="background-decoration" width="120" height="30">
+ <layer name="background-decoration" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2EsOgjAQxvG6wL16AvUE6v3FrY/EI3gVy4KEjH1M66NQ/7+EaLAQ0s+ZNhgzfsd56Seoi28+T+J8q5z34bjuHvI+Kc+Az+gy0ebXjx9+12Q4lDoev+Wrt/589xkaw/+hnJx67MR6bG4P1vZ4uMV6s3ZuU/p7SO66jzyl51fmTS3HtYN1MuTT+1rff4X98++kzrUcn3q9qx6pUbdFY8zSHqsmPjbUd+Vv2nrX3DsHeRtznxmztrlu7LFV5Oviy1WLHL7nYfPd2Vz39jgk5tvnmFN3rJ3TdbbZXd7Ij+zH7WrzuYn3C7H9ED16PL6VBRmPg6t/yveTck2W15R+/4FXsUx8uWN6Qr2U/VGdWD/rQp3+N+p5elyZsYf6P2ReB1+O9GYAAAAANXoCEt1G/A==
+   eJzt2k1Og0AYBmBc1L16AvUE6v1tt/4kHsGrOCyakEmZH4QytM+TTEroQNi8fN9M6Lr2vd+u/QSwHWN5OUTn94W5Gs7r7xHfp+YZgLw+c6X5PM4fHpdkdKh2PjCfsXp5PN//pubIO1txt+u6+zAedms/SZkp9bSX64Gn9silPTjM7eem6x5Dbp/CeG40v7neuTQ7Nf13ytR1N8ztN+T3JeT2NYy3RvObs3Z+4jyrxVy7/WCdmjL3vvDYu8D+M8yjNkvx/NrrT9VTNRbSUn1x/F9pvS659xTyDHljuS0lZ3B+x5xOqZvWrtCmj5DNz3/kM5VtuYdlfYWMfUffT+T2m/TQcB5LZU2GYXmnetj4+8l4TRxfs/b3HXBtcpkbyzXQllSvW7PHNOWdAMzP+hW2Q22Ey1Vbj62VYVmnMlmau1S9ll1ohzxC+8Zyai8LAAAAAADgcv0BVJFLlw==
   </data>
  </layer>
- <layer name="foreground-structure" width="120" height="30">
+ <layer name="foreground-structure" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmlsOgjAQRfvFut2SmhjwkfjYmBJtUpNSbqUj5XJPMv/THmYYSp1bPl3j3BGM+0ri/FkvA95v27hras0PkvUidIR+TyTrKYH8ciO/tmxfuezA2BvkLb+23IL3/tjMZ5G3/P6PsfleftME8/Mm1fuGeqZFf4zlNxQHgzwY/Ho/LVgbQ/tsXfdory6ZB4Nf5Du/Br8hqVqW33wuC/Lr+3SJWVt+v/fV+h3sCXs1Ol/nPgPhO4sdxO/cs3fO+XlusIP6tZhhUeT3d1C/c9bx1J4tv29q9RujVE2zI7/cLNXvzcDv0Ky9FGLnj8j5Ro1+e0rUMBOx/ZBfHmJzaHgnR37nxfdXq29Q+bUB9Wb9H1d+bfMcOzttjfd4jX7RO0JTIvV/NhboGXru3aY1+mWP8E4H8pzV5LdHjsuG/HKH/HKH/HIHm98n7WCBXg==
+   eJztnG1u2zAMhvMr59rRfKVu2JJ2GNB06L1mAfNGCzQ/ZNGkYr4AgSJ2U4nmI1K03bfr5fLG2M/ZIutVMIfFPk5gP66Xd6k/0p7fRuH3PsctFde/g8+jlzTr2RltXt++nGnNHIXf6OM8Ssnv8fEc2efRuUh+13pc4+eEZ4vn5LddEfl9mcfyVWjfjMYdOaaeLZ4j+zoSF5gi8rvkwA9H/0aOKU+b6xJ2zXwRnDOCr8teP3rfJyK/UNy1TX7jxfTrX86lNdR87uQ9rxHZLQL954mqTbdqWqv6tR4f4WeTcXjzS/V5b8gx7rMe+3lpTHv7rofPI7FL7SfvxHxgbtu6JtZ5W1pL9x6HVx9riSEqfn4hx7DPPsFn0I+t85L6eBR+6zUyErNQj+p6Se7hlfMj8AtFxYXVOGrfWZtkHp/IORi/veclrXVG4TfqnhETXH+lNdBI/Er2W5Ia+ztyzlG5uDxD05oDMKY5tXLGXfPk119SfiX9yF6qa0BJf1rLOMW5RVzC596Ort+S32P87CEpv95+sIiVrTXJIg97+q51b5D8xpeGX6sesHScFteWqit67Yn31Mu91DKX5De+NPx6+mNvTb2H4ZZcrKmXsb14q+bvmraOaeeS/MbXKPxi6hk/3P5e+7c0PtL2lJnvmrhzpHNJfuMr+ZUx3Dt3QR3NL1bLwGdAboJ700XJr6/K8x73gfl9GFzrXnmY8lFdL1vxS9XSyO/9k/Qe1Sj8cvcjPPo5rYLPaC3Po47Kb9GRfekiLHchuYzsV9W8avmluIT8SnLxoiPvKzvwSz7H5N1b1AjzefKrY5gTx+Nefqkcu8WvJhdLNQq/keJ1r7D8Adef5HdtLQz34Lc1x24d0+RiqZJfvZb61/N99kj+sI6hlrnWPNbvyUr4pXjbw2/PPJz8/peUS+v3eJPf/vzWPX5Pfuvzte/gw9+L+D6vV7wuccj1yu7GY0p+9XPl+smR+dW+gx/5Xfwta5mf1qj3c63HBNff5Fc/V47H6Px685W2z+D/5JCsI5H4LbKMwRZ+63sxyW9aJEt+1+L6zclvWiRLftdKftNGsuR3reQ3bSQ7E7+SPuGNOV4/Y27M79bPE/a3zsDvHwR6jB0=
   </data>
  </layer>
- <layer name="foreground-decoration" width="120" height="30">
+ <layer name="foreground-decoration" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2lEKgzAMAFC/ev9T1R1rH6MsC87qJp3M90CwVEFEY5M4TQDncSuv+3EMfKeWxzan9yqPARgnr3e2rn1qOG4uz3EV0wF+5l0Mb7E+z8t3AYB/Nqrm+ElOzX5LdeWt563VKtSm4Xjqg9fT66m3Od9M1ngmrkWd8ngx1rqf5xXzmtZfzX3WmKP0/q8Zve5aup5ezgUAABDdAROVLBI=
+   eJzt28EOQDAMAFCn/f9XbT5LHBa1cGJMvHdSjcSpqdamCQDgujntr2MMAAAAAD3kMIMqaYuz2RTAMOwLAMZwVo/r/TavfgMAAF9kPwAAAOeKfhl+q/f3st0iAABvsh/iLv6jpGWeBoxu7YNqrarna9tztrGWtXF9LuafdPQ+OenvAAAAAODLjuZ+MQdAHwtcyR82
   </data>
  </layer>
  <objectgroup name="triggers">
-  <object name="door_exit" type="door" x="3616" y="320" width="32" height="32">
+  <object id="1" name="door_exit" type="door" x="6592" y="160" width="32" height="32">
    <properties>
     <property name="key" value=""/>
     <property name="mapLink" value="Map2"/>
    </properties>
   </object>
-  <object name="commander-kavosic2" type="character-trigger" x="528" y="0" width="16" height="616">
+  <object id="2" name="commander-kavosic2" type="character-trigger" x="528" y="0" width="16" height="616">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="We need you down in the caves. Your job is fighting monsters, not old men!"/>
@@ -63,7 +63,7 @@
     <property name="y" value="504"/>
    </properties>
   </object>
-  <object name="commander-kavosic2" type="character-trigger" x="504" y="640" width="16" height="184">
+  <object id="3" name="commander-kavosic2" type="character-trigger" x="504" y="640" width="16" height="184">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="currentPhrase" value="Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too."/>
@@ -72,7 +72,7 @@
     <property name="y" value="728"/>
    </properties>
   </object>
-  <object name="commander-kavosic1" type="character-trigger" x="1120" y="600" width="16" height="272">
+  <object id="4" name="commander-kavosic1" type="character-trigger" x="1120" y="600" width="16" height="272">
    <properties>
     <property name="characterTriggerTarget" value="commander-kavosic"/>
     <property name="key" value="hide"/>
@@ -80,107 +80,228 @@
   </object>
  </objectgroup>
  <objectgroup name="platforms">
-  <object name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
+  <object id="5" name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[1824, 224],[1824, 776]]"/>
    </properties>
   </object>
-  <object name="platform-3" type="platform" x="2144" y="224" width="96" height="32">
+  <object id="6" name="platform-3" type="platform" x="2144" y="224" width="96" height="32">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[2144, 224],[2656, 128],[2656, 192],[2144,288]]"/>
    </properties>
   </object>
-  <object name="platform-2" type="platform" x="2656" y="128" width="96" height="32">
+  <object id="7" name="platform-2" type="platform" x="2656" y="128" width="96" height="32">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[2656, 128],[2656, 192],[2144,288], [2144, 224]]"/>
    </properties>
   </object>
+  <object id="32" name="platform-4" type="platform" x="4896" y="448" width="96" height="32">
+   <properties>
+    <property name="key" value="platform"/>
+    <property name="wayPoints" value="[[4896,448],[5376,448]]"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object name="player_spawn" type="spawn" x="2016" y="160" width="32" height="32"/>
+  <object id="8" name="player_spawn" type="spawn" x="2944" y="64" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables">
-  <object name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1496" y="744" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1856" y="768" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1376" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1408" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1440" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1472" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
-  <object name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
+  <object id="9" name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
+  <object id="10" name="health-powerup-1" type="health-powerup" x="1496" y="744" width="16" height="16"/>
+  <object id="11" name="health-powerup-1" type="health-powerup" x="1856" y="768" width="16" height="16"/>
+  <object id="12" name="health-powerup-1" type="health-powerup" x="1376" y="224" width="16" height="16"/>
+  <object id="13" name="health-powerup-1" type="health-powerup" x="1408" y="224" width="16" height="16"/>
+  <object id="14" name="health-powerup-1" type="health-powerup" x="1440" y="224" width="16" height="16"/>
+  <object id="15" name="health-powerup-1" type="health-powerup" x="1472" y="224" width="16" height="16"/>
+  <object id="16" name="health-powerup-1" type="health-powerup" x="1504" y="224" width="16" height="16"/>
+  <object id="17" name="health-powerup-1" type="health-powerup" x="1536" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="villagers"/>
  <objectgroup name="characters">
-  <object name="commander-kavosic" type="commander-kavosic" x="928" y="704" width="32" height="32"/>
+  <object id="18" name="commander-kavosic" type="commander-kavosic" x="928" y="704" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawners">
-  <object name="spawner-1" type="spawner" x="992" y="712" width="24" height="24">
+  <object id="19" name="spawner-1" type="spawner" x="992" y="712" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="2464" y="320" width="24" height="24">
+  <object id="20" name="spawner-1" type="spawner" x="2464" y="320" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="1312" y="736" width="24" height="24">
+  <object id="21" name="spawner-1" type="spawner" x="1312" y="736" width="24" height="24">
    <properties>
     <property name="key" value="enemy"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="1664" y="64" width="24" height="24">
+  <object id="22" name="spawner-1" type="spawner" x="1664" y="64" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="1760" y="512" width="24" height="24">
+  <object id="23" name="spawner-1" type="spawner" x="1376" y="416" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="1920" y="32" width="24" height="24">
+  <object id="24" name="spawner-1" type="spawner" x="1920" y="32" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="2608" y="48" width="24" height="24">
+  <object id="25" name="spawner-1" type="spawner" x="2608" y="48" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="3264" y="192" width="24" height="24">
+  <object id="26" name="spawner-1" type="spawner" x="3264" y="64" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="3360" y="192" width="24" height="24">
+  <object id="27" name="spawner-1" type="spawner" x="3360" y="64" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="3200" y="288" width="24" height="24">
+  <object id="28" name="spawner-1" type="spawner" x="3200" y="288" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="3744" y="320" width="24" height="24">
+  <object id="29" name="spawner-1" type="spawner" x="4096" y="896" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="160" y="744" width="24" height="24">
+  <object id="30" name="spawner-1" type="spawner" x="160" y="744" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object name="spawner-1" type="spawner" x="416" y="744" width="24" height="24">
+  <object id="31" name="spawner-1" type="spawner" x="416" y="744" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="35" name="spawner-1" type="spawner" x="4864" y="256" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="36" name="spawner-1" type="spawner" x="4960" y="256" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="37" name="spawner-1" type="spawner" x="5440" y="640" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="38" name="spawner-1" type="spawner" x="5600" y="320" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="39" name="spawner-1" type="spawner" x="5728" y="480" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="40" name="spawner-1" type="spawner" x="5888" y="544" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="41" name="spawner-1" type="spawner" x="4512" y="608" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="42" name="spawner-1" type="spawner" x="4448" y="608" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="43" name="spawner-1" type="spawner" x="4384" y="896" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="44" name="spawner-1" type="spawner" x="3488" y="320" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="45" name="spawner-1" type="spawner" x="3712" y="320" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="46" name="spawner-1" type="spawner" x="5920" y="704" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="47" name="spawner-1" type="spawner" x="6272" y="704" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="53" name="spawner-1" type="spawner" x="6080" y="128" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="54" name="spawner-1" type="spawner" x="6080" y="64" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="55" name="spawner-1" type="spawner" x="6464" y="160" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="56" name="spawner-1" type="spawner" x="6048" y="256" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="57" name="spawner-1" type="spawner" x="6336" y="64" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="58" name="spawner-1" type="spawner" x="4192" y="608" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="59" name="spawner-1" type="spawner" x="4320" y="896" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="60" name="spawner-1" type="spawner" x="4576" y="896" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object id="61" name="spawner-1" type="spawner" x="5088" y="256" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="62" name="spawner-1" type="spawner" x="5248" y="256" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
    </properties>
   </object>
  </objectgroup>
