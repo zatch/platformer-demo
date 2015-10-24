@@ -24,13 +24,13 @@ define([
     // Used to determine if the user is pressing the key combo  on the keyboard 
     // to trigger falling through platforms.
     function keyboardJumpAndDownPressed() {
-        return (!moveKeys.wasd.down.isDown || !moveKeys.wasd.up.isDown);
+        return (moveKeys.wasd.down.isDown && moveKeys.wasd.up.isDown);
     }
 
     // Used to determine if the user isp ressing the button combo on the gamepad
     // to trigger falling through platforms.
     function gamepadJumpAndDownPressed() {
-        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.5 || !pad1.isDown(Phaser.Gamepad.XBOX360_A));
+        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.5 && pad1.isDown(Phaser.Gamepad.XBOX360_A));
     }
 
     return {
@@ -192,7 +192,16 @@ define([
             pad1.onDownCallback = function (buttonCode, value) {
                 switch (buttonCode) {
                     case Phaser.Gamepad.XBOX360_A:
-                        // player.jump();
+                        // HACK: Phaser has a bug where it doesn't update button
+                        // down/up state of a button object until after it has
+                        // fired the onDownCallback.  To get around this, we
+                        // manually update the button state here.  A bug report
+                        // has been filed here: https://github.com/photonstorm/phaser/issues/2159
+                        pad1.getButton(buttonCode).start(null, value);
+
+                        // As long as the player isn't intentionally attempting 
+                        // to fall through a platform, attempt to jump.
+                        if(!gamepadJumpAndDownPressed()) player.jump();
                         break;
                     case Phaser.Gamepad.XBOX360_B:
                         player.attackSword();
