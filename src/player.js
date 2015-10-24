@@ -89,6 +89,13 @@ define([
             this.scale.x = -1; //flipped
         }
 
+        if(game.time.now > this.jumpTimer) {
+            this.isJumping = false;
+        }
+        if(this.isJumping) {
+            this.body.velocity.y = -this.jumpSpeed;
+        }
+
         // Update weapons.
         for(var w=0; w<this.weapons.length; w++) {
             this.weapons[w].facing = this.facing;
@@ -178,17 +185,11 @@ define([
             this.isJumping = true;
             this.jumpTimer = game.time.now + jumpDuration;
         }
-
-        if(game.time.now > this.jumpTimer) {
-            this.isJumping = false;
-        }
-        if(this.isJumping) {
-            this.body.velocity.y = -this.jumpSpeed;
-        }
-
     };
 
-    
+    Player.prototype.endJump = function () {
+        this.isJumping = false;
+    };
 
     Player.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.

@@ -158,10 +158,14 @@ define([
                 left: game.input.keyboard.addKey(Phaser.Keyboard.A),
                 right: game.input.keyboard.addKey(Phaser.Keyboard.D)
             };
-            /*moveKeys.wasd.up.onDown.add(function () {
-                player.jump();
-            });*/
-
+            moveKeys.wasd.up.onDown.add(function () {
+                // As long as the player isn't intentionally attempting to fall
+                // through a platform, attempt to jump.
+                if(!keyboardJumpAndDownPressed()) player.jump();
+            });
+            moveKeys.wasd.up.onUp.add(function () {
+                player.endJump();
+            });
             game.input.keyboard.addKey(Phaser.Keyboard.COMMA).onDown.add(function () {
                 player.attackSword();
             });
@@ -178,7 +182,6 @@ define([
                     game.scale.startFullScreen();
                 }
             });
-
             game.input.keyboard.addKey(Phaser.Keyboard.SPACE).onDown.add(function () {
                 // Check to see if player has reached the exit door.
                 if(game.physics.arcade.overlap(player, exitDoor)) {
@@ -219,6 +222,15 @@ define([
                         }
                         break;
 
+                    default:
+                        break;
+                }
+            };
+            pad1.onUpCallback = function (buttonCode, value) {
+                switch(buttonCode) {
+                    case Phaser.Gamepad.XBOX360_A:
+                        player.endJump();
+                        break;
                     default:
                         break;
                 }
@@ -276,8 +288,6 @@ define([
             game.physics.arcade.collide(enemies, collisionLayer);
             game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
-
-            if(moveKeys.wasd.up.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_A)) player.jump();
 
             // Player movement controls
             if(moveKeys.wasd.left.isDown ||
