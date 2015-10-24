@@ -197,8 +197,11 @@ define([
 
         if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
         
-        // Face away from wall and slide down wall slowly.
-        if(this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
+        // Face away from wall and slide down wall slowly if...
+        // - We're falling (i.e. y velocity is a positive value)
+        // - We're touching a wall on our left
+        // - We're NOT on a floor or platform.
+        if(this.body.velocity.y > 0 && this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
             this.facing = 'right';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
@@ -226,8 +229,11 @@ define([
 
         if(this.body.velocity.x >=  this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
 
-        // Face away from wall and slide down wall slowly.
-        if(this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {
+        // Face away from wall and slide down wall slowly if...
+        // - We're falling (i.e. y velocity is a positive value)
+        // - We're touching a wall on our right
+        // - We're NOT on a floor or platform.
+        if(this.body.velocity.y > 0 && this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {
             this.facing = 'left';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
