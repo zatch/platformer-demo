@@ -35,6 +35,9 @@ define([
         this.isJumping = false;
         // Initial jump speed
         this.jumpSpeed = 350;
+        // The maximum length of time that the upward movement of the player's
+        // normal jump will take.
+        this.maxJumpTime = 250;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 800;
 
@@ -159,7 +162,6 @@ define([
     };
     
     Player.prototype.jump = function () {
-        var jumpDuration = 250;
 
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
@@ -167,20 +169,20 @@ define([
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
             this.isJumping = true;
-            this.jumpTimer = game.time.now + jumpDuration;
+            this.jumpTimer = game.time.now + this.maxJumpTime;
         }
 
         // Wall jumping.
         else if(this.body.onWall() && this.body.blocked.left) {
             this.body.velocity.x = this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
-            this.jumpTimer = game.time.now + (jumpDuration * 0.4);
+            this.jumpTimer = game.time.now + (this.maxJumpTime * 0.4);
         }
 
         else if(this.body.onWall() && this.body.blocked.right) {
             this.body.velocity.x = -this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
-            this.jumpTimer = game.time.now + (jumpDuration * 0.4);
+            this.jumpTimer = game.time.now + (this.maxJumpTime * 0.4);
         }
     };
 
