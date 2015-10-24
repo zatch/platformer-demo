@@ -157,6 +157,13 @@ define([
             game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK).onDown.add(function () {
                 player.attackClaw();
             });
+            game.input.keyboard.addKey(Phaser.Keyboard.F).onDown.add(function() {
+                if(game.scale.isFullScreen) {
+                    game.scale.stopFullScreen();
+                } else {
+                    game.scale.startFullScreen();
+                }
+            });
 
             game.input.keyboard.addKey(Phaser.Keyboard.SPACE).onDown.add(function () {
                 // Check to see if player has reached the exit door.
