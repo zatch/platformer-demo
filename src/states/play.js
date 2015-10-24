@@ -19,6 +19,20 @@ define([
     // Shortcuts
     var game, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, collectables, level;
 
+    // Helper functions 
+
+    // Used to determine if the user is pressing the key combo  on the keyboard 
+    // to trigger falling through platforms.
+    function keyboardJumpAndDownPressed() {
+        return (!moveKeys.wasd.down.isDown || !moveKeys.wasd.up.isDown);
+    }
+
+    // Used to determine if the user isp ressing the button combo on the gamepad
+    // to trigger falling through platforms.
+    function gamepadJumpAndDownPressed() {
+        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.5 || !pad1.isDown(Phaser.Gamepad.XBOX360_A));
+    }
+
     return {
         // Intro
         init: function (mapName) {
@@ -217,10 +231,10 @@ define([
         */
 
         update: function () {
-            // Collide with platforms.
-            if(pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.5 || !pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
+            // Collide with platforms unless the user presses jump+down on the
+            // keyboard *or* the controller (but not both).
+            if(!keyboardJumpAndDownPressed() && !gamepadJumpAndDownPressed()) {
                 game.physics.arcade.collide(player, platforms);
-
             }
 
             // Check weapon collisions.
