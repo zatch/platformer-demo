@@ -176,14 +176,14 @@ define([
             // this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
-            this.jumpTimer = game.time.now + jumpDuration;
+            this.jumpTimer = game.time.now + (jumpDuration * 0.4);
         }
 
         else if(this.body.onWall() && this.body.blocked.right) {
             // this.body.velocity.y = -this.jumpSpeed;
             this.body.velocity.x = -this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
-            this.jumpTimer = game.time.now + jumpDuration;
+            this.jumpTimer = game.time.now + (jumpDuration * 0.4);
         }
     };
 
