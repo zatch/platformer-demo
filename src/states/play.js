@@ -30,7 +30,7 @@ define([
     // Used to determine if the user isp ressing the button combo on the gamepad
     // to trigger falling through platforms.
     function gamepadJumpAndDownPressed() {
-        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.5 && pad1.isDown(Phaser.Gamepad.XBOX360_A));
+        return (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.9 && pad1.isDown(Phaser.Gamepad.XBOX360_A));
     }
 
     return {
@@ -292,11 +292,11 @@ define([
             // Player movement controls
             if(moveKeys.wasd.left.isDown ||
                pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
-               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
+               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.6) {
                 player.moveLeft();
             } else if (moveKeys.wasd.right.isDown ||
                pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
-               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) {
+               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.6) {
                 player.moveRight();
             } else {
                 player.stopMoving();
