@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="30" tilewidth="32" tileheight="32" nextobjectid="63">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="30" tilewidth="32" tileheight="32" nextobjectid="64">
  <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
   <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
  </tileset>
@@ -22,29 +22,29 @@
   <image source="../tilesets/cave_32.png" trans="000000" width="640" height="512"/>
  </tileset>
  <tileset firstgid="1713" name="platformertiles" tilewidth="32" tileheight="32">
-  <image source="../tilesets/platformertiles.png" width="256" height="96"/>
+  <image source="../tilesets/platformertiles.png" width="256" height="128"/>
  </tileset>
- <tileset firstgid="1737" name="moon" tilewidth="32" tileheight="32">
+ <tileset firstgid="1745" name="moon" tilewidth="32" tileheight="32">
   <image source="../tilesets/moon.png" width="64" height="64"/>
  </tileset>
  <layer name="backdrop" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1zESgjAURVEr978gSxZm6zij6Dfkyc8pTgFFSDJzA9yul8ttIRs0ku7pyEaf7+mXbtKteb9CXbo37UJdujn9Ql26Of1CXbo5/UJdurmZXWucbtJt6Rfq0m3N7Be6SbelQahLdzmzX+cA3aS71C/Upbuc+e2sX7pJtzmzX+gm3aZ2oS7dp3ahLt2odqEu3enMbp0LdNO11VdrTe83jLRCt49rTe83jLRCt49rTc8BRjpbu7+Mp1+6OVO7249j6pduztbtu7H35qFfuqk2uXd91Dz3rv/9HxxGOqrfo7+b9Qtj+30ed8Q8vnmefllNl34/XUt6v2GkLv16/7KiO4bIC0M=
+   eJzt1kEKwjAQhlFXntuDufRgIigUQapDmh8nb/EWdVEzoV/T6/l0ui7kBo2kezqy0fff9Es36dacr1CX7k27UJduTr9Ql25Ov1CXbk6/UJdubmbXGqebdFv6hbp0WzP7hW7SbekQ6tJNzuzXO4Bu0k3OPHv1SzfpLmd+N+uXbtJtzuwXukm3qV2oS/epXahLN6pfqEs3OrNZ7wS66drqp1nT+w0jrdDtdtb0fsNIK3S7nTW9BhhplXZfs6bXACM9n+nLQ+d2N7NCG/9y5n5z77116Jduqk3uXR+1zr3rf/kWgBGO6veo83fvWr+sZGS/7/cdsY5f/k+/rKZLv9/Okt5vGKlLv85fVnQHx98MWw==
   </data>
  </layer>
  <layer name="background-decoration" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2k1Og0AYBmBc1L16AvUE6v1tt/4kHsGrOCyakEmZH4QytM+TTEroQNi8fN9M6Lr2vd+u/QSwHWN5OUTn94W5Gs7r7xHfp+YZgLw+c6X5PM4fHpdkdKh2PjCfsXp5PN//pubIO1txt+u6+zAedms/SZkp9bSX64Gn9silPTjM7eem6x5Dbp/CeG40v7neuTQ7Nf13ytR1N8ztN+T3JeT2NYy3RvObs3Z+4jyrxVy7/WCdmjL3vvDYu8D+M8yjNkvx/NrrT9VTNRbSUn1x/F9pvS659xTyDHljuS0lZ3B+x5xOqZvWrtCmj5DNz3/kM5VtuYdlfYWMfUffT+T2m/TQcB5LZU2GYXmnetj4+8l4TRxfs/b3HXBtcpkbyzXQllSvW7PHNOWdAMzP+hW2Q22Ey1Vbj62VYVmnMlmau1S9ll1ohzxC+8Zyai8LAAAAAADgcv0BVJFLlw==
+   eJzt2k1OhDAYBmBcjHv1BOoJ1At6MscDmBh/9l7FsiAhzVDaThkYfZ6EzARKw+bl+2jaddv3crn2E8D5mMrLa3R+n5mr8bh+jniekmcA5vWZy83nMH78PyejY6XjgXam6uVwvv9NjZF3zsXVruuuw3GzW/tJ8tTU095cD1zbI+f24NDa+0XX3Ybc3oXjfqP5neudc7NT0n+n1H53Q2s/Ib8PIbeP4XjaaH7nrJ2fOM9qMf/dfvSdmtJ6XXjqXWD9GdoozVI8vvT+Q/VUjYW0VF8cX8ut1zlz15BnmDeV21xyBqc35LSmbi7x7frmPQBH+wg5+jwiS6lsT12TXWjjK2TpO9o/MbfepIeG01gqa7Xzqr2Q71APG++fjL+J43tarTXLLuSZy9xUroFtSfW6JWvLNe+EgdoL7ZxiDUpmoY2l9x/LKqyntB4PvbTcwjIOZTJ3jSpVr/s55BaWEbL1XDLeujNsT5zjqZzaTwUAAAAAAPB3/QIQ/lW9
   </data>
  </layer>
  <layer name="foreground-structure" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="foreground-decoration" width="240" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt28EOQDAMAFCn/f9XbT5LHBa1cGJMvHdSjcSpqdamCQDgujntr2MMAAAAAD3kMIMqaYuz2RTAMOwLAMZwVo/r/TavfgMAAF9kPwAAAOeKfhl+q/f3st0iAABvsh/iLv6jpGWeBoxu7YNqrarna9tztrGWtXF9LuafdPQ+OenvAAAAAODLjuZ+MQdAHwtcyR82
+   eJzt2zsOgCAQBUAq7n8q9FjGgrgSrPwEdaZyQ0ysXpZFUgIAOG/O++dYAwAAAMAdSphBTXmri9kUwDCcFwCMreZ0m9fyGwAAeCPnAwAAcGzSL8Nv2S8DAPBl+l2u4j9KWuZpwOjWPqhmVb1f296zjVnW1vW9uP6k3veUrL8DAAAA+nODuAYAwN4CnwUdmg==
   </data>
  </layer>
  <objectgroup name="triggers">
@@ -80,25 +80,25 @@
   </object>
  </objectgroup>
  <objectgroup name="platforms">
-  <object id="5" name="platform-1" type="platform" x="1824" y="776" width="64" height="24">
+  <object id="5" name="platform-1" type="platform" x="1824" y="776" width="64" height="16">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[1824, 224],[1824, 776]]"/>
    </properties>
   </object>
-  <object id="6" name="platform-3" type="platform" x="2144" y="224" width="96" height="32">
+  <object id="6" name="platform-3" type="platform" x="2144" y="224" width="96" height="16">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[2144, 224],[2656, 128],[2656, 192],[2144,288]]"/>
    </properties>
   </object>
-  <object id="7" name="platform-2" type="platform" x="2656" y="128" width="96" height="32">
+  <object id="7" name="platform-2" type="platform" x="2656" y="128" width="96" height="16">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[2656, 128],[2656, 192],[2144,288], [2144, 224]]"/>
    </properties>
   </object>
-  <object id="32" name="platform-4" type="platform" x="4896" y="448" width="96" height="32">
+  <object id="32" name="platform-4" type="platform" x="4896" y="448" width="96" height="16">
    <properties>
     <property name="key" value="platform"/>
     <property name="wayPoints" value="[[4896,448],[5376,448]]"/>
@@ -106,7 +106,7 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object id="8" name="player_spawn" type="spawn" x="2944" y="64" width="32" height="32"/>
+  <object id="8" name="player_spawn" type="spawn" x="128" y="352" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables">
   <object id="9" name="health-powerup-1" type="health-powerup" x="112" y="720" width="16" height="16"/>
@@ -174,7 +174,7 @@
     <property name="key" value="worm"/>
    </properties>
   </object>
-  <object id="29" name="spawner-1" type="spawner" x="4096" y="896" width="24" height="24">
+  <object id="29" name="spawner-1" type="spawner" x="4096" y="864" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
    </properties>
@@ -284,11 +284,6 @@
     <property name="key" value="cthulbat"/>
    </properties>
   </object>
-  <object id="59" name="spawner-1" type="spawner" x="4320" y="896" width="24" height="24">
-   <properties>
-    <property name="key" value="worm"/>
-   </properties>
-  </object>
   <object id="60" name="spawner-1" type="spawner" x="4576" y="896" width="24" height="24">
    <properties>
     <property name="key" value="worm"/>
@@ -302,6 +297,11 @@
   <object id="62" name="spawner-1" type="spawner" x="5248" y="256" width="24" height="24">
    <properties>
     <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object id="63" name="spawner-1" type="spawner" x="5280" y="608" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
    </properties>
   </object>
  </objectgroup>
