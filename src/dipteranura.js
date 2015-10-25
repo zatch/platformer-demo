@@ -64,8 +64,7 @@ define([
         this.hopsToVomit = 3;
         this.canVomit = true;
         this.restDuration = 1000;
-        this.restTimer = game.time.create(false);
-        this.restTimer.start(); 
+        this.restFulfilledTime = game.time.now;
         
         // Missiles
         this.missiles = game.add.group();
@@ -145,32 +144,35 @@ define([
         }
     };
     
+    /*
+     * For whatever reason, variables adjusted on 'self' in this event handler
+     * can't be referenced from 'this' in other areas of the class. Probably
+     * some sort of weird scoping issue. As a workaround, you can read these
+     * properties from 'self' elsewhere, which seems to work fine. Thoughts?
+     */
     Dipteranura.prototype.onSelfChangeState = function (sm, stateName) {
         if (stateName === 'idle') {
-            self.restTimer.add(self.restDuration, onRestComplete, self);
+            self.restFulfilledTime = game.time.now + self.restDuration;
         }
     };
-    function onRestComplete () {
-        // No action necessary?
-    }
     
     Dipteranura.prototype.update_idle = function () {
         
         this.animations.play('idle');
         
         // Honor resting when idle.
-        if (!this.restTimer.duration) {
-            // Hop til you vomit!
-            if (this.hopCount < this.hopsToVomit) {
-                this.stateMachine.setState('hopping');
-            }
-            else {
-                // Reset counters and flags.
-                this.hopCount = 0;
-                this.canVomit = true;
-                
-                this.stateMachine.setState('vomiting');
-            }
+        if(self.restFulfilledTime > game.time.now) return; // Use 'self' here as workaround to event handler scoping issue.
+        
+        // Hop til you vomit!
+        if (this.hopCount < this.hopsToVomit) {
+            this.stateMachine.setState('hopping');
+        }
+        else {
+            // Reset counters and flags.
+            this.hopCount = 0;
+            this.canVomit = true;
+            
+            this.stateMachine.setState('vomiting');
         }
     };
 
