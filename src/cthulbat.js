@@ -217,7 +217,9 @@ define([
     };
 
     Cthulbat.prototype.update_retreat = function() {
+        // If hit while retreating, go into the idle state.
         if(this.invulnerable) this.stateMachine.setState('idle');
+
         Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
         if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
             // Move to the enemy or where the player was last seen.
@@ -233,7 +235,7 @@ define([
                 if(this.body.acceleration.y > 0) this.body.acceleration.y *= -1;
             }
         } else {
-            this.stateMachine.setState('idle');
+            this.stateMachine.setState('hunting');
         }
     };
 
