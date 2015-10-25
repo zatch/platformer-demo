@@ -166,31 +166,18 @@ define([
 
     
     Cthulbat.prototype.update_hunting = function () {
-
-        // If enemy is close enough to the player to hunt them...
-        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
-
-        // -- If player is within attack range, switch to "attack" state.
-            if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
-                this.stateMachine.setState('attacking');
-            }
-    
-            // otherwise, move toward the player.
-            else if(this.distanceToTarget.getMagnitude() > this.huntTarget.width / 2) {
-                // Move to the enemy or where the player was last seen.
-                if(this.distanceToTarget.x > 8) {
-                    this.moveRight();
-                } 
         
-                else if(this.distanceToTarget.x < -8) {
-                    this.moveLeft();
-                } 
-            }
-        }
-    
-        // Give up if the player isn't where we last saw them or they're too far away.
-        else {
-            this.stateMachine.setState('idle');
+        // Move to the enemy or where the player was last seen.
+        if(this.distanceToTarget.x > 8) {
+            this.moveRight();
+        } 
+
+        else if(this.distanceToTarget.x < -8) {
+            this.moveLeft();
+        } 
+
+        if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
+            this.stateMachine.setState('attacking');
         }
     };
 
@@ -230,7 +217,9 @@ define([
     };
 
     Cthulbat.prototype.update_retreat = function() {
+        // If hit while retreating, go into the idle state.
         if(this.invulnerable) this.stateMachine.setState('idle');
+
         Phaser.Point.subtract(this.huntTarget.position, this.position, this.distanceToTarget);
         if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
             // Move to the enemy or where the player was last seen.
@@ -246,7 +235,7 @@ define([
                 if(this.body.acceleration.y > 0) this.body.acceleration.y *= -1;
             }
         } else {
-            this.stateMachine.setState('idle');
+            this.stateMachine.setState('hunting');
         }
     };
 
@@ -285,6 +274,9 @@ define([
         
         // Restore flight.
         this.body.allowGravity = false;
+
+        // Always start in the "idle" state.
+        this.stateMachine.setState('idle');
     };
 
     Cthulbat.prototype.damage = function (amount, source) {
