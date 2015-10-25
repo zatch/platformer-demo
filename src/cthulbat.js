@@ -274,6 +274,9 @@ define([
         
         // Restore flight.
         this.body.allowGravity = false;
+
+        // Always start in the "idle" state.
+        this.stateMachine.setState('idle');
     };
 
     Cthulbat.prototype.damage = function (amount, source) {
