@@ -219,8 +219,8 @@
                  "type":"spawn",
                  "visible":true,
                  "width":32,
-                 "x":128,
-                 "y":352
+                 "x":160,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -456,7 +456,7 @@
                  "name":"spawner-1",
                  "properties":
                     {
-                     "key":"enemy"
+                     "key":"dipteranura"
                     },
                  "rotation":0,
                  "type":"spawner",
