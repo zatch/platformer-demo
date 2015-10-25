@@ -572,21 +572,6 @@
                 }, 
                 {
                  "height":24,
-                 "id":29,
-                 "name":"spawner-1",
-                 "properties":
-                    {
-                     "key":"worm"
-                    },
-                 "rotation":0,
-                 "type":"spawner",
-                 "visible":true,
-                 "width":24,
-                 "x":4096,
-                 "y":864
-                }, 
-                {
-                 "height":24,
                  "id":30,
                  "name":"spawner-1",
                  "properties":
@@ -797,21 +782,6 @@
                 }, 
                 {
                  "height":24,
-                 "id":47,
-                 "name":"spawner-1",
-                 "properties":
-                    {
-                     "key":"worm"
-                    },
-                 "rotation":0,
-                 "type":"spawner",
-                 "visible":true,
-                 "width":24,
-                 "x":6272,
-                 "y":704
-                }, 
-                {
-                 "height":24,
                  "id":53,
                  "name":"spawner-1",
                  "properties":
@@ -959,6 +929,36 @@
                  "width":24,
                  "x":5280,
                  "y":608
+                }, 
+                {
+                 "height":24,
+                 "id":64,
+                 "name":"spawner-1",
+                 "properties":
+                    {
+                     "key":"dipteranura"
+                    },
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":24,
+                 "x":4128,
+                 "y":864
+                }, 
+                {
+                 "height":24,
+                 "id":65,
+                 "name":"spawner-1",
+                 "properties":
+                    {
+                     "key":"dipteranura"
+                    },
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":24,
+                 "x":6272,
+                 "y":704
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -967,7 +967,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":64,
+ "nextobjectid":66,
  "orientation":"orthogonal",
  "properties":
     {
