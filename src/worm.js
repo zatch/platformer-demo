@@ -36,15 +36,12 @@ define([
         this.body.drag.y = 0;
         
         // Initial health.
-        this.health = 2;
+        this.health = this.maxHealth = 1;
 
         // Initial jump speed
         this.jumpSpeed = 500;
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 1200;
-
-        // Number of times the player can be hit by an enemy.
-        this.health = 3;
 
         // Invulnerability
         this.invulnerable = false;
