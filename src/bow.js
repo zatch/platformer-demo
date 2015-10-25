@@ -18,9 +18,6 @@ define([
         this.missiles.y = 0;
         this.missiles.classType = Arrow;
 
-        // Whether or not this weapon is currently in use.
-        this.inUse = false;
-
         // How often this weapon can be used (in ms)
         this.useRate = 300;
         this.useTimer = game.time.create(false);
@@ -42,38 +39,17 @@ define([
         Phaser.Sprite.prototype.update.call(this);
     };
 
-    function onAttackFinish () {
-        this.inUse = false;
-    }
-
-    function onMissileKilled () {
-        if(!this.missiles.getFirstAlive()) {
-            this.inUse = false;
-        }
-    }
-
     Bow.prototype.getCollidables = function () {
         return this.missiles.children;
     };
 
     Bow.prototype.use = function (direction) {
-        var missile;
-        if(this.canUse()) {
-            this.inUse = true;
-            missile = this.missiles.getFirstDead();
-            if(missile){
-                missile.reset(this.parent.x, this.parent.y, 1);
-            } else {
-                missile = this.missiles.create(this.x, this.y);
-                missile.events.onKilled.add(onMissileKilled, this);
-            }
-
-            game.world.bringToTop(this.missiles);
-            missile.x = this.parent.x;
-            missile.y = this.parent.y;
-            missile.fire(this.parent.facing);
-            this.useTimeout = game.time.now;
-        }
+        if (!this.canUse()) return;
+        
+        var missile = this.missiles.getFirstDead(true, this.parent.x, this.parent.y);
+        game.world.bringToTop(this.missiles);
+        missile.fire(this.parent.facing);
+        this.useTimeout = game.time.now;
     };
 
     Bow.prototype.canUse = function () {
