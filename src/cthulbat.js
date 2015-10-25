@@ -166,31 +166,18 @@ define([
 
     
     Cthulbat.prototype.update_hunting = function () {
-
-        // If enemy is close enough to the player to hunt them...
-        if(this.distanceToTarget.getMagnitude() < this.distanceToHunting) {
-
-        // -- If player is within attack range, switch to "attack" state.
-            if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
-                this.stateMachine.setState('attacking');
-            }
-    
-            // otherwise, move toward the player.
-            else if(this.distanceToTarget.getMagnitude() > this.huntTarget.width / 2) {
-                // Move to the enemy or where the player was last seen.
-                if(this.distanceToTarget.x > 8) {
-                    this.moveRight();
-                } 
         
-                else if(this.distanceToTarget.x < -8) {
-                    this.moveLeft();
-                } 
-            }
-        }
-    
-        // Give up if the player isn't where we last saw them or they're too far away.
-        else {
-            this.stateMachine.setState('idle');
+        // Move to the enemy or where the player was last seen.
+        if(this.distanceToTarget.x > 8) {
+            this.moveRight();
+        } 
+
+        else if(this.distanceToTarget.x < -8) {
+            this.moveLeft();
+        } 
+
+        if(this.distanceToTarget.getMagnitude() < this.distanceToAttacking) {
+            this.stateMachine.setState('attacking');
         }
     };
 
