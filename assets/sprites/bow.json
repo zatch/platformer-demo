@@ -1,0 +1,19 @@
+{ "frames": {
+   "bow.ase": {
+    "frame": { "x": 1, "y": 1, "w": 32, "h": 21 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 30, "h": 19 },
+    "sourceSize": { "w": 30, "h": 19 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.0.1",
+  "image": "J:\\LightTPD\\htdocs\\platformer-demo\\assets\\sprites\\bow.png",
+  "format": "RGBA8888",
+  "size": { "w": 34, "h": 23 },
+  "scale": "1"
+ }
+}
