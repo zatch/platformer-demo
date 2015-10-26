@@ -5,11 +5,11 @@ define([
 
     var game, self;
 
-    function Weapon (_game, x, y, key) {
+    function Weapon (_game, x, y, key, frame) {
         game = _game;
         self = this;
         
-        Phaser.Sprite.call(this, game, x, y, key);
+        Phaser.Sprite.call(this, game, x, y, key, frame);
 
         // Whether or not this weapon is currently in use.
         this.inUse = false;
