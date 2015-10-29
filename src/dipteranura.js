@@ -60,11 +60,11 @@ define([
         this.events.onSpawnChild = new Phaser.Signal();
 
         // AI
-        this.hopCount = 0;
-        this.hopsToVomit = 3;
         this.canVomit = true;
         this.restDuration = 1000;
         this.restFulfilledTime = game.time.now;
+		this.lineOfSight = new Phaser.Line();
+        this.vomitRange = 175;
         
         // Missiles
         this.missiles = game.add.group();
@@ -164,15 +164,14 @@ define([
         if(self.restFulfilledTime > game.time.now) return; // Use 'self' here as workaround to event handler scoping issue.
         
         // Hop til you vomit!
-        if (this.hopCount < this.hopsToVomit) {
-            this.stateMachine.setState('hopping');
-        }
-        else {
-            // Reset counters and flags.
-            this.hopCount = 0;
+        if (this.shouldVomit()) {
+            // Reset flags.
             this.canVomit = true;
             
             this.stateMachine.setState('vomiting');
+        }
+        else {
+            this.stateMachine.setState('hopping');
         }
     };
 
@@ -197,7 +196,6 @@ define([
         }
         
         if (this.animations.frame === 6) {
-            this.hopCount++; // Increment hop counter.
             this.body.acceleration.x = 0;
             this.body.velocity.x = 0;
             this.stateMachine.setState('idle');
@@ -238,6 +236,42 @@ define([
             this.canVomit = false;
         }
     };
+    
+    Dipteranura.prototype.shouldVomit = function () {
+        return this.canSee(game.player, this.lineOfSight) &&
+               this.isFacingPlayer() &&
+               Math.abs(game.player.position.x - this.position.x) <= this.vomitRange;
+    };
+
+    Dipteranura.prototype.canSee = function (target, line) {
+        line.start.x = this.x;
+        line.start.y = this.y;
+        line.end.x = target.x;
+        line.end.y = target.y;
+        var tiles = game.collisionLayer.getRayCastTiles(line, null, true);
+
+        if(tiles.length) return false;
+        return true;
+    };
+
+    Dipteranura.prototype.isFacingPlayer = function () {
+        if (game.player.position.x - this.position.x <= 0 && this.facing === 'left' ||
+            game.player.position.x - this.position.x >= 0 && this.facing === 'right') {
+            return true;
+        }
+        return false;
+    };
+
+    Dipteranura.prototype.facePlayer = function () {
+        if (!this.isFacingPlayer()) {
+            if (this.facing === 'right') {
+                this.facing = 'left';
+            }
+            else {
+                this.facing = 'right';
+            }
+        }
+    };
 
     Dipteranura.prototype.revive = function () {
         // Call up!
@@ -247,12 +281,17 @@ define([
         this.body.checkCollision.down = true;
         this.body.checkCollision.left = true;
         this.body.checkCollision.right = true;
+        
+        this.stateMachine.setState('idle');
     };
 
     Dipteranura.prototype.damage = function (amount, source) {
 
         // Can currently take damage?
         if(this.invulnerable) return;
+        
+        this.facePlayer();
+        this.stateMachine.setState('idle');
 
         amount = Math.abs(amount || 1);
         this.health -= amount;
