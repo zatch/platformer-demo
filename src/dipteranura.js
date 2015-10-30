@@ -283,6 +283,7 @@ define([
         this.body.checkCollision.right = true;
         
         this.stateMachine.setState('idle');
+        this.facePlayer();
     };
 
     Dipteranura.prototype.damage = function (amount, source) {

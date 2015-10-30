@@ -24,6 +24,8 @@ define([
         this.sprites.y = 0;
         this.sprites.classType = game.spriteClassTypes[properties.key];
         this.sprites.createMultiple(this.maxSpawned, properties.key, 1, true);
+        this.sprites.setAll('x', this.x);
+        this.sprites.setAll('y', this.x);
         this.sprites.callAll('kill');
         
         // Spawn timer
