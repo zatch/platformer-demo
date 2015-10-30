@@ -81,6 +81,10 @@ define([
             
             // Power-ups
             this.game.load.spritesheet('health-powerup', 'assets/sprites/health-powerup.png', 16, 16, 5);
+            
+            // Can be used for anything that doesn't need a sprite sheet.
+            // Workaround for issue: https://github.com/photonstorm/phaser/issues/2173
+            this.game.load.image('blank', 'assets/blank.png');
         },
         
         create: function() {

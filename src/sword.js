@@ -43,25 +43,25 @@ define([
 
     function makeRightHitboxFrames (hitboxes) {
 
-        var box0 = hitboxes.create(0,0,null);
+        var box0 = hitboxes.create(0,0,'blank');
         box0.body.setSize(32, 32, -16, -48);
 
-        var box1 = hitboxes.create(0,0,null);
+        var box1 = hitboxes.create(0,0,'blank');
         box1.body.setSize(32, 32, 0, -48);
 
-        var box2 = hitboxes.create(0,0,null);
+        var box2 = hitboxes.create(0,0,'blank');
         box2.body.setSize(32, 48, 16, -48);
 
-        var box3 = hitboxes.create(0,0,null);
+        var box3 = hitboxes.create(0,0,'blank');
         box3.body.setSize(32, 64, 16, -48);
 
-        var box4 = hitboxes.create(0,0,null);
+        var box4 = hitboxes.create(0,0,'blank');
         box4.body.setSize(32, 64, 16, -32);
 
-        var box5 = hitboxes.create(0,0,null);
+        var box5 = hitboxes.create(0,0,'blank');
         box5.body.setSize(32, 80, 16, -31);
 
-        var box6 = hitboxes.create(0,0,null);
+        var box6 = hitboxes.create(0,0,'blank');
         box6.body.setSize(48, 32, 0, 16);
 
         // Remember: frame keys here are 0 indexed.

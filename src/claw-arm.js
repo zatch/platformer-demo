@@ -11,7 +11,7 @@ define([
         game = _game;
         self = this;
 
-        Weapon.call(this, game, x, y);
+        Weapon.call(this, game, x, y, 'blank');
         this.anchor.set(0.5);
         
         this.armBalls = game.add.group();
