@@ -270,11 +270,12 @@ define([
                 // Check to see if weapons are colliding with enemies.
                 game.physics.arcade.overlap(currentWeapon.getCollidables(), enemies, currentWeapon.onHit);
                 game.physics.arcade.overlap(currentWeapon.getCollidables(), villagers, currentWeapon.onHit);
-                // Check to see if weapons are colliding with collectables.
-                game.physics.arcade.overlap(currentWeapon.getCollidables(), collectables, currentWeapon.onHit);
                 // Check to see if weapons are colliding collision layer.
                 game.physics.arcade.collide(currentWeapon.getCollidables(), collisionLayer, currentWeapon.onHitTerrain);
             }
+
+            // Check to see if weapons are colliding with collectables.
+            game.physics.arcade.overlap(player.weapons.clawArm.getCollidables(), collectables, currentWeapon.onHit);
 
             // Collide player + enemies.
             game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
