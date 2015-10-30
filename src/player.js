@@ -46,11 +46,14 @@ define([
         this.health = 20;
 
         // Equip weapons
-        this.weapons = [
-            new Sword(game, 0, 0),
-            new Bow(game, 4, 4),
-            new ClawArm(game, 0, 0)
-        ];
+        this.weapons = [];
+        this.weapons.sword   = new Sword(game, 0, 0);
+        this.weapons.bow     = new Bow(game, 4, 4);
+        this.weapons.clawArm = new ClawArm(game, 0, 0);
+
+        this.weapons.push(this.weapons.sword);
+        this.weapons.push(this.weapons.bow);
+        this.weapons.push(this.weapons.clawArm);
 
         for(var i=0; i<this.weapons.length; i++) {
             this.addChild(this.weapons[i]);
