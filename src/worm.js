@@ -128,6 +128,9 @@ define([
     Worm.prototype.revive = function () {
         // Call up!
         Phaser.Sprite.prototype.revive.call(this);
+
+        this.body.acceleration.set(0);
+        this.body.velocity.set(0);
         
         this.body.checkCollision.up = true;
         this.body.checkCollision.down = true;
@@ -278,7 +281,7 @@ define([
         this.events.onDeath.dispatch(this);
 
         // Drop loot.
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.05) {
             var healthPowerup = new HealthPowerup(game, this.x, this.y);
             this.events.onDrop.dispatch(this, healthPowerup);
         }

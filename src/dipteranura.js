@@ -177,7 +177,7 @@ define([
 
     Dipteranura.prototype.update_hopping = function () {
         // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
+        // if(this.knockbackTimeout > game.time.now) return;
         
         this.animations.play('hopping');
         
@@ -204,7 +204,7 @@ define([
 
     Dipteranura.prototype.update_vomiting = function () {
         // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
+        // if(this.knockbackTimeout > game.time.now) return;
         
         this.animations.play('vomiting');
         

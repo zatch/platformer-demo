@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="240" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Sci-Fi-Tiles_A4" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_A4.png" width="512" height="480"/>
+ </tileset>
+ <tileset firstgid="241" name="Sci-Fi-Tiles_A5" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_A5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="369" name="Sci-Fi-Tiles_B" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_B.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="625" name="Sci-Fi-Tiles_C" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_C.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="881" name="Sci-Fi-Tiles_D" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_D.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1137" name="Sci-Fi-Tiles_E" tilewidth="32" tileheight="32">
+  <image source="../tilesets/Sci-Fi-Tiles_E.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1393" name="cave" tilewidth="32" tileheight="32">
+  <image source="../tilesets/cave_32.png" trans="000000" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="1713" name="platformertiles" tilewidth="32" tileheight="32">
+  <image source="../tilesets/platformertiles.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="1745" name="moon" tilewidth="32" tileheight="32">
+  <image source="../tilesets/moon.png" width="64" height="64"/>
+ </tileset>
+ <layer name="backdrop" width="50" height="240">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Be8y+qwvpMBiT0kqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrqHylc/t0=
+  </data>
+ </layer>
+ <layer name="background-decoration" width="50" height="240">
+  <data encoding="base64" compression="zlib">
+   eJztz7ENwkAQBMALTq4b7ArAIREmpA0XxulTZw8Sb2lG2mCz3QgAAAAAAAAAAAAAAACAo33qy4h6v4zy55v9o30BAIBfumbEXFny30v6PTIut9p/r6zZ+im968eztm+VV7YOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACc3AceDy35
+  </data>
+ </layer>
+ <layer name="foreground-structure" width="50" height="240">
+  <data encoding="base64" compression="zlib">
+   eJzt2l1uozAUBtA8sa4uzVvKVBq16ctkurGCNChWa35CDLYzB+koD6GBr7YvNnDpTqcLANC8t+7052//Oaff56X0eS756C1t7xWcpxxy1Jrj2s3XgRpqwZoca7bSbdb/H8Ov/vNer11dOXK147WCvpWrP7bYJr+7n33rmdqkxSypNhmz1FSTt7ZJi+NGjroM19HUGGktx2AY71PX+ZZyLLVPizlSWVrNMYjHf4vXxlSOlrNMzVlausZP5ZjKVPMcJl6fLV1f1uSrIWOutXPpMZYrx7CVrOH35Dgv9MNWcoznGWe5dD+/byXH9ywt50hlKZkjng8veZv42zFPy3O1uE2fJUeL9zBSOWoa92t8f9732WCOIcPUeW/J0deKl6XnHntIZRiu82vq2z198sjtfMf51pwjR/8vneP8YDvUkCNXhtw5psbpEffujlr/7P1sK2eOuXV3qs7unWOuf/wT+n3Co7n3zrHi98N7AzlWvNsQrg3kOGqT4/EcMzUgjNbWgBI5Vszlwii6Xzr7XkuJHPExJ953DKNoHRrmjl0iR1zDltY/0b5hru4Z53K0kOPR9+RqyVGqDXPnyHGvo4YcpTY5/p8ciXngpnd/43nj1NxxzxyJ3w4bfzvEUuvHPXMk1oKzc6S5NWMstX40Pp47x55zjyNzlGqnI+Yl8dzj9VY/t9Tfata1H7f6me24lwI5Pm/1M+uzNfVKjtpz3PN+S265nqkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBpX43BE38=
+  </data>
+ </layer>
+ <layer name="foreground-decoration" width="50" height="240">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1pCaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4Aa7gAAB
+  </data>
+ </layer>
+ <objectgroup name="triggers">
+  <object name="door_exit" type="door" x="768" y="2720" width="32" height="32">
+   <properties>
+    <property name="mapLink" value="Map1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="platforms"/>
+ <objectgroup name="spawns">
+  <object name="player_spawn" type="spawn" x="128" y="416" width="32" height="32"/>
+  <object name="spawner-1" type="spawner" x="1024" y="2528" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1056" y="2528" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="640" y="2528" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="704" y="2528" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1152" y="2528" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="640" y="1664" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="480" y="2048" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="960" y="2112" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="896" y="2208" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1120" y="2272" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="320" y="2464" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="800" y="2496" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="384" y="2656" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="928" y="2688" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="collectables">
+  <object name="health-powerup-1" type="health-powerup" x="352" y="512" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="416" y="512" width="16" height="16"/>
+  <object name="health-powerup-1" type="health-powerup" x="384" y="512" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="villagers"/>
+ <objectgroup name="characters"/>
+ <objectgroup name="spawners">
+  <object name="spawner-1" type="spawner" x="992" y="1256" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1280" y="1184" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1408" y="1184" width="24" height="24">
+   <properties>
+    <property name="key" value="cthulbat"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="608" y="800" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="736" y="800" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="512" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="832" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1024" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="704" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="448" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1120" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="960" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1088" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1216" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="576" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="320" y="2720" width="24" height="24">
+   <properties>
+    <property name="key" value="worm"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="928" y="1600" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="512" y="1728" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="1024" y="1888" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="832" y="1856" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="352" y="2112" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="448" y="2304" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="704" y="2304" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+  <object name="spawner-1" type="spawner" x="960" y="2304" width="24" height="24">
+   <properties>
+    <property name="key" value="dipteranura"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="checkpoints"/>
+</map>

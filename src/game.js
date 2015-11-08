@@ -46,6 +46,7 @@ define([
         preload: function() {
             this.game.load.tilemap('Map1', 'assets/maps/test-map-1.json', null, Phaser.Tilemap.TILED_JSON);
             this.game.load.tilemap('Map2', 'assets/maps/test-map-2.json', null, Phaser.Tilemap.TILED_JSON);
+            this.game.load.tilemap('Map3', 'assets/maps/test-map-3.json', null, Phaser.Tilemap.TILED_JSON);
             
             this.game.load.image('moon', 'assets/tilesets/moon.png');
             this.game.load.image('Sci-Fi-Tiles_A2', 'assets/tilesets/Sci-Fi-Tiles_A2.png');
@@ -63,6 +64,7 @@ define([
             this.game.load.image('health-bar-middle', 'assets/hud/health-bar-middle.png');
             this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
+            this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
 
             this.game.load.spritesheet('player', 'assets/sprites/player-claw-arm.png', 26, 30, 1);
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);

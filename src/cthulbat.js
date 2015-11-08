@@ -344,7 +344,7 @@ define([
         this.events.onDeath.dispatch(this);
 
         // Drop loot.
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.25) {
             var healthPowerup = new HealthPowerup(game, this.x, this.y);
             this.events.onDrop.dispatch(this, healthPowerup);
         }

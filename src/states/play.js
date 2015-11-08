@@ -12,14 +12,16 @@ define([
     'platform',
     'object-layer-helper',
     'health-display',
+    'damage-display',
     'health-powerup',
+    'checkpoint',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, HealthPowerup, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, DamageDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, collectables, level;
+    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
 
     // Helper functions 
 
@@ -37,12 +39,23 @@ define([
 
     return {
         // Intro
-        init: function (mapName) {
+        init: function (data) {
+            console.log('Play State Initialized: ', data);
+
             // Shortcut variables.
             game = this.game;
+            playState = this;
             
             // Set map name.
-            map = mapName || 'Map1';
+            if(data && data.map) {
+                mapName = data.map; 
+            }
+            else {
+                mapName = 'Map1';
+            }
+
+            if(data && data.checkpoint) lastCheckpoint = data.checkpoint;
+            else lastCheckpoint = -1;
         },
         
         // Main
@@ -68,7 +81,7 @@ define([
             };
 
             // Create map.
-            map = this.game.add.tilemap(map);
+            map = this.game.add.tilemap(mapName);
             
             // Add images to map.
             map.addTilesetImage('Sci-Fi-Tiles_A2', 'Sci-Fi-Tiles_A2');
@@ -104,6 +117,16 @@ define([
             game.add.existing(player);
             player.x = spawnPoint.x;
             player.y = spawnPoint.y;
+
+            // Add checkpoints
+            checkpoints = ObjectLayerHelper.createObjectsByType(game, 'checkpoint', map, 'checkpoints', Checkpoint);
+            game.add.existing(checkpoints);
+
+            console.log('Checkpoints found: ', checkpoints);
+            if(lastCheckpoint !== -1) {
+                player.x = lastCheckpoint.x;
+                player.y = lastCheckpoint.y;
+            }
 
             // Insert enemies
             enemies = [];
@@ -149,6 +172,11 @@ define([
             game.add.existing(collectables);
             
             // HUD
+            damageDisplay = new DamageDisplay(game, 0, 0);
+            game.add.existing(damageDisplay);
+            damageDisplay.setMaxHealth(player.maxHealth);
+            damageDisplay.updateDisplay(player.health);
+
             healthDisplay = new HealthDisplay(game, 10, 10, 'health-bar-cap-left', 'health-bar-middle', 'health-bar-cap-right', 'health-bar-fill');
             game.add.existing(healthDisplay);
             healthDisplay.setMaxHealth(player.maxHealth);
@@ -192,6 +220,8 @@ define([
                     self.playerExits();
                 }
             });
+
+            game.input.keyboard.addKey(Phaser.Keyboard.P).onDown.add(this.togglePause);
             
             // Gamepad input setup
             game.input.gamepad.start();
@@ -225,6 +255,9 @@ define([
                             self.playerExits();
                         }
                         break;
+                    case Phaser.Gamepad.XBOX360_START:
+                        playState.togglePause();
+                        break;
 
                     default:
                         break;
@@ -245,15 +278,13 @@ define([
 
         },
 
-        /*
         render: function () {
-            var body = player.weapon.getCollidables();
-            if(body) game.debug.body(body);
-            enemies.forEach(function (enemy) {
+            //var body = player.weapons.sword.getCollidables();
+            //if(body) game.debug.body(body);
+            /*)enemies.forEach(function (enemy) {
                 if (enemy.behavior.hunter) game.debug.geom(enemy.behavior.hunter.lineHunting);
-            });
+            });*/
         },
-        */
 
         update: function () {
             // Collide with platforms unless the user presses jump+down on the
@@ -286,6 +317,8 @@ define([
             // Collide player + collectables.
             game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
 
+            game.physics.arcade.overlap(player, checkpoints, this.onPlayerCollidesCheckpoint);
+
             // Collide objects with map.  Do this after other collision checks
             // so objects aren't pushed through walls.
             game.physics.arcade.collide(player, collisionLayer);
@@ -312,6 +345,14 @@ define([
             // This prevents occasional momentary "flashes" during state transitions.
             game.camera.unfollow();
             pad1.onDownCallback = undefined;
+        },
+
+        togglePause: function () {
+            if(game.paused) {
+                game.paused = false;
+            } else {
+                game.paused = true;
+            }
         },
         
         registerSpawnerEvents: function (spawner) {
@@ -346,6 +387,11 @@ define([
         onPlayerCollidesEnemy: function (player, enemy) {
             if(!enemy.invulnerable && !enemy.dying) player.damage(4, enemy);
         },
+
+        onPlayerCollidesCheckpoint: function (player, checkpoint) {
+            console.log('colliding checkpoint');
+            lastCheckpoint = checkpoint;
+        },
         
         onEnemyDeath: function (enemy) {},
 
@@ -361,10 +407,16 @@ define([
             // Update HUD
             healthDisplay.updateDisplay(player.health);
 
+            // Update damage display.
+            damageDisplay.updateDisplay(player.health);
+
             // Is the player dead?
             if(totalHealth <= 0) {
                 game.camera.unfollow();
-                game.stateTransition.to('Die', true);
+                game.stateTransition.to('Die', true, false, {
+                    'map': mapName,
+                    'checkpoint': lastCheckpoint
+            }   );
             }
         },
 
@@ -373,6 +425,7 @@ define([
 
             // Update HUD
             healthDisplay.updateDisplay(player.health);
+            damageDisplay.updateDisplay(player.health);
         },
             
         onPlayerCollidesCollectable: function (player, collectable) {
@@ -381,13 +434,20 @@ define([
         },
         
         playerOutOfBounds: function() {
+            game.camera.unfollow();
             // Switch to the "death" state.
-            game.stateTransition.to('Die', true);
+            game.stateTransition.to('Die', true, false, {
+                'map': mapName,
+                'checkpoint': lastCheckpoint
+            });
         },
 
         playerExits: function () {
             // Switch to the "win" state.
-            game.stateTransition.to('Play', true, false, exitDoor.properties.mapLink);
+            game.camera.unfollow();
+            game.stateTransition.to('Play', true, false, {
+                'map': exitDoor.properties.mapLink
+            });
         }
     };
 });

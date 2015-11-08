@@ -14,7 +14,7 @@ define([
 
         this.debug = true;
 
-        this.speed = 500;
+        this.speed = 1000;
         this.revive();
 
         game.physics.enable(this);
