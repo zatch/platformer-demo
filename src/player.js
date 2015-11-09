@@ -68,6 +68,11 @@ define([
         this.knockbackTimeout = game.time.now;
         this.maxMoveSpeed = new Phaser.Point(300, 10000);
 
+        // Wall jump timer
+        this.wallJumpTime = game.time.now;
+        this.wallJumpDuration = 350;
+        this.lastBlocked = null; // Values will be 'right' or 'left'
+
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
@@ -176,16 +181,18 @@ define([
         }
 
         // Wall jumping.
-        else if(this.body.onWall() && this.body.blocked.left) {
+        else if(this.lastBlocked === 'left' && this.wallJumpTime > game.time.now) {
             this.body.velocity.x = this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
             this.jumpTimer = game.time.now + (this.maxJumpTime * 0.4);
+            this.wallJumpTime = game.time.now;
         }
 
-        else if(this.body.onWall() && this.body.blocked.right) {
+        else if(this.lastBlocked === 'right' && this.wallJumpTime > game.time.now) {
             this.body.velocity.x = -this.maxMoveSpeed.x * 0.8;  // TODO: Find a more appropriate way to calculate vx when wall jumping.
             this.isJumping = true;
             this.jumpTimer = game.time.now + (this.maxJumpTime * 0.4);
+            this.wallJumpTime = game.time.now;
         }
     };
 
@@ -212,6 +219,13 @@ define([
         // Face normally and fall normally.
         else {
             this.facing = 'left';
+        }
+
+        // If we're touching a wall, we can jump off of it.
+        if(this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
+            // Create a small window of time during which the player can wall jump.
+            this.wallJumpTime = game.time.now + this.wallJumpDuration;
+            this.lastBlocked = 'left';
         }
         
         // Wait for drag to stop us if switching directions.
@@ -244,6 +258,13 @@ define([
         // Face normally and fall normally.
         else {
             this.facing = 'right';
+        }
+
+                // If we're touching a wall, we can jump off of it.
+        if(this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {
+            // Create a small window of time during which the player can wall jump.
+            this.wallJumpTime = game.time.now + this.wallJumpDuration;
+            this.lastBlocked = 'right';
         }
         
         // Wait for drag to stop us if switching directions.
