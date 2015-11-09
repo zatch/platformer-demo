@@ -66,7 +66,7 @@ define([
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
 
-            this.game.load.spritesheet('player', 'assets/sprites/player-claw-arm.png', 26, 30, 1);
+            this.game.load.spritesheet('player', 'assets/sprites/blobman.png', 32, 48, 13);
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
             this.game.load.atlas('dipteranura', 'assets/sprites/dipteranura.png', 'assets/sprites/dipteranura.json');

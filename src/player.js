@@ -16,6 +16,11 @@ define([
         Phaser.Sprite.call(this, game, x, y, 'player');
         this.anchor.set(0.5);
 
+        // Set up animations.
+        this.anims = {};
+        this.anims.walk = this.animations.add('walk', [2,3,4,5,6,7,8,9], 40);
+        this.frame = 0;
+
         // Which way is the player facing?
         this.facing = 'right';
 
@@ -23,6 +28,9 @@ define([
         game.physics.enable(this);
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
+
+        // Resize player body/hitbox.
+        this.body.setSize(32, 32, 0, 8);
 
         // Initialize public properites.
         // Fastest possible movement speeds.
@@ -100,6 +108,11 @@ define([
             this.scale.x = -1; //flipped
         }
 
+        // Update sprite.
+        if(this.isJumping && this.body.velocity.y < 0) this.frame = 10;
+        else if (!this.body.touching.down && !this.body.blocked.left && !this.body.blocked.right && this.body.velocity.y > 0) this.frame = 11;
+        else if(this.body.acceleration.x === 0) this.frame = 0;
+
         if(game.time.now > this.jumpTimer) {
             this.isJumping = false;
         }
@@ -173,6 +186,10 @@ define([
 
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
+
+        // Update sprite.
+        this.animations.stop();
+        this.frame = 5;
         
         // Normal jumping
         if(this.body.onFloor() || this.body.touching.down) {
@@ -204,6 +221,9 @@ define([
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
 
+        // Play walk animation if 1) we're on the floor 2) We're not blocked.
+        if(!this.anims.walk.isPlaying && (this.body.onFloor() || this.body.touching.down)) this.anims.walk.play();
+
         if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
         
         // Face away from wall and slide down wall slowly if...
@@ -214,7 +234,9 @@ define([
             this.facing = 'right';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
+                this.frame = 12;
             }
+
         }
         // Face normally and fall normally.
         else {
@@ -243,6 +265,9 @@ define([
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
 
+        // Play walk animation if 1) we're on the floor 2) We're not blocked.
+        if(!this.anims.walk.isPlaying && (this.body.onFloor() || this.body.touching.down)) this.anims.walk.play();
+
         if(this.body.velocity.x >=  this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
 
         // Face away from wall and slide down wall slowly if...
@@ -253,6 +278,7 @@ define([
             this.facing = 'left';
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
+                this.frame = 12;
             }
         }
         // Face normally and fall normally.
