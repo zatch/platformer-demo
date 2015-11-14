@@ -1,9 +1,9 @@
 define([
     'phaser',
     'sword',
-    'bow',
+    'puker',
     'claw-arm'
-], function (Phaser, Sword, Bow, ClawArm) { 
+], function (Phaser, Sword, Puker, ClawArm) { 
     'use strict';
 
     // Shortcuts
@@ -56,7 +56,7 @@ define([
         // Equip weapons
         this.weapons = [];
         this.weapons.sword   = new Sword(game, 0, 0);
-        this.weapons.bow     = new Bow(game, 4, 4);
+        this.weapons.bow     = new Puker(game, 20, 14);
         this.weapons.clawArm = new ClawArm(game, 0, 0);
 
         this.weapons.push(this.weapons.sword);
@@ -133,7 +133,7 @@ define([
         this.weapons[0].use();
     };
 
-    Player.prototype.attackBow = function () {
+    Player.prototype.attackPuker = function () {
         this.weapons[1].use();
     };
     

@@ -202,7 +202,7 @@ define([
                 player.attackSword();
             });
             game.input.keyboard.addKey(Phaser.Keyboard.PERIOD).onDown.add(function () {
-                player.attackBow();
+                player.attackPuker();
             });
             game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK).onDown.add(function () {
                 player.attackClaw();
@@ -244,7 +244,7 @@ define([
                         player.attackSword();
                         break;
                     case Phaser.Gamepad.XBOX360_X:
-                        player.attackBow();
+                        player.attackPuker();
                         break;
                     case Phaser.Gamepad.XBOX360_Y:
                         player.attackClaw();
@@ -338,6 +338,11 @@ define([
                 player.moveRight();
             } else {
                 player.stopMoving();
+            }
+            
+            if (Phaser.Keyboard.PERIOD.isDown ||
+                pad1.isDown(Phaser.Gamepad.XBOX360_X)) {
+                player.attackPuker();
             }
         },
 
