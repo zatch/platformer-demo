@@ -135,6 +135,10 @@ define([
     }
 
     Sword.prototype.update = function () {
+        // Hide sword when it's not in use.
+        if(anim.isPlaying) this.visible = true;
+        else this.visible = false;
+
         Phaser.Sprite.prototype.update.call(this);
     };
 
