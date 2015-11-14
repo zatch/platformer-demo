@@ -21,7 +21,21 @@ define([
     'use strict';
 
     // Shortcuts
-    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
+    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
+
+    // Default starting properties/state of the game world. These properties
+    // can be overridden by passing a data object to the Play state.
+    var initialState,
+        defaultInitialState = {
+            map: {
+                name: 'Map1',
+                checkpoint: null
+            },
+            player: {
+                health: null,
+                maxHealth: null,
+            }
+        };
 
     // Helper functions 
 
@@ -40,22 +54,14 @@ define([
     return {
         // Intro
         init: function (data) {
-            console.log('Play State Initialized: ', data);
 
             // Shortcut variables.
             game = this.game;
             playState = this;
-            
-            // Set map name.
-            if(data && data.map) {
-                mapName = data.map; 
-            }
-            else {
-                mapName = 'Map1';
-            }
 
-            if(data && data.checkpoint) lastCheckpoint = data.checkpoint;
-            else lastCheckpoint = -1;
+            // Generate initial game world state data.
+            initialState = Phaser.Utils.extend(true, {}, defaultInitialState, data);
+
         },
         
         // Main
@@ -81,7 +87,7 @@ define([
             };
 
             // Create map.
-            map = this.game.add.tilemap(mapName);
+            map = this.game.add.tilemap(initialState.map.name);
             
             // Add images to map.
             map.addTilesetImage('Sci-Fi-Tiles_A2', 'Sci-Fi-Tiles_A2');
@@ -118,14 +124,18 @@ define([
             player.x = spawnPoint.x;
             player.y = spawnPoint.y;
 
+            // Apply prior player state (if it exists).
+            player.health    = initialState.player.health ? initialState.player.health : player.health;
+            player.maxHealth = initialState.player.maxHealth ? initialState.player.maxHealth : player.maxHealth;
+
             // Add checkpoints
             checkpoints = ObjectLayerHelper.createObjectsByType(game, 'checkpoint', map, 'checkpoints', Checkpoint);
             game.add.existing(checkpoints);
 
-            console.log('Checkpoints found: ', checkpoints);
-            if(lastCheckpoint !== -1) {
-                player.x = lastCheckpoint.x;
-                player.y = lastCheckpoint.y;
+            // Drop player at last checkpoint (if necessary).
+            if(initialState.map.checkpoint) {
+                player.x = initialState.map.checkpoint.x;
+                player.y = initialState.map.checkpoint.y;
             }
 
             // Insert enemies
@@ -390,7 +400,7 @@ define([
 
         onPlayerCollidesCheckpoint: function (player, checkpoint) {
             console.log('colliding checkpoint');
-            lastCheckpoint = checkpoint;
+            initialState.map.checkpoint = checkpoint;
         },
         
         onEnemyDeath: function (enemy) {},
@@ -413,10 +423,26 @@ define([
             // Is the player dead?
             if(totalHealth <= 0) {
                 game.camera.unfollow();
-                game.stateTransition.to('Die', true, false, {
-                    'map': mapName,
-                    'checkpoint': lastCheckpoint
-            }   );
+
+                // Player has more lives and will get another chance!
+                if(player.lives > 0) {
+                    game.stateTransition.to('Die', true, false, {
+                        map: {
+                            name: initialState.map.name,
+                            checkpoint: initialState.map.checkpoint
+                        },
+                        player: {
+                            // Start w/ maximum health
+                            health: player.maxHealth,
+                            maxHealth: player.maxHealth,
+                        }
+                    });
+                }
+
+                // Player has no more lives left :(.  Game over.
+                else {
+                    game.stateTransition.to('GameOver', true, false);
+                }
             }
         },
 
@@ -437,8 +463,15 @@ define([
             game.camera.unfollow();
             // Switch to the "death" state.
             game.stateTransition.to('Die', true, false, {
-                'map': mapName,
-                'checkpoint': lastCheckpoint
+                map: {
+                    name: initialState.map.name,
+                    checkpoint: initialState.map.checkpoint
+                },
+                player: {
+                    // Start w/ max health when respawned.
+                    health: player.maxHealth,
+                    maxHealth: player.maxHealth,
+                }
             });
         },
 
@@ -446,7 +479,14 @@ define([
             // Switch to the "win" state.
             game.camera.unfollow();
             game.stateTransition.to('Play', true, false, {
-                'map': exitDoor.properties.mapLink
+                map: {
+                    name: initialState.map.name
+                },
+                player: {
+                    // Start w/ same health on next map as player has now.
+                    health: player.health,
+                    maxHealth: player.maxHealth,
+                }
             });
         }
     };
