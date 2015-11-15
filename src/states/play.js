@@ -70,6 +70,7 @@ define([
             player.events.onDamage.add(this.onPlayerDamage);
             player.events.onHeal.add(this.onPlayerHeal);
             player.events.onPuke.add(this.onPlayerPuke);
+            player.events.onEat.add(this.onPlayerEat);
 
             // Make player accessible via game object.
             game.player = player;
@@ -440,6 +441,11 @@ define([
         },
         
         onPlayerPuke: function () {
+            // Update HUD
+            stomachMeter.updateDisplay(player.fullness / player.maxFullness);
+        },
+        
+        onPlayerEat: function () {
             // Update HUD
             stomachMeter.updateDisplay(player.fullness / player.maxFullness);
         },

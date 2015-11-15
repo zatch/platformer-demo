@@ -91,7 +91,7 @@ define([
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
         this.events.onPuke = new Phaser.Signal();
-        this.events.onStomachEmptied = new Phaser.Signal();
+        this.events.onEat = new Phaser.Signal();
 
     }
 
@@ -161,6 +161,11 @@ define([
         this.health += amount;
         if (this.health > this.maxHealth) this.health = this.maxHealth;
         this.events.onHeal.dispatch(this.health, amount);
+        
+        // Temp deboug: always fill fullness on heal.
+        this.fullness += 10;
+        if (this.fullness > this.maxFullness) this.fullness = this.maxFullness;
+        this.events.onEat.dispatch();
     };
 
     Player.prototype.damage = function (amount, source) {
