@@ -424,7 +424,7 @@ define([
         },
         
         onPlayerCollidesEnemy: function (player, enemy) {
-            if(!enemy.invulnerable && !enemy.dying) player.damage(4, enemy);
+            if(!enemy.invulnerable && !enemy.dying) player.damage(0.5, enemy);
         },
 
         onPlayerCollidesCheckpoint: function (player, checkpoint) {

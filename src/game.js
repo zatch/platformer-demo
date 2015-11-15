@@ -60,16 +60,11 @@ define([
             this.game.load.image('platformertiles',  'assets/tilesets/platformertiles.png');
             this.game.load.image('cave',  'assets/tilesets/cave_32.png');
             
-            // HUD
-            this.game.load.image('health-bar-cap-left', 'assets/hud/health-bar-cap-left.png');
-            this.game.load.image('health-bar-middle', 'assets/hud/health-bar-middle.png');
-            this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
-            this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
+            // HUD;
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
+            this.game.load.atlas('health', 'assets/hud/health.png', 'assets/hud/health.json');
             this.game.load.atlas('stomach-meter', 'assets/hud/stomach-meter.png', 'assets/hud/stomach-meter.json');
             this.game.load.image('lives', 'assets/hud/lives.png');
-            this.game.load.image('life', 'assets/hud/life.png');
-            this.game.load.image('life-empty', 'assets/hud/life-empty.png');
 
             this.game.load.spritesheet('player', 'assets/sprites/blobman.png', 32, 48, 13);
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);
