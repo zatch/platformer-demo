@@ -67,6 +67,7 @@ define([
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
             this.game.load.atlas('stomach-meter', 'assets/hud/stomach-meter.png', 'assets/hud/stomach-meter.json');
+            this.game.load.image('lives', 'assets/hud/lives.png');
             this.game.load.image('life', 'assets/hud/life.png');
             this.game.load.image('life-empty', 'assets/hud/life-empty.png');
 

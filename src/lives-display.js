@@ -9,46 +9,32 @@ define([
 
         game = _game;
 
-        Phaser.Group.call(this, game);
+        // Initialize sprite
+        Phaser.Sprite.call(this, game, x, y, 'lives');
 
         // Current number of lives.
         this.lives = 3;
-
-        // Max number of lives to draw (default).
-        this.maxLives = 3;
-
-        // Child groups.
-        this.lives = new Phaser.Group(_game, this);
-        this.emptyLives = new Phaser.Group(_game, this);
-
+        this.livesString = "00";
+        this.livesText = new Phaser.Text(game, 8, 4, this.livesString, { font: "bold 16px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" });
+        this.addChild(this.livesText);
         // Lock to camera.
         this.fixedToCamera = true;
-        this.cameraOffset.x = 10;
-        this.cameraOffset.y = 40;
+        this.cameraOffset.x = 60;
+        this.cameraOffset.y = 60;
 
     }
 
-    LivesDisplay.prototype = Object.create(Phaser.Group.prototype);
+    LivesDisplay.prototype = Object.create(Phaser.Sprite.prototype);
     LivesDisplay.prototype.constructor = LivesDisplay;
 
-    LivesDisplay.prototype.updateDisplay = function (amount, total) {
-
-        var i, sprite;
-        this.lives.callAll('kill');
-        this.emptyLives.callAll('kill');
-
-        for(i=0; i<total; i++) {
-            if(i<amount) {
-                sprite = this.lives.getFirstDead(true, 0, 0, 'life');
-            } else {
-                sprite = this.emptyLives.getFirstDead(true, 0, 0, 'life-empty');
-            }
-            sprite.revive();
-
-            sprite.x = (i * sprite.width + 5);
-            sprite.y = 4;
+    LivesDisplay.prototype.updateDisplay = function (amount) {
+        this.livesString = this.lives = amount;
+        this.livesString = this.livesString.toString();
+        console.log(this.livesString);
+        if (this.livesString.length === 1) {
+            this.livesString = "0" + this.livesString;
         }
-
+        this.livesText.setText(this.livesString);
     };
 
     return LivesDisplay;
