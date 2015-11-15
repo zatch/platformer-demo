@@ -16,51 +16,56 @@ define([
         this.fullness = 1; // 1=100%
         
         // Set up animations.
-        this.animations.add('idle10',  [0], 15);
-        this.animations.add('idle20',  [1], 15);
-        this.animations.add('idle30',  [2], 15);
-        this.animations.add('idle40',  [3], 15);
-        this.animations.add('idle50',  [4], 15);
-        this.animations.add('idle60',  [5], 15);
-        this.animations.add('idle70',  [6], 15);
-        this.animations.add('idle80',  [7], 15);
-        this.animations.add('idle90',  [8], 15);
-        this.animations.add('idle100', [9], 15);
+        this.animations.add('idle0',   [0], 15);
+        this.animations.add('idle10',  [1], 15);
+        this.animations.add('idle20',  [2], 15);
+        this.animations.add('idle30',  [3], 15);
+        this.animations.add('idle40',  [4], 15);
+        this.animations.add('idle50',  [5], 15);
+        this.animations.add('idle60',  [6], 15);
+        this.animations.add('idle70',  [7], 15);
+        this.animations.add('idle80',  [8], 15);
+        this.animations.add('idle90',  [9], 15);
+        this.animations.add('idle100', [10], 15);
         
-        this.animations.add('start-squeeze10',  [10], 15);
-        this.animations.add('start-squeeze20',  [11], 15);
-        this.animations.add('start-squeeze30',  [12], 15);
-        this.animations.add('start-squeeze40',  [13], 15);
-        this.animations.add('start-squeeze50',  [14], 15);
-        this.animations.add('start-squeeze60',  [15], 15);
-        this.animations.add('start-squeeze70',  [16], 15);
-        this.animations.add('start-squeeze80',  [17], 15);
-        this.animations.add('start-squeeze90',  [18], 15);
-        this.animations.add('start-squeeze100', [19], 15);
+        this.animations.add('start-squeeze0',   [11], 15);
+        this.animations.add('start-squeeze10',  [12], 15);
+        this.animations.add('start-squeeze20',  [13], 15);
+        this.animations.add('start-squeeze30',  [14], 15);
+        this.animations.add('start-squeeze40',  [15], 15);
+        this.animations.add('start-squeeze50',  [16], 15);
+        this.animations.add('start-squeeze60',  [17], 15);
+        this.animations.add('start-squeeze70',  [18], 15);
+        this.animations.add('start-squeeze80',  [19], 15);
+        this.animations.add('start-squeeze90',  [20], 15);
+        this.animations.add('start-squeeze100', [21], 15);
         
-        this.animations.add('squeeze10',  [20,30], 15);
-        this.animations.add('squeeze20',  [21,31], 15);
-        this.animations.add('squeeze30',  [22,32], 15);
-        this.animations.add('squeeze40',  [23,33], 15);
-        this.animations.add('squeeze50',  [24,34], 15);
-        this.animations.add('squeeze60',  [25,35], 15);
-        this.animations.add('squeeze70',  [26,36], 15);
-        this.animations.add('squeeze80',  [27,37], 15);
-        this.animations.add('squeeze90',  [28,38], 15);
-        this.animations.add('squeeze100', [29,39], 15);
+        this.animations.add('squeeze0',   [22,33], 15);
+        this.animations.add('squeeze10',  [23,34], 15);
+        this.animations.add('squeeze20',  [24,35], 15);
+        this.animations.add('squeeze30',  [25,36], 15);
+        this.animations.add('squeeze40',  [26,37], 15);
+        this.animations.add('squeeze50',  [27,38], 15);
+        this.animations.add('squeeze60',  [28,39], 15);
+        this.animations.add('squeeze70',  [29,40], 15);
+        this.animations.add('squeeze80',  [30,41], 15);
+        this.animations.add('squeeze90',  [31,42], 15);
+        this.animations.add('squeeze100', [32,43], 15);
         
-        this.animations.add('release10',  [20,30,40], 15);
-        this.animations.add('release20',  [21,31,41], 15);
-        this.animations.add('release30',  [22,32,42], 15);
-        this.animations.add('release40',  [23,33,43], 15);
-        this.animations.add('release50',  [24,34,44], 15);
-        this.animations.add('release60',  [25,35,45], 15);
-        this.animations.add('release70',  [26,36,46], 15);
-        this.animations.add('release80',  [27,37,47], 15);
-        this.animations.add('release90',  [28,38,48], 15);
-        this.animations.add('release100', [29,39,49], 15);
+        this.animations.add('release0',   [22,33,44], 15);
+        this.animations.add('release10',  [23,34,45], 15);
+        this.animations.add('release20',  [24,35,46], 15);
+        this.animations.add('release30',  [25,36,47], 15);
+        this.animations.add('release40',  [26,37,48], 15);
+        this.animations.add('release50',  [27,38,49], 15);
+        this.animations.add('release60',  [28,39,50], 15);
+        this.animations.add('release70',  [29,40,51], 15);
+        this.animations.add('release80',  [30,41,52], 15);
+        this.animations.add('release90',  [31,42,53], 15);
+        this.animations.add('release100', [32,43,54], 15);
         
         // Set up automatic animation transitions.
+        this.animations.getAnimation('squeeze0')  .onComplete.add(this.releaseSqueeze, this);
         this.animations.getAnimation('squeeze10') .onComplete.add(this.releaseSqueeze, this);
         this.animations.getAnimation('squeeze20') .onComplete.add(this.releaseSqueeze, this);
         this.animations.getAnimation('squeeze30') .onComplete.add(this.releaseSqueeze, this);
@@ -72,6 +77,7 @@ define([
         this.animations.getAnimation('squeeze90') .onComplete.add(this.releaseSqueeze, this);
         this.animations.getAnimation('squeeze100').onComplete.add(this.releaseSqueeze, this);
         
+        this.animations.getAnimation('release0')  .onComplete.add(this.setIdle, this);
         this.animations.getAnimation('release10') .onComplete.add(this.setIdle, this);
         this.animations.getAnimation('release20') .onComplete.add(this.setIdle, this);
         this.animations.getAnimation('release30') .onComplete.add(this.setIdle, this);
@@ -118,21 +124,18 @@ define([
     StomachMeter.prototype.squeeze = function () {
         // Store % converted to a multiple of 10 for animation selection.
         var p = Math.ceil(this.fullness * 10) * 10;
-        if (p === 0) p = 10;
         this.animations.play('squeeze'+p);
     };
 
     StomachMeter.prototype.releaseSqueeze = function () {
         // Store % converted to a multiple of 10 for animation selection.
         var p = Math.ceil(this.fullness * 10) * 10;
-        if (p === 0) p = 10;
         this.animations.play('release'+p);
     };
 
     StomachMeter.prototype.setIdle = function () {
         // Store % converted to a multiple of 10 for animation selection.
         var p = Math.ceil(this.fullness * 10) * 10;
-        if (p === 0) p = 10;
         this.animations.play('idle'+p);
     };
 
