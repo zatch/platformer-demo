@@ -13,15 +13,16 @@ define([
     'object-layer-helper',
     'health-display',
     'damage-display',
+    'lives-display',
     'health-powerup',
     'checkpoint',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, DamageDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, DamageDisplay, LivesDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
+    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, livesDisplay, collectables, checkpoints, lastCheckpoint, level;
 
     // Default starting properties/state of the game world. These properties
     // can be overridden by passing a data object to the Play state.
@@ -34,6 +35,8 @@ define([
             player: {
                 health: null,
                 maxHealth: null,
+                lives: null,
+                maxLives: null
             }
         };
 
@@ -71,9 +74,10 @@ define([
 
             // Player set-up
             player = new Player(game, 0, 0);
-            player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
+            player.events.onOutOfBounds.add(this.onPlayerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
             player.events.onHeal.add(this.onPlayerHeal);
+            player.events.onDeath.add(this.onPlayerDeath);
 
             // Make player accessible via game object.
             game.player = player;
@@ -127,6 +131,8 @@ define([
             // Apply prior player state (if it exists).
             player.health    = initialState.player.health ? initialState.player.health : player.health;
             player.maxHealth = initialState.player.maxHealth ? initialState.player.maxHealth : player.maxHealth;
+            player.lives     = initialState.player.lives ? initialState.player.lives : player.lives;
+            player.maxLives  = initialState.player.maxLives ? initialState.player.maxLives : player.maxLives;
 
             // Add checkpoints
             checkpoints = ObjectLayerHelper.createObjectsByType(game, 'checkpoint', map, 'checkpoints', Checkpoint);
@@ -191,6 +197,10 @@ define([
             game.add.existing(healthDisplay);
             healthDisplay.setMaxHealth(player.maxHealth);
             healthDisplay.updateDisplay(player.health);
+
+            livesDisplay = new LivesDisplay(game, 20, 20, 'life', 'empty-life');
+            game.add.existing(livesDisplay);
+            livesDisplay.updateDisplay(player.lives, player.maxLives);
 
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
@@ -419,31 +429,6 @@ define([
 
             // Update damage display.
             damageDisplay.updateDisplay(player.health);
-
-            // Is the player dead?
-            if(totalHealth <= 0) {
-                game.camera.unfollow();
-
-                // Player has more lives and will get another chance!
-                if(player.lives > 0) {
-                    game.stateTransition.to('Die', true, false, {
-                        map: {
-                            name: initialState.map.name,
-                            checkpoint: initialState.map.checkpoint
-                        },
-                        player: {
-                            // Start w/ maximum health
-                            health: player.maxHealth,
-                            maxHealth: player.maxHealth,
-                        }
-                    });
-                }
-
-                // Player has no more lives left :(.  Game over.
-                else {
-                    game.stateTransition.to('GameOver', true, false);
-                }
-            }
         },
 
         onPlayerHeal: function (totalHealth, amount) {
@@ -453,26 +438,43 @@ define([
             healthDisplay.updateDisplay(player.health);
             damageDisplay.updateDisplay(player.health);
         },
+
+        onPlayerDeath: function (player) {
+            game.camera.unfollow();
+
+            // Player has more lives and will get another chance!
+            if(player.lives > 1) {
+                // Decrement player lives.
+                player.removeLife();
+
+                game.stateTransition.to('Die', true, false, {
+                    map: {
+                        name: initialState.map.name,
+                        checkpoint: initialState.map.checkpoint
+                    },
+                    player: {
+                        // Start w/ maximum health
+                        health: player.maxHealth,
+                        maxHealth: player.maxHealth,
+                        lives: player.lives,
+                        maxLives: player.maxLives
+                    }
+                });
+            }
+
+            // Player has no more lives left :(.  Game over.
+            else {
+                game.stateTransition.to('GameOver', true, false);
+            }
+        },
             
         onPlayerCollidesCollectable: function (player, collectable) {
             collectable.useOn(player);
             collectable.destroy();
         },
         
-        playerOutOfBounds: function() {
+        onPlayerOutOfBounds: function() {
             game.camera.unfollow();
-            // Switch to the "death" state.
-            game.stateTransition.to('Die', true, false, {
-                map: {
-                    name: initialState.map.name,
-                    checkpoint: initialState.map.checkpoint
-                },
-                player: {
-                    // Start w/ max health when respawned.
-                    health: player.maxHealth,
-                    maxHealth: player.maxHealth,
-                }
-            });
         },
 
         playerExits: function () {
@@ -480,12 +482,14 @@ define([
             game.camera.unfollow();
             game.stateTransition.to('Play', true, false, {
                 map: {
-                    name: initialState.map.name
+                    name: exitDoor.properties.mapLink
                 },
                 player: {
                     // Start w/ same health on next map as player has now.
                     health: player.health,
                     maxHealth: player.maxHealth,
+                    lives: player.lives,
+                    maxLives: player.maxLives
                 }
             });
         }

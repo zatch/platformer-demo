@@ -4,8 +4,9 @@ define([
     'states/menu',
     'states/play',
     'states/win',
-    'states/die'
-], function (Phaser, PhaserState, Menu, Play, Win, Die) { 
+    'states/die',
+    'states/game-over'
+], function (Phaser, PhaserState, Menu, Play, Win, Die, GameOver) { 
     'use strict';
 
     function Game() {    
@@ -65,6 +66,8 @@ define([
             this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
+            this.game.load.image('life', 'assets/hud/life.png');
+            this.game.load.image('life-empty', 'assets/hud/life-empty.png');
 
             this.game.load.spritesheet('player', 'assets/sprites/blobman.png', 32, 48, 13);
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);
@@ -95,6 +98,7 @@ define([
             this.game.state.add('Play', Play);
             this.game.state.add('Win', Win);
             this.game.state.add('Die', Die);
+            this.game.state.add('GameOver', GameOver);
 
             // Now that everything is loaded, show the menu.
             this.game.state.start('Menu');

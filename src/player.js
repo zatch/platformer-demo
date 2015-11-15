@@ -49,6 +49,12 @@ define([
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 800;
 
+        // Number of times that the player can die and re-spawn at the last 
+        // checkpoint reached.
+        this.lives = 3;
+        // The maximum number of lives a player can carry at any given time.
+        this.maxLives = 3;
+
         // Number of times the player can be hit by an enemy.
         this.maxHealth = 20;
         this.health = 20;
@@ -84,6 +90,14 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
+        this.events.onAddLife = new Phaser.Signal();
+        this.events.onRemoveLife = new Phaser.Signal();
+        this.events.onAddMaxLife = new Phaser.Signal();
+        this.events.onRemoveMaxLife = new Phaser.Signal();
+        this.events.onDeath = new Phaser.Signal();
+
+        // Kill player when they fall outside the bounds of the map.
+        this.events.onOutOfBounds.add(this.handleDeath, this);
 
     }
 
@@ -180,6 +194,48 @@ define([
         // Temporarily disable input after knockback.
         this.knockbackTimeout = game.time.now + 500;
 
+        // Am I dead yet?
+        if (this.health <= 0) this.handleDeath();
+
+    };
+
+    Player.prototype.addLife = function (amount) {
+        if(!amount || amount < 1) amount = 1;
+        this.lives += amount;
+        if(this.lives > this.maxLives) this.lives = this.maxLives;
+        this.events.onAddLife.dispatch(this, amount);
+    };
+
+    Player.prototype.removeLife = function(amount) {
+        if(!amount || amount < 1) amount = 1;
+        this.lives -= amount;
+        if(this.lives < 0) this.lives = 0;
+        this.events.onRemoveLife.dispatch(this, amount);
+    };
+
+    Player.prototype.addMaxLife = function (amount) {
+        if(!amount || amount < 1) amount = 1;
+        this.maxLives += amount;
+        this.events.onAddMaxLife.dispatch(this, amount);
+    };
+
+    Player.prototype.removeMaxLife = function (amount) {
+        if(!amount || amount < 1) amount = 1;
+        this.lives -= amount;
+        this.events.onRemoveMaxLife.dispatch(this, amount);
+    };
+
+    Player.prototype.handleDeath = function () {
+        // Player is now in the process of dying.
+        this.dying = true;
+
+        // Tell everyone how dead I am.
+        this.events.onDeath.dispatch(this);
+    };
+
+    Player.prototype.kill = function () {
+        this.dying = false;
+        Phaser.Sprite.prototype.kill.apply(this, arguments);
     };
     
     Player.prototype.jump = function () {
