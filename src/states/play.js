@@ -22,7 +22,7 @@ define([
     'use strict';
 
     // Shortcuts
-    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
+    var game, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
 
     // Helper functions 
 
@@ -205,13 +205,18 @@ define([
             moveKeys.wasd.up.onUp.add(function () {
                 player.endJump();
             });
-            game.input.keyboard.addKey(Phaser.Keyboard.COMMA).onDown.add(function () {
+            attackKeys = {
+                sword: game.input.keyboard.addKey(Phaser.Keyboard.COMMA),
+                puker: game.input.keyboard.addKey(Phaser.Keyboard.PERIOD),
+                claw: game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK)
+            };
+            attackKeys.sword.onDown.add(function () {
                 player.attackSword();
             });
-            game.input.keyboard.addKey(Phaser.Keyboard.PERIOD).onDown.add(function () {
+            attackKeys.puker.onDown.add(function () {
                 player.attackPuker();
             });
-            game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK).onDown.add(function () {
+            attackKeys.claw.onDown.add(function () {
                 player.attackClaw();
             });
             game.input.keyboard.addKey(Phaser.Keyboard.F).onDown.add(function() {
@@ -347,7 +352,7 @@ define([
                 player.stopMoving();
             }
             
-            if (Phaser.Keyboard.PERIOD.isDown ||
+            if (attackKeys.puker.isDown ||
                 pad1.isDown(Phaser.Gamepad.XBOX360_X)) {
                 player.attackPuker();
             }
