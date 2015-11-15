@@ -30,6 +30,8 @@ define([
         this.body.immovable = true;
         this.body.allowGravity = false;
 
+        // Signals
+        this.events.onPuke = new Phaser.Signal();
     }
 
     Puker.prototype = Object.create(Weapon.prototype);
@@ -50,6 +52,7 @@ define([
         game.world.bringToTop(this.missiles);
         missile.fire(this.parent.facing, this.parent.body.velocity);
         this.useTimeout = game.time.now;
+        this.events.onPuke.dispatch();
     };
 
     Puker.prototype.canUse = function () {

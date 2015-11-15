@@ -65,6 +65,7 @@ define([
             this.game.load.image('health-bar-cap-right', 'assets/hud/health-bar-cap-right.png');
             this.game.load.image('health-bar-fill', 'assets/hud/health-bar-fill.png');
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
+            this.game.load.atlas('stomach-meter', 'assets/hud/stomach-meter.png', 'assets/hud/stomach-meter.json');
 
             this.game.load.spritesheet('player', 'assets/sprites/blobman.png', 32, 48, 13);
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);

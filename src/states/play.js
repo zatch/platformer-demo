@@ -12,16 +12,17 @@ define([
     'platform',
     'object-layer-helper',
     'health-display',
+    'stomach-meter',
     'damage-display',
     'health-powerup',
     'checkpoint',
     'character-trigger',
     'levels/test-map-1'
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, DamageDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
 
     // Shortcuts
-    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
+    var game, playState, moveKeys, pad1, player, spawners, enemies, villagers, characters, map, mapName, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, collectables, checkpoints, lastCheckpoint, level;
 
     // Helper functions 
 
@@ -68,6 +69,7 @@ define([
             player.events.onOutOfBounds.add(this.playerOutOfBounds, this);
             player.events.onDamage.add(this.onPlayerDamage);
             player.events.onHeal.add(this.onPlayerHeal);
+            player.events.onPuke.add(this.onPlayerPuke);
 
             // Make player accessible via game object.
             game.player = player;
@@ -181,6 +183,10 @@ define([
             game.add.existing(healthDisplay);
             healthDisplay.setMaxHealth(player.maxHealth);
             healthDisplay.updateDisplay(player.health);
+            
+            stomachMeter = new StomachMeter(game, 0, 0);
+            game.add.existing(stomachMeter);
+            stomachMeter.updateDisplay(player.fullness / player.maxFullness);
 
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
@@ -431,6 +437,11 @@ define([
             // Update HUD
             healthDisplay.updateDisplay(player.health);
             damageDisplay.updateDisplay(player.health);
+        },
+        
+        onPlayerPuke: function () {
+            // Update HUD
+            stomachMeter.updateDisplay(player.fullness / player.maxFullness);
         },
             
         onPlayerCollidesCollectable: function (player, collectable) {

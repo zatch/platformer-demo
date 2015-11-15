@@ -53,19 +53,25 @@ define([
         this.maxHealth = 20;
         this.health = 20;
 
+        // Amount of shit the player can fit in his stomach.
+        this.maxFullness = 100;
+        this.fullness = 100;
+
         // Equip weapons
         this.weapons = [];
         this.weapons.sword   = new Sword(game, 0, 0);
-        this.weapons.bow     = new Puker(game, 20, 14);
+        this.weapons.puker     = new Puker(game, 20, 14);
         this.weapons.clawArm = new ClawArm(game, 0, 0);
 
         this.weapons.push(this.weapons.sword);
-        this.weapons.push(this.weapons.bow);
+        this.weapons.push(this.weapons.puker);
         this.weapons.push(this.weapons.clawArm);
 
         for(var i=0; i<this.weapons.length; i++) {
             this.addChild(this.weapons[i]);
         }
+        
+        this.weapons.puker.events.onPuke.add(this.onPukerPuke, this);
 
         // Invulnerability
         this.invulnerable = false;
@@ -84,6 +90,8 @@ define([
         // Signals
         this.events.onHeal = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
+        this.events.onPuke = new Phaser.Signal();
+        this.events.onStomachEmptied = new Phaser.Signal();
 
     }
 
@@ -134,7 +142,14 @@ define([
     };
 
     Player.prototype.attackPuker = function () {
-        this.weapons[1].use();
+        if (this.fullness > 0) {
+            this.weapons[1].use();
+        }
+    };
+
+    Player.prototype.onPukerPuke = function () {
+        this.fullness--;
+        this.events.onPuke.dispatch();
     };
     
     Player.prototype.attackClaw = function () {
