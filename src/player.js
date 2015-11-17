@@ -60,8 +60,11 @@ define([
         this.health = 5;
 
         // Amount of shit the player can fit in his stomach.
-        this.maxFullness = 100;
-        this.fullness = 100;
+        this.maxFullness = 40;
+        this.fullness = 40;
+        this.stomachAutoFillTimer = game.time.create(false);
+        this.stomachAutoFillTimer.loop(700, this.eat, this, 3);
+        this.stomachAutoFillTimer.start();
 
         // Equip weapons
         this.weapons = [];
@@ -177,7 +180,11 @@ define([
         this.events.onHeal.dispatch(this.health, amount);
         
         // Temp deboug: always fill fullness on heal.
-        this.fullness += 10;
+        this.eat(20);
+    };
+    
+    Player.prototype.eat = function(amount) {
+        this.fullness += amount;
         if (this.fullness > this.maxFullness) this.fullness = this.maxFullness;
         this.events.onEat.dispatch();
     };
