@@ -47,10 +47,11 @@ define([
 
     Puker.prototype.use = function (direction) {
         if (!this.canUse()) return;
-        
+        var v = {x:(this.parent.scale.x*Math.random()*150 - 75) + this.parent.body.velocity.x,
+                 y: 0};
         var missile = this.missiles.getFirstDead(true, this.parent.x+(this.x*this.parent.scale.x), this.parent.y+this.y);
         game.world.bringToTop(this.missiles);
-        missile.fire(this.parent.facing, this.parent.body.velocity);
+        missile.fire(this.parent.facing, v);
         this.useTimeout = game.time.now;
         this.events.onPuke.dispatch();
     };

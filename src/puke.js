@@ -56,7 +56,7 @@ define([
 
         // Initialize public properites.
         // Fastest possible movement speeds.
-        this.body.maxVelocity.x = 500;
+        this.body.maxVelocity.x = 600;
         this.body.maxVelocity.y = 10000;
         this.body.drag.x = 0;
         this.body.drag.y = 0;
@@ -131,7 +131,7 @@ define([
         else {
             this.body.velocity.x = this.fireVelocity.x + initialVelocity.x;
         }
-        this.body.velocity.y = -this.fireVelocity.y;
+        this.body.velocity.y = -this.fireVelocity.y + initialVelocity.y;
         
         this.animations.play('ejecting');
         this.stateMachine.setState('flying');
