@@ -58,7 +58,7 @@ define([
         // Fastest possible movement speeds.
         this.body.maxVelocity.x = 600;
         this.body.maxVelocity.y = 10000;
-        this.body.drag.x = 0;
+        this.body.drag.x = 100;
         this.body.drag.y = 0;
 
         // The acceleration that is applied when moving.
