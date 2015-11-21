@@ -170,8 +170,6 @@ define([
     };
     
     Worm.prototype.handleDeath = function () {
-        this.events.onDeath.dispatch(this);
-
         // Drop loot.
         if (Math.random() < 0.05) {
             var healthPowerup = new HealthPowerup(game, this.x, this.y);
@@ -182,6 +180,8 @@ define([
         this.body.checkCollision.down = false;
         this.body.checkCollision.left = false;
         this.body.checkCollision.right = false;
+        
+        Entity.prototype.handleDeath.apply(this);
     };
 
     return Worm;
