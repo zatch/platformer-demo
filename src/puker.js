@@ -1,8 +1,9 @@
 define([
     'phaser',
+    'entity',
     'weapon',
     'puke'
-], function (Phaser, Weapon, Puke) { 
+], function (Phaser, Entity, Weapon, Puke) { 
     'use strict';
 
     var game;
@@ -51,7 +52,7 @@ define([
                  y: 0};
         var missile = this.missiles.getFirstDead(true, this.parent.x+(this.x*this.parent.scale.x), this.parent.y+this.y);
         game.world.bringToTop(this.missiles);
-        missile.fire(this.parent.facing, v);
+        missile.fire(this.parent.scale.x, v);
         this.useTimeout = game.time.now;
         this.events.onPuke.dispatch();
     };

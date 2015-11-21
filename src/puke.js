@@ -1,7 +1,8 @@
 define([
     'phaser',
+    'entity',
     'utilities/state-machine'
-], function (Phaser, StateMachine) { 
+], function (Phaser, Entity, StateMachine) { 
     'use strict';
 
     // Shortcuts
@@ -13,7 +14,7 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'puke');
+        Entity.call(this, game, x, y, 'puke');
         this.anchor.set(0.5);
 
         // Set up animations.
@@ -44,9 +45,6 @@ define([
             [43,5,16,21],
             [43,5,16,21]
         ];
-        
-        // Which way is the dude or dudette facing?
-        this.facing = this.parent && this.parent.facing ? this.parent.facing : 'right';
 
         // Enable physics.
         game.physics.enable(this);
@@ -82,7 +80,7 @@ define([
         this.stateMachine.setState('idle');
     }
 
-    Puke.prototype = Object.create(Phaser.Sprite.prototype);
+    Puke.prototype = Object.create(Entity.prototype);
     Puke.prototype.constructor = Puke;
     
     Puke.prototype.update = function () {
@@ -98,17 +96,9 @@ define([
         if(this.alive && !this.dying && !this.invulnerable) {
             this.stateMachine.handle('update');
         }
-
-        // Update direction
-        if (this.facing === 'right') {
-            this.scale.x = 1; //facing default direction
-        }
-        else {
-            this.scale.x = -1; //flipped
-        }
         
         // Call up!
-        Phaser.Sprite.prototype.update.call(this);
+        Entity.prototype.update.call(this);
     };
 
     Puke.prototype.update_flying = function () {
@@ -123,12 +113,14 @@ define([
     };
 
     Puke.prototype.fire = function (direction, initialVelocity) {
-        this.facing = direction;
+
+        // Flip sprite direction.
+        this.flip(direction);
         
-        if (this.facing === 'left') {
+        if (this.scale.x === -1) {
             this.body.velocity.x = -this.fireVelocity.x + initialVelocity.x;
         }
-        else {
+        else if (this.scale.x === 1) {
             this.body.velocity.x = this.fireVelocity.x + initialVelocity.x;
         }
         this.body.velocity.y = -this.fireVelocity.y + initialVelocity.y;
@@ -139,13 +131,9 @@ define([
 
     Puke.prototype.reset = function (x, y, health) {
         // Call up!
-        Phaser.Sprite.prototype.reset.call(this, x||this.x, y||this.y, health||this.maxHealth);
+        Entity.prototype.reset.call(this, x||this.x, y||this.y, health||this.maxHealth);
         
         this.stateMachine.setState('idle');
-    };
-
-    Puke.prototype.kill = function () {
-        Phaser.Sprite.prototype.kill.apply(this, arguments);
     };
 
     return Puke;

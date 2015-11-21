@@ -1,9 +1,10 @@
 define([
     'phaser',
+    'entity',
     'sword',
     'puker',
     'claw-arm'
-], function (Phaser, Sword, Puker, ClawArm) { 
+], function (Phaser, Entity, Sword, Puker, ClawArm) { 
     'use strict';
 
     // Shortcuts
@@ -13,16 +14,13 @@ define([
         game = _game;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'player');
+        Entity.call(this, game, x, y, 'player');
         this.anchor.set(0.5);
 
         // Set up animations.
         this.anims = {};
         this.anims.walk = this.animations.add('walk', [2,3,4,5,6,7,8,9], 40);
         this.frame = 0;
-
-        // Which way is the player facing?
-        this.facing = 'right';
 
         // Enable physics.
         game.physics.enable(this);
@@ -121,17 +119,11 @@ define([
         }
     }
 
-    Player.prototype = Object.create(Phaser.Sprite.prototype);
+    Player.prototype = Object.create(Entity.prototype);
     Player.prototype.constructor = Player;
     
     // Update children.
     Player.prototype.update = function () {
-        if (this.facing === 'right') {
-            this.scale.x = 1; //facing default direction
-        }
-        else {
-            this.scale.x = -1; //flipped
-        }
 
         // Update sprite.
         if(this.isJumping && this.body.velocity.y < 0) this.frame = 10;
@@ -147,7 +139,6 @@ define([
 
         // Update weapons.
         for(var w=0; w<this.weapons.length; w++) {
-            this.weapons[w].facing = this.facing;
             this.weapons[w].update();
         }
 
@@ -314,7 +305,7 @@ define([
         // - We're touching a wall on our left
         // - We're NOT on a floor or platform.
         if(this.body.velocity.y > 0 && this.body.onWall() && this.body.blocked.left && !(this.body.onFloor() || this.body.touching.down)) {
-            this.facing = 'right';
+            this.flip(1);
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
                 this.frame = 12;
@@ -323,7 +314,7 @@ define([
         }
         // Face normally and fall normally.
         else {
-            this.facing = 'left';
+            this.flip(-1);
         }
 
         // If we're touching a wall, we can jump off of it.
@@ -358,7 +349,7 @@ define([
         // - We're touching a wall on our right
         // - We're NOT on a floor or platform.
         if(this.body.velocity.y > 0 && this.body.onWall() && this.body.blocked.right && !(this.body.onFloor() || this.body.touching.down)) {
-            this.facing = 'left';
+            this.flip(-1);
             if (this.body.velocity.y > 0) {
                 this.body.velocity.y = 50;
                 this.frame = 12;
@@ -366,7 +357,7 @@ define([
         }
         // Face normally and fall normally.
         else {
-            this.facing = 'right';
+            this.flip(1);
         }
 
                 // If we're touching a wall, we can jump off of it.

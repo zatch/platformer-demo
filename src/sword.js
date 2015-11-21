@@ -10,6 +10,11 @@ define([
         game = _game;
 
         Weapon.call(this, game, x, y, 'sword-swipe');
+        game.physics.enable(this);
+        this.body.allowGravity = false;
+        this.body.moves = false;
+        this.body.immovable = true;
+
         anim = this.animations.add('swipe', null, 60);
         anim.onComplete.add(onAttackFinish, this);
         this.anchor.y = 0.5;
@@ -118,8 +123,9 @@ define([
 
     Sword.prototype.getCollidables = function () {
         if(!this.inUse) return null;
+
         var hitbox;
-        if(this.parent.facing == 'right') {
+        if(this.parent.scale.x > 0) {
             hitbox = this.rightHitboxFrames[anim.currentFrame.index];
         } else {
             hitbox = this.leftHitboxFrames[anim.currentFrame.index];
@@ -139,7 +145,7 @@ define([
         if(anim.isPlaying) this.visible = true;
         else this.visible = false;
 
-        Phaser.Sprite.prototype.update.call(this);
+        Weapon.prototype.update.call(this);
     };
 
     Sword.prototype.revive = function (health) {
