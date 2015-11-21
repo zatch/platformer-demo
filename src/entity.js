@@ -37,7 +37,10 @@ define([
      
         // Initial health.
         this.health = this.maxHealth = 1;
-
+        
+        // Line of sight
+		this.lineOfSight = new Phaser.Line();
+        
         // Invulnerability
         this.invulnerable            = false;
         this.invulnerableTime        = game.time.now;
@@ -53,6 +56,7 @@ define([
         this.events.onDamage = new Phaser.Signal();
         this.events.onDeath  = new Phaser.Signal();
         this.events.onDrop   = new Phaser.Signal();
+        this.events.onSpawnChild = new Phaser.Signal();
         
         // Assets for killing enemy when it goes off screen for a given period
         // of time.
@@ -80,6 +84,20 @@ define([
                 this.offCameraKillTimer.removeAll();
             }
         }
+    };
+
+    /*
+     * Check whether this entity can see a given target.
+     */
+    Entity.prototype.canSee = function (target) {
+        this.lineOfSight.start.x = this.x;
+        this.lineOfSight.start.y = this.y;
+        this.lineOfSight.end.x = target.x;
+        this.lineOfSight.end.y = target.y;
+        var tiles = game.collisionLayer.getRayCastTiles(this.lineOfSight, null, true);
+
+        if(tiles.length) return false;
+        return true;
     };
 
     /* 
