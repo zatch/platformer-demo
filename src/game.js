@@ -66,7 +66,7 @@ define([
             this.game.load.atlas('stomach-meter', 'assets/hud/stomach-meter.png', 'assets/hud/stomach-meter.json');
             this.game.load.image('lives', 'assets/hud/lives.png');
 
-            this.game.load.spritesheet('player', 'assets/sprites/blobman.png', 32, 48, 13);
+            this.game.load.atlas('player', 'assets/sprites/blobman.png', 'assets/sprites/blobman.json');
             this.game.load.spritesheet('spawner', 'assets/sprites/spawner.png', 32, 32, 1);
             this.game.load.spritesheet('enemy', 'assets/sprites/enemy.png', 33, 27, 1);
             this.game.load.atlas('dipteranura', 'assets/sprites/dipteranura.png', 'assets/sprites/dipteranura.json');
@@ -77,6 +77,7 @@ define([
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
             this.game.load.atlas('bow', 'assets/sprites/bow.png', 'assets/sprites/bow.json');
             this.game.load.atlas('puke', 'assets/sprites/puke.png', 'assets/sprites/puke.json');
+            this.game.load.atlas('puke2', 'assets/sprites/puke2.png', 'assets/sprites/puke2.json');
             this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 1);
             this.game.load.spritesheet('claw', 'assets/sprites/claw.png', 15, 27, 1);
             this.game.load.spritesheet('claw-arm-ball', 'assets/sprites/claw-arm-ball.png', 8, 8, 1);

@@ -149,6 +149,17 @@ define([
                 player.y = initialState.map.checkpoint.y;
             }
 
+            // Platforms
+            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
+            game.add.existing(platforms);
+            platforms.callAll('start');
+
+            // Collectables
+            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
+            game.add.existing(collectables);
+
+            map.createLayer('foreground-decoration');
+
             // Insert enemies
             enemies = [];
             spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner);
@@ -158,8 +169,6 @@ define([
             // Insert villagers
             villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
             game.add.existing(villagers);
-
-            map.createLayer('foreground-decoration');
 
             // Physics engine set-up
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -182,15 +191,6 @@ define([
             exitDoor.body.allowGravity = false;
             exitDoor.body.immovable = true;
             game.add.existing(exitDoor);
-
-            // Platforms
-            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
-            game.add.existing(platforms);
-            platforms.callAll('start');
-
-            // Collectables
-            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
-            game.add.existing(collectables);
             
             // HUD
             damageDisplay = new DamageDisplay(game, 0, 0);

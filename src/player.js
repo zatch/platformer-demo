@@ -28,7 +28,7 @@ define([
         this.checkWorldBounds = true;
 
         // Resize player body/hitbox.
-        this.body.setSize(32, 32, 0, 8);
+        this.body.setSize(26,29,1,9);
 
         // Initialize public properites.
         // Fastest possible movement speeds.
