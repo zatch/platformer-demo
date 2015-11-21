@@ -13,7 +13,8 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'puke');
+        this.spriteKey = Math.random() < 0.5 ? 'puke' : 'puke2';
+        Phaser.Sprite.call(this, game, x, y, this.spriteKey);
         this.anchor.set(0.5);
 
         // Set up animations.
@@ -30,20 +31,36 @@ define([
             this.animations.play('idle', null, false, true);
         }, this);
         
-        this.bodyFrameData = [
-            [19,11,5,1],
-            [28,15,5,0],
-            [33,20,8,0],
-            [25,19,16,1],
-            [29,20,17,8],
-            [29,20,17,8],
-            [29,20,17,8],
-            [28,14,21,12],
-            [36,8,18,18],
-            [43,5,16,21],
-            [43,5,16,21],
-            [43,5,16,21]
-        ];
+        this.bodyFrameData = {
+            'puke': [
+                [19,11,5,1],
+                [28,15,5,0],
+                [33,20,8,0],
+                [25,19,16,1],
+                [29,20,17,8],
+                [29,20,17,8],
+                [29,20,17,8],
+                [28,14,21,12],
+                [36,8,18,18],
+                [43,5,16,21],
+                [43,5,16,21],
+                [43,5,16,21]
+            ],
+            'puke2': [
+                [19,11,5,1],
+                [28,15,5,0],
+                [33,20,8,0],
+                [25,19,16,1],
+                [23,23,19,7],
+                [23,23,19,7],
+                [23,23,19,7],
+                [28,14,21,12],
+                [36,8,18,18],
+                [43,5,16,21],
+                [43,5,16,21],
+                [43,5,16,21]
+            ]
+            };
         
         // Which way is the dude or dudette facing?
         this.facing = this.parent && this.parent.facing ? this.parent.facing : 'right';
@@ -88,7 +105,7 @@ define([
     Puke.prototype.update = function () {
 
         // Adjust body to match animation frame.
-        var bfd = this.bodyFrameData[this.animations.frame];
+        var bfd = this.bodyFrameData[this.spriteKey][this.animations.frame];
         this.body.setSize(bfd[0],
                           bfd[1],
                           bfd[2]*this.anchor.x*this.scale,

@@ -77,6 +77,7 @@ define([
             this.game.load.spritesheet('platform', 'assets/sprites/platform.png', 96, 8, 1);
             this.game.load.atlas('bow', 'assets/sprites/bow.png', 'assets/sprites/bow.json');
             this.game.load.atlas('puke', 'assets/sprites/puke.png', 'assets/sprites/puke.json');
+            this.game.load.atlas('puke2', 'assets/sprites/puke2.png', 'assets/sprites/puke2.json');
             this.game.load.spritesheet('arrow', 'assets/sprites/arrow.png', 32, 7, 1);
             this.game.load.spritesheet('claw', 'assets/sprites/claw.png', 15, 27, 1);
             this.game.load.spritesheet('claw-arm-ball', 'assets/sprites/claw-arm-ball.png', 8, 8, 1);
