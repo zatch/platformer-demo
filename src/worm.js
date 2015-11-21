@@ -19,6 +19,15 @@ define([
         this.animations.add('walk', [0,1,2,3,4,5], 5);
        // this.animations.add('attack', [4,5,6]);
 
+        this.bodyFrameData = [
+            [46,4,1,19],
+            [23,16,20,7],
+            [26,3,17,20],
+            [26,3,17,20],
+            [23,16,20,7],
+            [46,4,1,19]
+        ];
+        
         // Which way is the dude or dudette facing?
         this.facing = 'right';
 
@@ -92,7 +101,14 @@ define([
     Worm.prototype.constructor = Worm;
 
     Worm.prototype.update = function () {
-
+    
+        // Adjust body to match animation frame.
+        var bfd = this.bodyFrameData[this.animations.frame];
+        this.body.setSize(bfd[0],
+                          bfd[1],
+                          bfd[2]*this.anchor.x*this.scale,
+                          bfd[3]*this.anchor.y);
+        
         Phaser.Point.subtract(game.player.position, this.position, this.distanceToPlayer);
 
         // Don't continue to accelerate unless force is applied.
