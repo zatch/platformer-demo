@@ -51,7 +51,7 @@ define([
         // Signals
         this.events.onHeal   = new Phaser.Signal();
         this.events.onDamage = new Phaser.Signal();
-        this.events.onDying  = new Phaser.Signal();
+        this.events.onDeath  = new Phaser.Signal();
         this.events.onDrop   = new Phaser.Signal();
         
         // Assets for killing enemy when it goes off screen for a given period
@@ -149,7 +149,7 @@ define([
         this.knockbackTime = game.time.now + this.knockbackDuration;
         
         if (this.health <= 0) {
-            this.die();
+            this.handleDeath();
         }
     };
     
@@ -159,13 +159,13 @@ define([
      * provides an opportunity to, for example, show a death animation, generate
      * loot drops, etc.
      */ 
-    Entity.prototype.die = function () {
+    Entity.prototype.handleDeath = function () {
         
         // You may only kill me once.  Sorry.
         if(this.dying) return;
 
         // Send out the obit
-        this.events.onDying.dispatch(this);
+        this.events.onDeath.dispatch(this);
 
         // ... and now we're in the process of dying.  Weeeeee!
         this.dying = true;
