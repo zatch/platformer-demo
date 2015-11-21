@@ -1,8 +1,9 @@
 define([
     'phaser',
+    'entity',
     'health-powerup',
     'behaviors/pacer'
-], function (Phaser, HealthPowerup, Pacer) { 
+], function (Phaser, Entity, HealthPowerup, Pacer) { 
     'use strict';
 
     // Shortcuts
@@ -13,8 +14,7 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, 'velma-worm');
-        this.anchor.set(0.5);
+        Entity.call(this, game, x, y, 'velma-worm');
         
         this.animations.add('walk', [0,1,2,3,4,5], 5);
        // this.animations.add('attack', [4,5,6]);
@@ -31,12 +31,6 @@ define([
         // Which way is the dude or dudette facing?
         this.facing = 'right';
 
-        // Enable physics.
-        game.physics.enable(this);
-        this.body.collideWorldBounds = true;
-        this.checkWorldBounds = true;
-        this.outOfBoundsKill = true;
-
         // Initialize public properites.
         // Fastest possible movement speeds.
         this.body.maxVelocity.x = 500;
@@ -46,25 +40,9 @@ define([
         
         // Initial health.
         this.health = this.maxHealth = 1;
-
-        // Initial jump speed
-        this.jumpSpeed = 500;
+        
         // The horizontal acceleration that is applied when moving.
         this.moveAccel = 1200;
-
-        // Invulnerability
-        this.invulnerable = false;
-        this.invulnerableTimer = 0;
-
-        // Knockback
-        this.knockback = new Phaser.Point();
-        this.knockbackTimeout = game.time.now;
-
-        // Signals
-        this.events.onHeal = new Phaser.Signal();
-        this.events.onDamage = new Phaser.Signal();
-        this.events.onDeath = new Phaser.Signal();
-        this.events.onDrop = new Phaser.Signal();
 
         // AI
         this.targetPosition = new Phaser.Point();
@@ -73,31 +51,13 @@ define([
         this.bearing = new Phaser.Point();
         this.distanceToPlayer = new Phaser.Point();
 
-        this.knockback = new Phaser.Point();
-        this.knockbackTimeout = 0;
-
         this.behavior = {
             pacer: new Pacer(this, game.player)
         };
         
-        this.offCameraKillTimer = game.time.create(false);
-        this.offCameraKillTimer.start(); 
-        
     }
 
-    function onBlinkLoop (){
-        if(game.time.now - this.invulnerableTimer > 500) {
-            this.blinkTween.start(0);
-            this.blinkTween.pause();
-            this.invulnerable = false;
-            this.alpha = 1;
-            if (!this.alive) {
-                this.kill();
-            }
-        }
-    }
-
-    Worm.prototype = Object.create(Phaser.Sprite.prototype);
+    Worm.prototype = Object.create(Entity.prototype);
     Worm.prototype.constructor = Worm;
 
     Worm.prototype.update = function () {
@@ -126,27 +86,12 @@ define([
         }
         
         // Call up!
-        Phaser.Sprite.prototype.update.call(this);
-        
-        if (this.alive) {
-            
-            if (!this.inCamera) {
-                // Auto-kill if off camera for too long.
-                this.offCameraKillTimer.add(2000, this.kill, this);
-            }
-            else {
-                // Cancel auto-kill if returned to the camera.
-                this.offCameraKillTimer.removeAll();
-            }
-        }
+        Entity.prototype.update.call(this);
     };
 
     Worm.prototype.revive = function () {
         // Call up!
-        Phaser.Sprite.prototype.revive.call(this);
-
-        this.body.acceleration.set(0);
-        this.body.velocity.set(0);
+        Entity.prototype.revive.call(this);
         
         this.body.checkCollision.up = true;
         this.body.checkCollision.down = true;
@@ -163,75 +108,6 @@ define([
 
         if(tiles.length) return false;
         return true;
-    };
-
-    Worm.prototype.damage = function (amount, source) {
-
-        // Can currently take damage?
-        if(this.invulnerable) return;
-
-        amount = Math.abs(amount || 1);
-        this.health -= amount;
-        this.events.onDamage.dispatch(this.health, amount);
-
-        // Temporary invulnerability.
-        this.invulnerable = true;
-        this.invulnerableTimer = game.time.now;
-        
-        // Visual feedback to show player was hit and is currently invulnerable.
-        this.blinkTween = game.add.tween(this);
-        this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
-        this.blinkTween.onLoop.add(onBlinkLoop, this);
-
-        // Knockback force
-        Phaser.Point.subtract({x: this.position.x, y: this.position.y-20}, source.position, this.knockback);
-        Phaser.Point.normalize(this.knockback, this.knockback);
-        this.knockback.setMagnitude(500);
-
-        // Zero out current velocity
-        this.body.velocity.set(0);
-
-        Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
-        this.knockback.set(0);
-
-        // Temporarily disable input after knockback.
-        this.knockbackTimeout = game.time.now + 500;
-        
-        if (this.health === 0) {
-            this.handleDeath();
-        }
-    };
-
-    Worm.prototype.shouldJump = function () {
-        // If the player is higher than enemy and enemy...
-        if(game.player.position.y+game.player.height < this.position.y+this.height) return true;
-
-        // If player is within attack range, there is a 5% change enemy will jump;
-        if(this.distanceToPlayer.getMagnitude() < 64 && Math.random() < 0.05) return true;
-
-        // ...else don't jump.
-        return false;
-    };
-    
-    Worm.prototype.jump = function () {
-        // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
-        
-        // Normal jumping
-        if(this.body.onFloor() || this.body.touching.down) {
-            this.body.velocity.y = -this.jumpSpeed;
-        }
-
-        // Wall jumping.
-        if(this.body.onWall() && this.body.blocked.left) {
-            this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = this.maxMoveSpeed.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
-        }
-
-        if(this.body.onWall() && this.body.blocked.right) {
-            this.body.velocity.y = -this.jumpSpeed;
-            this.body.velocity.x = -this.maxMoveSpeed.x; // TODO: Find a more appropriate way to calculate vx when wall jumping.
-        }
     };
 
     Worm.prototype.moveLeft = function () {
