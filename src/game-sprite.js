@@ -13,7 +13,7 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y, key, frame);
+        Phaser.Sprite.call(this, game, x, y, key||'blank', frame);
         
         // Assets for killing enemy when it goes off screen for a given period
         // of time.
