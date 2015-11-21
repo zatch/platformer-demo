@@ -83,7 +83,7 @@ define([
             this.game.load.spritesheet('sword-swipe', 'assets/sprites/sword-swipe.png', 64, 128, 8);
             
             // Power-ups
-            this.game.load.spritesheet('health-powerup', 'assets/sprites/health-powerup.png', 16, 16, 5);
+            this.game.load.spritesheet('health-powerup', 'assets/sprites/health-powerup.png', 32, 32, 6);
             
             // Can be used for anything that doesn't need a sprite sheet.
             // Workaround for issue: https://github.com/photonstorm/phaser/issues/2173
