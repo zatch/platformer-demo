@@ -95,7 +95,7 @@ define([
             // Visual feedback to show player was hit and is currently invulnerable.
             this.blinkTween = game.add.tween(this);
             this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
-            this.blinkTween.onLoop.add(this.onBlinkLoopCallback);
+            this.blinkTween.onLoop.add(this.onBlinkLoopCallback, this);
         }
     };
 
@@ -105,7 +105,7 @@ define([
      * frame has finished or not.
      */
     Entity.prototype.onBlinkLoopCallback = function (){
-        if(game.time.now - this.invulnerableTimer) {
+        if(game.time.now > this.invulnerableTime) {
             this.blinkTween.start(0);
             this.blinkTween.pause();
             this.invulnerable = false;
