@@ -103,7 +103,7 @@ define([
         if(this.dying) return;
 
         // Send out the obit
-        this.events.onDying.dispatch(this);
+        this.events.onDeath.dispatch(this);
 
         // ... and now we're in the process of dying.  Weeeeee!
         this.dying = true;
