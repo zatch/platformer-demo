@@ -62,6 +62,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":1,
                  "name":"door_exit",
                  "properties":
                     {
@@ -74,57 +75,6 @@
                  "width":32,
                  "x":6592,
                  "y":160
-                }, 
-                {
-                 "height":616,
-                 "name":"commander-kavosic2",
-                 "properties":
-                    {
-                     "characterTriggerTarget":"commander-kavosic",
-                     "currentPhrase":"We need you down in the caves. Your job is fighting monsters, not old men!",
-                     "key":"complain about old men",
-                     "x":"688",
-                     "y":"504"
-                    },
-                 "rotation":0,
-                 "type":"character-trigger",
-                 "visible":true,
-                 "width":16,
-                 "x":528,
-                 "y":0
-                }, 
-                {
-                 "height":184,
-                 "name":"commander-kavosic2",
-                 "properties":
-                    {
-                     "characterTriggerTarget":"commander-kavosic",
-                     "currentPhrase":"Careful! Monsters can jump up walls to get you. Remember that you can jump off of walls, too.",
-                     "key":"warn about jumping monsters",
-                     "x":"688",
-                     "y":"728"
-                    },
-                 "rotation":0,
-                 "type":"character-trigger",
-                 "visible":true,
-                 "width":16,
-                 "x":504,
-                 "y":640
-                }, 
-                {
-                 "height":272,
-                 "name":"commander-kavosic1",
-                 "properties":
-                    {
-                     "characterTriggerTarget":"commander-kavosic",
-                     "key":"hide"
-                    },
-                 "rotation":0,
-                 "type":"character-trigger",
-                 "visible":true,
-                 "width":16,
-                 "x":1120,
-                 "y":600
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -140,6 +90,7 @@
          "objects":[
                 {
                  "height":16,
+                 "id":5,
                  "name":"platform-1",
                  "properties":
                     {
@@ -155,6 +106,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":6,
                  "name":"platform-3",
                  "properties":
                     {
@@ -170,6 +122,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":7,
                  "name":"platform-2",
                  "properties":
                     {
@@ -185,6 +138,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":8,
                  "name":"platform-4",
                  "properties":
                     {
@@ -212,6 +166,7 @@
          "objects":[
                 {
                  "height":32,
+                 "id":9,
                  "name":"player_spawn",
                  "properties":
                     {
@@ -238,6 +193,7 @@
          "objects":[
                 {
                  "height":16,
+                 "id":10,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -252,6 +208,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":11,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -266,6 +223,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":12,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -280,6 +238,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":13,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -294,6 +253,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":14,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -308,6 +268,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":15,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -322,6 +283,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":16,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -336,6 +298,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":17,
                  "name":"health-powerup-1",
                  "properties":
                     {
@@ -371,21 +334,7 @@
          "draworder":"topdown",
          "height":0,
          "name":"characters",
-         "objects":[
-                {
-                 "height":32,
-                 "name":"commander-kavosic",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"commander-kavosic",
-                 "visible":true,
-                 "width":32,
-                 "x":928,
-                 "y":704
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -400,6 +349,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":19,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -414,6 +364,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":20,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -428,6 +379,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":21,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -442,6 +394,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":22,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -456,6 +409,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":23,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -470,6 +424,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":24,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -484,6 +439,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":25,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -498,6 +454,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":26,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -512,6 +469,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":27,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -526,6 +484,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":28,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -540,6 +499,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":29,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -554,6 +514,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":30,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -568,6 +529,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":31,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -582,6 +544,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":32,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -596,6 +559,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":33,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -610,6 +574,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":34,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -624,6 +589,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":35,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -638,6 +604,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":36,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -652,6 +619,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":37,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -666,6 +634,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":38,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -680,6 +649,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":39,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -694,6 +664,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":40,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -708,6 +679,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":41,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -722,6 +694,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":42,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -736,6 +709,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":43,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -750,6 +724,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":44,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -764,6 +739,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":45,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -778,6 +754,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":46,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -792,6 +769,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":47,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -806,6 +784,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":48,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -820,6 +799,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":49,
                  "name":"spawner-1",
                  "properties":
                     {
@@ -846,6 +826,7 @@
          "objects":[
                 {
                  "height":96,
+                 "id":50,
                  "name":"",
                  "properties":
                     {
@@ -860,6 +841,7 @@
                 }, 
                 {
                  "height":192,
+                 "id":51,
                  "name":"",
                  "properties":
                     {
@@ -874,6 +856,7 @@
                 }, 
                 {
                  "height":224,
+                 "id":52,
                  "name":"",
                  "properties":
                     {
@@ -905,6 +888,7 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":53,
  "orientation":"orthogonal",
  "properties":
     {
