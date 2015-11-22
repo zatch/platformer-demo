@@ -1,15 +1,15 @@
 define([
     'phaser',
     'entity',
-    'health-powerup',
-    'behaviors/pacer'
-], function (Phaser, Entity, HealthPowerup, Pacer) { 
+    'utilities/state-machine',
+    'health-powerup'
+], function (Phaser, Entity, StateMachine, HealthPowerup) { 
     'use strict';
 
     // Shortcuts
-    var game, self, sightLine;
+    var game, self;
 
-    function Worm (_game, x, y) {
+    function Worm (_game, x, y, state) {
         game = _game;
         self = this;
 
@@ -17,7 +17,8 @@ define([
         Entity.call(this, game, x, y, 'velma-worm');
         
         this.animations.add('walk', [0,1,2,3,4,5], 5);
-       // this.animations.add('attack', [4,5,6]);
+       // this.animations.add('attack', [6,7,8], 5);
+        this.animations.add('flying', [9,10,11,12], 5);
 
         this.bodyFrameData = [
             [46,4,1,19],
@@ -25,8 +26,29 @@ define([
             [26,3,17,20],
             [26,3,17,20],
             [23,16,20,7],
-            [46,4,1,19]
+            [46,4,1,19],
+            [],
+            [],
+            [],
+            [17,13,16,5],
+            [13,17,17,3],
+            [17,13,14,5],
+            [13,17,15,3]
         ];
+        
+        // State machine for managing behavior states.
+        StateMachine.extend(this);
+        this.stateMachine.onStateChange.add(this.onSelfChangeState, this);
+        this.stateMachine.states = {
+            'flying': {
+                'update': this.update_flying
+            },
+            'walking': {
+                'update': this.update_walking
+            }
+        };
+        // Spawn in idle state.
+        this.stateMachine.setState('walking');
         
         // Which way is the dude or dudette facing?
         this.facing = 'right';
@@ -45,15 +67,7 @@ define([
         this.moveAccel = 1200;
 
         // AI
-        this.targetPosition = new Phaser.Point();
-        this.sightLine = new Phaser.Line();
         this.maxMoveSpeed = new Phaser.Point(75, 1000);
-        this.bearing = new Phaser.Point();
-        this.distanceToPlayer = new Phaser.Point();
-
-        this.behavior = {
-            pacer: new Pacer(this, game.player)
-        };
         
     }
 
@@ -68,14 +82,14 @@ define([
                           bfd[1],
                           bfd[2]*this.anchor.x*this.scale,
                           bfd[3]*this.anchor.y);
-        
-        Phaser.Point.subtract(game.player.position, this.position, this.distanceToPlayer);
 
         // Don't continue to accelerate unless force is applied.
         this.stopMoving();
 
         // Apply behaviors.
-        this.behavior.pacer.update();
+        if(this.alive && !this.dying && !this.invulnerable) {
+            this.stateMachine.handle('update');
+        }
 
         // Update direction
         if (this.facing === 'right') {
@@ -88,6 +102,41 @@ define([
         // Call up!
         Entity.prototype.update.call(this);
     };
+    
+    Worm.prototype.onSelfChangeState = function (sm, stateName) {
+        if (stateName === 'flying') {
+            this.animations.play('flying', null, true);
+            this.body.drag.x = 100;
+        }
+        else if (stateName === 'walking') {
+            this.body.drag.x = 800;
+        }
+    };
+    
+    Worm.prototype.update_flying = function () {
+        if (this.body.blocked.down) {
+            this.stateMachine.setState('walking');
+        }
+    };
+    
+    Worm.prototype.update_walking = function () {
+		if(this.facing === 'left') {
+			if (this.body.blocked.left) {
+				this.moveRight();
+			}
+			else {
+				this.moveLeft();
+			}
+		}
+		else if(this.facing === 'right'){
+			if (this.body.blocked.right) {
+				this.moveLeft();
+			}
+			else {
+				this.moveRight();
+			}
+		}
+    };
 
     Worm.prototype.revive = function () {
         // Call up!
@@ -99,22 +148,11 @@ define([
         this.body.checkCollision.right = true;
     };
 
-    Worm.prototype.canSee = function (target, line) {
-        line.start.x = this.x;
-        line.start.y = this.y;
-        line.end.x = target.x;
-        line.end.y = target.y;
-        var tiles = game.collisionLayer.getRayCastTiles(line, null, true);
-
-        if(tiles.length) return false;
-        return true;
-    };
-
     Worm.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.
         if(this.knockbackTimeout > game.time.now) return;
 
-        if(this.body.velocity.x <=  -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
+        if(this.body.velocity.x <= -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
         
         this.animations.play('walk');
         
@@ -147,9 +185,6 @@ define([
         // Face away from wall and slide down wall slowly.
         if(this.body.onWall() && this.body.blocked.right) {
             this.facing = 'left';
-            if (this.body.velocity.y > 0) {
-                this.body.velocity.y = 50;
-            }
         }
         // Face normally and fall normally.
         else {

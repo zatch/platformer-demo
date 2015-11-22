@@ -2,9 +2,9 @@ define([
     'phaser',
     'entity',
     'health-powerup',
-    'egg-sac',
+    'worm',
     'utilities/state-machine'
-], function (Phaser, Entity, HealthPowerup, EggSac, StateMachine) { 
+], function (Phaser, Entity, HealthPowerup, Worm, StateMachine) { 
     'use strict';
 
     // Shortcuts
@@ -48,7 +48,10 @@ define([
         this.missiles = game.add.group();
         this.missiles.x = 0;
         this.missiles.y = 0;
-        this.missiles.classType = EggSac;
+        this.missiles.classType = Worm;
+        this.missileVelocity = [{x: 350, y: 220},
+                                {x: 300, y: 200},
+                                {x: 250, y: 180}];
         
         // State machine for managing behavior states.
         StateMachine.extend(this);
@@ -168,20 +171,27 @@ define([
 
     Dipteranura.prototype.vomit = function () {
         if (this.canVomit) {
-            var missile = this.missiles.getFirstDead();
-            if(missile){
-                missile.reset(this.x, this.y);
-            } else {
-                missile = this.missiles.create(this.x, this.y);
-            }
-    
+            var missile;
+            
             game.world.bringToTop(this.missiles);
-            missile.x = this.x;
-            missile.y = this.y;
-            
-            missile.fire(this.facing);
-            
-            this.events.onSpawnChild.dispatch(this, missile);
+            for (var lcv = 0; lcv < this.missileVelocity.length; lcv++) {
+                missile = this.missiles.getFirstDead(true, this.x, this.y);
+                missile.revive();
+                missile.x = this.x;
+                missile.y = this.y;
+                missile.facing = this.facing;
+                missile.stateMachine.setState('flying');
+                
+                if (this.facing === 'left') {
+                    missile.body.velocity.x = -this.missileVelocity[lcv].x;
+                }
+                else {
+                    missile.body.velocity.x = this.missileVelocity[lcv].x;
+                }
+                missile.body.velocity.y = -this.missileVelocity[lcv].y;
+                
+                this.events.onSpawnChild.dispatch(this, missile);
+            }
             
             this.canVomit = false;
         }
