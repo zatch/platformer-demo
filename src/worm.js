@@ -138,9 +138,12 @@ define([
 		}
     };
 
-    Worm.prototype.revive = function () {
+    Worm.prototype.revive = function (health, state) {
         // Call up!
-        Entity.prototype.revive.call(this);
+        Entity.prototype.revive.call(this, health);
+        
+        state = state ? state : 'walking';
+        this.stateMachine.setState(state);
         
         this.body.checkCollision.up = true;
         this.body.checkCollision.down = true;
@@ -210,7 +213,9 @@ define([
             var healthPowerup = new HealthPowerup(game, this.x, this.y);
             this.events.onDrop.dispatch(this, healthPowerup);
         }
-
+        
+        this.stateMachine.setState('flying');
+        
         this.body.checkCollision.up = false;
         this.body.checkCollision.down = false;
         this.body.checkCollision.left = false;

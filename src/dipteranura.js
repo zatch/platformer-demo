@@ -176,11 +176,10 @@ define([
             game.world.bringToTop(this.missiles);
             for (var lcv = 0; lcv < this.missileVelocity.length; lcv++) {
                 missile = this.missiles.getFirstDead(true, this.x, this.y);
-                missile.revive();
+                missile.revive(null, 'flying');
                 missile.x = this.x;
                 missile.y = this.y;
                 missile.facing = this.facing;
-                missile.stateMachine.setState('flying');
                 
                 if (this.facing === 'left') {
                     missile.body.velocity.x = -this.missileVelocity[lcv].x;
