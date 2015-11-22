@@ -64,11 +64,7 @@ define([
         this.health = this.maxHealth = 1;
         
         // The horizontal acceleration that is applied when moving.
-        this.moveAccel = 1200;
-
-        // AI
-        this.maxMoveSpeed = new Phaser.Point(75, 1000);
-        
+        this.moveAccel = 700;
     }
 
     Worm.prototype = Object.create(Entity.prototype);
@@ -120,22 +116,24 @@ define([
     };
     
     Worm.prototype.update_walking = function () {
-		if(this.facing === 'left') {
-			if (this.body.blocked.left) {
-				this.moveRight();
-			}
-			else {
-				this.moveLeft();
-			}
-		}
-		else if(this.facing === 'right'){
-			if (this.body.blocked.right) {
-				this.moveLeft();
-			}
-			else {
-				this.moveRight();
-			}
-		}
+        // Play animation.
+        this.animations.play('walk');
+        
+		// Face away from any walls touched.
+        if(this.body.onWall()) {
+            if (this.body.blocked.left) {
+                this.facing = 'right';
+            }
+            // Face normally.
+            else {
+                this.facing = 'left';
+            }
+        }
+        
+        // Accelerate on certain frame of animation.
+        if (this.animations.frame === 4) {
+            this.body.acceleration.x = this.moveAccel * this.scale.x;
+        }
     };
 
     Worm.prototype.revive = function (health, state) {
@@ -149,58 +147,6 @@ define([
         this.body.checkCollision.down = true;
         this.body.checkCollision.left = true;
         this.body.checkCollision.right = true;
-    };
-
-    Worm.prototype.moveLeft = function () {
-        // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
-
-        if(this.body.velocity.x <= -this.maxMoveSpeed.x) this.body.velocity.x = -this.maxMoveSpeed.x;
-        
-        this.animations.play('walk');
-        
-        // Face away from wall.
-        if(this.body.onWall() && this.body.blocked.left) {
-            this.facing = 'right';
-        }
-        // Face normally.
-        else {
-            this.facing = 'left';
-        }
-        
-        // Wait for drag to stop us if switching directions.
-        if (this.body.acceleration.x > 0) {
-            this.body.acceleration.x = 0;
-        }
-        if (this.body.velocity.x <= 0 && this.animations.frame === 4) {
-            this.body.acceleration.x = -this.moveAccel;
-        }
-    };
-
-    Worm.prototype.moveRight = function () {
-        // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
-
-        if(this.body.velocity.x >= this.maxMoveSpeed.x) this.body.velocity.x = this.maxMoveSpeed.x;
-        
-        this.animations.play('walk');
-        
-        // Face away from wall and slide down wall slowly.
-        if(this.body.onWall() && this.body.blocked.right) {
-            this.facing = 'left';
-        }
-        // Face normally and fall normally.
-        else {
-            this.facing = 'right';
-        }
-        
-        // Wait for drag to stop us if switching directions.
-        if (this.body.acceleration.x < 0) {
-            this.body.acceleration.x = 0;
-        }
-        if (this.body.velocity.x >= 0 && this.animations.frame === 4) {
-            this.body.acceleration.x = this.moveAccel;
-        }
     };
 
     Worm.prototype.stopMoving = function () {
