@@ -36,9 +36,9 @@ define([
         return sprite;
     }
 
-    function createObjectsByType(game, type, map, layer, customClass) {
+    function createObjectsByType(game, type, map, layer, customClass, group) {
         var results = findObjectsByType(type, map, layer);
-        var group = game.add.group();
+        group = group || game.add.group();
 
         // If no objects matching the specified criteria could be found, return
         // an empty group.
