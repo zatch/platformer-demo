@@ -58,10 +58,10 @@ define([
         this.health = 5;
 
         // Amount of shit the player can fit in his stomach.
-        this.maxFullness = 40;
-        this.fullness = 40;
+        this.maxFullness = 50;
+        this.fullness = 50;
         this.stomachAutoFillTimer = game.time.create(false);
-        this.stomachAutoFillTimer.loop(700, this.eat, this, 3);
+        this.stomachAutoFillTimer.loop(1500, this.eat, this, 1);
         this.stomachAutoFillTimer.start();
 
         // Equip weapons
