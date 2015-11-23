@@ -152,9 +152,7 @@ define([
         this.health += amount;
         if (this.health > this.maxHealth) this.health = this.maxHealth;
         this.events.onHeal.dispatch(this.health, amount);
-        
-        // Temp deboug: always fill fullness on heal.
-        this.eat(20);
+
     };
     
     Player.prototype.eat = function(amount) {
