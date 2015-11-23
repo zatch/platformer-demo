@@ -2,8 +2,9 @@ define([
     'phaser',
     'entity',
     'health-powerup',
+    'food-powerup',
     'behaviors/pacer'
-], function (Phaser, Entity, HealthPowerup, Pacer) { 
+], function (Phaser, Entity, HealthPowerup, FoodPowerup, Pacer) { 
     'use strict';
 
     // Shortcuts
@@ -172,8 +173,17 @@ define([
     Worm.prototype.handleDeath = function () {
         // Drop loot.
         if (Math.random() < 0.05) {
-            var healthPowerup = new HealthPowerup(game, this.x, this.y);
-            this.events.onDrop.dispatch(this, healthPowerup);
+            this.events.onDrop.dispatch(
+                this, 
+                new HealthPowerup(game, this.x, this.y-this.height)
+            );
+        }
+
+        else if(Math.random() < 0.1) {
+            this.events.onDrop.dispatch(
+                this, 
+                new FoodPowerup(game, this.x, this.y-this.height)
+            );
         }
 
         this.body.checkCollision.up = false;

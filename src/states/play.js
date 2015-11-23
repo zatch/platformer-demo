@@ -16,12 +16,13 @@ define([
     'damage-display',
     'lives-display',
     'health-powerup',
+    'food-powerup',
     'checkpoint',
     'character-trigger',
     'levels/test-map-1'
 
 
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
     
     // Shortcuts
@@ -149,17 +150,6 @@ define([
                 player.y = initialState.map.checkpoint.y;
             }
 
-            // Platforms
-            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
-            game.add.existing(platforms);
-            platforms.callAll('start');
-
-            // Collectables
-            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
-            game.add.existing(collectables);
-
-            map.createLayer('foreground-decoration');
-
             // Insert enemies
             enemies = [];
             spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner);
@@ -169,6 +159,8 @@ define([
             // Insert villagers
             villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
             game.add.existing(villagers);
+
+            map.createLayer('foreground-decoration');
 
             // Physics engine set-up
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -191,6 +183,16 @@ define([
             exitDoor.body.allowGravity = false;
             exitDoor.body.immovable = true;
             game.add.existing(exitDoor);
+
+            // Platforms
+            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
+            game.add.existing(platforms);
+            platforms.callAll('start');
+
+            // Collectables
+            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
+            ObjectLayerHelper.createObjectsByType(game, 'food-powerup', map, 'collectables', FoodPowerup, collectables);
+            game.add.existing(collectables);
             
             // HUD
             damageDisplay = new DamageDisplay(game, 0, 0);

@@ -2,8 +2,9 @@ define([
     'phaser',
     'entity',
     'health-powerup',
+    'food-powerup',
     'utilities/state-machine'
-], function (Phaser, Entity, HealthPowerup, StateMachine) { 
+], function (Phaser, Entity, HealthPowerup, FoodPowerup, StateMachine) { 
     'use strict';
 
     // Shortcuts
@@ -255,9 +256,18 @@ define([
     Cthulbat.prototype.handleDeath = function () {
 
         // Drop loot.
-        if (Math.random() < 0.25) {
-            var healthPowerup = new HealthPowerup(game, this.x, this.y);
-            this.events.onDrop.dispatch(this, healthPowerup);
+        if (Math.random() < 0.10) {
+            this.events.onDrop.dispatch(
+                this, 
+                new HealthPowerup(game, this.x, this.y-this.height)
+            );
+        }
+
+        else if(Math.random() < 0.5) {
+            this.events.onDrop.dispatch(
+                this, 
+                new FoodPowerup(game, this.x, this.y-this.height)
+            );
         }
 
         // If in the process of swooping, stop it.

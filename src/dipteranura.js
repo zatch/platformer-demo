@@ -2,9 +2,10 @@ define([
     'phaser',
     'entity',
     'health-powerup',
+    'food-powerup',
     'egg-sac',
     'utilities/state-machine'
-], function (Phaser, Entity, HealthPowerup, EggSac, StateMachine) { 
+], function (Phaser, Entity, HealthPowerup, FoodPowerup, EggSac, StateMachine) { 
     'use strict';
 
     // Shortcuts
@@ -231,9 +232,18 @@ define([
     
     Dipteranura.prototype.handleDeath = function () {
         // Drop loot.
-        if (Math.random() < 0.5) {
-            var healthPowerup = new HealthPowerup(game, this.x, this.y);
-            this.events.onDrop.dispatch(this, healthPowerup);
+        if (Math.random() < 0.1) {
+            this.events.onDrop.dispatch(
+                this, 
+                new HealthPowerup(game, this.x, this.y-this.height)
+            );
+        }
+
+        else if(Math.random() < 0.5) {
+            this.events.onDrop.dispatch(
+                this, 
+                new FoodPowerup(game, this.x, this.y-this.height)
+            );
         }
 
         this.body.checkCollision.up = false;

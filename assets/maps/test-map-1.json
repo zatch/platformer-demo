@@ -192,7 +192,7 @@
          "name":"collectables",
          "objects":[
                 {
-                 "height":16,
+                 "height":32,
                  "id":10,
                  "name":"health-powerup-1",
                  "properties":
@@ -202,12 +202,12 @@
                  "rotation":0,
                  "type":"health-powerup",
                  "visible":true,
-                 "width":16,
-                 "x":1976,
-                 "y":680
+                 "width":32,
+                 "x":1952,
+                 "y":672
                 }, 
                 {
-                 "height":16,
+                 "height":32,
                  "id":11,
                  "name":"health-powerup-1",
                  "properties":
@@ -217,27 +217,12 @@
                  "rotation":0,
                  "type":"health-powerup",
                  "visible":true,
-                 "width":16,
+                 "width":32,
                  "x":3360,
                  "y":864
                 }, 
                 {
-                 "height":16,
-                 "id":12,
-                 "name":"health-powerup-1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"health-powerup",
-                 "visible":true,
-                 "width":16,
-                 "x":3392,
-                 "y":864
-                }, 
-                {
-                 "height":16,
+                 "height":32,
                  "id":13,
                  "name":"health-powerup-1",
                  "properties":
@@ -247,12 +232,12 @@
                  "rotation":0,
                  "type":"health-powerup",
                  "visible":true,
-                 "width":16,
-                 "x":3424,
+                 "width":32,
+                 "x":3488,
                  "y":864
                 }, 
                 {
-                 "height":16,
+                 "height":32,
                  "id":14,
                  "name":"health-powerup-1",
                  "properties":
@@ -262,42 +247,12 @@
                  "rotation":0,
                  "type":"health-powerup",
                  "visible":true,
-                 "width":16,
+                 "width":32,
                  "x":1376,
                  "y":224
                 }, 
                 {
-                 "height":16,
-                 "id":15,
-                 "name":"health-powerup-1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"health-powerup",
-                 "visible":true,
-                 "width":16,
-                 "x":1440,
-                 "y":224
-                }, 
-                {
-                 "height":16,
-                 "id":16,
-                 "name":"health-powerup-1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"health-powerup",
-                 "visible":true,
-                 "width":16,
-                 "x":1408,
-                 "y":224
-                }, 
-                {
-                 "height":16,
+                 "height":32,
                  "id":17,
                  "name":"health-powerup-1",
                  "properties":
@@ -307,8 +262,83 @@
                  "rotation":0,
                  "type":"health-powerup",
                  "visible":true,
-                 "width":16,
+                 "width":32,
                  "x":5312,
+                 "y":608
+                }, 
+                {
+                 "height":32,
+                 "id":66,
+                 "name":"food-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"food-powerup",
+                 "visible":true,
+                 "width":32,
+                 "x":1728,
+                 "y":512
+                }, 
+                {
+                 "height":32,
+                 "id":67,
+                 "name":"food-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"food-powerup",
+                 "visible":true,
+                 "width":32,
+                 "x":1664,
+                 "y":544
+                }, 
+                {
+                 "height":32,
+                 "id":84,
+                 "name":"food-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"food-powerup",
+                 "visible":true,
+                 "width":32,
+                 "x":1440,
+                 "y":224
+                }, 
+                {
+                 "height":32,
+                 "id":85,
+                 "name":"food-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"food-powerup",
+                 "visible":true,
+                 "width":32,
+                 "x":3424,
+                 "y":864
+                }, 
+                {
+                 "height":32,
+                 "id":86,
+                 "name":"food-powerup-1",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"food-powerup",
+                 "visible":true,
+                 "width":32,
+                 "x":5056,
                  "y":608
                 }],
          "opacity":1,
@@ -888,7 +918,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":53,
+ "nextobjectid":87,
  "orientation":"orthogonal",
  "properties":
     {
@@ -909,6 +939,7 @@
 
             },
          "spacing":0,
+         "tilecount":240,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -924,6 +955,7 @@
 
             },
          "spacing":0,
+         "tilecount":128,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -939,6 +971,7 @@
 
             },
          "spacing":0,
+         "tilecount":256,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -954,6 +987,7 @@
 
             },
          "spacing":0,
+         "tilecount":256,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -969,6 +1003,7 @@
 
             },
          "spacing":0,
+         "tilecount":256,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -984,6 +1019,7 @@
 
             },
          "spacing":0,
+         "tilecount":256,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -999,6 +1035,7 @@
 
             },
          "spacing":0,
+         "tilecount":320,
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#000000"
@@ -1015,6 +1052,7 @@
 
             },
          "spacing":0,
+         "tilecount":32,
          "tileheight":32,
          "tilewidth":32
         }, 
@@ -1030,6 +1068,7 @@
 
             },
          "spacing":0,
+         "tilecount":4,
          "tileheight":32,
          "tilewidth":32
         }],
