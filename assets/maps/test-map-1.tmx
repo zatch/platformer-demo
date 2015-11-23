@@ -235,7 +235,7 @@
   <object name="player_spawn" type="spawn" x="128" y="416" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="collectables" width="0" height="0">
-  <object name="health-powerup-1" type="health-powerup" x="1952" y="672" width="32" height="32"/>
+  <object name="health-powerup-1" type="health-powerup" x="1984" y="672" width="32" height="32"/>
   <object name="health-powerup-1" type="health-powerup" x="3360" y="864" width="32" height="32"/>
   <object name="health-powerup-1" type="health-powerup" x="3488" y="864" width="32" height="32"/>
   <object name="health-powerup-1" type="health-powerup" x="1376" y="224" width="32" height="32"/>
