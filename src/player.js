@@ -80,13 +80,6 @@ define([
         
         this.weapons.puker.events.onPuke.add(this.onPukerPuke, this);
 
-        // Invulnerability
-        this.invulnerable = false;
-        this.invulnerableTimer = 0;
-
-        // Knockback
-        this.knockback = new Phaser.Point();
-        this.knockbackTimeout = game.time.now;
         this.maxMoveSpeed = new Phaser.Point(300, 10000);
 
         // Wall jump timer
@@ -95,28 +88,16 @@ define([
         this.lastBlocked = null; // Values will be 'right' or 'left'
 
         // Signals
-        this.events.onHeal = new Phaser.Signal();
-        this.events.onDamage = new Phaser.Signal();
         this.events.onPuke = new Phaser.Signal();
         this.events.onEat = new Phaser.Signal();
         this.events.onAddLife = new Phaser.Signal();
         this.events.onRemoveLife = new Phaser.Signal();
         this.events.onAddMaxLife = new Phaser.Signal();
         this.events.onRemoveMaxLife = new Phaser.Signal();
-        this.events.onDeath = new Phaser.Signal();
 
         // Kill player when they fall outside the bounds of the map.
         this.events.onOutOfBounds.add(this.handleDeath, this);
 
-    }
-
-    function onBlinkLoop (){
-        if(game.time.now - this.invulnerableTimer > 1500) {
-            this.blinkTween.start(0);
-            this.blinkTween.pause();
-            this.invulnerable = false;
-            this.alpha = 1;
-        }
     }
 
     Player.prototype = Object.create(Entity.prototype);
@@ -124,6 +105,8 @@ define([
     
     // Update children.
     Player.prototype.update = function () {
+
+        if(this.invulnerable) console.log(this.body.velocity);
 
         // Update sprite.
         if(this.isJumping && this.body.velocity.y < 0) this.frame = 10;
@@ -180,43 +163,6 @@ define([
         this.events.onEat.dispatch();
     };
 
-    Player.prototype.damage = function (amount, source) {
-
-        // Can currently take damage?
-        if(this.invulnerable) return;
-
-        amount = Math.abs(amount || 1);
-        this.health -= amount;
-        this.events.onDamage.dispatch(this.health, amount);
-
-        // Temporary invulnerability.
-        this.invulnerable = true;
-        this.invulnerableTimer = game.time.now;
-        
-        // Visual feedback to show player was hit and is currently invulnerable.
-        this.blinkTween = game.add.tween(this);
-        this.blinkTween.to({alpha: 0}, 80, null, true, 0, -1, true);
-        this.blinkTween.onLoop.add(onBlinkLoop, this);
-
-        // Knockback force
-        Phaser.Point.subtract(this.position, source.position, this.knockback);
-        Phaser.Point.normalize(this.knockback, this.knockback);
-        this.knockback.setMagnitude(400);
-
-        // Zero out current velocity
-        this.body.velocity.set(0);
-
-        Phaser.Point.add(this.body.velocity, this.knockback, this.body.velocity);
-        this.knockback.set(0);
-
-        // Temporarily disable input after knockback.
-        this.knockbackTimeout = game.time.now + 500;
-
-        // Am I dead yet?
-        if (this.health <= 0) this.handleDeath();
-
-    };
-
     Player.prototype.addLife = function (amount) {
         if(!amount || amount < 1) amount = 1;
         this.lives += amount;
@@ -241,14 +187,6 @@ define([
         if(!amount || amount < 1) amount = 1;
         this.lives -= amount;
         this.events.onRemoveMaxLife.dispatch(this, amount);
-    };
-
-    Player.prototype.handleDeath = function () {
-        // Player is now in the process of dying.
-        this.dying = true;
-
-        // Tell everyone how dead I am.
-        this.events.onDeath.dispatch(this);
     };
 
     Player.prototype.kill = function () {
