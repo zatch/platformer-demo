@@ -84,6 +84,7 @@ define([
             this.game.load.spritesheet('sword-swipe', 'assets/sprites/sword-swipe.png', 64, 128, 8);
             
             // Power-ups
+            this.game.load.image('heal', 'assets/sprites/heal.png');
             this.game.load.spritesheet('health-powerup', 'assets/sprites/health-powerup.png', 32, 32, 6);
             this.game.load.image('eat', 'assets/sprites/eat.png');
             this.game.load.spritesheet('food-powerup', 'assets/sprites/food-powerup.png', 32, 32, 6);
