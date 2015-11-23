@@ -11,7 +11,7 @@ define([
         self = this;
 
         // Initialize sprite
-        Phaser.Sprite.call(this, game, x, y);
+        Phaser.Sprite.call(this, game, x, y, 'blank');
 
         // Enable physics.
         game.physics.enable(this);

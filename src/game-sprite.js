@@ -11,7 +11,9 @@ define([
 
         game = _game;
         self = this;
-
+        
+        key = key ? key : 'blank';
+        
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, key, frame);
         

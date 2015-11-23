@@ -1,6 +1,7 @@
 define([
-    'phaser'
-], function (Phaser) { 
+    'phaser',
+    'game-sprite'
+], function (Phaser, GameSprite) { 
     'use strict';
 
     //From http://www.gamedevacademy.org/html5-phaser-tutorial-top-down-games-with-tiled/
@@ -26,7 +27,7 @@ define([
 
     //create a sprite from an object
     function createFromTiledObject (game, element, customClass) {
-        var CustomClass = customClass || Phaser.Sprite,
+        var CustomClass = customClass || GameSprite,
             sprite = new CustomClass(game, element.x, element.y, element.properties.key || null, element.properties.frame || null, element.properties);
 
         // Copy all properties to the sprite
