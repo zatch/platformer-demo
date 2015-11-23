@@ -106,8 +106,6 @@ define([
     // Update children.
     Player.prototype.update = function () {
 
-        if(this.invulnerable) console.log(this.body.velocity);
-
         // Update sprite.
         if(this.isJumping && this.body.velocity.y < 0) this.frame = 10;
         else if (!this.body.touching.down && !this.body.blocked.left && !this.body.blocked.right && this.body.velocity.y > 0) this.frame = 11;
