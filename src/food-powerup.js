@@ -25,9 +25,6 @@ define([
         // Enable physics.
         game.physics.enable(this);
         this.body.collideWorldBounds = true;
-        this.body.velocity.y = 200 + (Math.random() * 200);
-        this.body.velocity.x = Math.random() * 200;
-        this.body.drag.x = 200;
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
         
