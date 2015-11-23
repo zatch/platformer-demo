@@ -54,8 +54,8 @@ define([
         this.maxLives = 3;
 
         // Number of times the player can be hit by an enemy.
-        this.maxHealth = 5;
-        this.health = 5;
+        this.maxHealth = 4;
+        this.health = 4;
 
         // Amount of shit the player can fit in his stomach.
         this.maxFullness = 50;
