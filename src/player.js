@@ -195,7 +195,7 @@ define([
     Player.prototype.jump = function () {
 
         // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
+        if(this.knockbackTime > game.time.now) return;
 
         // Update sprite.
         this.animations.stop();
@@ -229,7 +229,7 @@ define([
 
     Player.prototype.moveLeft = function () {
         // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
+        if(this.knockbackTime > game.time.now) return;
 
         // Play walk animation if 1) we're on the floor 2) We're not blocked.
         if(!this.anims.walk.isPlaying && (this.body.onFloor() || this.body.touching.down)) this.anims.walk.play();
@@ -273,7 +273,7 @@ define([
 
     Player.prototype.moveRight = function () {
         // Temporarily disable input after knockback.
-        if(this.knockbackTimeout > game.time.now) return;
+        if(this.knockbackTime > game.time.now) return;
 
         // Play walk animation if 1) we're on the floor 2) We're not blocked.
         if(!this.anims.walk.isPlaying && (this.body.onFloor() || this.body.touching.down)) this.anims.walk.play();
