@@ -1,5 +1,6 @@
 define([
     'phaser',
+    'game-stuff',
     'player',
     'spawner',
     'enemy',
@@ -22,11 +23,11 @@ define([
     'levels/test-map-1'
 
 
-], function (Phaser, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, GameStuff, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
     
     // Shortcuts
-    var game, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
+    var game, gameStuff, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
 
     // Default starting properties/state of the game world. These properties
     // can be overridden by passing a data object to the Play state.
@@ -152,7 +153,8 @@ define([
 
             // Insert enemies
             enemies = [];
-            spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner);
+            spawners = new GameStuff(game);
+            spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner, spawners);
             spawners.forEach(this.registerSpawnerEvents, this);
             game.add.existing(spawners);
 
@@ -185,7 +187,8 @@ define([
             game.add.existing(exitDoor);
 
             // Platforms
-            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform);
+            platforms = new GameStuff(game);
+            platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform, platforms);
             game.add.existing(platforms);
             platforms.callAll('start');
 
@@ -389,10 +392,10 @@ define([
         },
 
         togglePause: function () {
-            if(game.paused) {
-                game.paused = false;
+            if(platforms.paused) {
+                platforms.paused = false;
             } else {
-                game.paused = true;
+                platforms.paused = true;
             }
         },
         
