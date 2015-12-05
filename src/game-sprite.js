@@ -17,6 +17,8 @@ define([
         // Initialize sprite
         Phaser.Sprite.call(this, game, x, y, key, frame);
         
+        this.paused = false;
+        
         // Assets for killing enemy when it goes off screen for a given period
         // of time.
         this.offCameraKillTimer = game.time.create(false);
@@ -28,21 +30,30 @@ define([
     GameSprite.prototype = Object.create(Phaser.Sprite.prototype);
     GameSprite.prototype.constructor = GameSprite;
 
+    GameSprite.prototype.preUpdate = function () {
+        if (!this.paused) Phaser.Sprite.prototype.preUpdate.call(this);
+    };
+
     GameSprite.prototype.update = function () {
-        
-        // Call up!
-        Phaser.Sprite.prototype.update.call(this);
-        
-        if (this.alive) {
-            if (!this.inCamera) {
-                // Auto-kill if off camera for too long.
-                this.offCameraKillTimer.add(2000, this.kill, this);
-            }
-            else {
-                // Cancel auto-kill if returned to the camera.
-                this.offCameraKillTimer.removeAll();
+        if (!this.paused) {
+            // Call up!
+            Phaser.Sprite.prototype.update.call(this);
+            
+            if (this.alive) {
+                if (!this.inCamera) {
+                    // Auto-kill if off camera for too long.
+                    this.offCameraKillTimer.add(2000, this.kill, this);
+                }
+                else {
+                    // Cancel auto-kill if returned to the camera.
+                    this.offCameraKillTimer.removeAll();
+                }
             }
         }
+    };
+
+    GameSprite.prototype.postUpdate = function () {
+        if (!this.paused) Phaser.Sprite.prototype.postUpdate.call(this);
     };
 
     GameSprite.prototype.flip = function (direction) {

@@ -392,9 +392,11 @@ define([
         },
 
         togglePause: function () {
-            if(platforms.paused) {
+            if(player.paused) {
+                player.paused = false;
                 platforms.paused = false;
             } else {
+                player.paused = true;
                 platforms.paused = true;
             }
         },
