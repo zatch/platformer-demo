@@ -193,7 +193,8 @@ define([
             platforms.callAll('start');
 
             // Collectables
-            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup);
+            collectables = new GameGroup(game);
+            collectables = ObjectLayerHelper.createObjectsByType(game, 'health-powerup', map, 'collectables', HealthPowerup, collectables);
             ObjectLayerHelper.createObjectsByType(game, 'food-powerup', map, 'collectables', FoodPowerup, collectables);
             game.add.existing(collectables);
             
@@ -394,9 +395,11 @@ define([
         togglePause: function () {
             if(player.paused) {
                 player.paused = false;
+                collectables.paused = false;
                 platforms.paused = false;
             } else {
                 player.paused = true;
+                collectables.paused = true;
                 platforms.paused = true;
             }
         },
