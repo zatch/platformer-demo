@@ -60,6 +60,9 @@ define([
             this.game.load.image('platformertiles',  'assets/tilesets/platformertiles.png');
             this.game.load.image('cave',  'assets/tilesets/cave_32.png');
             
+            // Pause Menu
+            this.game.load.image('pause-background', 'assets/pause/background.png');
+            
             // HUD;
             this.game.load.image('damage-overlay', 'assets/damage-overlay.png');
             this.game.load.atlas('health', 'assets/hud/health.png', 'assets/hud/health.json');

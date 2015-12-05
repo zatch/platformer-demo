@@ -2,6 +2,7 @@ define([
     'phaser',
     'game-group',
     'player',
+    'pause-menu',
     'spawner',
     'enemy',
     'cthulbat',
@@ -22,11 +23,11 @@ define([
     'levels/test-map-1'
 
 
-], function (Phaser, GameGroup, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, GameGroup, Player, PauseMenu, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
     
     // Shortcuts
-    var game, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
+    var game, playState, moveKeys, attackKeys, pad1, player, pauseMenu, spawners, enemies, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
 
     // Default starting properties/state of the game world. These properties
     // can be overridden by passing a data object to the Play state.
@@ -212,6 +213,12 @@ define([
             game.add.existing(livesDisplay);
             livesDisplay.updateDisplay(player.lives, player.maxLives);
 
+            // Pause Menu
+            pauseMenu = new PauseMenu(game);
+            game.add.existing(pauseMenu);
+            // Disable pauseMenu by default.
+            pauseMenu.disable();
+            
             // Keyboard input set-up
             moveKeys = game.input.keyboard.createCursorKeys();
             moveKeys.wasd = {
@@ -395,6 +402,9 @@ define([
                 for (var lcv = 0; lcv < enemies.length; lcv++) {
                     enemies[lcv].paused = false;
                 }
+                
+                // Disable pauseMenu.
+                pauseMenu.disable();
             } else {
                 player.paused = true;
                 collectables.paused = true;
@@ -404,6 +414,9 @@ define([
                 for (var lcv = 0; lcv < enemies.length; lcv++) {
                     enemies[lcv].paused = true;
                 }
+                
+                // Enable pauseMenu.
+                pauseMenu.enable();
             }
         },
         
