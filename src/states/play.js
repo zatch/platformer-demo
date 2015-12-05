@@ -1,6 +1,6 @@
 define([
     'phaser',
-    'game-stuff',
+    'game-group',
     'player',
     'spawner',
     'enemy',
@@ -23,7 +23,7 @@ define([
     'levels/test-map-1'
 
 
-], function (Phaser, GameStuff, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, GameGroup, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
     
     // Shortcuts
@@ -153,7 +153,7 @@ define([
 
             // Insert enemies
             enemies = [];
-            spawners = new GameStuff(game);
+            spawners = new GameGroup(game);
             spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner, spawners);
             spawners.forEach(this.registerSpawnerEvents, this);
             game.add.existing(spawners);
@@ -187,7 +187,7 @@ define([
             game.add.existing(exitDoor);
 
             // Platforms
-            platforms = new GameStuff(game);
+            platforms = new GameGroup(game);
             platforms = ObjectLayerHelper.createObjectsByType(game, 'platform', map, 'platforms', Platform, platforms);
             game.add.existing(platforms);
             platforms.callAll('start');
