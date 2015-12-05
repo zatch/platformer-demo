@@ -390,10 +390,20 @@ define([
                 player.paused = false;
                 collectables.paused = false;
                 platforms.paused = false;
+                
+                // This is dumb. Enemies should just be a GameGroup, but I'm lazy.
+                for (var lcv = 0; lcv < enemies.length; lcv++) {
+                    enemies[lcv].paused = false;
+                }
             } else {
                 player.paused = true;
                 collectables.paused = true;
                 platforms.paused = true;
+                
+                // This is dumb. Enemies should just be a GameGroup, but I'm lazy.
+                for (var lcv = 0; lcv < enemies.length; lcv++) {
+                    enemies[lcv].paused = true;
+                }
             }
         },
         
