@@ -8,7 +8,6 @@ define([
     'worm',
     'dipteranura',
     'egg-sac',
-    'villager',
     'commander-kavosic',
     'platform',
     'object-layer-helper',
@@ -23,11 +22,11 @@ define([
     'levels/test-map-1'
 
 
-], function (Phaser, GameGroup, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, Villager, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
+], function (Phaser, GameGroup, Player, Spawner, Enemy, Cthulbat, Worm, Dipteranura, EggSac, CommanderKavosic, Platform, ObjectLayerHelper, HealthDisplay, StomachMeter, DamageDisplay, LivesDisplay, HealthPowerup, FoodPowerup, Checkpoint, CharacterTrigger, TestMap1) { 
     'use strict';
     
     // Shortcuts
-    var game, gameStuff, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, villagers, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
+    var game, playState, moveKeys, attackKeys, pad1, player, spawners, enemies, characters, map, collisionLayer, platforms, characterTriggers, exitDoor, healthDisplay, stomachMeter, damageDisplay, livesDisplay, collectables, checkpoints, level;
 
     // Default starting properties/state of the game world. These properties
     // can be overridden by passing a data object to the Play state.
@@ -157,10 +156,6 @@ define([
             spawners = ObjectLayerHelper.createObjectsByType(game, 'spawner', map, 'spawners', Spawner, spawners);
             spawners.forEach(this.registerSpawnerEvents, this);
             game.add.existing(spawners);
-
-            // Insert villagers
-            villagers = ObjectLayerHelper.createObjectsByType(game, 'villager', map, 'villagers', Villager);
-            game.add.existing(villagers);
 
             map.createLayer('foreground-decoration');
 
@@ -340,7 +335,6 @@ define([
                 
                 // Check to see if weapons are colliding with enemies.
                 game.physics.arcade.overlap(currentWeapon.getCollidables(), enemies, currentWeapon.onHit);
-                game.physics.arcade.overlap(currentWeapon.getCollidables(), villagers, currentWeapon.onHit);
                 // Check to see if weapons are colliding collision layer.
                 game.physics.arcade.collide(currentWeapon.getCollidables(), collisionLayer, currentWeapon.onHitTerrain);
             }
@@ -364,7 +358,6 @@ define([
             game.physics.arcade.collide(player, collisionLayer);
             game.physics.arcade.collide(characters, collisionLayer);
             game.physics.arcade.collide(enemies, collisionLayer);
-            game.physics.arcade.collide(villagers, collisionLayer);
             game.physics.arcade.collide(collectables, collisionLayer);
 
             // Player movement controls
@@ -417,10 +410,6 @@ define([
             if (enemy.events.onSpawnChild) enemy.events.onSpawnChild.add(this.onSpawnerSpawn, this);
         },
         
-        registerVillagerEvents: function (villager) {
-            villager.events.onDeath.add(this.onVillagerDeath, this);
-        },
-        
         onPlayerOverlapCharacterTrigger: function (player, characterTrigger) {
             characters.forEach( function(character) {
                 if (character.name === characterTrigger.properties.characterTriggerTarget) {
@@ -447,8 +436,6 @@ define([
         onEnemyDrop: function (enemy, item) {
             collectables.add(item);
         },
-        
-        onVillagerDeath: function (villager) {},
 
         onPlayerDamage: function (totalHealth, amount) {
             console.log('health: ', totalHealth);
