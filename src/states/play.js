@@ -228,12 +228,18 @@ define([
                 right: game.input.keyboard.addKey(Phaser.Keyboard.D)
             };
             moveKeys.wasd.up.onDown.add(function () {
-                // As long as the player isn't intentionally attempting to fall
-                // through a platform, attempt to jump.
-                if(!keyboardJumpAndDownPressed()) player.jump();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    // As long as the player isn't intentionally attempting to fall
+                    // through a platform, attempt to jump.
+                    if(!keyboardJumpAndDownPressed()) player.jump();
+                }
             });
             moveKeys.wasd.up.onUp.add(function () {
-                player.endJump();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    player.endJump();
+                }
             });
             attackKeys = {
                 sword: game.input.keyboard.addKey(Phaser.Keyboard.COMMA),
@@ -241,13 +247,22 @@ define([
                 claw: game.input.keyboard.addKey(Phaser.Keyboard.QUESTION_MARK)
             };
             attackKeys.sword.onDown.add(function () {
-                player.attackSword();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    player.attackSword();
+                }
             });
             attackKeys.puker.onDown.add(function () {
-                player.attackPuker();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    player.attackPuker();
+                }
             });
             attackKeys.claw.onDown.add(function () {
-                player.attackClaw();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    player.attackClaw();
+                }
             });
             game.input.keyboard.addKey(Phaser.Keyboard.F).onDown.add(function() {
                 if(game.scale.isFullScreen) {
@@ -257,9 +272,12 @@ define([
                 }
             });
             game.input.keyboard.addKey(Phaser.Keyboard.SPACE).onDown.add(function () {
-                // Check to see if player has reached the exit door.
-                if(game.physics.arcade.overlap(player, exitDoor)) {
-                    self.playerExits();
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    // Check to see if player has reached the exit door.
+                    if(game.physics.arcade.overlap(player, exitDoor)) {
+                        self.playerExits();
+                    }
                 }
             });
 
@@ -269,40 +287,55 @@ define([
             game.input.gamepad.start();
             pad1 = game.input.gamepad.pad1;
             pad1.onDownCallback = function (buttonCode, value) {
-                switch (buttonCode) {
-                    case Phaser.Gamepad.XBOX360_A:
-                        // HACK: Phaser has a bug where it doesn't update button
-                        // down/up state of a button object until after it has
-                        // fired the onDownCallback.  To get around this, we
-                        // manually update the button state here.  A bug report
-                        // has been filed here: https://github.com/photonstorm/phaser/issues/2159
-                        pad1.getButton(buttonCode).start(null, value);
-
-                        // As long as the player isn't intentionally attempting 
-                        // to fall through a platform, attempt to jump.
-                        if(!gamepadJumpAndDownPressed()) player.jump();
-                        break;
-                    case Phaser.Gamepad.XBOX360_B:
-                        player.attackSword();
-                        break;
-                    case Phaser.Gamepad.XBOX360_X:
-                        player.attackPuker();
-                        break;
-                    case Phaser.Gamepad.XBOX360_Y:
-                        player.attackClaw();
-                        break;
-                    case Phaser.Gamepad.XBOX360_RIGHT_BUMPER:
-                        // Check to see if player has reached the exit door.
-                        if(game.physics.arcade.overlap(player, exitDoor)) {
-                            self.playerExits();
-                        }
-                        break;
-                    case Phaser.Gamepad.XBOX360_START:
-                        playState.togglePause();
-                        break;
-
-                    default:
-                        break;
+                
+                // Direct input to player if not paused.
+                if (!player.paused) {
+                    switch (buttonCode) {
+                        case Phaser.Gamepad.XBOX360_A:
+                            // HACK: Phaser has a bug where it doesn't update button
+                            // down/up state of a button object until after it has
+                            // fired the onDownCallback.  To get around this, we
+                            // manually update the button state here.  A bug report
+                            // has been filed here: https://github.com/photonstorm/phaser/issues/2159
+                            pad1.getButton(buttonCode).start(null, value);
+    
+                            // As long as the player isn't intentionally attempting 
+                            // to fall through a platform, attempt to jump.
+                            if(!gamepadJumpAndDownPressed()) player.jump();
+                            break;
+                        case Phaser.Gamepad.XBOX360_B:
+                            player.attackSword();
+                            break;
+                        case Phaser.Gamepad.XBOX360_X:
+                            player.attackPuker();
+                            break;
+                        case Phaser.Gamepad.XBOX360_Y:
+                            player.attackClaw();
+                            break;
+                        case Phaser.Gamepad.XBOX360_RIGHT_BUMPER:
+                            // Check to see if player has reached the exit door.
+                            if(game.physics.arcade.overlap(player, exitDoor)) {
+                                self.playerExits();
+                            }
+                            break;
+                        case Phaser.Gamepad.XBOX360_START:
+                            playState.togglePause();
+                            break;
+    
+                        default:
+                            break;
+                    }
+                }
+                // Direct input to pauseMenu when paused.
+                else {
+                    switch (buttonCode) {
+                        case Phaser.Gamepad.XBOX360_START:
+                            playState.togglePause();
+                            break;
+    
+                        default:
+                            break;
+                    }
                 }
             };
             pad1.onUpCallback = function (buttonCode, value) {
@@ -329,60 +362,67 @@ define([
         },
 
         update: function () {
-            // Collide with platforms unless the user presses jump+down on the
-            // keyboard *or* the controller (but not both).
-            if(!keyboardJumpAndDownPressed() && !gamepadJumpAndDownPressed()) {
-                game.physics.arcade.collide(player, platforms);
-            }
-
-            // Check weapon collisions.
-            var currentWeapon;
-            for(var w=0; w<player.weapons.length; w++) {
-                currentWeapon = player.weapons[w];
+            // Direct input to player and do all the map and collision stuff.
+            if (!player.paused) {
+                // Collide with platforms unless the user presses jump+down on the
+                // keyboard *or* the controller (but not both).
+                if(!keyboardJumpAndDownPressed() && !gamepadJumpAndDownPressed()) {
+                    game.physics.arcade.collide(player, platforms);
+                }
+    
+                // Check weapon collisions.
+                var currentWeapon;
+                for(var w=0; w<player.weapons.length; w++) {
+                    currentWeapon = player.weapons[w];
+                    
+                    // Check to see if weapons are colliding with enemies.
+                    game.physics.arcade.overlap(currentWeapon.getCollidables(), enemies, currentWeapon.onHit);
+                    // Check to see if weapons are colliding collision layer.
+                    game.physics.arcade.collide(currentWeapon.getCollidables(), collisionLayer, currentWeapon.onHitTerrain);
+                }
+    
+                // Check to see if weapons are colliding with collectables.
+                game.physics.arcade.overlap(player.weapons.clawArm.getCollidables(), collectables, currentWeapon.onHit);
+    
+                // Collide player + enemies.
+                game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
                 
-                // Check to see if weapons are colliding with enemies.
-                game.physics.arcade.overlap(currentWeapon.getCollidables(), enemies, currentWeapon.onHit);
-                // Check to see if weapons are colliding collision layer.
-                game.physics.arcade.collide(currentWeapon.getCollidables(), collisionLayer, currentWeapon.onHitTerrain);
+                // Check overlap of player + character triggers.
+                game.physics.arcade.overlap(player, characterTriggers, this.onPlayerOverlapCharacterTrigger);
+                
+                // Collide player + collectables.
+                game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
+    
+                game.physics.arcade.overlap(player, checkpoints, this.onPlayerCollidesCheckpoint);
+    
+                // Collide objects with map.  Do this after other collision checks
+                // so objects aren't pushed through walls.
+                game.physics.arcade.collide(player, collisionLayer);
+                game.physics.arcade.collide(characters, collisionLayer);
+                game.physics.arcade.collide(enemies, collisionLayer);
+                game.physics.arcade.collide(collectables, collisionLayer);
+    
+                // Player movement controls
+                if(moveKeys.wasd.left.isDown ||
+                   pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
+                   pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.6) {
+                    player.moveLeft();
+                } else if (moveKeys.wasd.right.isDown ||
+                   pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
+                   pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.6) {
+                    player.moveRight();
+                } else {
+                    player.stopMoving();
+                }
+                
+                if (attackKeys.puker.isDown ||
+                    pad1.isDown(Phaser.Gamepad.XBOX360_X)) {
+                    player.attackPuker();
+                }
             }
-
-            // Check to see if weapons are colliding with collectables.
-            game.physics.arcade.overlap(player.weapons.clawArm.getCollidables(), collectables, currentWeapon.onHit);
-
-            // Collide player + enemies.
-            game.physics.arcade.overlap(player, enemies, this.onPlayerCollidesEnemy);
-            
-            // Check overlap of player + character triggers.
-            game.physics.arcade.overlap(player, characterTriggers, this.onPlayerOverlapCharacterTrigger);
-            
-            // Collide player + collectables.
-            game.physics.arcade.overlap(player, collectables, this.onPlayerCollidesCollectable);
-
-            game.physics.arcade.overlap(player, checkpoints, this.onPlayerCollidesCheckpoint);
-
-            // Collide objects with map.  Do this after other collision checks
-            // so objects aren't pushed through walls.
-            game.physics.arcade.collide(player, collisionLayer);
-            game.physics.arcade.collide(characters, collisionLayer);
-            game.physics.arcade.collide(enemies, collisionLayer);
-            game.physics.arcade.collide(collectables, collisionLayer);
-
-            // Player movement controls
-            if(moveKeys.wasd.left.isDown ||
-               pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
-               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.6) {
-                player.moveLeft();
-            } else if (moveKeys.wasd.right.isDown ||
-               pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
-               pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.6) {
-                player.moveRight();
-            } else {
-                player.stopMoving();
-            }
-            
-            if (attackKeys.puker.isDown ||
-                pad1.isDown(Phaser.Gamepad.XBOX360_X)) {
-                player.attackPuker();
+            // Direct input to PauseMenu when paused.
+            else {
+                
             }
         },
 
