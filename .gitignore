@@ -1,1 +1,12 @@
 src/lib/**/*
+
+!src/lib/requirejs
+!src/lib/requirejs/require.js
+
+!src/lib/phaser
+!src/lib/phaser/build
+!src/lib/phaser/build/phaser.min.js
+
+!src/lib/phaser-state-transition-plugin
+!src/lib/phaser-state-transition-plugin/dist
+!src/lib/phaser-state-transition-plugin/dist/phaser-state-transition-plugin.min.js
